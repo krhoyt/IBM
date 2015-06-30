@@ -1,0 +1,89 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="#ffdfe8e2"
+    android:clickable="false"
+    android:id="@+id/detail">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/border_classify"
+        android:gravity="center"
+        android:id="@+id/classify">
+
+        <ImageView
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:id="@+id/imageView"
+            android:src="@drawable/poo"
+            android:padding="8dp"
+            android:layout_marginRight="8dp"
+            android:scaleType="fitCenter" />
+
+        <ImageView
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:id="@+id/imageView2"
+            android:src="@drawable/pee"
+            android:padding="8dp"
+            android:layout_marginLeft="8dp"
+            android:scaleType="fitCenter" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/classify"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/border_drawer"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:id="@+id/drawer">
+
+        <ImageView
+            android:layout_width="68px"
+            android:layout_height="68px"
+            android:id="@+id/imageView3"
+            android:background="#ffff0000" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/drawer"
+        android:gravity="center"
+        android:layout_alignParentBottom="false"
+        android:background="#ffdfe8e2"
+        android:id="@+id/toilet"
+        android:layout_above="@+id/commit"></RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_alignParentStart="false"
+        android:background="@drawable/border_rating"
+        android:id="@+id/rating"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentEnd="false"
+        android:layout_above="@+id/commit">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:background="@drawable/border_commit"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/commit"></LinearLayout>
+</RelativeLayout>
