@@ -1,12 +1,11 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#ffdfe8e2"
+    android:id="@+id/detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="#ffdfe8e2"
-    android:clickable="false"
-    android:id="@+id/detail">
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -14,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:background="@drawable/border_classify"
         android:gravity="center"
         android:id="@+id/classify">
@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/classify"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:background="@drawable/border_drawer"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
@@ -71,12 +72,13 @@
         android:layout_width="match_parent"
         android:layout_height="68dp"
         android:layout_alignParentStart="false"
+        android:layout_alignParentLeft="true"
         android:background="@drawable/border_rating"
         android:id="@+id/rating"
         android:layout_alignParentBottom="false"
         android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
         android:layout_above="@+id/commit">
-
     </LinearLayout>
 
     <LinearLayout
@@ -86,4 +88,5 @@
         android:background="@drawable/border_commit"
         android:layout_alignParentBottom="true"
         android:id="@+id/commit"></LinearLayout>
+
 </RelativeLayout>
