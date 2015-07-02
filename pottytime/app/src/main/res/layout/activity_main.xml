@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#ffdfe8e2"
-    android:id="@+id/detail"
+    android:id="@+id/layout_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -14,79 +14,192 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/border_classify"
+        android:background="#ffdfe8e2"
         android:gravity="center"
-        android:id="@+id/classify">
+        android:id="@+id/layout_classify">
 
         <ImageView
-            android:layout_width="68dp"
-            android:layout_height="68dp"
-            android:id="@+id/imageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/view_poo"
             android:src="@drawable/poo"
-            android:padding="8dp"
-            android:layout_marginRight="8dp"
-            android:scaleType="fitCenter" />
+            android:layout_marginRight="10dp"
+            android:scaleType="fitCenter"
+            android:padding="10dp" />
 
         <ImageView
-            android:layout_width="68dp"
-            android:layout_height="68dp"
-            android:id="@+id/imageView2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/view_pee"
             android:src="@drawable/pee"
-            android:padding="8dp"
-            android:layout_marginLeft="8dp"
-            android:scaleType="fitCenter" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/classify"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:background="@drawable/border_drawer"
-        android:paddingLeft="16dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:id="@+id/drawer">
-
-        <ImageView
-            android:layout_width="68px"
-            android:layout_height="68px"
-            android:id="@+id/imageView3"
-            android:background="#ffff0000" />
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitCenter"
+            android:padding="10dp" />
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/drawer"
+        android:layout_below="@+id/layout_classify"
         android:gravity="center"
         android:layout_alignParentBottom="false"
         android:background="#ffdfe8e2"
-        android:id="@+id/toilet"
-        android:layout_above="@+id/commit"></RelativeLayout>
+        android:id="@+id/layout_toilet"
+        android:layout_above="@+id/layout_commit">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/view_toilet"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/toilet"
+            android:scaleType="centerCrop" />
+    </RelativeLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="68dp"
-        android:layout_alignParentStart="false"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_classify"
+        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/border_rating"
-        android:id="@+id/rating"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentRight="false"
-        android:layout_above="@+id/commit">
+        android:background="#7fffffff"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:id="@+id/layout_drawer">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/view_pee_1"
+            android:background="@drawable/border_pee_1"
+            android:layout_marginLeft="11dp" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/view_pee_2"
+            android:background="@drawable/border_pee_2"
+            android:layout_marginLeft="11dp" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/view_pee_3"
+            android:background="@drawable/border_pee_3"
+            android:layout_marginLeft="11dp" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/view_pee_4"
+            android:background="@drawable/border_pee_4"
+            android:layout_marginLeft="11dp" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/view_pee_5"
+            android:background="@drawable/border_pee_5"
+            android:layout_marginLeft="11dp" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/view_pee_6"
+            android:background="@drawable/border_pee_6"
+            android:layout_marginLeft="11dp" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="68dp"
-        android:background="@drawable/border_commit"
+        android:layout_height="70dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentLeft="true"
+        android:background="#7fffffff"
+        android:id="@+id/layout_rating"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:layout_above="@+id/layout_commit"
+        android:paddingTop="10dp"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/view_rating_1"
+            android:background="@drawable/border_rating" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/view_rating_2"
+            android:background="@drawable/border_rating"
+            android:layout_marginLeft="11dp" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/view_rating_3"
+            android:background="@drawable/border_rating"
+            android:layout_marginLeft="11dp" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/view_rating_4"
+            android:background="@drawable/border_rating"
+            android:layout_marginLeft="11dp" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/view_rating_5"
+            android:background="@drawable/border_rating"
+            android:layout_marginLeft="11dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#ffdfe8e2"
         android:layout_alignParentBottom="true"
-        android:id="@+id/commit"></LinearLayout>
+        android:id="@+id/layout_commit">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/text_cancel"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:textSize="28dp"
+            android:textColor="#ff98b5a3"
+            android:textAlignment="center"
+            android:gravity="center_horizontal" />
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:id="@+id/view_divider"
+            android:background="@drawable/border_divider"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:id="@+id/text_save"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:textColor="#ff98b5a3"
+            android:textSize="28dp"
+            android:gravity="center_horizontal" />
+    </LinearLayout>
 
 </RelativeLayout>
