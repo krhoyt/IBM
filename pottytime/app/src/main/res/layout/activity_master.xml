@@ -22,7 +22,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="Potty Time"
             android:id="@+id/text_title"
             android:layout_weight="1"
@@ -30,12 +30,14 @@
             android:textSize="28dp"
             android:gravity="center" />
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/view_add"
-            android:background="#ffffffff"
-            android:layout_margin="10dp" />
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/text_add"
+            android:text="+"
+            android:textSize="36dp"
+            android:textColor="#ff98b5a3"
+            android:gravity="center_vertical|center_horizontal" />
     </LinearLayout>
 
     <Button

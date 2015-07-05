@@ -1,6 +1,7 @@
 package com.ibm.us.pottytime;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,12 @@ public class MainActivity extends Activity {
         btnDetail.setOnClickListener( new View.OnClickListener() {
             public void onClick( View view ) {
                 Log.i( "DETAIL", "Transition to detail." );
+
+                Intent detail = null;
+
+                detail = new Intent( MainActivity.this, DetailActivity.class );
+                // detail.putExtra( PottyDetailFragment.ARG_ITEM_ID, id );
+                startActivity( detail );
             }
         } );
     }
@@ -49,4 +56,5 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 */
+
 }
