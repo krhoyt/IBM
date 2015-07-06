@@ -2,28 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffdfe8e2">
+    android:background="#ffdfe8e2"
+    android:id="@+id/layout_master">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffdfe8e2"
         android:gravity="center"
-        android:id="@+id/linearLayout">
+        android:id="@+id/layout_title"
+        android:background="@drawable/border_header">
 
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:id="@+id/view_most"
-            android:src="@drawable/pee"
             android:scaleType="fitCenter"
             android:padding="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:text="Potty Time"
+            android:text="Potty Visits"
             android:id="@+id/text_title"
             android:layout_weight="1"
             android:textColor="#ff98b5a3"
@@ -40,10 +40,16 @@
             android:gravity="center_vertical|center_horizontal" />
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:id="@+id/view_chart"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/border_chart" />
+
+    <ListView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Detail"
-        android:id="@+id/button_detail" />
+        android:id="@+id/list_history" />
 
 </LinearLayout>
