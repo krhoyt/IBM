@@ -40,11 +40,11 @@ public class PottyAdapter extends ArrayAdapter<Potty> {
         }
 
         // Get label
-        label = ( TextView )row.findViewById( R.id.text_label );
+        // label = ( TextView )row.findViewById( R.id.text_label );
 
         // Set the text
         // label.setText( items.get( position ).title );
-        label.setText( "Hello" );
+        // label.setText( "Hello" );
 
         return row;
     }

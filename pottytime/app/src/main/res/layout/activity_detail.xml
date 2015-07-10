@@ -19,22 +19,22 @@
         android:id="@+id/layout_classify">
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:id="@+id/view_poo"
             android:src="@drawable/poo"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="8dp"
             android:scaleType="fitCenter"
-            android:padding="10dp" />
+            android:padding="8dp" />
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:id="@+id/view_pee"
             android:src="@drawable/pee"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="8dp"
             android:scaleType="fitCenter"
-            android:padding="10dp" />
+            android:padding="8dp" />
     </LinearLayout>
 
     <RelativeLayout
@@ -66,57 +66,57 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:background="#7fffffff"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:id="@+id/layout_drawer">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:id="@+id/view_pee_1"
             android:background="@drawable/border_pee_1"
-            android:layout_marginLeft="11dp" />
+            android:layout_marginLeft="8dp" />
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:id="@+id/view_pee_2"
             android:background="@drawable/border_pee_2"
-            android:layout_marginLeft="11dp" />
+            android:layout_marginLeft="8dp" />
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:id="@+id/view_pee_3"
             android:background="@drawable/border_pee_3"
-            android:layout_marginLeft="11dp" />
+            android:layout_marginLeft="8dp" />
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:id="@+id/view_pee_4"
             android:background="@drawable/border_pee_4"
-            android:layout_marginLeft="11dp" />
+            android:layout_marginLeft="8dp" />
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:id="@+id/view_pee_5"
             android:background="@drawable/border_pee_5"
-            android:layout_marginLeft="11dp" />
+            android:layout_marginLeft="8dp" />
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:id="@+id/view_pee_6"
             android:background="@drawable/border_pee_6"
-            android:layout_marginLeft="11dp" />
+            android:layout_marginLeft="8dp" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="48dp"
         android:layout_alignParentStart="false"
         android:layout_alignParentLeft="true"
         android:background="#7fffffff"
@@ -129,44 +129,44 @@
         android:gravity="center_horizontal">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:id="@+id/view_rating_1"
             android:background="@drawable/border_rating" />
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:id="@+id/view_rating_2"
             android:background="@drawable/border_rating"
-            android:layout_marginLeft="11dp" />
+            android:layout_marginLeft="8dp" />
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:id="@+id/view_rating_3"
             android:background="@drawable/border_rating"
-            android:layout_marginLeft="11dp" />
+            android:layout_marginLeft="8dp" />
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:id="@+id/view_rating_4"
             android:background="@drawable/border_rating"
-            android:layout_marginLeft="11dp" />
+            android:layout_marginLeft="8dp" />
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:id="@+id/view_rating_5"
             android:background="@drawable/border_rating"
-            android:layout_marginLeft="11dp" />
+            android:layout_marginLeft="8dp" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="48dp"
         android:background="#ffdfe8e2"
         android:layout_alignParentBottom="true"
         android:id="@+id/layout_commit">
@@ -178,12 +178,12 @@
             android:id="@+id/text_cancel"
             android:layout_weight="1"
             android:textColor="#ff98b5a3"
-            android:textSize="28dp"
+            android:textSize="18dp"
             android:gravity="center_vertical|center_horizontal" />
 
         <ImageView
             android:layout_width="1dp"
-            android:layout_height="50dp"
+            android:layout_height="32dp"
             android:id="@+id/view_divider"
             android:background="@drawable/border_divider"
             android:layout_gravity="center_vertical" />
@@ -195,7 +195,7 @@
             android:id="@+id/text_done"
             android:layout_weight="1"
             android:textColor="#ff98b5a3"
-            android:textSize="28dp"
+            android:textSize="18dp"
             android:gravity="center_vertical|center_horizontal" />
     </LinearLayout>
 

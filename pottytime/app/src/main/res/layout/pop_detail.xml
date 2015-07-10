@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffffff"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#4CAF50">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/view_cancel"
+            android:layout_gravity="left|center_vertical"
+            android:src="@drawable/arrow_back_white"
+            android:padding="12dp"
+            android:layout_marginLeft="4dp" />
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/view_done"
+            android:layout_gravity="right|center_vertical"
+            android:src="@drawable/check_white"
+            android:padding="12dp"
+            android:layout_marginRight="4dp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="238dp">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/view_map"
+            android:layout_gravity="center"
+            android:src="@drawable/ibm"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="79dp"
+            android:id="@+id/view_top"
+            android:layout_gravity="top"
+            android:background="@drawable/map_top_darken" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="79dp"
+            android:id="@+id/view_bottom"
+            android:layout_gravity="bottom"
+            android:background="@drawable/map_bottom_darken" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Armonk, NY"
+            android:id="@+id/text_location"
+            android:layout_gravity="left|bottom"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp"
+            android:textSize="34dp"
+            android:textColor="#ffffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="76 F"
+            android:id="@+id/text_weather"
+            android:layout_gravity="right|bottom"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:textSize="34dp"
+            android:textColor="#ffffffff" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Urine color"
+            android:id="@+id/text_urine"
+            android:textColor="#ff000000"
+            android:textSize="16dp"
+            android:background="@drawable/border_field"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bristol scale"
+            android:id="@+id/text_bristol"
+            android:textColor="#ff000000"
+            android:textSize="16dp"
+            android:background="@drawable/border_field"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="General summary about health conditions based on selections."
+            android:id="@+id/text_summary"
+            android:textColor="#ff000000"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textSize="16dp"
+            android:padding="16dp"
+            android:background="#0c000000" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rating"
+            android:id="@+id/text_rating"
+            android:textColor="#ff000000"
+            android:textSize="16dp"
+            android:background="@drawable/border_field"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="32dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:textColor="#ff000000"
+            android:textSize="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:layout_marginRight="16dp" />
+    </LinearLayout>
+
+</LinearLayout>

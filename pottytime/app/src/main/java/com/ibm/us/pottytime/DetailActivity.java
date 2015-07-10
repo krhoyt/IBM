@@ -8,29 +8,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
 public class DetailActivity extends Activity {
 
-    private TextView    txtCancel = null;
-    private TextView    txtDone = null;
+    private ImageView   btnCancel = null;
+    private ImageView   btnDone = null;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_detail );
+        setContentView(R.layout.pop_detail);
 
-        txtCancel = ( TextView )findViewById( R.id.text_cancel );
-        txtCancel.setOnClickListener(new View.OnClickListener() {
+        btnCancel = ( ImageView )findViewById( R.id.view_cancel );
+        btnCancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Log.i("DETAIL", "Transition back to main.");
                 DetailActivity.this.onBackPressed();
             }
         });
 
-        txtDone = ( TextView )findViewById( R.id.text_done );
-        txtDone.setOnClickListener( new View.OnClickListener() {
+        btnDone = ( ImageView )findViewById( R.id.view_done );
+        btnDone.setOnClickListener( new View.OnClickListener() {
             public void onClick( View view ) {
                 Log.i( "DETAIL", "Save record." );
             }

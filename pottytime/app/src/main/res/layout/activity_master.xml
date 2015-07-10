@@ -1,55 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffdfe8e2"
-    android:id="@+id/layout_master">
+    android:id="@+id/layout_master"
+    android:background="#ffffff">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_height="238dp"
         android:id="@+id/layout_title"
-        android:background="@drawable/border_header">
-
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:id="@+id/view_most"
-            android:scaleType="fitCenter"
-            android:padding="10dp" />
+        android:background="#4CAF50"
+        android:gravity="bottom">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text="Potty Visits"
+            android:layout_height="56dp"
+            android:text="Bio breaks"
             android:id="@+id/text_title"
             android:layout_weight="1"
-            android:textColor="#ff98b5a3"
-            android:textSize="28dp"
-            android:gravity="center" />
+            android:textColor="#ffffff"
+            android:textSize="24dp"
+            android:paddingLeft="72dp"
+            android:enabled="false"
+            android:gravity="center_vertical" />
 
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:id="@+id/text_add"
-            android:text="+"
-            android:textSize="36dp"
-            android:textColor="#ff98b5a3"
-            android:gravity="center_vertical|center_horizontal" />
     </LinearLayout>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="190dp"
-        android:id="@+id/view_chart"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/border_chart" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/list_history" />
+        android:id="@+id/list_history"
+        android:divider="#0C000000"
+        android:dividerHeight="1dp" />
 
 </LinearLayout>
