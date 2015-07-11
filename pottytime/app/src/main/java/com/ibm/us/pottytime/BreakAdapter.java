@@ -9,12 +9,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class PottyAdapter extends ArrayAdapter<Potty> {
+public class BreakAdapter extends ArrayAdapter<Break> {
 
-    private final ArrayList<Potty>  items;
+    private final ArrayList<Break>  items;
     private final Context           context;
 
-    public PottyAdapter( Context context, ArrayList<Potty> list ) {
+    public BreakAdapter(Context context, ArrayList<Break> list) {
         super( context, R.layout.item_row, list );
 
         this.context = context;

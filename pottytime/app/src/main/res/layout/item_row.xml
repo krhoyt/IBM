@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="72dp"
     android:id="@+id/layout_row"
     android:background="#ffffffff"
@@ -11,7 +13,8 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_top_row">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -19,7 +22,7 @@
                 android:text="Urine only"
                 android:id="@+id/text_classify"
                 android:textColor="#dd000000"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
 
             <ImageView
                 android:layout_width="fill_parent"
@@ -33,20 +36,21 @@
                 android:text="10:11 AM"
                 android:id="@+id/text_when"
                 android:textColor="#42000000"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 android:singleLine="false" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_bottom_row">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rating: 4"
-                android:id="@+id/text_rating"
+                android:text="Bristol scale: 5"
+                android:id="@+id/text_stool"
                 android:textColor="#89000000"
                 android:textSize="14dp" />
 
@@ -59,10 +63,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bristol scale: 5"
-                android:id="@+id/text_bristol"
+                android:text="Rating: 4"
+                android:id="@+id/text_rating"
                 android:textColor="#89000000"
-                android:textSize="14dp" />
+                android:textSize="14sp" />
+
         </LinearLayout>
 
 </LinearLayout>

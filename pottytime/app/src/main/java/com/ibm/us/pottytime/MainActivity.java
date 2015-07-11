@@ -2,11 +2,7 @@ package com.ibm.us.pottytime;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -20,8 +16,8 @@ public class MainActivity extends Activity {
     private Button              btnDetail = null;
     private ListView            lstHistory = null;
 
-    private ArrayList<Potty>    history = null;
-    private PottyAdapter        adapter = null;
+    private ArrayList<Break>    history = null;
+    private BreakAdapter        adapter = null;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -29,13 +25,13 @@ public class MainActivity extends Activity {
         setContentView( R.layout.activity_master );
 
         // Data model
-        history = new ArrayList<Potty>();
-        adapter = new PottyAdapter( this, history );
+        history = new ArrayList<Break>();
+        adapter = new BreakAdapter( this, history );
 
         // Testing
         for( int p = 0; p < 100; p++ )
         {
-            Potty   test = new Potty();
+            Break test = new Break();
             history.add( test );
         }
 
@@ -47,9 +43,9 @@ public class MainActivity extends Activity {
             @Override
             public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
                 Intent  detail = null;
-                Potty   potty = null;
+                Break potty = null;
 
-                potty = ( Potty )parent.getAdapter().getItem( position );
+                potty = (Break)parent.getAdapter().getItem( position );
 
                 detail = new Intent( MainActivity.this, DetailActivity.class );
                 // detail.putExtra( EXTRA_MESSAGE, message );

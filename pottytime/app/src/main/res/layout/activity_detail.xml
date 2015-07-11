@@ -1,202 +1,255 @@
-<RelativeLayout
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#ffdfe8e2"
-    android:id="@+id/layout_detail"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="#ffffffff"
+    tools:context=".MainActivity"
+    android:id="@+id/layout_detail">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#4CAF50"
+        android:id="@+id/layout_header">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/view_cancel"
+            android:layout_gravity="left|center_vertical"
+            android:src="@drawable/arrow_back_white"
+            android:padding="12dp"
+            android:layout_marginLeft="4dp" />
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/view_done"
+            android:layout_gravity="right|center_vertical"
+            android:src="@drawable/check_white"
+            android:padding="12dp"
+            android:layout_marginRight="4dp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="169dp"
+        android:id="@+id/layout_location">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/view_map"
+            android:layout_gravity="center"
+            android:src="@drawable/ibm"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="79dp"
+            android:id="@+id/view_top"
+            android:layout_gravity="top"
+            android:background="@drawable/map_top_darken" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="79dp"
+            android:id="@+id/view_bottom"
+            android:layout_gravity="bottom"
+            android:background="@drawable/map_bottom_darken" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Armonk, NY"
+            android:id="@+id/text_location"
+            android:layout_gravity="left|bottom"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp"
+            android:textSize="34sp"
+            android:textColor="#ffffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="76°F"
+            android:id="@+id/text_weather"
+            android:layout_gravity="right|bottom"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:textSize="34sp"
+            android:textColor="#ffffffff" />
+
+    </FrameLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:background="#ffdfe8e2"
-        android:gravity="center"
-        android:id="@+id/layout_classify">
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:id="@+id/layout_stool">
 
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:id="@+id/view_poo"
-            android:src="@drawable/poo"
-            android:layout_marginRight="8dp"
+            android:id="@+id/view_stool"
+            android:src="@drawable/stool"
             android:scaleType="fitCenter"
-            android:padding="8dp" />
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:alpha="0.30" />
 
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:id="@+id/view_pee"
-            android:src="@drawable/pee"
-            android:layout_marginLeft="8dp"
-            android:scaleType="fitCenter"
-            android:padding="8dp" />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/layout_classify"
-        android:gravity="center"
-        android:layout_alignParentBottom="false"
-        android:background="#ffdfe8e2"
-        android:id="@+id/layout_toilet"
-        android:layout_above="@+id/layout_commit">
-
-        <ImageView
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/view_toilet"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:src="@drawable/toilet"
-            android:scaleType="centerCrop" />
-    </RelativeLayout>
+            android:layout_marginLeft="16dp"
+            android:layout_weight="1"
+            android:id="@+id/layout_stool_field">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="A sausage with cracks on its surface"
+                android:id="@+id/text_stool"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:paddingTop="16dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/view_stool_divider"
+                android:layout_marginTop="8dp"
+                android:background="#1f000000" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_classify"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:background="#7fffffff"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:id="@+id/layout_drawer">
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:id="@+id/layout_urine">
 
         <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:id="@+id/view_pee_1"
-            android:background="@drawable/border_pee_1"
-            android:layout_marginLeft="8dp" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/view_urine"
+            android:src="@drawable/urine_green"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:scaleType="fitCenter" />
 
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:id="@+id/view_pee_2"
-            android:background="@drawable/border_pee_2"
-            android:layout_marginLeft="8dp" />
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:id="@+id/view_pee_3"
-            android:background="@drawable/border_pee_3"
-            android:layout_marginLeft="8dp" />
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:id="@+id/view_pee_4"
-            android:background="@drawable/border_pee_4"
-            android:layout_marginLeft="8dp" />
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:id="@+id/view_pee_5"
-            android:background="@drawable/border_pee_5"
-            android:layout_marginLeft="8dp" />
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:id="@+id/view_pee_6"
-            android:background="@drawable/border_pee_6"
-            android:layout_marginLeft="8dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentLeft="true"
-        android:background="#7fffffff"
-        android:id="@+id/layout_rating"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentRight="false"
-        android:layout_above="@+id/layout_commit"
-        android:paddingTop="10dp"
-        android:gravity="center_horizontal">
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:id="@+id/view_rating_1"
-            android:background="@drawable/border_rating" />
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:id="@+id/view_rating_2"
-            android:background="@drawable/border_rating"
-            android:layout_marginLeft="8dp" />
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:id="@+id/view_rating_3"
-            android:background="@drawable/border_rating"
-            android:layout_marginLeft="8dp" />
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:id="@+id/view_rating_4"
-            android:background="@drawable/border_rating"
-            android:layout_marginLeft="8dp" />
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:id="@+id/view_rating_5"
-            android:background="@drawable/border_rating"
-            android:layout_marginLeft="8dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="#ffdfe8e2"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/layout_commit">
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="Cancel"
-            android:id="@+id/text_cancel"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
             android:layout_weight="1"
-            android:textColor="#ff98b5a3"
-            android:textSize="18dp"
-            android:gravity="center_vertical|center_horizontal" />
+            android:id="@+id/layout_urine_field">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Transparent yellow"
+                android:id="@+id/text_urine"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:paddingTop="16dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/view_urine_divider"
+                android:layout_marginTop="8dp"
+                android:background="#4CAF50" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:id="@+id/layout_rating" >
 
         <ImageView
-            android:layout_width="1dp"
-            android:layout_height="32dp"
-            android:id="@+id/view_divider"
-            android:background="@drawable/border_divider"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/view_rating"
+            android:src="@drawable/rating"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:scaleType="fitCenter"
+            android:alpha="0.30" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:id="@+id/layout_rating_field"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rating"
+                android:id="@+id/text_rating"
+                android:textColor="#4d000000"
+                android:textSize="16sp"
+                android:paddingTop="16dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/view_rating_divider"
+                android:layout_marginTop="8dp"
+                android:background="#1f000000" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/view_spacer"
+            android:layout_weight="1"
             android:layout_gravity="center_vertical" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:id="@+id/layout_summary">
+
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="Done"
-            android:id="@+id/text_done"
-            android:layout_weight="1"
-            android:textColor="#ff98b5a3"
-            android:textSize="18dp"
-            android:gravity="center_vertical|center_horizontal" />
+            android:text="General summary about health conditions based on selections."
+            android:id="@+id/text_summary"
+            android:textColor="#ff000000"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textSize="16dp"
+            android:padding="16dp"
+            android:background="#f5f5f5"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp" />
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

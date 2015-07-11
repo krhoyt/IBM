@@ -22,7 +22,7 @@
             android:id="@+id/text_title"
             android:layout_weight="1"
             android:textColor="#ffffff"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:paddingLeft="72dp"
             android:enabled="false"
             android:gravity="center_vertical" />
