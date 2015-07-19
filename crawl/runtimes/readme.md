@@ -1,0 +1,3 @@
+- web - Just web assets. Included in runtime versions.
+- node - Node.js version.
+- php - PHP version.
