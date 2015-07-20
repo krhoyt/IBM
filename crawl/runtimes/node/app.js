@@ -53,11 +53,11 @@ app.get( '/weather', function( req, res ) {
         // Build initial weather object
         if( !error && response.statusCode == 200 ) {
             weather = {
-                'temperature': data.currently.apparentTemperature,
+                'temperature': data.currently.temperature,
                 'icon': data.currently.icon,
                 'summary': data.currently.summary,
-                'maximum': data.daily.data[0].apparentTemperatureMax,
-                'minimum': data.daily.data[0].apparentTemperatureMin
+                'maximum': data.daily.data[0].temperatureMax,
+                'minimum': data.daily.data[0].temperatureMin
             };
             
             // Geolocation data

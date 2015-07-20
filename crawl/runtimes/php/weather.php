@@ -39,11 +39,11 @@ $response = json_decode( $result );
 
 // Extract weather data
 $weather = array();
-$weather['temperature'] = $response -> currently -> apparentTemperature;
+$weather['temperature'] = $response -> currently -> temperature;
 $weather['icon'] = $response -> currently -> icon;
 $weather['summary'] = $response -> currently -> summary;
-$weather['maximum'] = $response -> daily -> data[0] -> apparentTemperatureMax;
-$weather['minimum'] = $response -> daily -> data[0] -> apparentTemperatureMin;
+$weather['maximum'] = $response -> daily -> data[0] -> temperatureMax;
+$weather['minimum'] = $response -> daily -> data[0] -> temperatureMin;
 
 /*
  * Geocoding 
