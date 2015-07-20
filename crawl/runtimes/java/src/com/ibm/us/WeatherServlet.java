@@ -1,144 +1,125 @@
 package com.ibm.us;
 
-// Uses Glassfish JSON
-// http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javax.json%22
-
+// General processing
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+// Servlet
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+// Uses Glassfish JSON
+// http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javax.json%22
 import javax.json.Json;
+import javax.json.JsonArray;
 import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
-import javax.json.JsonWriter;
+import javax.json.JsonReader;
+import javax.json.JsonReaderFactory;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
 public class WeatherServlet extends HttpServlet {
 
+	// Constants
 	public static final String FORECAST_IO = "https://api.forecast.io/forecast/";
 	public static final String FORECAST_KEY = "forecast";
+	public static final String GOOGLE_ARGUMENT = "latlng";	
+	public static final String GOOGLE_GEO = "http://maps.googleapis.com/maps/api/geocode/json";
+	public static final String GOOGLE_SENSOR = "sensor=true";
+	public static final String KEY_ADDRESS_COMPONENTS = "address_components";
+	public static final String KEY_ADMINISTRATIVE_AREA = "administrative_area_level_1";	
 	public static final String KEY_APPARENT_MAXIMUM = "apparentTemperatureMax";
 	public static final String KEY_APPARENT_MINIMUM = "apparentTemperatureMin";
-	public static final String KEY_APPARENT_TEMPERATURE= "apparentTemperature";	
+	public static final String KEY_APPARENT_TEMPERATURE= "apparentTemperature";
 	public static final String KEY_ICON = "icon";
-	public static final String KEY_MAXIMUM = "maximum";
-	public static final String KEY_MINIMUM = "minimum";
-	public static final String KEY_SUMMARY = "summary";
-	public static final String KEY_TEMPERATURE = "temperature";
+	public static final String KEY_LOCALITY = "locality";
+	public static final String KEY_LONG_NAME = "long_name";
+	public static final String KEY_RESULTS = "results";	
+	public static final String KEY_SHORT_NAME = "short_name";
+	public static final String KEY_SUMMARY = "summary";	
+	public static final String KEY_TYPES = "types";
 	public static final String QUERY_LATITUDE = "latitude";
 	public static final String QUERY_LONGITUDE = "longitude";
 	
+	// Serialization
 	private static final long serialVersionUID = 1L;	
 	
+	// Forecast IO API key
+	// From servlet configuration file
 	protected String	forecastKey = null;
 	
-	protected String encode( Weather weather )
-	{
-		JsonObject			result = null;
-		JsonObjectBuilder	builder = null;
-		StringWriter		stringify = null;
-		
-		builder = Json.createObjectBuilder();
-		builder.add( KEY_TEMPERATURE, weather.temperature );
-		builder.add( KEY_ICON, weather.icon );
-		builder.add( KEY_SUMMARY, weather.summary );
-		builder.add( KEY_MAXIMUM, weather.maximum );
-		builder.add( KEY_MINIMUM, weather.minimum );
-		
-		result = builder.build();
-		
-		stringify = new StringWriter();
-		
-		try( JsonWriter writer = Json.createWriter( stringify ) ) {
-			writer.writeObject( result );
-		}
-		
-		return stringify.toString();
-	}
-	
+	// Get forecast data based on geolocation
+	// Response from service is JSON
+	// Data is decoded into object mapping
 	protected Weather forecast( String latitude, String longitude )
 	{
-		BufferedReader			buffer = null;
 		ByteArrayInputStream	stream = null;
 		Event					event = null;
-		HttpURLConnection		connection = null;
-		InputStreamReader		reader = null;
 		JsonParser				parser = null;
-		String					line = null;
 		StringBuffer			response = null;
-		URL						url = null;
 		Weather					weather = null;
-		
-		try {			
-			url = new URL( FORECAST_IO + forecastKey + "/" + latitude + "," + longitude );
-			
-			connection = ( HttpURLConnection )url.openConnection();
-			connection.setRequestMethod( "GET" );
-	  
-			reader = new InputStreamReader( connection.getInputStream() );
-			buffer = new BufferedReader( reader );
-			
-			response = new StringBuffer();
-	 
-			while( ( line = buffer.readLine() ) != null ) 
-			{
-				response.append( line );
-			}
-			
-			buffer.close();			
-		} catch( MalformedURLException murle ) {
-			murle.printStackTrace();
-		} catch( IOException ioe ) {
-			ioe.printStackTrace();
-		}
 
+		// Make service request
+		// Forecast data
+		response = request(
+			FORECAST_IO + forecastKey + "/" + latitude + "," + longitude		
+		);
+		
+		// Map JSON to object
 		if( response != null )
 		{
+			// Weather object
 			weather = new Weather();
 			
+			// Create JSON parser
 			stream = new ByteArrayInputStream( response.toString().getBytes() );
 			parser = Json.createParser( stream );
 			
+			// Iterate through JSON tokens
 			while( parser.hasNext() )
 			{
+				// Get the next token
 				event = parser.next();
 				
+				// Store in weather object based on token
 				if( event == Event.KEY_NAME )
 				{
 					switch( parser.getString() ) 
 					{
+						// Temperature
 						case KEY_APPARENT_TEMPERATURE:
 							parser.next();
 							weather.temperature = parser.getBigDecimal().floatValue();
 							break;
-							
+						
+						// Icon
 						case KEY_ICON:
 							parser.next();
 							weather.icon = parser.getString();
 							break;							
 							
+						// Summary
 						case KEY_SUMMARY:
 							parser.next();
 							weather.summary = parser.getString();
 							break;							
 							
+						// Maximum for the day
 						case KEY_APPARENT_MAXIMUM:
 							parser.next();
 							weather.maximum = parser.getBigDecimal().floatValue();
 							break;
 							
+						// Minimum for the day
 						case KEY_APPARENT_MINIMUM:
 							parser.next();
 							weather.minimum = parser.getBigDecimal().floatValue();
@@ -148,27 +129,157 @@ public class WeatherServlet extends HttpServlet {
 			}
 		}
 		
+		// Return mapped object
 		return weather;		
 	}
 	
+	// Called to perform reverse geolocation lookup
+	// Call against Google API
+	// Response is JSON-encoded
+	protected Weather location( String latitude, String longitude )
+	{
+		ByteArrayInputStream	stream = null;
+		JsonArray				address = null;
+		JsonArray				types = null;
+		JsonObject				component = null;
+		JsonObject				data = null;
+		JsonObject				results = null;		
+		JsonReader				reader = null;
+		JsonReaderFactory		factory = null;
+		StringBuffer			response = null;
+		Weather					weather = null;
+
+		// Make service request
+		// Location data
+		response = request(				
+			GOOGLE_GEO + "?" + GOOGLE_ARGUMENT + "=" + latitude + "," + longitude + "&" + GOOGLE_SENSOR		
+		);		
+		
+		// Map JSON to object
+		if( response != null )
+		{
+			// Weather object
+			weather = new Weather();
+			
+			// Input stream needed by factory
+			stream = new ByteArrayInputStream( response.toString().getBytes() );
+			
+			// JSON factory and reader
+			factory = Json.createReaderFactory( null );
+			reader = factory.createReader( stream );
+			
+			// Read JSON object
+			data = reader.readObject();
+			
+			// Cleanup
+			// Reader
+			reader.close();
+			
+			// Stream
+			try {
+				stream.close();
+			} catch( IOException ioe ) {
+				ioe.printStackTrace();
+			}
+			
+			// Get root object
+			// Get address component array
+			results = data.getJsonArray( KEY_RESULTS ).getJsonObject( 0 );
+			address = results.getJsonArray( KEY_ADDRESS_COMPONENTS );
+			
+			// Loop through address component options
+			for( int c = 0; c < address.size(); c++ )
+			{
+				// Current component
+				// Address type description for component
+				component = address.getJsonObject( c );
+				types = component.getJsonArray( KEY_TYPES );
+
+				// Look for city component type
+				if( types.getString( 0 ).equals( KEY_LOCALITY ) )
+				{
+					weather.city = component.getString( KEY_LONG_NAME );
+				}
+				
+				// Look for state component type
+				if( types.getString( 0 ).equals( KEY_ADMINISTRATIVE_AREA ) )
+				{
+					weather.state = component.getString( KEY_SHORT_NAME );
+				}
+			}
+		}
+		
+		return weather;
+	}
+	
+	// Generic HTTP request handler
+	// Servlet makes two network requests
+	// Both are HTTP GET and both return JSON
+	protected StringBuffer request( String path )
+	{
+		BufferedReader		buffer = null;
+		HttpURLConnection	connection = null;
+		InputStreamReader	reader = null;
+		String				line = null;
+		StringBuffer		response = null;
+		URL					url = null;
+				
+		// Request data
+		try {						
+			// Location of service
+			url = new URL( path );			
+			
+			// Connect
+			connection = ( HttpURLConnection )url.openConnection();
+			connection.setRequestMethod( "GET" );
+	  
+			// Prepare to read response
+			reader = new InputStreamReader( connection.getInputStream() );
+			buffer = new BufferedReader( reader );
+			
+			// Response data is JSON-encoded string
+			response = new StringBuffer();
+	 
+			// Read response data 
+			while( ( line = buffer.readLine() ) != null ) 
+			{
+				response.append( line );
+			}
+			
+			// Close the connection
+			buffer.close();			
+		} catch( MalformedURLException murle ) {
+			murle.printStackTrace();
+		} catch( IOException ioe ) {
+			ioe.printStackTrace();
+		}	
+		
+		return response;
+	}
+	
+	// Called at servlet initialization
+	// Grabs Forecast.IO API key from configuration file
 	public void init( ServletConfig config ) throws ServletException
 	{
 	    forecastKey = config.getInitParameter( FORECAST_KEY );
 	}	
 	
+	// Get request for weather data
+	// Based on provided geolocation coordinates
+	// Also performs reverse lookup of location name
 	protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
 	{
 		PrintWriter	out = null;
-		String		latitude = null;
-		String		longitude = null;
 		Weather		result = null;
 		Weather		weather = null;
+
+		// Get forecast data
+		result = forecast( 
+			request.getParameter( QUERY_LATITUDE ),
+			request.getParameter( QUERY_LONGITUDE )
+		);		
 		
-		latitude = request.getParameter( QUERY_LATITUDE );
-		longitude = request.getParameter( QUERY_LONGITUDE );
-					
-		result = forecast( latitude, longitude );		
-		
+		// Map to return object
 		weather = new Weather();
 		weather.temperature = result.temperature;
 		weather.icon = result.icon;
@@ -176,8 +287,20 @@ public class WeatherServlet extends HttpServlet {
 		weather.maximum = result.maximum;
 		weather.minimum = result.minimum;
 		
+		// Get location data
+		result = location(
+			request.getParameter( QUERY_LATITUDE ),
+			request.getParameter( QUERY_LONGITUDE )				
+		);
+		
+		// Map to return object
+		weather.city = result.city;
+		weather.state = result.state;
+		
+		// Return JSON-encoded data
+		// Inclusive of weather and geolocation
 		out = response.getWriter();
-		out.print( encode( weather ) );
+		out.print( weather.toJson() );
 	}	
 	
 }
