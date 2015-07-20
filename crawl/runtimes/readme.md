@@ -1,3 +1,4 @@
-- web - Just web assets. Included in runtime versions.
+- java - Java servlet version.
 - node - Node.js version.
 - php - PHP version.
+- web - Just web assets. Included in runtime versions.
