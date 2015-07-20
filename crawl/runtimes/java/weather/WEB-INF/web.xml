@@ -34,7 +34,7 @@
       <servlet-class>com.ibm.us.WeatherServlet</servlet-class>
 	  <init-param>
 		  <param-name>forecast</param-name>
-		  <param-value>_YOUR_FORECAST_IO_API_KEY_</param-value>
+		  <param-value>_YOUR_FORECAST_IO_KEY_HERE_</param-value>
 	  </init-param>	  
     </servlet>
     <servlet-mapping>

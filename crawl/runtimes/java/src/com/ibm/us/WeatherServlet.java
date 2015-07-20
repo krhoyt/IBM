@@ -36,16 +36,19 @@ public class WeatherServlet extends HttpServlet {
 	public static final String GOOGLE_GEO = "http://maps.googleapis.com/maps/api/geocode/json";
 	public static final String GOOGLE_SENSOR = "sensor=true";
 	public static final String KEY_ADDRESS_COMPONENTS = "address_components";
-	public static final String KEY_ADMINISTRATIVE_AREA = "administrative_area_level_1";	
-	public static final String KEY_APPARENT_MAXIMUM = "apparentTemperatureMax";
-	public static final String KEY_APPARENT_MINIMUM = "apparentTemperatureMin";
-	public static final String KEY_APPARENT_TEMPERATURE= "apparentTemperature";
+	public static final String KEY_ADMINISTRATIVE_AREA = "administrative_area_level_1";
+	public static final String KEY_CURRENTLY = "currently";
+	public static final String KEY_DAILY = "daily";
+	public static final String KEY_DATA = "data";
 	public static final String KEY_ICON = "icon";
 	public static final String KEY_LOCALITY = "locality";
 	public static final String KEY_LONG_NAME = "long_name";
+	public static final String KEY_MAXIMUM = "temperatureMax";
+	public static final String KEY_MINIMUM = "temperatureMin";	
 	public static final String KEY_RESULTS = "results";	
 	public static final String KEY_SHORT_NAME = "short_name";
 	public static final String KEY_SUMMARY = "summary";	
+	public static final String KEY_TEMPERATURE= "temperature";
 	public static final String KEY_TYPES = "types";
 	public static final String QUERY_LATITUDE = "latitude";
 	public static final String QUERY_LONGITUDE = "longitude";
@@ -62,11 +65,16 @@ public class WeatherServlet extends HttpServlet {
 	// Data is decoded into object mapping
 	protected Weather forecast( String latitude, String longitude )
 	{
-		ByteArrayInputStream	stream = null;
-		Event					event = null;
-		JsonParser				parser = null;
-		StringBuffer			response = null;
-		Weather					weather = null;
+		ByteArrayInputStream	stream = null;	
+		JsonArray				ranges = null;
+		JsonObject				currently = null;
+		JsonObject				daily = null;		
+		JsonObject				data = null;
+		JsonObject				today = null;
+		JsonReaderFactory		factory = null;
+		JsonReader				reader = null;
+		StringBuffer			response = null;		
+		Weather					weather = null;		
 
 		// Make service request
 		// Forecast data
@@ -78,55 +86,43 @@ public class WeatherServlet extends HttpServlet {
 		if( response != null )
 		{
 			// Weather object
-			weather = new Weather();
+			weather = new Weather();			
 			
-			// Create JSON parser
+			// Input stream needed by factory
 			stream = new ByteArrayInputStream( response.toString().getBytes() );
-			parser = Json.createParser( stream );
 			
-			// Iterate through JSON tokens
-			while( parser.hasNext() )
-			{
-				// Get the next token
-				event = parser.next();
-				
-				// Store in weather object based on token
-				if( event == Event.KEY_NAME )
-				{
-					switch( parser.getString() ) 
-					{
-						// Temperature
-						case KEY_APPARENT_TEMPERATURE:
-							parser.next();
-							weather.temperature = parser.getBigDecimal().floatValue();
-							break;
-						
-						// Icon
-						case KEY_ICON:
-							parser.next();
-							weather.icon = parser.getString();
-							break;							
-							
-						// Summary
-						case KEY_SUMMARY:
-							parser.next();
-							weather.summary = parser.getString();
-							break;							
-							
-						// Maximum for the day
-						case KEY_APPARENT_MAXIMUM:
-							parser.next();
-							weather.maximum = parser.getBigDecimal().floatValue();
-							break;
-							
-						// Minimum for the day
-						case KEY_APPARENT_MINIMUM:
-							parser.next();
-							weather.minimum = parser.getBigDecimal().floatValue();
-							break;							
-					}
-				}
+			// JSON factory and reader
+			factory = Json.createReaderFactory( null );
+			reader = factory.createReader( stream );
+			
+			// Read JSON object
+			data = reader.readObject();
+			
+			// Cleanup
+			// Reader
+			reader.close();
+			
+			// Stream
+			try {
+				stream.close();
+			} catch( IOException ioe ) {
+				ioe.printStackTrace();
 			}
+			
+			// Get current conditions
+			currently = data.getJsonObject( KEY_CURRENTLY );
+			
+			// Get daily range for today
+			daily = data.getJsonObject( KEY_DAILY );
+			ranges = daily.getJsonArray( KEY_DATA );
+			today = ranges.getJsonObject( 0 );
+			
+			// Assign data to mapped object
+			weather.temperature = currently.getJsonNumber( KEY_TEMPERATURE ).bigDecimalValue().floatValue();
+			weather.icon = currently.getString( KEY_ICON );
+			weather.summary = currently.getString( KEY_SUMMARY );
+			weather.maximum = today.getJsonNumber( KEY_MAXIMUM ).bigDecimalValue().floatValue();
+			weather.minimum = today.getJsonNumber( KEY_MINIMUM ).bigDecimalValue().floatValue();
 		}
 		
 		// Return mapped object
