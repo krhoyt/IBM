@@ -2,7 +2,7 @@
 var fs = require( 'fs' );
 var request = require( 'request' );
 var express = require( 'express' );
-var app = express();
+var cfenv = require( 'cfenv' );
 
 // Constants
 var FORECAST_IO = 'https://api.forecast.io/forecast/';
@@ -23,7 +23,7 @@ var longitude = null;
  */
 
 // Get API key
-fs.readFile( '../' + KEY_FILE, 'utf-8', function( err, data ) {
+fs.readFile( __dirname + '/' + KEY_FILE, 'utf-8', function( err, data ) {
     if( err ) {
         return console.log( err );    
     }
@@ -35,8 +35,12 @@ fs.readFile( '../' + KEY_FILE, 'utf-8', function( err, data ) {
  * Web
  */
 
+// Express
+var app = express();
+var bluemix = cfenv.getAppEnv();
+
 // Static content
-app.use( express.static( 'web' ) );
+app.use( express.static( __dirname + '/public' ) );
 
 // Weather data
 app.get( '/weather', function( req, res ) {
@@ -93,12 +97,6 @@ app.get( '/weather', function( req, res ) {
 } );
 
 // Start server
-var server = app.listen( 8000, function () {
-	var host = null;
-	var port = null;
-
-	host = server.address().address;
-	port = server.address().port;	
-
-	console.log( 'Listening on http://%s:%s', host, port );
+app.listen( bluemix.port, bluemix.bind, function () {
+	console.log( 'Server starting on: ' + bluemix.url );
 } );

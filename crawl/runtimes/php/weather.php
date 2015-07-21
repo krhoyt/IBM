@@ -14,7 +14,7 @@ $KEY_FILE = 'forecast.io';
  */
 
 // Get API key
-$forecast_key = trim( file_get_contents( '../' . $KEY_FILE ) );
+$forecast_key = trim( file_get_contents( $KEY_FILE ) );
 
 /*
  * Weather 
