@@ -1,35 +1,27 @@
-package com.ibm.us;
+package com.ibm.kevinhoyt;
 
-// General processing
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-// Servlet
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-// Uses Glassfish JSON
-// http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javax.json%22
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.json.JsonReaderFactory;
-import javax.json.stream.JsonParser;
-import javax.json.stream.JsonParser.Event;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 
-public class WeatherServlet extends HttpServlet {
-
+@Path( "/weather" )
+public class WeatherService 
+{
 	// Constants
+	public static final String FORECAST_API = "_YOUR_FORECAST_IO_API_KEY_";	
 	public static final String FORECAST_IO = "https://api.forecast.io/forecast/";
 	public static final String FORECAST_KEY = "forecast";
 	public static final String GOOGLE_ARGUMENT = "latlng";	
@@ -50,16 +42,7 @@ public class WeatherServlet extends HttpServlet {
 	public static final String KEY_SUMMARY = "summary";	
 	public static final String KEY_TEMPERATURE= "temperature";
 	public static final String KEY_TYPES = "types";
-	public static final String QUERY_LATITUDE = "latitude";
-	public static final String QUERY_LONGITUDE = "longitude";
-	
-	// Serialization
-	private static final long serialVersionUID = 1L;	
-	
-	// Forecast IO API key
-	// From servlet configuration file
-	protected String	forecastKey = null;
-	
+		
 	// Get forecast data based on geolocation
 	// Response from service is JSON
 	// Data is decoded into object mapping
@@ -79,7 +62,7 @@ public class WeatherServlet extends HttpServlet {
 		// Make service request
 		// Forecast data
 		response = request(
-			FORECAST_IO + forecastKey + "/" + latitude + "," + longitude		
+			FORECAST_IO + FORECAST_API + "/" + latitude + "," + longitude		
 		);
 		
 		// Map JSON to object
@@ -251,28 +234,21 @@ public class WeatherServlet extends HttpServlet {
 		}	
 		
 		return response;
-	}
-	
-	// Called at servlet initialization
-	// Grabs Forecast.IO API key from configuration file
-	public void init( ServletConfig config ) throws ServletException
-	{
-	    forecastKey = config.getInitParameter( FORECAST_KEY );
 	}	
-	
+
 	// Get request for weather data
 	// Based on provided geolocation coordinates
-	// Also performs reverse lookup of location name
-	protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
+	// Also performs reverse lookup of location name	
+	@GET	
+	public String doWeather( @QueryParam( "latitude" ) String latitude, @QueryParam( "longitude" ) String longitude )
 	{
-		PrintWriter	out = null;
-		Weather		result = null;
-		Weather		weather = null;
-
+		Weather result = null;
+		Weather	weather = null;
+		
 		// Get forecast data
 		result = forecast( 
-			request.getParameter( QUERY_LATITUDE ),
-			request.getParameter( QUERY_LONGITUDE )
+			latitude,
+			longitude
 		);		
 		
 		// Map to return object
@@ -285,18 +261,14 @@ public class WeatherServlet extends HttpServlet {
 		
 		// Get location data
 		result = location(
-			request.getParameter( QUERY_LATITUDE ),
-			request.getParameter( QUERY_LONGITUDE )				
+			latitude,
+			longitude				
 		);
 		
 		// Map to return object
 		weather.city = result.city;
 		weather.state = result.state;
 		
-		// Return JSON-encoded data
-		// Inclusive of weather and geolocation
-		out = response.getWriter();
-		out.print( weather.toJson() );
-	}	
-	
+		return weather.toJson();
+	}
 }

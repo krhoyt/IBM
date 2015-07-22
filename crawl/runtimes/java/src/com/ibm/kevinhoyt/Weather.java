@@ -1,4 +1,4 @@
-package com.ibm.us;
+package com.ibm.kevinhoyt;
 
 // General processing
 import java.io.StringWriter;
@@ -10,8 +10,8 @@ import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonWriter;
 
-public class Weather {
-
+public class Weather 
+{
 	// Constants
 	public static final String KEY_CITY = "city";	
 	public static final String KEY_ICON = "icon";
@@ -36,6 +36,7 @@ public class Weather {
 	{
 		JsonObject			result = null;
 		JsonObjectBuilder	builder = null;
+		JsonWriter			writer = null;
 		StringWriter		stringify = null;
 		
 		// Populate JSON object
@@ -54,9 +55,8 @@ public class Weather {
 		// Write properties to string
 		stringify = new StringWriter();
 		
-		try( JsonWriter writer = Json.createWriter( stringify ) ) {
-			writer.writeObject( result );
-		}
+		writer = Json.createWriter( stringify );
+		writer.writeObject( result );
 		
 		// Return encoded string
 		return stringify.toString();
