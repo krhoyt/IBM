@@ -1,4 +1,4 @@
-- java - Java servlet version.
+- java - Java web container version (Liberty/JAX-RS).
 - node - Node.js version.
 - php - PHP version.
 - web - Just web assets. Included in runtime versions.
