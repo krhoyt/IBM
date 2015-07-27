@@ -1,0 +1,79 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:id="@+id/layout_screen">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/image_scene"
+        android:layout_gravity="center"
+        android:src="@drawable/scene_partly_cloudy_day"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Parker, CO"
+        android:id="@+id/text_location"
+        android:layout_gravity="center_horizontal|top"
+        android:textColor="#ffffffff"
+        android:layout_marginTop="24dp"
+        android:textSize="34dp" />
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:id="@+id/imageView"
+        android:layout_gravity="center"
+        android:background="@drawable/weather_circle" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/layout_conditions">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/image_icon"
+            android:src="@drawable/icon_partly_cloudy_day"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="91°"
+            android:id="@+id/text_current"
+            android:layout_gravity="center_horizontal"
+            android:textSize="96dp"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Partly Cloudy"
+            android:id="@+id/text_summary"
+            android:textColor="#ffffff"
+            android:textSize="24dp"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="91°/60°"
+            android:id="@+id/text_range"
+            android:textColor="#ffffff"
+            android:textSize="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/weather_top_bottom" />
+
+    </LinearLayout>
+
+</FrameLayout>
