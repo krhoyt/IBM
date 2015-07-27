@@ -25,8 +25,8 @@
         android:textSize="34dp" />
 
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
         android:id="@+id/imageView"
         android:layout_gravity="center"
         android:background="@drawable/weather_circle" />
