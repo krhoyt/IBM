@@ -1,0 +1,30 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "ibm.us.com.weather"
+        minSdkVersion 16
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.ibm.mobile.services:ibmbluemix:1.0.1.20150311-1224'
+    compile 'com.ibm.mobile.services:ibmcloudcode:1.0.1.20150311-1224'
+    compile 'com.ibm.mobile.services:ibmdata:1.0.1.20150311-1224'
+    compile 'com.ibm.mobile.services:ibmlocation:0.9.0.20140707-1250'
+    compile 'com.ibm.mobile.services:ibmfilesync:1.0.1.20150311-1224'
+}

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="ibmfilesync-1.0.1.20150311-1224">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ibm.mobile.services/ibmfilesync/1.0.1.20150311-1224/c9c2a97cdf54089bcc736b0589d299f3886c5257/ibmfilesync-1.0.1.20150311-1224.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ibm.mobile.services/ibmfilesync/1.0.1.20150311-1224/adc83b19e793491b1c6ea0fd8b46cd9f32e592fc/ibmfilesync-1.0.1.20150311-1224-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

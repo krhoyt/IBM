@@ -1,0 +1,16 @@
+{
+  "name": "Weather",
+  "version": "0.0.1",
+  "description": "Simple weather lookup.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.13.1",
+    "ibmbluemix": "^1.0.0",
+    "request": "^2.58.0",
+    "winston": "^1.0.1"
+  },
+  "repository": {}
+}

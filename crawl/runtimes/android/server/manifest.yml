@@ -1,0 +1,14 @@
+applications:
+- services:
+  - Android Weather-MAS
+  - Android Weather-Push
+  - Android Weather-MobileData
+  - Android Weather-Mobile Quality Assurance
+  disk_quota: 1024M
+  host: android-weather
+  name: Android Weather
+  command: node app.js
+  path: .
+  domain: mybluemix.net
+  instances: 1
+  memory: 128M

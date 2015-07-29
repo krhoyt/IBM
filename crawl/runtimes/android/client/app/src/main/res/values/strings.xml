@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">Weather</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="bluemix_id">_YOUR_APPLICATION_ID_</string>
+    <string name="bluemix_route">_YOUR_APPLICATION_ROUTE_</string>
+    <string name="bluemix_secret">_YOUR_APPLICATION_SECRET_</string>
+
+</resources>
