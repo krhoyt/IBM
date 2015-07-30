@@ -11,13 +11,13 @@
         android:layout_height="match_parent"
         android:id="@+id/image_scene"
         android:layout_gravity="center"
-        android:src="@drawable/scene_partly_cloudy_day"
+        android:src="@drawable/earth"
         android:scaleType="centerCrop" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Parker, CO"
+        android:text="Locating ..."
         android:id="@+id/text_location"
         android:layout_gravity="center_horizontal|top"
         android:textColor="#ffffffff"
@@ -27,16 +27,18 @@
     <ImageView
         android:layout_width="320dp"
         android:layout_height="320dp"
-        android:id="@+id/imageView"
+        android:id="@+id/image_circle"
         android:layout_gravity="center"
-        android:background="@drawable/weather_circle" />
+        android:background="@drawable/weather_circle"
+        android:visibility="invisible" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:id="@+id/layout_conditions">
+        android:id="@+id/layout_conditions"
+        android:visibility="invisible">
 
         <ImageView
             android:layout_width="48dp"

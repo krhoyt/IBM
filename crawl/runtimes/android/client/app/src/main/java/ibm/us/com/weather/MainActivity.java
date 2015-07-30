@@ -1,11 +1,16 @@
 package ibm.us.com.weather;
 
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ibm.mobile.services.cloudcode.IBMCloudCode;
@@ -24,6 +29,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 
 import bolts.Continuation;
 import bolts.Task;
@@ -32,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
     // Constants
     public static final String DEGREE = "°";
+    public static final String DRAWABLE_ICON = "@drawable/icon_";
+    public static final String DRAWABLE_SCENE = "@drawable/scene_";
     public static final String KEY_CITY = "city";
     public static final String KEY_ICON = "icon";
     public static final String KEY_MAXIMUM = "maximum";
@@ -44,8 +52,10 @@ public class MainActivity extends AppCompatActivity {
     public static final String WEATHER_ROOT = "/weather";
 
     // User interface
+    protected ImageView     imgCircle = null;
     protected ImageView     imgIcon = null;
     protected ImageView     imgScene = null;
+    protected LinearLayout  layConditions = null;
     protected TextView      txtCurrent = null;
     protected TextView      txtLocation = null;
     protected TextView      txtRange = null;
@@ -204,6 +214,8 @@ public class MainActivity extends AppCompatActivity {
 
         // User interface component references
         // Used later to fill with data
+        layConditions = ( LinearLayout )findViewById( R.id.layout_conditions );
+        imgCircle = ( ImageView )findViewById( R.id.image_circle );
         imgScene = ( ImageView )findViewById( R.id.image_scene );
         imgIcon = ( ImageView )findViewById( R.id.image_icon );
         txtCurrent = ( TextView )findViewById( R.id.text_current );
@@ -218,19 +230,37 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void handleMessage( Message message )
             {
-                Bundle  bundle;
-                String  location;
-                String  range;
-                String  temperature;
+                Bundle      bundle;
+                Drawable    icon;
+                Drawable    scene;
+                int         id;
+                String      location;
+                String      path;
+                String      range;
+                String      temperature;
 
                 super.handleMessage( message );
 
                 // Get values
                 bundle = message.getData();
 
+                // Assemble image resources for user interface
+                // Map to resource identifier
+                path = bundle.getString( KEY_ICON );
+                path = path.replace("-", "_");
+                Log.i( "DRAWABLE", path );
+
+                // Icon
+                id = getResources().getIdentifier( DRAWABLE_ICON + path, null, getPackageName() );
+                icon = ResourcesCompat.getDrawable(getResources(), id, null);
+
+                // Background scene
+                id = getResources().getIdentifier( DRAWABLE_SCENE + path, null, getPackageName() );
+                scene = ResourcesCompat.getDrawable( getResources(), id, null );
+
                 // Assemble strings for user interface
                 temperature = Long.toString( Math.round( bundle.getDouble( KEY_TEMPERATURE ) ) ) + DEGREE;
-                location = bundle.getString( KEY_CITY ) + ", " + bundle.getString( KEY_STATE );
+                location = bundle.getString(KEY_CITY) + ", " + bundle.getString( KEY_STATE );
                 range =
                     Long.toString( Math.round( bundle.getDouble( KEY_MAXIMUM ) ) ) +
                     DEGREE +
@@ -239,10 +269,16 @@ public class MainActivity extends AppCompatActivity {
                     DEGREE;
 
                 // Populate user interface
+                imgIcon.setImageDrawable( icon );
+                imgScene.setImageDrawable(scene);
                 txtCurrent.setText( temperature );
-                txtLocation.setText( location );
                 txtSummary.setText( bundle.getString( KEY_SUMMARY ) );
                 txtRange.setText( range );
+                txtLocation.setText( location );
+
+                // Reveal user interface
+                imgCircle.setVisibility( View.VISIBLE );
+                layConditions.setVisibility( View.VISIBLE );
             }
 
         };
