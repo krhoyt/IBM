@@ -65,16 +65,42 @@
             android:textSize="24dp"
             android:layout_gravity="center_horizontal" />
 
-        <TextView
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="91°/60°"
-            android:id="@+id/text_range"
-            android:textColor="#ffffff"
-            android:textSize="16dp"
+            android:layout_gravity="center"
+            android:background="@drawable/weather_top_bottom"
             android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/weather_top_bottom" />
+            android:id="@+id/layout_range"
+            android:paddingTop="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="91°"
+                android:id="@+id/text_maximum"
+                android:textColor="#ffffff"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/"
+                android:id="@+id/text_divider"
+                android:textColor="#ffffff"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="72°"
+                android:id="@+id/text_minimum"
+                android:textColor="#ffffff"
+                android:textSize="16dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

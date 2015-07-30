@@ -58,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
     protected LinearLayout  layConditions = null;
     protected TextView      txtCurrent = null;
     protected TextView      txtLocation = null;
-    protected TextView      txtRange = null;
+    protected TextView      txtMaximum = null;
+    protected TextView      txtMinimum = null;
     protected TextView      txtSummary = null;
 
     // Async
@@ -220,7 +221,8 @@ public class MainActivity extends AppCompatActivity {
         imgIcon = ( ImageView )findViewById( R.id.image_icon );
         txtCurrent = ( TextView )findViewById( R.id.text_current );
         txtLocation = ( TextView )findViewById( R.id.text_location );
-        txtRange = ( TextView )findViewById( R.id.text_range );
+        txtMaximum = ( TextView )findViewById( R.id.text_maximum );
+        txtMinimum = ( TextView )findViewById( R.id.text_minimum );
         txtSummary = ( TextView )findViewById( R.id.text_summary );
 
         // Async against Cloud Code
@@ -235,8 +237,9 @@ public class MainActivity extends AppCompatActivity {
                 Drawable    scene;
                 int         id;
                 String      location;
+                String      maximum;
+                String      minimum;
                 String      path;
-                String      range;
                 String      temperature;
 
                 super.handleMessage( message );
@@ -261,19 +264,16 @@ public class MainActivity extends AppCompatActivity {
                 // Assemble strings for user interface
                 temperature = Long.toString( Math.round( bundle.getDouble( KEY_TEMPERATURE ) ) ) + DEGREE;
                 location = bundle.getString(KEY_CITY) + ", " + bundle.getString( KEY_STATE );
-                range =
-                    Long.toString( Math.round( bundle.getDouble( KEY_MAXIMUM ) ) ) +
-                    DEGREE +
-                    "/" +
-                    Long.toString( Math.round( bundle.getDouble( KEY_MINIMUM ) ) ) +
-                    DEGREE;
+                maximum = Long.toString( Math.round( bundle.getDouble( KEY_MAXIMUM ) ) ) + DEGREE;
+                minimum = Long.toString( Math.round( bundle.getDouble( KEY_MINIMUM ) ) ) + DEGREE;
 
                 // Populate user interface
                 imgIcon.setImageDrawable( icon );
                 imgScene.setImageDrawable(scene);
                 txtCurrent.setText( temperature );
                 txtSummary.setText( bundle.getString( KEY_SUMMARY ) );
-                txtRange.setText( range );
+                txtMaximum.setText( maximum );
+                txtMinimum.setText( minimum );
                 txtLocation.setText( location );
 
                 // Reveal user interface

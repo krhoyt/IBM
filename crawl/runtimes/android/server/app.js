@@ -26,9 +26,9 @@ var longitude = null;
 
 // Bluemix
 ibmbluemix.initialize( {
-	applicationId: '0b6a4a12-1ef4-43af-999b-2a50bea45628',
-	applicationRoute: 'http://android-weather.mybluemix.net',
-	applicationSecret: '35f1ea90412f00d2fddcb11af2db0b996e16ebbc'
+	applicationId: '_YOUR_APPLICATION_ID_',
+	applicationRoute: '_YOUR_APPLICATION_ROUTE_',
+	applicationSecret: '_YOUR_APPLICATION_SECRET_'
 } );
 
 // Environment
@@ -70,6 +70,9 @@ app.use( function( req, res, next ) {
 	ibmlogger.info( 'Forwarding ...' );		
 	next();
 } );
+
+// Static content
+app.use( ibmconfig.getContextRoot() + '/public', express.static( 'public' ) );
 
 // Weather data
 app.get( ibmconfig.getContextRoot() + '/weather', function( req, res ) {

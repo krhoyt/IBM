@@ -1,59 +1,33 @@
 // Constant
-var CONFIGURATION_FILE = 'weather.txt';
+var APPLICATION_ID = '_YOUR_APPLICATION_ID_';
+var APPLICATION_ROUTE = '_YOUR_APPLICATION_ROUTE_';
+var APPLICATION_SECRET = '_YOUR_APPLICATION_SECRET_';
 var ICON_EXTENSION = '.svg';
 var ICON_PATH = 'img/icon/';
 var IMAGE_EXTENSION = '.jpg';
 var IMAGE_PATH = 'img/scene/';
+var LATITUDE = 'latitude';
+var LONGITUDE = 'longitude';
 var UPDATE_RATE = 60000;
+var WEATHER_ROOT = "/weather";
     
 // Global
+var cloud = null;
 var interval = null;
 var latitude = null;
 var longitude = null;
-var url = null;
-var xhr = null; 
     
-// Called to get weather
-// Makes an asynchronous call to the server
+// Calls Cloud Code to get weather
 // HTTP GET wth location on query string
 function weather()
 {
-    // XHR
-    xhr = new XMLHttpRequest();
-    xhr.addEventListener( 'load', doWeatherLoad );
-    xhr.open( 
-        'GET', 
-        url + 
-        '?latitude=' + 
-        latitude + 
-        '&longitude=' + 
-        longitude 
-    );
-    xhr.send( null );    
-}
-
-// Called when configuration file is loaded
-// Gets endpoint for weather data
-// Start geolocation acquisition
-function doConfigurationLoad()
-{
-    // Global reference to data endpoint
-    url = xhr.responseText.trim();
-    
-    // Clean up
-    xhr.removeEventListener( 'load', doConfigurationLoad );
-    xhr = null;
-    
-    // Geolocation
-    if( navigator.geolocation ) 
-    {
-        navigator.geolocation.getCurrentPosition( 
-            doLocationSuccess, 
-            doLocationError 
-        );
-    } else {
-        doLocationError( 'Geolocation not supported.' );
-    }            
+	var url = null;
+	
+	// URL for service
+	url = WEATHER_ROOT + "?" + LATITUDE + "=" + latitude + "&" + LONGITUDE + "=" + longitude;
+	
+	// Call service
+	cloud.get( url ).then( doWeatherLoad, doWeatherError );
 }
 
 // Problem access geolocation
@@ -87,10 +61,16 @@ function doLocationSuccess( position )
     // Get weather
     weather();
 }
+
+// Problem calling Cloud Code
+function doWeatherError( error )
+{
+	console.log( error );
+}
     
 // Called when weather has been loaded
 // Populates display fields with data
-function doWeatherLoad()
+function doWeatherLoad( response )
 {
     var conditions = null;
     var data = null;
@@ -102,7 +82,7 @@ function doWeatherLoad()
     var weather = null;
     
     // Debug
-    console.log( xhr.responseText );
+    console.log( response );
     
     // Check periodically
     if( interval == null )
@@ -111,7 +91,7 @@ function doWeatherLoad()
     }
     
     // Decode data
-    data = JSON.parse( xhr.responseText );
+    data = JSON.parse( response );
     
     // Large background image
     weather = document.querySelector( '.weather' );
@@ -141,23 +121,38 @@ function doWeatherLoad()
     // Show if not already visible
     conditions = document.querySelector( '.conditions' );
     conditions.style.visibility = 'visible';
-    
-    // Clean up
-    xhr.removeEventListener( 'load', doWeatherLoad );
-    xhr = null;
 }
     
 // Called when the page loads
-// Loads configuration file
+// Initializes Mobile Cloud Services
+// Starts acquiring location
 // Performs initial layout
 function doWindowLoad()
 {
-    // Get configuration information
-    // Effectively the URL to weather data
-    xhr = new XMLHttpRequest();
-    xhr.addEventListener( 'load', doConfigurationLoad );
-    xhr.open( 'GET', CONFIGURATION_FILE );
-    xhr.send( null );
+	// Mobile Cloud Services
+	IBMBluemix.initialize( {
+		applicationId: APPLICATION_ID,
+		applicationRoute: APPLICATION_ROUTE,
+		applicationSecret: APPLICATION_SECRET
+	} );
+	
+	// Cloud Code
+	cloud = IBMCloudCode.initializeService();
+	
+    // Geolocation
+	// Timeout clears stack
+	// Avoids Safari implementation bug
+	setTimeout( function() {
+	    if( navigator.geolocation ) 
+	    {
+	        navigator.geolocation.getCurrentPosition( 
+	            doLocationSuccess, 
+	            doLocationError 
+	        );
+	    } else {
+	        doLocationError( 'Geolocation not supported.' );
+	    }            		
+	}, 1000 );
     
     // Layout
     doWindowResize();
