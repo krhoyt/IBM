@@ -5,7 +5,7 @@ var router = require( 'express' ).Router();
 
 // Constants
 var DEFAULT_IMAGES_PATH = '../locations/';
-var LOCATIONS_PATH = '../locations.json'
+var LOCATIONS_PATH = '../locations.json';
 var USER_IMAGES_PATH = '../public/images/';
 
 // Module
@@ -14,6 +14,7 @@ var Reset = {
 	// Reset the demo content
 	buildDefault: function( req, res ) {
 		var locations = null;
+		var query = null;
 		
 		/*
 		 * Image files
@@ -40,35 +41,28 @@ var Reset = {
 		 */
 		
 		// Get existing
-		var query = req.data.Query.ofType( 'Image' );
+		query = req.data.Query.ofType( 'Image' );
 		
 		query.find().done( function( images ) {
-			console.log( 'Found images.' );
+			req.logger.info( 'Found images.' );
 			
 			Reset.deleteImageRecords( req, images ).then( function() {
-				console.log( 'Existing records being cleared ...' );	
+				req.logger.info( 'Existing records being cleared ...' );	
+				
+				// Default image details
+				locations = fs.readJsonSync( 
+					path.join( __dirname, LOCATIONS_PATH )
+				);		
+				
+				// Save to Cloudant
+				Reset.saveImageRecords( req, locations ).then( function() {
+					req.logger.info( 'Records being saved ...' );
+					
+					// Tell user we are done
+					res.send( 'Reset complete.' );						
+				} );				
 			} );
-			/*
-			images.forEach( function( image ) {
-				req.logger.info( 'Existing: ' + image.get( 'source' ) );	
-			} );
-			*/	
-		} );
-		
-		/*
-		// Default image details
-		locations = fs.readJsonSync( 
-			path.join( __dirname, LOCATIONS_PATH )
-		);		
-		
-		// Save to Cloudant
-		Reset.saveImageRecords( req, locations ).then( function() {
-			console.log( 'Records being saved ...' );
-		} );
-		*/			
-			
-		// Tell user we are done
-		res.send( 'Reset complete.' );		
+		} );	
 	},
 	
 	// Just a test
@@ -83,8 +77,8 @@ var Reset = {
 	    return records.reduce( function( promise, record ) {
 	        return promise.then( function() {				
 				// Delete image record
-	            return record.delete().done( function( result ) {
-	                request.logger.info( 'Deleted.' );
+	            return record.del().done( function( result ) {
+	                request.logger.info( 'Deleted: ' + result );
 	            } );
 	        } );
 	    }, Promise.resolve() );		

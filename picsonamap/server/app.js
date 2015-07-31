@@ -26,6 +26,9 @@ app.get( '/', function( req, res ) {
 	res.sendFile( __dirname + '/public/index.html' );
 } );
 
+// Static content
+app.use( ibmconfig.getContextRoot() + '/public', express.static( 'public' ) );
+
 // Initialize services
 app.use( function( req, res, next ) {
     req.data = ibmdata.initializeService( req );
@@ -38,6 +41,7 @@ app.use( require( './lib/setup' ) );
 
 // Route endpoints
 app.use( ibmconfig.getContextRoot(), require( './lib/reset' ) );
+app.use( ibmconfig.getContextRoot(), require( './lib/image' ) );
 
 // Start server
 app.listen( ibmconfig.getPort() );
