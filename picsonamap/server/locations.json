@@ -1,0 +1,23 @@
+[
+  {
+    "source": "acadian-village.jpg",
+    "latitude": 30.1769562,
+    "longitude": -92.0932376
+  }, {
+    "source": "flatirons.jpg",
+    "latitude": 39.9866153,
+    "longitude": -105.2938839
+  }, {
+    "source": "golden-gate-bridge.jpg",
+    "latitude": 37.8199286,
+    "longitude": -122.4782551
+  }, {
+    "source": "lincoln-memorial.jpg",
+    "latitude": 38.8892686,
+    "longitude": -77.050176
+  }, {
+    "source": "times-square.jpg",
+    "latitude": 40.758895,
+    "longitude": -73.985131
+  }
+]

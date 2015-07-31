@@ -1,0 +1,619 @@
+IBM base license agreement
+
+International License Agreement for Non-Warranted Programs
+
+Part 1 - General Terms
+
+BY DOWNLOADING, INSTALLING, COPYING, ACCESSING, CLICKING ON AN "ACCEPT" BUTTON,
+OR OTHERWISE USING THE PROGRAM, LICENSEE AGREES TO THE TERMS OF THIS AGREEMENT.
+IF YOU ARE ACCEPTING THESE TERMS ON BEHALF OF LICENSEE, YOU REPRESENT AND
+WARRANT THAT YOU HAVE FULL AUTHORITY TO BIND LICENSEE TO THESE TERMS. IF YOU DO
+NOT AGREE TO THESE TERMS,
+
+* DO NOT DOWNLOAD, INSTALL, COPY, ACCESS, CLICK ON AN "ACCEPT" BUTTON, OR USE
+THE PROGRAM; AND
+
+* PROMPTLY RETURN THE UNUSED MEDIA AND DOCUMENTATION TO THE PARTY FROM WHOM IT
+WAS OBTAINED FOR A REFUND OF THE AMOUNT PAID. IF THE PROGRAM WAS DOWNLOADED,
+DESTROY ALL COPIES OF THE PROGRAM.
+
+1. Definitions
+
+"Authorized Use" - the specified level at which Licensee is authorized to
+execute or run the Program. That level may be measured by number of users,
+millions of service units ("MSUs"), Processor Value Units ("PVUs"), or other
+level of use specified by IBM.
+
+"IBM" - International Business Machines Corporation or one of its subsidiaries.
+
+"License Information" ("LI") - a document that provides information and any
+additional terms specific to a Program. The Program's LI is available at
+www.ibm.com/software/sla. The LI can also be found in the Program's directory,
+by the use of a system command, or as a booklet included with the Program.
+
+"Program" - the following, including the original and all whole or partial
+copies: 1) machine-readable instructions and data, 2) components, files, and
+modules, 3) audio-visual content (such as images, text, recordings, or
+pictures), and 4) related licensed materials (such as keys and documentation).
+
+2. Agreement Structure
+
+This Agreement includes Part 1 - General Terms, Part 2 - Country-unique Terms
+(if any) and the LI and is the complete agreement between Licensee and IBM
+regarding the use of the Program. It replaces any prior oral or written
+communications between Licensee and IBM concerning Licensee's use of the
+Program. The terms of Part 2 may replace or modify those of Part 1. To the
+extent of any conflict, the LI prevails over both Parts.
+
+3. License Grant
+
+The Program is owned by IBM or an IBM supplier, and is copyrighted and
+licensed, not sold.
+
+IBM grants Licensee a nonexclusive license to 1) use the Program up to the
+Authorized Use specified in the invoice, 2) make and install copies to support
+such Authorized Use, and 3) make a backup copy, all provided that
+
+a. Licensee has lawfully obtained the Program and complies with the terms of
+this Agreement;
+
+b. the backup copy does not execute unless the backed-up Program cannot
+execute;
+
+c. Licensee reproduces all copyright notices and other legends of ownership on
+each copy, or partial copy, of the Program;
+
+d. Licensee ensures that anyone who uses the Program (accessed either locally
+or remotely) 1) does so only on Licensee's behalf and 2) complies with the
+terms of this Agreement;
+
+e. Licensee does not 1) use, copy, modify, or distribute the Program except as
+expressly permitted in this Agreement; 2) reverse assemble, reverse compile,
+otherwise translate, or reverse engineer the Program, except as expressly
+permitted by law without the possibility of contractual waiver; 3) use any of
+the Program's components, files, modules, audio-visual content, or related
+licensed materials separately from that Program; or 4) sublicense, rent, or
+lease the Program; and
+
+f. if Licensee obtains this Program as a Supporting Program, Licensee uses this
+Program only to support the Principal Program and subject to any limitations in
+the license to the Principal Program, or, if Licensee obtains this Program as a
+Principal Program, Licensee uses all Supporting Programs only to support this
+Program, and subject to any limitations in this Agreement. For purposes of this
+Item "f," a "Supporting Program" is a Program that is part of another IBM
+Program ("Principal Program") and identified as a Supporting Program in the
+Principal Program's LI. (To obtain a separate license to a Supporting Program
+without these restrictions, Licensee should contact the party from whom
+Licensee obtained the Supporting Program.)
+
+This license applies to each copy of the Program that Licensee makes.
+
+3.1 Trade-ups, Updates, Fixes, and Patches
+
+3.1.1 Trade-ups
+
+If the Program is replaced by a trade-up Program, the replaced Program's
+license is promptly terminated.
+
+3.1.2 Updates, Fixes, and Patches
+
+When Licensee receives an update, fix, or patch to a Program, Licensee accepts
+any additional or different terms that are applicable to such update, fix, or
+patch that are specified in its LI. If no additional or different terms are
+provided, then the update, fix, or patch is subject solely to this Agreement.
+If the Program is replaced by an update, Licensee agrees to promptly
+discontinue use of the replaced Program.
+
+3.2 Fixed Term Licenses
+
+If IBM licenses the Program for a fixed term, Licensee's license is terminated
+at the end of the fixed term, unless Licensee and IBM agree to renew it.
+
+3.3 Term and Termination
+
+This Agreement is effective until terminated.
+
+IBM may terminate Licensee's license if Licensee fails to comply with the terms
+of this Agreement.
+
+If the license is terminated for any reason by either party, Licensee agrees to
+promptly discontinue use of and destroy all of Licensee's copies of the
+Program. Any terms of this Agreement that by their nature extend beyond
+termination of this Agreement remain in effect until fulfilled, and apply to
+both parties' respective successors and assignees.
+
+4. Charges
+
+Charges, if any, are based on Authorized Use obtained, which is specified in
+the invoice. IBM does not give credits or refunds for charges already due or
+paid, except as specified elsewhere in this Agreement.
+
+If Licensee wishes to increase its Authorized Use, Licensee must notify IBM or
+an authorized IBM reseller in advance and pay any applicable charges.
+
+5. Taxes
+
+If any authority imposes on the Program a duty, tax, levy, or fee, excluding
+those based on IBM's net income, then Licensee agrees to pay that amount, as
+specified in an invoice, or supply exemption documentation. Licensee is
+responsible for any personal property taxes for the Program from the date that
+Licensee obtains it. If any authority imposes a customs duty, tax, levy, or fee
+for the import into or the export, transfer, access, or use of the Program
+outside the country in which the original Licensee was granted the license,
+then Licensee agrees that it is responsible for, and will pay, any amount
+imposed.
+
+6. Money-back Guarantee
+
+If Licensee is dissatisfied with the Program for any reason and is the original
+Licensee, Licensee may terminate the license and obtain a refund of the amount
+Licensee paid, if any, for the Program, provided that Licensee returns the
+Program to the party from whom Licensee obtained it within 30 days of the
+invoice date. If the license is for a fixed term that is subject to renewal,
+then Licensee may obtain a refund only if the Program is returned within the
+first 30 days of the initial term. If Licensee downloaded the Program, Licensee
+should contact the party from whom Licensee obtained it for instructions on how
+to obtain the refund.
+
+7. Program Transfer
+
+Licensee may transfer the Program and all of Licensee's license rights and
+obligations to another party only if that party agrees to the terms of this
+Agreement. If the license is terminated for any reason by either party,
+Licensee is prohibited from transferring the Program to another party. Licensee
+may not transfer a portion of 1) the Program or 2) the Program's Authorized
+Use. When Licensee transfers the Program, Licensee must also transfer a hard
+copy of this Agreement, including the LI. Immediately after the transfer,
+Licensee's license terminates.
+
+8. No Warranties
+
+SUBJECT TO ANY STATUTORY WARRANTIES THAT CANNOT BE EXCLUDED, IBM MAKES NO
+WARRANTIES OR CONDITIONS, EXPRESS OR IMPLIED, REGARDING THE PROGRAM OR SUPPORT,
+IF ANY, INCLUDING, BUT NOT LIMITED TO, ANY IMPLIED WARRANTIES OR CONDITIONS OF
+MERCHANTABILITY, SATISFACTORY QUALITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+TITLE, AND ANY WARRANTY OR CONDITION OF NON-INFRINGEMENT.
+
+SOME STATES OR JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF EXPRESS OR IMPLIED
+WARRANTIES, SO THE ABOVE EXCLUSION MAY NOT APPLY TO LICENSEE. IN THAT EVENT,
+SUCH WARRANTIES ARE LIMITED IN DURATION TO THE MINIMUM PERIOD REQUIRED BY LAW.
+NO WARRANTIES APPLY AFTER THAT PERIOD. SOME STATES OR JURISDICTIONS DO NOT
+ALLOW LIMITATIONS ON HOW LONG AN IMPLIED WARRANTY LASTS, SO THE ABOVE
+LIMITATION MAY NOT APPLY TO LICENSEE. LICENSEE MAY HAVE OTHER RIGHTS THAT VARY
+FROM STATE TO STATE OR JURISDICTION TO JURISDICTION.
+
+THE DISCLAIMERS AND EXCLUSIONS IN THIS SECTION 8 ALSO APPLY TO ANY OF IBM'S
+PROGRAM DEVELOPERS AND SUPPLIERS.
+
+MANUFACTURERS, SUPPLIERS, OR PUBLISHERS OF NON-IBM PROGRAMS MAY PROVIDE THEIR
+OWN WARRANTIES.
+
+IBM DOES NOT PROVIDE SUPPORT OF ANY KIND, UNLESS IBM SPECIFIES OTHERWISE. IN
+SUCH EVENT, ANY SUPPORT PROVIDED BY IBM IS SUBJECT TO THE DISCLAIMERS AND
+EXCLUSIONS IN THIS SECTION 8.
+
+9. Licensee Data and Databases
+
+To assist Licensee in isolating the cause of a problem with the Program, IBM
+may request that Licensee 1) allow IBM to remotely access Licensee's system or
+2) send Licensee information or system data to IBM. However, IBM is not
+obligated to provide such assistance unless IBM and Licensee enter a separate
+written agreement under which IBM agrees to provide to Licensee that type of
+support, which is beyond IBM's obligations in this Agreement. In any event, IBM
+uses information about errors and problems to improve its products and
+services, and assist with its provision of related support offerings. For these
+purposes, IBM may use IBM entities and subcontractors (including in one or more
+countries other than the one in which Licensee is located), and Licensee
+authorizes IBM to do so.
+
+Licensee remains responsible for 1) any data and the content of any database
+Licensee makes available to IBM, 2) the selection and implementation of
+procedures and controls regarding access, security, encryption, use, and
+transmission of data (including any personally-identifiable data), and 3)
+backup and recovery of any database and any stored data. Licensee will not send
+or provide IBM access to any personally-identifiable information, whether in
+data or any other form, and will be responsible for reasonable costs and other
+amounts that IBM may incur relating to any such information mistakenly provided
+to IBM or the loss or disclosure of such information by IBM, including those
+arising out of any third party claims.
+
+10. Limitation of Liability
+
+The limitations and exclusions in this Section 10 (Limitation of Liability)
+apply to the full extent they are not prohibited by applicable law without the
+possibility of contractual waiver.
+
+10.1 Items for Which IBM May Be Liable
+
+Circumstances may arise where, because of a default on IBM's part or other
+liability, Licensee is entitled to recover damages from IBM. Regardless of the
+basis on which Licensee is entitled to claim damages from IBM (including
+fundamental breach, negligence, misrepresentation, or other contract or tort
+claim), IBM's entire liability for all claims in the aggregate arising from or
+related to each Program or otherwise arising under this Agreement will not
+exceed the amount of any 1) damages for bodily injury (including death) and
+damage to real property and tangible personal property and 2) other actual
+direct damages up to the charges (if the Program is subject to fixed term
+charges, up to twelve months' charges) Licensee paid for the Program that is
+the subject of the claim.
+
+This limit also applies to any of IBM's Program developers and suppliers. It is
+the maximum for which IBM and its Program developers and suppliers are
+collectively responsible.
+
+10.2 Items for Which IBM Is Not Liable
+
+UNDER NO CIRCUMSTANCES IS IBM, ITS PROGRAM DEVELOPERS OR SUPPLIERS LIABLE FOR
+ANY OF THE FOLLOWING, EVEN IF INFORMED OF THEIR POSSIBILITY:
+
+a. LOSS OF, OR DAMAGE TO, DATA;
+
+b. SPECIAL, INCIDENTAL, EXEMPLARY, OR INDIRECT DAMAGES, OR FOR ANY ECONOMIC
+CONSEQUENTIAL DAMAGES; OR
+
+c. LOST PROFITS, BUSINESS, REVENUE, GOODWILL, OR ANTICIPATED SAVINGS.
+
+11. Compliance Verification
+
+For purposes of this Section 11 (Compliance Verification), "ILAN Program Terms"
+means 1) this Agreement and applicable amendments and transaction documents
+provided by IBM, and 2) IBM software policies that may be found at the IBM
+Software Policy website (www.ibm.com/softwarepolicies), including but not
+limited to those policies concerning backup, sub-capacity pricing, and
+migration.
+
+The rights and obligations set forth in this Section 11 remain in effect during
+the period the Program is licensed to Licensee, and for two years thereafter.
+
+11.1 Verification Process
+
+Licensee agrees to create, retain, and provide to IBM and its auditors accurate
+written records, system tool outputs, and other system information sufficient
+to provide auditable verification that Licensee's use of all Programs is in
+compliance with the ILAN Program Terms, including, without limitation, all of
+IBM's applicable licensing and pricing qualification terms. Licensee is
+responsible for 1) ensuring that it does not exceed its Authorized Use, and 2)
+remaining in compliance with ILAN Program Terms.
+
+Upon reasonable notice, IBM may verify Licensee's compliance with ILAN Program
+Terms at all sites and for all environments in which Licensee uses (for any
+purpose) Programs subject to ILAN Program Terms. Such verification will be
+conducted in a manner that minimizes disruption to Licensee's business, and may
+be conducted on Licensee's premises, during normal business hours. IBM may use
+an independent auditor to assist with such verification, provided IBM has a
+written confidentiality agreement in place with such auditor.
+
+11.2 Resolution
+
+IBM will notify Licensee in writing if any such verification indicates that
+Licensee has used any Program in excess of its Authorized Use or is otherwise
+not in compliance with the ILAN Program Terms. Licensee agrees to promptly pay
+directly to IBM the charges that IBM specifies in an invoice for 1) any such
+excess use, 2) support for such excess use for the lesser of the duration of
+such excess use or two years, and 3) any additional charges and other
+liabilities determined as a result of such verification.
+
+12. Third Party Notices
+
+The Program may include third party code that IBM, not the third party,
+licenses to Licensee under this Agreement. Notices, if any, for the third party
+code ("Third Party Notices") are included for Licensee's information only.
+These notices can be found in the Program's NOTICES file(s). Information on how
+to obtain source code for certain third party code can be found in the Third
+Party Notices. If in the Third Party Notices IBM identifies third party code as
+"Modifiable Third Party Code," IBM authorizes Licensee to 1) modify the
+Modifiable Third Party Code and 2) reverse engineer the Program modules that
+directly interface with the Modifiable Third Party Code provided that it is
+only for the purpose of debugging Licensee's modifications to such third party
+code. IBM's service and support obligations, if any, apply only to the
+unmodified Program.
+
+13. General
+
+a. Nothing in this Agreement affects any statutory rights of consumers that
+cannot be waived or limited by contract.
+
+b. For Programs IBM provides to Licensee in tangible form, IBM fulfills its
+shipping and delivery obligations upon the delivery of such Programs to the
+IBM-designated carrier, unless otherwise agreed to in writing by Licensee and
+IBM.
+
+c. If any provision of this Agreement is held to be invalid or unenforceable,
+the remaining provisions of this Agreement remain in full force and effect.
+
+d. Licensee agrees to comply with all applicable export and import laws and
+regulations, including U.S. embargo and sanctions regulations and prohibitions
+on export for certain end uses or to certain users.
+
+e. Licensee authorizes International Business Machines Corporation and its
+subsidiaries (and their successors and assigns, contractors and IBM Business
+Partners) to store and use Licensee's business contact information wherever
+they do business, in connection with IBM products and services, or in
+furtherance of IBM's business relationship with Licensee.
+
+f. Each party will allow the other reasonable opportunity to comply before it
+claims that the other has not met its obligations under this Agreement. The
+parties will attempt in good faith to resolve all disputes, disagreements, or
+claims between the parties relating to this Agreement.
+
+g. Unless otherwise required by applicable law without the possibility of
+contractual waiver or limitation: 1) neither party will bring a legal action,
+regardless of form, for any claim arising out of or related to this Agreement
+more than two years after the cause of action arose; and 2) upon the expiration
+of such time limit, any such claim and all respective rights related to the
+claim lapse.
+
+h. Neither Licensee nor IBM is responsible for failure to fulfill any
+obligations due to causes beyond its control.
+
+i. No right or cause of action for any third party is created by this
+Agreement, nor is IBM responsible for any third party claims against Licensee,
+except as permitted in Subsection 10.1 (Items for Which IBM May Be Liable)
+above for bodily injury (including death) or damage to real or tangible
+personal property for which IBM is legally liable to that third party.
+
+j. In entering into this Agreement, neither party is relying on any
+representation not specified in this Agreement, including but not limited to
+any representation concerning: 1) the performance or function of the Program;
+2) the experiences or recommendations of other parties; or 3) any results or
+savings that Licensee may achieve.
+
+k. IBM has signed agreements with certain organizations (called "IBM Business
+Partners") to promote, market, and support certain Programs. IBM Business
+Partners remain independent and separate from IBM. IBM is not responsible for
+the actions or statements of IBM Business Partners or obligations they have to
+Licensee.
+
+l. The license and intellectual property indemnification terms of Licensee's
+other agreements with IBM (such as the IBM Customer Agreement) do not apply to
+Program licenses granted under this Agreement.
+
+m. Both parties agree that all information exchanged is nonconfidential. If
+either party requires the exchange of confidential information, it will be made
+under a signed confidentiality agreement.
+
+14. Geographic Scope and Governing Law
+
+14.1 Governing Law
+
+Both parties agree to the application of the laws of the country in which
+Licensee obtained the Program license to govern, interpret, and enforce all of
+Licensee's and IBM's respective rights, duties, and obligations arising from,
+or relating in any manner to, the subject matter of this Agreement, without
+regard to conflict of law principles.
+
+The United Nations Convention on Contracts for the International Sale of Goods
+does not apply.
+
+14.2 Jurisdiction
+
+All rights, duties, and obligations are subject to the courts of the country in
+which Licensee obtained the Program license.
+
+Part 2 - Country-unique Terms
+
+For licenses granted in the countries specified below, the following terms
+replace or modify the referenced terms in Part 1. All terms in Part 1 that are
+not changed by these amendments remain unchanged and in effect. This Part 2 is
+organized as follows:
+
+* Multiple country amendments to Part 1, Section 14 (Governing Law and
+Jurisdiction);
+
+* Americas country amendments to other Agreement terms;
+
+* Asia Pacific country amendments to other Agreement terms; and
+
+* Europe, Middle East, and Africa country amendments to other Agreement terms.
+
+Multiple country amendments to Part 1, Section 14 (Governing Law and
+Jurisdiction)
+
+14.1 Governing Law
+
+The phrase "the laws of the country in which Licensee obtained the Program
+license" in the first paragraph of 14.1 Governing Law is replaced by the
+following phrases in the countries below:
+
+AMERICAS
+
+(1) In Canada: the laws in the Province of Ontario;
+
+(2) in Mexico: the federal laws of the Republic of Mexico;
+
+(3) in the United States, Anguilla, Antigua/Barbuda, Aruba, British Virgin
+Islands, Cayman Islands, Dominica, Grenada, Guyana, Saint Kitts and Nevis,
+Saint Lucia, Saint Maarten, and Saint Vincent and the Grenadines: the laws of
+the State of New York, United States;
+
+(4) in Venezuela: the laws of the Bolivarian Republic of Venezuela;
+
+ASIA PACIFIC
+
+(5) in Cambodia and Laos: the laws of the State of New York, United States;
+
+(6) in Australia: the laws of the State or Territory in which the transaction
+is performed;
+
+(7) in Hong Kong SAR and Macau SAR: the laws of Hong Kong Special
+Administrative Region ("SAR");
+
+(8) in Taiwan: the laws of Taiwan;
+
+EUROPE, MIDDLE EAST, AND AFRICA
+
+(9) in Albania, Armenia, Azerbaijan, Belarus, Bosnia-Herzegovina, Bulgaria,
+Croatia, Former Yugoslav Republic of Macedonia, Georgia, Hungary, Kazakhstan,
+Kyrgyzstan, Moldova, Montenegro, Poland, Romania, Russia, Serbia, Slovakia,
+Tajikistan, Turkmenistan, Ukraine, and Uzbekistan: the laws of Austria;
+
+(10) in Algeria, Andorra, Benin, Burkina Faso, Cameroon, Cape Verde, Central
+African Republic, Chad, Comoros, Congo Republic, Djibouti, Democratic Republic
+of Congo, Equatorial Guinea, French Guiana, French Polynesia, Gabon, Gambia,
+Guinea, Guinea-Bissau, Ivory Coast, Lebanon, Madagascar, Mali, Mauritania,
+Mauritius, Mayotte, Morocco, New Caledonia, Niger, Reunion, Senegal,
+Seychelles, Togo, Tunisia, Vanuatu, and Wallis and Futuna: the laws of France;
+
+(11) in Estonia, Latvia, and Lithuania: the laws of Finland;
+
+(12) in Angola, Bahrain, Botswana, Burundi, Egypt, Eritrea, Ethiopia, Ghana,
+Jordan, Kenya, Kuwait, Liberia, Malawi, Malta, Mozambique, Nigeria, Oman,
+Pakistan, Qatar, Rwanda, Sao Tome and Principe, Saudi Arabia, Sierra Leone,
+Somalia, Tanzania, Uganda, United Arab Emirates, the United Kingdom, West
+Bank/Gaza, Yemen, Zambia, and Zimbabwe: the laws of England; and
+
+(13) in South Africa, Namibia, Lesotho, and Swaziland: the laws of the Republic
+of South Africa.
+
+14.2 Jurisdiction
+
+The following paragraph pertains to jurisdiction and replaces Subsection 14.2
+(Jurisdiction) as it applies for those countries identified below:
+
+All rights, duties, and obligations are subject to the courts of the country in
+which Licensee obtained the Program license except that in the countries
+identified below all disputes arising out of or related to this Agreement,
+including summary proceedings, will be brought before and subject to the
+exclusive jurisdiction of the following courts of competent jurisdiction:
+
+AMERICAS
+
+(1) In Argentina: the Ordinary Commercial Court of the city of Buenos Aires;
+
+(2) in Brazil: the court of Rio de Janeiro, RJ;
+
+(3) in Chile: the Civil Courts of Justice of Santiago;
+
+(4) in Ecuador: the civil judges of Quito for executory or summary proceedings
+(as applicable);
+
+(5) in Mexico: the courts located in Mexico City, Federal District;
+
+(6) in Peru: the judges and tribunals of the judicial district of Lima,
+Cercado;
+
+(7) in Uruguay: the courts of the city of Montevideo;
+
+(8) in Venezuela: the courts of the metropolitan area of the city of Caracas;
+
+EUROPE, MIDDLE EAST, AND AFRICA
+
+(9) in Austria: the court of law in Vienna, Austria (Inner-City);
+
+(10) in Algeria, Andorra, Benin, Burkina Faso, Cameroon, Cape Verde, Central
+African Republic, Chad, Comoros, Congo Republic, Djibouti, Democratic Republic
+of Congo, Equatorial Guinea, France, French Guiana, French Polynesia, Gabon,
+Gambia, Guinea, Guinea-Bissau, Ivory Coast, Lebanon, Madagascar, Mali,
+Mauritania, Mauritius, Mayotte, Monaco, Morocco, New Caledonia, Niger, Reunion,
+Senegal, Seychelles, Togo, Tunisia, Vanuatu, and Wallis and Futuna: the
+Commercial Court of Paris;
+
+(11) in Angola, Bahrain, Botswana, Burundi, Egypt, Eritrea, Ethiopia, Ghana,
+Jordan, Kenya, Kuwait, Liberia, Malawi, Malta, Mozambique, Nigeria, Oman,
+Pakistan, Qatar, Rwanda, Sao Tome and Principe, Saudi Arabia, Sierra Leone,
+Somalia, Tanzania, Uganda, United Arab Emirates, the United Kingdom, West
+Bank/Gaza, Yemen, Zambia, and Zimbabwe: the English courts;
+
+(12) in South Africa, Namibia, Lesotho, and Swaziland: the High Court in
+Johannesburg;
+
+(13) in Greece: the competent court of Athens;
+
+(14) in Israel: the courts of Tel Aviv-Jaffa;
+
+(15) in Italy: the courts of Milan;
+
+(16) in Portugal: the courts of Lisbon;
+
+(17) in Spain: the courts of Madrid; and
+
+(18) in Turkey: the Istanbul Central Courts and Execution Directorates of
+Istanbul, the Republic of Turkey.
+
+14.3 Arbitration
+
+The following paragraph is added as a new Subsection 14.3 (Arbitration) as it
+applies for those countries identified below. The provisions of this Subsection
+14.3 prevail over those of Subsection 14.2 (Jurisdiction) to the extent
+permitted by the applicable governing law and rules of procedure:
+
+ASIA PACIFIC
+
+(1) In Cambodia, India, Laos, Philippines, and Vietnam:
+
+Disputes arising out of or in connection with this Agreement will be finally
+settled by arbitration which will be held in Singapore in accordance with the
+Arbitration Rules of Singapore International Arbitration Center ("SIAC Rules")
+then in effect. The arbitration award will be final and binding for the parties
+without appeal and will be in writing and set forth the findings of fact and
+the conclusions of law.
+
+The number of arbitrators will be three, with each side to the dispute being
+entitled to appoint one arbitrator. The two arbitrators appointed by the
+parties will appoint a third arbitrator who will act as chairman of the
+proceedings. Vacancies in the post of chairman will be filled by the president
+of the SIAC. Other vacancies will be filled by the respective nominating party.
+Proceedings will continue from the stage they were at when the vacancy
+occurred.
+
+If one of the parties refuses or otherwise fails to appoint an arbitrator
+within 30 days of the date the other party appoints its, the first appointed
+arbitrator will be the sole arbitrator, provided that the arbitrator was
+validly and properly appointed.
+
+All proceedings will be conducted, including all documents presented in such
+proceedings, in the English language. The English language version of this
+Agreement prevails over any other language version.
+
+(2) In the People's Republic of China:
+
+In case no settlement can be reached, the disputes will be submitted to China
+International Economic and Trade Arbitration Commission for arbitration
+according to the then effective rules of the said Arbitration Commission. The
+arbitration will take place in Beijing and be conducted in Chinese. The
+arbitration award will be final and binding on both parties. During the course
+of arbitration, this agreement will continue to be performed except for the
+part which the parties are disputing and which is undergoing arbitration.
+
+(3) In Indonesia:
+
+Each party will allow the other reasonable opportunity to comply before it
+claims that the other has not met its obligations under this Agreement. The
+parties will attempt in good faith to resolve all disputes, disagreements, or
+claims between the parties relating to this Agreement. Unless otherwise
+required by applicable law without the possibility of contractual waiver or
+limitation, i) neither party will bring a legal action, regardless of form,
+arising out of or related to this Agreement or any transaction under it more
+than two years after the cause of action arose; and ii) after such time limit,
+any legal action arising out of this Agreement or any transaction under it and
+all respective rights related to any such action lapse.
+
+Disputes arising out of or in connection with this Agreement shall be finally
+settled by arbitration that shall be held in Jakarta, Indonesia in accordance
+with the rules of Board of the Indonesian National Board of Arbitration (Badan
+Arbitrase Nasional Indonesia or "BANI") then in effect. The arbitration award
+shall be final and binding for the parties without appeal and shall be in
+writing and set forth the findings of fact and the conclusions of law.
+
+The number of arbitrators shall be three, with each side to the dispute being
+entitled to appoint one arbitrator. The two arbitrators appointed by the
+parties shall appoint a third arbitrator who shall act as chairman of the
+proceedings. Vacancies in the post of chairman shall be filled by the chairman
+of the BANI. Other vacancies shall be filled by the respective nominating
+party. Proceedings shall continue from the stage they were at when the vacancy
+occurred.
+
+If one of the parties refuses or otherwise fails to appoint an arbitrator
+within 30 days of the date the other party appoints its, the first appointed
+arbitrator shall be the sole arbitrator, provided that the arbitrator was
+validly and properly appointed.
+
+All proceedings shall be conducted, including all documents presented in such
+proceedings, in the English and/or Indonesian language.
+
+EUROPE, MIDDLE EAST, AND AFRICA
+
+(4) In Albania, Armenia, Azerbaijan, Belarus, Bosnia-Herzegovina, Bulgaria,
+Croatia, Former Yugoslav Republic of Macedonia, Georgia, Hungary, Kazakhstan,
+Kyrgyzstan, Moldova, Montenegro, Poland, Romania, Russia, Serbia, Slovakia,
+Tajikistan, Turkmenistan, Ukraine, and Uzbekistan:
