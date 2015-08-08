@@ -1,0 +1,49 @@
+<html>
+<head>
+	
+<title>Photon Weather</title>
+
+<!-- Beach: https://www.flickr.com/photos/20401442@N08/15777223905 -->
+<!-- Field: https://www.flickr.com/photos/photophilde/3514290419 -->
+<!-- Snow: https://commons.wikimedia.org/wiki/Snow#/media/File:Field-with-snow-champ-enneige.jpg -->
+<!-- Icicles: https://www.flickr.com/photos/ekilby/11958026303 -->
+
+<!-- Google Web Fonts -->
+<!-- Open Sans -->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,600" rel="stylesheet" type="text/css">    
+
+<!-- Styles -->
+<link href="weather.css" rel="stylesheet" type="text/css">    
+
+<!-- Bluemix -->
+<!-- Cloud Code -->
+<script src="script/IBMBluemix.min.js" type="text/javascript"></script>
+<script src="script/IBMCloudCode.min.js" type="text/javascript"></script>
+
+<!-- Moment for formatting -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js" type="text/javascript"></script>
+
+<!-- PubNub real-time data -->
+<!-- Publish-subscribe -->
+<script src="https://cdn.pubnub.com/pubnub-3.7.13.min.js" type="text/javascript"></script>
+
+<!-- Application -->
+<script src="script/weather.js" type="text/javascript"></script>
+
+</head>
+<body>
+	
+<!-- Background -->
+<div class="background"></div>	
+	
+<!-- Weather display -->	
+<div class="circle">
+	<p>99&deg;</p>
+	<p>99%</p>	
+</div>	
+	
+<!-- Last sensor update -->
+<p class="timestamp">Loading ...</p>	
+	
+</body>
+</html>

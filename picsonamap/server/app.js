@@ -7,10 +7,18 @@ var ibmdata = require( 'ibmdata' );
  */
 
 ibmbluemix.initialize( {
+	applicationId: '6982d829-9411-4425-ae74-e6f89b717595',
+	applicationRoute: 'http://pics-on-a-map.mybluemix.net',
+	applicationSecret: '824e9deeb33f941dfde4d64f1d3bb7323a7d1b59'
+} );
+
+/*
+ibmbluemix.initialize( {
 	applicationId: '_YOUR_APPLICATION_ID_',
 	applicationRoute: '_YOUR_APPLICATION_ROUTE_',
 	applicationSecret: '_YOUR_APPLICATION_SECRET_'
 } );
+*/
 
 var ibmlogger = ibmbluemix.getLogger();
 var ibmconfig = ibmbluemix.getConfig();

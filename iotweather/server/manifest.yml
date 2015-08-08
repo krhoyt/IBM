@@ -1,0 +1,14 @@
+applications:
+- services:
+  - IoT Weather-MAS
+  - IoT Weather-Push
+  - IoT Weather-Mobile Quality Assurance
+  - IoT Weather-Cloudant
+  disk_quota: 1024M
+  host: iot-weather
+  name: IoT Weather
+  command: node app.js
+  path: .
+  domain: mybluemix.net
+  instances: 1
+  memory: 128M

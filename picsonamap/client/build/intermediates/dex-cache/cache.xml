@@ -2,32 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/Users/Kevin/Desktop/PicsOnAMap/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
+        jar="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/exploded-aar/com.badoo.mobile/android-weak-handler/1.1/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="f8efd0096475e0daf054267b61544e10dc776503">
-        <dex dex="/Users/Kevin/Desktop/PicsOnAMap/app/build/intermediates/pre-dexed/debug/classes-67e41914ef6ad7c8d57ac0ac2495f85c60ef7601.jar" />
-    </item>
-    <item
-        jar="/Users/Kevin/Desktop/PicsOnAMap/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
-        <dex dex="/Users/Kevin/Desktop/PicsOnAMap/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-2470d19b74eee3163d257fc899eed449a2b7e818.jar" />
-    </item>
-    <item
-        jar="/Users/Kevin/Desktop/PicsOnAMap/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
-        <dex dex="/Users/Kevin/Desktop/PicsOnAMap/app/build/intermediates/pre-dexed/debug/classes-bacf85354523bce4983bec1726a9cae7f1a903ec.jar" />
-    </item>
-    <item
-        jar="/Users/Kevin/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
-        <dex dex="/Users/Kevin/Desktop/PicsOnAMap/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-385b4fc8a6f7da7d3ea6d4ee3ed8c05d31ad02a3.jar" />
+        sha1="7a2dafc6ef58bed3ca9a9a1fb5c5a42624b379a3">
+        <dex dex="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/pre-dexed/debug/classes-d226ce4263a6fd8990a5d17cdd524c5d84fb7916.jar" />
     </item>
 
 </items>

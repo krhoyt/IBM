@@ -6,7 +6,7 @@ var router = require( 'express' ).Router();
 // Constants
 var DEFAULT_IMAGES_PATH = '../locations/';
 var LOCATIONS_PATH = '../locations.json';
-var USER_IMAGES_PATH = '../public/images/';
+var USER_IMAGES_PATH = '../public/stream/';
 
 // Module
 var Reset = {

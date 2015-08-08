@@ -6,6 +6,10 @@ Collection of work from IBM.
 
 Crawl various features of IBM Bluemix.
 
+#IoT Weather
+
+A sampling of hardware devices communicating with IBM Bluemix.  Initially the theme is built around weather as temperature and humidity are easy sensors to find, use, and build, across multiple micro-controllers.  There is a Node.js server that handles providing REST services to devices.  There is a mobile application (Android initially) to view the current conditions.  There is a web page to view the current conditions.  First MCU is a Particle Photon.
+
 #Pics On A Map
 
 Example application that uses IBM Mobile Cloud Services to display a stream of user-captured images.  Images are available in a grid view, but also on a map.  Captured images are synchronized to the server along with geolocation information.  Roughly a clone of [GeoPix](http://www.tricedesigns.com/2015/03/27/geopix-a-native-ios-app-powered-by-ibm-mobilefirst-for-bluemix/) from my IBM colleague Andy Trice.

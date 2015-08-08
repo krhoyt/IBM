@@ -1,0 +1,43 @@
+body {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;	
+}
+
+.background {
+	background-image: url( img/earth.jpg );
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	left: 0;
+	position: absolute;
+	top: 0;
+}
+
+.circle {
+	background-color: rgba( 0, 0, 0, 0.25 );
+	position: absolute;
+	text-align: center;
+	visibility: hidden;
+}
+
+.circle p {
+	left: 0;
+	margin: 0;	
+	padding: 0;
+	position: absolute;
+	right: 0;
+	text-align: center;
+}
+
+.timestamp {
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	text-shadow: 1px 1px 0 black;
+}
