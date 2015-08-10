@@ -2,7 +2,7 @@ applications:
 - services:
   - Pics On A Map-MAS
   - Pics On A Map-Push
-  - Pics On A Map-MobileData
+  - Pics On A Map-Cloudant
   - Pics On A Map-Mobile Quality Assurance
   disk_quota: 1024M
   host: pics-on-a-map
