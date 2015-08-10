@@ -4,13 +4,16 @@ var multer = require( 'multer' );
 var path = require( 'path' );
 var uuid = require( 'uuid' );
 
-var router = express.Router();
-
 // Constants
 var EXTERNAL_PATH = 'uploads';
+var IMAGE_TYPE = 'Content-Type';
+var IMAGE_JPEG = 'image/jpeg';
+var IMAGE_PNG = 'image/png';
 var INTERNAL_PATH = '../public/uploads';
 var UPLOAD_FIELD = 'attachment';
 var UPLOAD_PATH = 'public/uploads';
+
+var router = express.Router();
 
 // Custom naming for file uploads
 var storage = multer.diskStorage( {
@@ -20,7 +23,7 @@ var storage = multer.diskStorage( {
 		var name = null;
 	  	var start = null;
 		
-		start = file.originalname.indexOf( '.' );
+		start = file.originalname.lastIndexOf( '.' );
 		extension = file.originalname.substring( start, file.originalname.length );
 		
 		name = uuid.v4();
@@ -67,6 +70,7 @@ router.get( '/attachment', function( req, res ) {
 } );
 
 // Get a specific file by ID
+// Alternatively get attachment from database
 router.get( '/attachment/:id', function( req, res ) {	
 	// Look for matching file in uploads
 	// Do not assume file extension
@@ -84,10 +88,45 @@ router.get( '/attachment/:id', function( req, res ) {
 		} 
 		
 		// May not be a matching file
-		// Send error message or file
+		// Check database if not local
 		if( !found )
 		{
-			res.send( '404: File not found.' );
+			// Assume ID is for document
+			req.data.get( req.params.id, function( error, body ) {
+				var attachment = null;
+				var content = null;
+				
+				if( error )
+				{
+					req.logger.info( 'Problem reading document.' );
+					req.logger.info( 'Message: ' + error.message );												
+				}								
+				
+				// File attachment name
+				attachment = Object.keys( body._attachments )[0];
+				
+				// Content type
+				if( attachment.indexOf( 'jpg' ) ) 
+				{
+					content = IMAGE_JPEG;		
+				} else {
+					content = IMAGE_PNG;
+				}
+				
+				// Get attachment
+				req.data.attachment.get( req.params.id, attachment, function( error, body ) {
+					if( error )
+					{
+						req.logger.info( 'Problem getting attachment.' );
+						req.logger.info( 'Message: ' + error.message );
+					}
+					
+					// Set content type
+					// Write file to client
+					res.set( IMAGE_TYPE, content  );
+					res.send( body );
+				} );			
+			} );			
 		} else {
 			res.sendFile( path.join( __dirname, INTERNAL_PATH, files[f] ) );			
 		}		
@@ -138,7 +177,7 @@ router.delete( '/attachment/:id', function( req, res ) {
 		} else {
 			fs.unlink( path.join( __dirname, INTERNAL_PATH, files[f] ), function() {
 				res.send( 'Done.' );	
-			} )			
+			} );		
 		}		
 	} );	
 } );

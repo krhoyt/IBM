@@ -10,7 +10,8 @@
     "ibmbluemix": "^1.0.0",
     "jsonfile": "^2.2.1",
     "multer": "^1.0.3",
-    "pubnub": "^3.7.13"
+    "pubnub": "^3.7.13",
+    "uuid": "^2.0.1"
   },
   "scripts": {
     "start": "node app.js"

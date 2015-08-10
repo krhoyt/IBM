@@ -165,7 +165,7 @@ app.use( '/', express.static( 'public' ) );
 // Routing
 app.use( ibmconfig.getContextRoot(), require( './routes/picture' ) );
 app.use( ibmconfig.getContextRoot(), require( './routes/attachment' ) );
-app.use( ibmconfig.getContextRoot(), require( './routes/build' ) );
+app.use( ibmconfig.getContextRoot(), require( './routes/manage' ) );
 
 // Server
 app.listen( ibmconfig.getPort() );
