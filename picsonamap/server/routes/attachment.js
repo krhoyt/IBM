@@ -2,6 +2,7 @@ var express = require( 'express' );
 var fs = require( 'fs' );
 var multer = require( 'multer' ); 
 var path = require( 'path' );
+var sizeof = require( 'image-size' );
 var uuid = require( 'uuid' );
 
 // Constants
@@ -41,6 +42,7 @@ var upload = multer( {
 // Get list of file uploads
 router.get( '/attachment', function( req, res ) {
 	fs.readdir( path.join( __dirname, INTERNAL_PATH ), function( error, files ) {
+		var dimensions = null;
 		var list = null;
 		var name = null;
 		
@@ -56,7 +58,12 @@ router.get( '/attachment', function( req, res ) {
 				// Not a dot file
 				if( files[f].indexOf( '.' ) > 0 )
 				{
-					list.push( files[f] );					
+					dimensions = sizeof( name );
+					list.push( {
+						height: dimensions.height,
+						name: files[f],
+						width: dimensions.width
+					} );					
 				} 
 			}
 		}

@@ -2,6 +2,7 @@ var express = require( 'express' );
 var fs = require( 'fs' );
 var multer = require( 'multer' );
 var path = require( 'path' );
+var sizeof = require( 'image-size' );
 var uuid = require( 'uuid' );
 
 // Constants
@@ -49,7 +50,7 @@ router.get( '/picture', function( req, res ) {
 			timestamp: {'$gt': 0}
 		},
 		sort: [
-			{timestamp: 'desc'}
+			{timestamp: 'asc'}
 		]
 	};
 	
@@ -96,9 +97,9 @@ router.get( '/picture/:id', function( req, res ) {
 
 // Upload data and image all at once
 router.post( '/picture', upload.single( UPLOAD_FIELD ), function( req, res ) {
-	// res.send( req.file.filename + ' ' + req.body.latitude );
-
 	var content = null;
+	var dimensions = null;
+	var name = null;
 
 	// Determine content type
 	// TOOD: Possible to be more thorough? 
@@ -109,9 +110,15 @@ router.post( '/picture', upload.single( UPLOAD_FIELD ), function( req, res ) {
 		content = IMAGE_PNG;
 	}
 	
+	name = path.join( __dirname, INTERNAL_PATH, req.file.filename );
+	
+	// Image dimensions
+	// Used by user interface
+	dimensions = sizeof( name );
+	
 	// Read file to attach
 	// Make sure we can read the file before attaching
-	fs.readFile( path.join( __dirname, INTERNAL_PATH, req.file.filename ), function( error, data ) {
+	fs.readFile( name, function( error, data ) {
 		if( error ) 
 		{
 			req.info.logger( 'Could not read image file.' );
@@ -124,9 +131,11 @@ router.post( '/picture', upload.single( UPLOAD_FIELD ), function( req, res ) {
 		// Let Cloudant create ID
 		// Attachment requires ID be provided
 		req.data.insert( {
+			height: dimensions.height,
 			latitude: parseFloat( req.body.latitude ),
 			longitude: parseFloat( req.body.longitude ),
-			timestamp: parseInt( req.body.timestamp )
+			timestamp: parseInt( req.body.timestamp ),
+			width: dimensions.width
 		}, function( error, body, header ) {
 			if( error )
 			{
@@ -167,7 +176,9 @@ router.post( '/picture/:id', function( req, res ) {
 	// Find file by ID
 	fs.readdir( path.join( __dirname, INTERNAL_PATH ), function( error, files ) {
 		var content = null;
+		var dimensions = null;
 		var found = false;
+		var name = null;
 		
 		for( var f = 0; f < files.length; f++ )
 		{
@@ -196,9 +207,15 @@ router.post( '/picture/:id', function( req, res ) {
 				content = IMAGE_PNG;
 			}
 			
+			name = path.join( __dirname, INTERNAL_PATH, files[f] );
+			
+			// Image dimensions
+			// Used by user interface
+			dimensions = sizeof( name );
+			
 			// Read file to attach
 			// Make sure we can read the file before attaching
-			fs.readFile( path.join( __dirname, INTERNAL_PATH, files[f] ), function( error, data ) {
+			fs.readFile( name, function( error, data ) {
 				if( error ) 
 				{
 					req.info.logger( 'Could not read image file.' );
@@ -211,9 +228,11 @@ router.post( '/picture/:id', function( req, res ) {
 				// Let Cloudant create ID
 				// Attachment requires ID be provided
 				req.data.insert( {
+					height: dimensions.height,
 					latitude: parseFloat( req.query.latitude ),
 					longitude: parseFloat( req.query.longitude ),
-					timestamp: parseInt( req.query.timestamp )
+					timestamp: parseInt( req.query.timestamp ),
+					width: dimensions.width
 				}, function( error, body, header ) {
 					if( error )
 					{

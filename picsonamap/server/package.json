@@ -8,6 +8,7 @@
     "cloudant": "^1.2.0",
     "express": "^4.13.3",
     "ibmbluemix": "^1.0.0",
+    "image-size": "^0.3.5",
     "jsonfile": "^2.2.1",
     "multer": "^1.0.3",
     "pubnub": "^3.7.13",

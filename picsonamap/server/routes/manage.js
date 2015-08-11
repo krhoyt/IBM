@@ -2,6 +2,7 @@ var express = require( 'express' );
 var fs = require( 'fs' );
 var jsonfile = require( 'jsonfile' );
 var path = require( 'path' );
+var sizeof = require( 'image-size' );
 var uuid = require( 'uuid' );
 
 // TODO: Make sure upload directory exists
@@ -70,8 +71,10 @@ router.get( '/reset', function( req, res ) {
 		
 		// Bulk delete
 		req.data.bulk( {docs: bulk}, function( error, body ) {
+			var dimensions = null;
 			var documents = null;
 			var locations = null;
+			var original = null;
 			var start = null;
 			
 			if( error )
@@ -107,17 +110,25 @@ router.get( '/reset', function( req, res ) {
 				}
 				
 				// Copy original to uploads
+				original = path.join( __dirname, LOCATION_SRC, locations[p].source );
+				
 				fs.linkSync( 
-					path.join( __dirname, LOCATION_SRC, locations[p].source ),
+					original,
 					path.join( __dirname, UPLOAD_PATH, locations[p].uuid + locations[p].extension ) 
 				);
+				
+				// Image dimensions
+				// Used by user interface
+				dimensions = sizeof( original );
 				
 				// Push document data object
 				// Used for bulk insert
 				documents.push( {
+					height: dimensions.height,
 					latitude: locations[p].latitude,
 					longitude: locations[p].longitude,
-					timestamp: Date.now()	
+					timestamp: Date.now(),	
+					width: dimensions.width
 				} );
 			}
 							

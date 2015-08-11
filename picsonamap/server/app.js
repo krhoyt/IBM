@@ -11,6 +11,7 @@ var CLOUDANT_DATABASE = 'picture';
 var CLOUDANT_PROPERTY = 'cloudantNoSQLDB';
 var CONFIGURATION_FILE = 'configuration.json';
 var CONFIGURATION_PATH = 'public';
+var PUBNUB_CHANNEL = 'picture_channel';
 
 // Configuration
 var configuration = jsonfile.readFileSync( path.join( __dirname, CONFIGURATION_PATH, CONFIGURATION_FILE ) );
@@ -69,6 +70,9 @@ Cloudant( {
 			// Use database
 			ibmlogger.info( 'Using database.' );
 			ibmdb = cloudant.db.use( CLOUDANT_DATABASE );
+						
+			// Publish-subscribe
+			createStream();						
 						
 			// Ready
 			ibmlogger.info( 'Ready.' );			
@@ -132,6 +136,9 @@ Cloudant( {
 								ibmlogger.info( 'Problem removing test record.' );
 								ibmlogger.info( 'Message: ' + error.message );
 							}	
+											
+							// Publish-subscribe
+							createStream();											
 														
 							// Ready
 							ibmlogger.info( 'Ready.' );
@@ -142,6 +149,44 @@ Cloudant( {
 		}
 	} );
 } );
+
+// Publish-Subscribe
+// PubNub
+var pubnub = require( 'pubnub' )( configuration.pubnub );
+var stream = null;
+
+// Called to listen for changes
+// Sends data across publish-subscribe
+function createStream()
+{
+	// Setup push
+	ibmlogger.info( 'Adding publish-subscribe.' );
+	stream = ibmdb.follow( {
+		include_docs: true, 
+		since: 'now'
+	} );
+
+	// Database change (new reading)
+	stream.on( 'change', function( change ) {
+		ibmlogger.info( 'Change: ' + change.doc._id );
+		
+		pubnub.publish( { 
+    		channel: PUBNUB_CHANNEL,
+    		message: change.doc,
+    		callback : function( results ) {
+				ibmlogger.info( results[1] + ': ' + results[2] );  
+			},
+    		error: function( error ) {
+				ibmlogger.info( 'Failed to publish message.' );
+				ibmlogger.info( error );  
+			}
+		} );
+	} );
+	
+	// Start listening
+	ibmlogger.info( 'Listening for changes.' );
+	stream.follow();	
+}
 
 // Web
 var app = express();
