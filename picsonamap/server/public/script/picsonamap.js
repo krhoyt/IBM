@@ -24,6 +24,8 @@ var stream = null;
 var touch = null;
 var xhr = null;
 
+// Called to build initial list
+// Configure publish-subscribe
 function build() 
 {	
 	var clone = null;
@@ -65,6 +67,9 @@ function build()
 	}		
 }
 
+// Called to create a photo in the stream
+// Also creates a marker on the map
+// Returns photo item for list
 function create( item )
 {
 	var marker = null;
@@ -178,13 +183,26 @@ function doConfigurationLoad()
 function doItemClick()
 {
 	var id = null;
+	var item = null;
 	var list = null;
 	var map = null;
 	var position = null;
 	var tabs = null;
 	
+	// Debug
+	console.log( 'Item click.' );
+	
+	// Photo click will be mouse argument
+	// Message arrived has element as argument
+	if( !arguments[0].type )
+	{
+		item = arguments[0];		
+	} else {
+		item = this;	
+	}
+	
 	// ID of selected photo
-	id = this.getAttribute( 'data-id' );
+	id = item.getAttribute( 'data-id' );
 	
 	// Look at stored marker references
 	for( var m = 0; m < google_markers.length; m++ )
@@ -202,17 +220,23 @@ function doItemClick()
 			google_maps.setCenter( position );
 			google_maps.setZoom( 12 );
 			
-			// Control selected tab
-			tabs = document.querySelectorAll( '.header .tabs p' );
-			tabs[0].classList.remove( 'selected' );
-			tabs[1].classList.add( 'selected' );
 			
-			// Switch views
-			list = document.querySelector( '.list' );
-			map = document.querySelector( '.map' );
-			
-			map.style.visibility = 'visible';
-			list.style.visibility = 'hidden';
+			// Photo requires view switch
+			// Already in map then stay in map
+			if( arguments[0].type == 'click' )
+			{
+				// Control selected tab
+				tabs = document.querySelectorAll( '.header .tabs p' );
+				tabs[0].classList.remove( 'selected' );
+				tabs[1].classList.add( 'selected' );
+				
+				// Switch views
+				list = document.querySelector( '.list' );
+				map = document.querySelector( '.map' );
+				
+				map.style.visibility = 'visible';
+				list.style.visibility = 'hidden';				
+			}
 			
 			// Show information window
 			doMarkerClick( google_markers[m] );
@@ -305,6 +329,9 @@ function doMarkerClick()
 	var source = null;
 	var width = null;
 	
+	// Debug 
+	console.log( 'Marker click.' );
+	
 	// Hide existing window
 	if( info != null )
 	{
@@ -314,11 +341,11 @@ function doMarkerClick()
 	
 	// Click on marker directly
 	// Click on photo and show marker details
-	if( arguments.length == 0 )
+	if( !arguments[0].latLng )
 	{
-		marker = this;
+		marker = arguments[0];		
 	} else {
-		marker = arguments[0];
+		marker = this;
 	}
 	
 	// Ratio of original
@@ -355,6 +382,7 @@ function doMessage( data )
 	var clone = null;
 	var list = null;
 	var match = null;
+	var tab = null;	
 	
 	// Debug
 	console.log( 'Message: ' + data._id );
@@ -395,6 +423,15 @@ function doMessage( data )
 		list.insertBefore( clone, list.children[0] );
 	} else {
 		list.appendChild( clone );
+	}
+	
+	// Check for view
+	// Map view will zoom in on marker
+	tab = document.querySelector( '.header .tabs p:last-of-type' );
+	
+	if( tab.className.indexOf( 'selected' ) >= 0 )
+	{
+		doItemClick( clone );
 	}
 }
 
