@@ -13,11 +13,12 @@ var SERVICE_ROOT = '/pics-on-a-map/v1/apps/';
 
 // Application
 var configuration = null;
+var google_maps = null;
+var google_markers = null;
 var ibmcloud = null;
 var info = null;
 var latitude = null;
 var longitude = null;
-var google_maps = null;
 var pubnub = null;
 var stream = null;
 var touch = null;
@@ -90,6 +91,7 @@ function create( item )
 	result.style.width = Math.round( ( window.innerWidth - ( ( LIST_COLUMNS + 1 ) * LIST_COLUMN_GAP ) ) / LIST_COLUMNS ) + 'px';
 	result.style.height = Math.round( ( window.innerWidth - ( ( LIST_COLUMNS + 1 ) * LIST_COLUMN_GAP ) ) / LIST_COLUMNS ) + 'px';		
 	result.classList.remove( 'template' );
+	result.addEventListener( touch ? 'touchstart' : 'click', doItemClick );
 	
 	// Marker on map
 	// Keep reference to object
@@ -101,6 +103,7 @@ function create( item )
   		map: google_maps
 	} );
 	marker.stream = item;
+	google_markers.push( marker );
 	  
 	// Click to show image
 	google.maps.event.addListener( marker, 'click', doMarkerClick );
@@ -167,6 +170,58 @@ function doConfigurationLoad()
     }  	
 }
 
+// Called when a photo is clicked
+// Recenter map view
+// Update tabs
+// Hide list and show map
+// Show information window
+function doItemClick()
+{
+	var id = null;
+	var list = null;
+	var map = null;
+	var position = null;
+	var tabs = null;
+	
+	// ID of selected photo
+	id = this.getAttribute( 'data-id' );
+	
+	// Look at stored marker references
+	for( var m = 0; m < google_markers.length; m++ )
+	{
+		// Found matching ID in markers
+		if( google_markers[m].stream._id == id )
+		{
+			// Position
+			position = new google.maps.LatLng(
+				google_markers[m].stream.latitude,
+				google_markers[m].stream.longitude				
+			)
+			
+			// Center map
+			google_maps.setCenter( position );
+			google_maps.setZoom( 12 );
+			
+			// Control selected tab
+			tabs = document.querySelectorAll( '.header .tabs p' );
+			tabs[0].classList.remove( 'selected' );
+			tabs[1].classList.add( 'selected' );
+			
+			// Switch views
+			list = document.querySelector( '.list' );
+			map = document.querySelector( '.map' );
+			
+			map.style.visibility = 'visible';
+			list.style.visibility = 'hidden';
+			
+			// Show information window
+			doMarkerClick( google_markers[m] );
+			
+			break;		
+		}
+	}
+}
+
 // Problem access geolocation
 // Could be the user declined access
 // Could be the feature is not present
@@ -203,13 +258,18 @@ function doLocationSuccess( position )
 			lng: longitude
 		},
 		zoom: MAP_ZOOM
-	} );	
+	} );
+	
+	// Markers on the map
+	google_markers = [];	
 }
 
 // Called when map tab is click
 // Toggle view to show map
 function doMapClick()
 {
+	var list = null;
+	var map = null;
 	var tabs = null;
 	
 	// Debug
@@ -240,6 +300,7 @@ function doMapClick()
 function doMarkerClick()
 {
 	var height = null;
+	var marker = null;
 	var ratio = null;
 	var source = null;
 	var width = null;
@@ -251,8 +312,17 @@ function doMarkerClick()
 		info = null;
 	}
 	
+	// Click on marker directly
+	// Click on photo and show marker details
+	if( arguments.length == 0 )
+	{
+		marker = this;
+	} else {
+		marker = arguments[0];
+	}
+	
 	// Ratio of original
-	ratio = this.stream.height / this.stream.width;
+	ratio = marker.stream.height / marker.stream.width;
 	
 	// Image width
 	// Same width as used by stream list
@@ -267,13 +337,13 @@ function doMarkerClick()
 		SERVICE_ROOT + 
 		configuration.bluemix.applicationId + 
 		SERVICE_ATTACHMENT + 
-		this.stream._id;
+		marker.stream._id;
 	
 	// Information window
 	info = new google.maps.InfoWindow( {
 		content: '<img src="' + source + '" width="' + width + '" height="' + height + '">'	
 	} );
-	info.open( google_maps, this );
+	info.open( google_maps, marker );
 }
 
 // Called when message arrives
