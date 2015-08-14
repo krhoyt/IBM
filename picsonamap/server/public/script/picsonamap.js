@@ -96,7 +96,7 @@ function create( item )
 	result.style.width = Math.round( ( window.innerWidth - ( ( LIST_COLUMNS + 1 ) * LIST_COLUMN_GAP ) ) / LIST_COLUMNS ) + 'px';
 	result.style.height = Math.round( ( window.innerWidth - ( ( LIST_COLUMNS + 1 ) * LIST_COLUMN_GAP ) ) / LIST_COLUMNS ) + 'px';		
 	result.classList.remove( 'template' );
-	result.addEventListener( touch ? 'touchstart' : 'click', doItemClick );
+	result.addEventListener( 'click', doItemClick );
 	
 	// Marker on map
 	// Keep reference to object
