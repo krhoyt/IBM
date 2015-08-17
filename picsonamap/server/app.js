@@ -10,11 +10,10 @@ var path = require( 'path' );
 var CLOUDANT_DATABASE = 'picture';
 var CLOUDANT_PROPERTY = 'cloudantNoSQLDB';
 var CONFIGURATION_FILE = 'configuration.json';
-var CONFIGURATION_PATH = 'public';
 var PUBNUB_CHANNEL = 'picture_channel';
 
 // Configuration
-var configuration = jsonfile.readFileSync( path.join( __dirname, CONFIGURATION_PATH, CONFIGURATION_FILE ) );
+var configuration = jsonfile.readFileSync( path.join( __dirname, CONFIGURATION_FILE ) );
 
 // Bluemix
 ibmbluemix.initialize( configuration.bluemix );
