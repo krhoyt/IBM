@@ -254,9 +254,6 @@ function doLocationSuccess( position )
 		},
 		zoom: MAP_ZOOM
 	} );
-	
-	// Markers on the map
-	google_markers = [];	
 }
 
 // Called when map tab is click
@@ -319,6 +316,12 @@ function doMarkerClick()
 		marker = this;
 	}
 	
+    // Center map
+    google_maps.panTo( new google.maps.LatLng(
+        marker.stream.latitude,
+        marker.stream.longitude
+    ) );
+    
 	// Ratio of original
 	ratio = marker.stream.height / marker.stream.width;
 	
@@ -539,6 +542,9 @@ function doWindowLoad()
 	xhr.open( 'GET', PATH_CONFIGURATION );
 	xhr.send( null );
 	
+	// Markers on the map
+	google_markers = [];	    
+    
 	// Touch support
     touch = ( 'ontouchstart' in document.documentElement ) ? true : false;	
 	
