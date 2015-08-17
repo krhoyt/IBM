@@ -2,11 +2,95 @@
 <items version="2" >
 
     <item
+        jar="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/pre-dexed/debug/classes-eaf8cf4a2ece7be50a9a91ea347525df393795ae.jar" />
+    </item>
+    <item
+        jar="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-5c234d62c0f3332f9918b16bd0503e17de89a628.jar" />
+    </item>
+    <item
+        jar="/Users/Kevin/.gradle/caches/modules-2/files-2.1/com.ibm.mobile.services/ibmdata/1.0.1.20150311-1224/a589c20860ad3cdfa77ba4c6449cc1dda410d93/ibmdata-1.0.1.20150311-1224.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0a589c20860ad3cdfa77ba4c6449cc1dda410d93">
+        <dex dex="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/pre-dexed/debug/ibmdata-1.0.1.20150311-1224-2fae7bbaa502d331104865a506e0e38c9b90fe74.jar" />
+    </item>
+    <item
+        jar="/Users/Kevin/Git/IBM/picsonamap/client/app/libs/volley-1.0-snapshot.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9cf09accfa83552f32dd6b837f91be3a1c6ee9d1">
+        <dex dex="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/pre-dexed/debug/volley-1.0-snapshot-462c0aeba5d8002019c396af2bf1e38dc07c6ab5.jar" />
+    </item>
+    <item
         jar="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/exploded-aar/com.badoo.mobile/android-weak-handler/1.1/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="7a2dafc6ef58bed3ca9a9a1fb5c5a42624b379a3">
         <dex dex="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/pre-dexed/debug/classes-d226ce4263a6fd8990a5d17cdd524c5d84fb7916.jar" />
+    </item>
+    <item
+        jar="/Users/Kevin/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-4c0f3270340c38fc920086441e3291e5981a4ac3.jar" />
+    </item>
+    <item
+        jar="/Users/Kevin/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-385b4fc8a6f7da7d3ea6d4ee3ed8c05d31ad02a3.jar" />
+    </item>
+    <item
+        jar="/Users/Kevin/.gradle/caches/modules-2/files-2.1/com.ibm.mobile.services/ibmlocation/0.9.0.20140707-1250/b50f2975d83f4960eda36b3c30d2283251e55c3/ibmlocation-0.9.0.20140707-1250.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0b50f2975d83f4960eda36b3c30d2283251e55c3">
+        <dex dex="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/pre-dexed/debug/ibmlocation-0.9.0.20140707-1250-542b501fcb399f1e8f310b83dc7f39225c4f018f.jar" />
+    </item>
+    <item
+        jar="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/pre-dexed/debug/classes-20e309f67e0ff033865c3866838d4a930676a561.jar" />
+    </item>
+    <item
+        jar="/Users/Kevin/.gradle/caches/modules-2/files-2.1/com.ibm.mobile.services/ibmfilesync/1.0.1.20150311-1224/c9c2a97cdf54089bcc736b0589d299f3886c5257/ibmfilesync-1.0.1.20150311-1224.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c9c2a97cdf54089bcc736b0589d299f3886c5257">
+        <dex dex="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/pre-dexed/debug/ibmfilesync-1.0.1.20150311-1224-a65aa80988853963fb62fff7d86ecab154e8baf0.jar" />
+    </item>
+    <item
+        jar="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/exploded-aar/client/volley/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="bf89ef13d304cc4a48c8e9dc610cd760d6fbf382">
+        <dex dex="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/pre-dexed/debug/classes-1ddb19a5fd967eb4bf031aef4db2c4f2805ac014.jar" />
+    </item>
+    <item
+        jar="/Users/Kevin/.gradle/caches/modules-2/files-2.1/com.ibm.mobile.services/ibmbluemix/1.0.1.20150311-1224/7bdbbcf8f380f8dd86e62b8cc88f36eec2ad2914/ibmbluemix-1.0.1.20150311-1224.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7bdbbcf8f380f8dd86e62b8cc88f36eec2ad2914">
+        <dex dex="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/pre-dexed/debug/ibmbluemix-1.0.1.20150311-1224-5fe98a1f36445410ea074a3a37d9a130d14e5149.jar" />
+    </item>
+    <item
+        jar="/Users/Kevin/.gradle/caches/modules-2/files-2.1/com.ibm.mobile.services/ibmcloudcode/1.0.1.20150311-1224/306322622d644814e0668b28f19b70e4b4b6c0ce/ibmcloudcode-1.0.1.20150311-1224.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="306322622d644814e0668b28f19b70e4b4b6c0ce">
+        <dex dex="/Users/Kevin/Git/IBM/picsonamap/client/app/build/intermediates/pre-dexed/debug/ibmcloudcode-1.0.1.20150311-1224-f7a7b5a6c9930e80ea322f7d63ff6b2e24e16532.jar" />
     </item>
 
 </items>

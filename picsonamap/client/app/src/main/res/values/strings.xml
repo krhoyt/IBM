@@ -3,10 +3,4 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
-    <string name="bluemix_name">pics-on-a-map</string>
-    <string name="bluemix_version">v1</string>
-    <string name="bluemix_id">6982d829-9411-4425-ae74-e6f89b717595</string>
-    <string name="bluemix_route">http://pics-on-a-map.mybluemix.net</string>
-    <string name="bluemix_secret">824e9deeb33f941dfde4d64f1d3bb7323a7d1b59</string>
 </resources>
