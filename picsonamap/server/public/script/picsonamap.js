@@ -123,27 +123,23 @@ function doConfigurationLoad()
 	
 	// Configuration
 	configuration = JSON.parse( xhr.responseText );
-
-	// Clean up previous
-	xhr.removeEventListener( 'load', doConfigurationLoad );
-	xhr = null;
-    
-    // Current data stream
-    xhr = new XMLHttpRequest();
-    xhr.addEventListener( 'load', doStreamLoad );
-    xhr.open( 'GET', SERVICE_ROOT + SERVICE_PICTURE + SERVICE_PICTURE_LIMIT );
-    xhr.send( null );
-	
+    	
 	// Geolocation
-    if( navigator.geolocation ) 
-    {
-        navigator.geolocation.getCurrentPosition( 
-            doLocationSuccess, 
-            doLocationError 
-        );
-    } else {
-        doLocationError( 'Geolocation not supported.' );
-    }  	
+    setTimeout( function() {
+        if( navigator.geolocation ) 
+        {
+            navigator.geolocation.getCurrentPosition( 
+                doLocationSuccess, 
+                doLocationError 
+            );
+        } else {
+            doLocationError( 'Geolocation not supported.' );
+        }  	
+    }, 1000 );
+    
+	// Clean up
+	xhr.removeEventListener( 'load', doConfigurationLoad );
+	xhr = null;    
 }
 
 // Called when a photo is clicked
@@ -189,8 +185,7 @@ function doItemClick()
 			
 			// Center map
 			google_maps.setCenter( position );
-			google_maps.setZoom( 12 );
-			
+			google_maps.setZoom( 12 );			
 			
 			// Photo requires view switch
 			// Already in map then stay in map
@@ -254,6 +249,12 @@ function doLocationSuccess( position )
 		},
 		zoom: MAP_ZOOM
 	} );
+    
+    // Current data stream
+    xhr = new XMLHttpRequest();
+    xhr.addEventListener( 'load', doStreamLoad );
+    xhr.open( 'GET', SERVICE_ROOT + SERVICE_PICTURE + SERVICE_PICTURE_LIMIT );
+    xhr.send( null );    
 }
 
 // Called when map tab is click
