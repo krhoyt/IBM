@@ -1,21 +1,18 @@
 // Constants
-var CLOUD_BASE_URL = 'http://localhost:3000';
 var LIST_COLUMNS = 3;
 var LIST_COLUMN_GAP = 4;
-var LOCAL_DEVELOPMENT = false;
 var MAP_ZOOM = 7;
 var PATH_CONFIGURATION = 'configuration.json';
 var PUBNUB_CHANNEL = 'picture_channel';
 var SERVICE_ATTACHMENT = '/attachment/';
 var SERVICE_PICTURE = '/picture';
 var SERVICE_PICTURE_LIMIT = '?limit=100';
-var SERVICE_ROOT = '/pics-on-a-map/v1/apps/';
+var SERVICE_ROOT = 'api';
 
 // Application
 var configuration = null;
 var google_maps = null;
 var google_markers = null;
-var ibmcloud = null;
 var info = null;
 var latitude = null;
 var longitude = null;
@@ -89,7 +86,6 @@ function create( item )
 	result.style.backgroundImage = 
 		'url( ' + 
 		SERVICE_ROOT + 
-		configuration.bluemix.applicationId + 
 		SERVICE_ATTACHMENT + 
 		item._id + 
 		' )';
@@ -127,41 +123,16 @@ function doConfigurationLoad()
 	
 	// Configuration
 	configuration = JSON.parse( xhr.responseText );
-	
-	// Bluemix
-	IBMBluemix.initialize( configuration.bluemix );
-	
-	// Cloud Code
-	ibmcloud = IBMCloudCode.initializeService();
-	
-	// Tell Cloud Code where to look for data
-	// Toggle between local and production
-	// Uses a boolean flag in the constants
-	if( LOCAL_DEVELOPMENT )
-	{
-		ibmcloud.setBaseUrl( CLOUD_BASE_URL );		
-	}
-	
-	// Fetch current data stream
-	ibmcloud.get( SERVICE_PICTURE + SERVICE_PICTURE_LIMIT ).then( function( results )  {
-		var data = null;
-		
-		// Debug
-		console.log( 'Cloud Code.' );
-		
-		// Parse
-		data = JSON.parse( results );
-		stream = data.docs;
-		
-		// Initial population of user interface
-		build();	
-	}, function( error ) {
-		console.log( error );
-	} );
-	
-	// Clean up
+
+	// Clean up previous
 	xhr.removeEventListener( 'load', doConfigurationLoad );
 	xhr = null;
+    
+    // Current data stream
+    xhr = new XMLHttpRequest();
+    xhr.addEventListener( 'load', doStreamLoad );
+    xhr.open( 'GET', SERVICE_ROOT + SERVICE_PICTURE + SERVICE_PICTURE_LIMIT );
+    xhr.send( null );
 	
 	// Geolocation
     if( navigator.geolocation ) 
@@ -362,7 +333,6 @@ function doMarkerClick()
 	// Image source	
 	source = 
 		SERVICE_ROOT + 
-		configuration.bluemix.applicationId + 
 		SERVICE_ATTACHMENT + 
 		marker.stream._id;
 	
@@ -466,6 +436,27 @@ function doStreamClick()
 	map.style.visibility = 'hidden';
 }
 
+// Called with an initial stream
+// Stores current feed data
+// Calls to build list
+function doStreamLoad()
+{
+    var data = null;
+
+    // Debug
+    console.log( 'Stream loaded.' );
+
+    // Parse
+    data = JSON.parse( xhr.responseText );
+    stream = data.docs;
+
+    // Initial population of user interface
+    build();	    
+    
+    xhr.removeEventListener( 'load', doStreamLoad );
+    xhr = null;
+}
+
 // Called when file selection is made
 // May upload if selection was made
 function doUploadChange()
@@ -492,7 +483,7 @@ function doUploadChange()
 		
 		// URL of service
 		// TODO: Cloud Code multipart upload?
-		url = SERVICE_ROOT + configuration.bluemix.applicationId + '/' + SERVICE_PICTURE;
+		url = SERVICE_ROOT + SERVICE_PICTURE;
 		
 		// Upload file and data
 		// Multipart file upload
@@ -516,9 +507,16 @@ function doUploadClick()
 // Called when file upload is finished
 function doUploadLoad()
 {
+    var input = null;
+    
 	// Debug
 	console.log( 'Upload done.' );
 	
+    // Clear selected file
+	input = document.querySelector( 'input[type=file]' );  
+    input.value = '';
+    
+    // Clean up
 	xhr.removeEventListener( 'load', doUploadLoad );
 	xhr = null;
 }

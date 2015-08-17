@@ -208,9 +208,9 @@ app.use( function( req, res, next ) {
 app.use( '/', express.static( 'public' ) );
 
 // Routing
-app.use( ibmconfig.getContextRoot(), require( './routes/picture' ) );
-app.use( ibmconfig.getContextRoot(), require( './routes/attachment' ) );
-app.use( ibmconfig.getContextRoot(), require( './routes/manage' ) );
+app.use( '/api', require( './routes/picture' ) );
+app.use( '/api', require( './routes/attachment' ) );
+app.use( '/api', require( './routes/manage' ) );
 
 // Server
 app.listen( ibmconfig.getPort() );
