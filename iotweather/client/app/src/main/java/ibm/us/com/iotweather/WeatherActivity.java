@@ -31,7 +31,6 @@ import java.util.Date;
 
 public class WeatherActivity extends AppCompatActivity
 {
-    public static final String CLOUD_CODE = "http://iot-weather.mybluemix.net/iot-weather/v1/apps/c02e7aae-bf7d-417f-85df-5a605de208d3/reading?limit=1";
     public static final String DRAWABLE_BEACH = "@drawable/beach";
     public static final String DRAWABLE_FIELD = "@drawable/field";
     public static final String DRAWABLE_ICICLES = "@drawable/icicles";
@@ -41,9 +40,6 @@ public class WeatherActivity extends AppCompatActivity
     public static final String KEY_FAHRENHEIT = "fahrenheit";
     public static final String KEY_HUMIDITY = "humidity";
     public static final String KEY_TIMESTAMP = "timestamp";
-    public static final String PUBNUB_CHANNEL = "weather_channel";
-    public static final String PUBNUB_PUBLISH = "pub-c-cbef13c4-2ce5-44af-b0f1-41cca5333835";
-    public static final String PUBNUB_SUBSCRIBE = "sub-c-3244cd2a-3d72-11e5-bcbe-0619f8945a4f";
     public static final String SYMBOL_DEGREE = "°";
     public static final String SYMBOL_PERCENT = "%";
 
@@ -107,7 +103,7 @@ public class WeatherActivity extends AppCompatActivity
 
         request = new JsonObjectRequest(
             Request.Method.GET,
-            CLOUD_CODE,
+            getString( R.string.cloud_code ),
             null,
             new Response.Listener<JSONObject>() {
                 @Override
@@ -199,10 +195,15 @@ public class WeatherActivity extends AppCompatActivity
 
         if(pubnub == null)
         {
-            pubnub = new Pubnub(PUBNUB_PUBLISH, PUBNUB_SUBSCRIBE);
+            pubnub = new Pubnub(
+                getString(R.string.pubnub_publish),
+                getString(R.string.pubnub_subscribe)
+            );
 
             try {
-                pubnub.subscribe(PUBNUB_CHANNEL, new Callback() {
+                pubnub.subscribe(
+                    getString(R.string.pubnub_channel),
+                    new Callback() {
                     @Override
                     public void successCallback(String channel, Object data) {
                         Bundle      bundle;
