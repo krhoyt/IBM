@@ -1,0 +1,82 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WeatherActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/image_earth"
+        android:layout_gravity="center"
+        android:src="@drawable/earth"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/image_weather"
+        android:src="@drawable/beach"
+        android:scaleType="centerCrop"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:id="@+id/image_circle"
+        android:layout_gravity="center"
+        android:background="@drawable/weather_circle"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loading ..."
+        android:id="@+id/text_loading"
+        android:layout_gravity="center_horizontal|top"
+        android:textSize="34dp"
+        android:layout_marginTop="24dp"
+        android:textColor="#ffffffff" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/layout_weather"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="91°"
+            android:id="@+id/text_temperature"
+            android:layout_gravity="center_horizontal"
+            android:textSize="96dp"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="41%"
+            android:id="@+id/text_humidity"
+            android:textColor="#ffffff"
+            android:textSize="24dp"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Updated"
+        android:id="@+id/text_update"
+        android:layout_gravity="center_horizontal|bottom"
+        android:textSize="24dp"
+        android:textColor="#ffffffff"
+        android:layout_marginBottom="16dp"
+        android:visibility="invisible" />
+
+</FrameLayout>
