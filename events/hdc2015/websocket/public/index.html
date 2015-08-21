@@ -1,0 +1,97 @@
+<html>
+<head>
+
+<title>WebSockets</title>    
+    
+<script type="text/javascript">
+// Constants
+var SOCKET_PROTOCOL = 'ws://';    
+    
+// Application
+var socket = null;    
+    
+// Send button is clicked
+// Package data and send message
+function doSendClick()
+{
+    var echo = null;
+    var input = null;
+    var message = null;
+    
+    // Debug
+    console.log( 'Send.' );
+    
+    // Form fields
+    input = document.querySelector( 'input[type=\'text\']' );
+    echo = document.querySelector( 'input[type=\'checkbox\']' );
+    
+    // Message content
+    message = {
+        content: input.value.trim()
+    };
+    
+    // Optionally echo
+    // Server setting wins
+    if( echo.checked )
+    {
+        message.echo = true;
+    }
+    
+    // Send message
+    socket.send( JSON.stringify( message ) );
+}
+    
+// Got a message
+function doSocketMessage( event )
+{
+    // Debug
+    console.log( event.data );
+}
+    
+// Connected to server
+function doSocketOpen()
+{
+    // Debug
+    console.log( 'Open.' );
+}
+    
+// Window loaded
+function doWindowLoad() 
+{
+    var button = null;
+    
+    // Debug
+    console.log( 'Load.' );
+    
+    // WebSocket
+    socket = new WebSocket( SOCKET_PROTOCOL + window.location.host );
+    socket.addEventListener( 'open', doSocketOpen );
+    socket.addEventListener( 'message', doSocketMessage );
+    
+    // Click to send
+    button = document.querySelector( 'button' );
+    button.addEventListener( 'click', doSendClick );
+}
+    
+// Go
+window.addEventListener( 'load', doWindowLoad );    
+</script>
+
+</head>
+<body>
+
+<!-- Message -->
+<div>
+    <input type="text" value="IBM">    
+</div>
+    
+<!-- Echo -->
+<div>
+    <input type="checkbox">Echo    
+</div>
+
+<!-- Send -->
+<button>Send</button>
+
+</body>
+</html>
