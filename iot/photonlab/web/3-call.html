@@ -6,6 +6,9 @@
 <!-- PhotonJS -->
 <script src="http://cdn.jsdelivr.net/sparkjs/0.5.2/spark.min.js"></script>
 
+<!-- Configuration -->
+<script src="configuration.js" type="text/javascript"></script>    
+    
 <!-- Application -->
 <script type="text/javascript">
 var authentication = null;
@@ -73,8 +76,8 @@ function doWindowLoad() {
 
     // Login
     spark.login( {
-        username: "parkerkrhoyt@gmail.com",
-        password: "Paige123"
+        username: configuration.username,
+        password: configuration.password
     }, doSparkLogin );
 }
 
