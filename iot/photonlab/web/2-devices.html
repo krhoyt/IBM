@@ -1,0 +1,63 @@
+<html>
+<head>
+
+<title>List Devices</title>
+
+<!-- PhotonJS -->
+<script src="http://cdn.jsdelivr.net/sparkjs/0.5.2/spark.min.js"></script>    
+    
+<!-- Application -->
+<script type="text/javascript">
+var authentication = null;
+var device = null;
+    
+function doSparkDevices( err, devices ) {
+    // Debug
+    console.log( 'Devices.' );
+    
+    // Find connected device
+    for ( var d = 0; d < devices.length; d++ ) {
+        if ( devices[d].connected ) {
+            // Debug
+            console.log( devices[d] );
+            
+            // Keep around for reference
+            device = devices[d];
+            break;
+        }
+    }
+}
+    
+function doSparkLogin( error, authentication ) {
+    // Debug
+    console.log( 'Login.' );
+
+    // Keep around for reference
+    this.authentication = authentication;
+    
+    // List devices
+    spark.listDevices( doSparkDevices );
+}
+    
+function doWindowLoad() {
+    // Debug
+    console.log( 'Load.' );
+    
+    // Login
+    spark.login( {
+        username: "parkerkrhoyt@gmail.com",
+        password: "Paige123"
+    }, doSparkLogin );
+}
+    
+// Go    
+window.addEventListener( 'load', doWindowLoad );
+</script>
+    
+</head>
+<body>
+
+<!-- Empty -->
+
+</body>
+</html>

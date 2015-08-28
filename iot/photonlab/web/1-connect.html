@@ -1,0 +1,43 @@
+<html>
+<head>
+
+<title>Connect</title>
+
+<!-- PhotonJS -->
+<script src="http://cdn.jsdelivr.net/sparkjs/0.5.2/spark.min.js"></script>    
+    
+<!-- Application -->
+<script type="text/javascript">
+var authentication = null;
+    
+function doSparkLogin( error, authentication ) {
+    // Debug
+    console.log( 'Login.' );
+    console.log( authentication );
+    
+    // Keep around for reference
+    this.authentication = authentication;
+}
+    
+function doWindowLoad() {
+    // Debug
+    console.log( 'Load.' );
+    
+    // Login
+    spark.login( {
+        username: "parkerkrhoyt@gmail.com",
+        password: "Paige123"
+    }, doSparkLogin );
+}
+    
+// Go    
+window.addEventListener( 'load', doWindowLoad );
+</script>
+    
+</head>
+<body>
+
+<!-- Empty -->
+
+</body>
+</html>

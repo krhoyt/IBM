@@ -1,0 +1,107 @@
+<html>
+<head>
+
+<title>Remote Control</title>
+
+<!-- PhotonJS -->
+<script src="http://cdn.jsdelivr.net/sparkjs/0.5.2/spark.min.js"></script>
+
+<!-- Application -->
+<script type="text/javascript">
+var EVENT_PHOTOCELL = 'photocell';
+
+var authentication = null;
+var device = null;
+var state = null;
+
+function doCallDevice() {
+    // Debug
+    console.log( 'Call.' );
+
+    // Toggle state
+    if ( state == null ) {
+        state = 1;
+    } else {
+        state = state == 1 ? 0 : 1;
+    }
+
+    // Call the device
+    device.callFunction( 'led', state.toString(), doSparkCalled );
+}
+
+function doSparkCalled( error, data ) {
+    // Debug
+    console.log( 'Called.' );
+    console.log( data );
+}
+
+function doSparkDevices( err, devices ) {
+    // Debug
+    console.log( 'Devices.' );
+
+    // Find connected device
+    for ( var d = 0; d < devices.length; d++ ) {
+        if ( devices[d].connected ) {
+            // Debug
+            console.log( devices[d] );
+
+            // Keep around for reference
+            device = devices[d];
+            break;
+        }
+    }
+
+    // Listen for event
+    // For specific device
+    // Could be across all devices
+    device.onEvent( EVENT_PHOTOCELL, doSparkEvent );
+}
+
+function doSparkEvent( event ) {
+  // Debug
+  console.log( 'Event.' );
+
+  // Display
+  console.log( 'Photocell: ' + event.data );
+}
+
+function doSparkLogin( error, authentication ) {
+    var button = null;
+
+    // Debug
+    console.log( 'Login.' );
+
+    // Keep around for reference
+    this.authentication = authentication;
+
+    // List devices
+    spark.listDevices( doSparkDevices );
+
+    // Listen for click to call
+    button = document.querySelector( 'button' );
+    button.addEventListener( 'click', doCallDevice );
+}
+
+function doWindowLoad() {
+    // Debug
+    console.log( 'Load.' );
+
+    // Login
+    spark.login( {
+        username: "parkerkrhoyt@gmail.com",
+        password: "Paige123"
+    }, doSparkLogin );
+}
+
+// Go
+window.addEventListener( 'load', doWindowLoad );
+</script>
+
+</head>
+<body>
+
+<!-- Call your device -->
+<button>Call</button>
+
+</body>
+</html>

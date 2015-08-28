@@ -1,0 +1,24 @@
+-= Device =-
+
+Organization ID
+asu2l5
+
+Device Type
+Photon
+
+Device ID
+286cb6fb
+
+Authentication Method
+token
+
+Authentication Token
+RIJyk&Fb&J9C7sE+js
+
+-= API =-
+
+API Key 	
+a-asu2l5-n8nrugtarm
+
+Authentication Token 	
+0X7Jh&p!NYWf_Zfk+1

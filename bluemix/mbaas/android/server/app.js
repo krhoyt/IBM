@@ -26,9 +26,9 @@ var longitude = null;
 
 // Bluemix
 ibmbluemix.initialize( {
-	applicationId: '_YOUR_APPLICATION_ID_',
-	applicationRoute: '_YOUR_APPLICATION_ROUTE_',
-	applicationSecret: '_YOUR_APPLICATION_SECRET_'
+	applicationId: '71d523b2-9410-470b-8cac-e46b90398ad9',
+	applicationRoute: 'http://android-weather.mybluemix.net',
+	applicationSecret: '7364f99675af051ab715a09f5f363697361319f0'
 } );
 
 // Environment
