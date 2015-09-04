@@ -8,14 +8,6 @@ var mongoose = require( 'mongoose' );
 var path = require( 'path' );
 var ws = require( 'ws' );
 
-// Constant
-var CHAT_CREATE = 'create_chat';
-var CHAT_READ_ALL = 'read_all_chat';
-var PHOTOCELL_VALUE = 'photocell';
-var TETRIS_DOWN = 'tetris_down';
-var TETRIS_JOIN = 'tetris_join';
-var TETRIS_UP = 'tetris_up';
-
 // Environment
 var environment = cfenv.getAppEnv();
 var configuration = jsonfile.readFileSync( path.join( __dirname, 'configuration.json' ) );
@@ -27,7 +19,7 @@ mongoose.connection.on( 'connected', function() {
     console.log( 'Connected to Compose.' );
 } );
 
-// Models
+// Model
 var Chat = require( path.join( __dirname, 'models/chat' ) );
 
 // Web
@@ -66,12 +58,12 @@ socket.on( 'connection', function connection( connection ) {
         // Action
         switch( body.action ) {                
             // History
-            case CHAT_READ_ALL:
+            case 'read_all':
                 // Reference requesting client
                 client = this;
                 
                 // Find and send back to requesting client
-                Chat.find( {}, null, {sort: {createdAt: 1}}, function( error, data ) {                    
+                Chat.find( {}, function( error, data ) {                    
                     client.send( JSON.stringify( {
                         action: body.action,
                         data: data
@@ -81,7 +73,7 @@ socket.on( 'connection', function connection( connection ) {
                 break;
                 
             // Create
-            case CHAT_CREATE:
+            case 'create':
                 chat = new Chat();
 
                 chat.blue = body.blue;
@@ -104,33 +96,13 @@ socket.on( 'connection', function connection( connection ) {
                     // Distribute
                     for( var c = 0; c < socket.clients.length; c++ ) {
                         socket.clients[c].send( JSON.stringify( {
-                            action: body.action,
+                            action: 'create',
                             data: result
                         } ) );
                     }                                    
                 } );                                            
                 
                 break;
-            
-            // Tetris
-            case TETRIS_JOIN:
-            case TETRIS_UP:
-            case TETRIS_DOWN:
-                // Distribute
-                for( var c = 0; c < socket.clients.length; c++ ) {
-                    socket.clients[c].send( message );
-                }         
-                
-                break;
-            
-            // Photocell
-            case PHOTOCELL_VALUE:
-                // Distribute
-                for( var c = 0; c < socket.clients.length; c++ ) {
-                    socket.clients[c].send( message );
-                }         
-                
-                break;                
         }
     } );
     

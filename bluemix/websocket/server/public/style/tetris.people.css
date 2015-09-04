@@ -1,0 +1,62 @@
+.bob {
+  background-image: url( ../img/bob.jpg );
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+}
+
+.joe {
+  background-image: url( ../img/joe.jpg );
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+}
+
+.jon {
+  background-image: url( ../img/jon.jpg );
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+}
+
+.kevin {
+  background-image: url( ../img/kevin.jpg );
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+}
+
+.michel {
+  background-image: url( ../img/michel.jpg );
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+}
+  
+.mohsen {
+  background-image: url( ../img/mohsen.jpg );
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+}  
+
+.peter {
+  background-image: url( ../img/peter.jpg );
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+}
+
+.shaunak {
+  background-image: url( ../img/shaunak.jpg );
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+}
+
+.shen {
+  background-image: url( ../img/shen.jpg );
+  background-repeat: no-repeat; 
+  background-size: cover;
+  position: absolute;
+}

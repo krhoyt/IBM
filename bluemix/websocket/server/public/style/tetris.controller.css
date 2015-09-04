@@ -1,0 +1,64 @@
+body {
+  background-color: #74798C;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.button {
+  background-color: white;
+  border-radius: 6px;
+  position: absolute;
+}
+ 
+.button > div {
+  background-color: #CA070D;
+  margin-left: auto;
+  margin-right: auto;
+}
+ 
+.controller {
+  overflow: hidden;
+  position: absolute;
+  visibility: hidden;
+}
+  
+.direction {
+  background: rgba( 255, 0, 0, 0 );
+  position: absolute;
+}
+
+.instructions {
+  color: white;
+  font-family: sans-serif;
+  font-size: 3em;
+  position: absolute;
+  text-align: center;
+  visibility: hidden;
+}
+  
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}  
+  
+.pad {
+  background-image: url( ../img/pad.svg );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  height: 70%;
+}
+  
+.surface {
+  background-color: black;
+  border-radius: 6px;
+  position: absolute;
+  width: 95%;
+  height: 85%;
+}

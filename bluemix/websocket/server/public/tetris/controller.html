@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="apple-mobile-web-app-capable" content="yes">  
+<meta name="viewport" content="initial-scale=1, user-scalable=no">  
+  
+<title>Controller</title>
+
+<!-- Styles -->
+<link href="../style/tetris.controller.css" rel="stylesheet" type="text/css">  
+
+<!-- Parse query string for linking two devices -->
+<script src="../script/URLParser.js" type="text/javascript"></script>
+
+<!-- Controller logic -->
+<script src="../script/tetris.controller.js" type="text/javascript"></script>  
+  
+</head>
+<body>
+
+<!-- Landscape orientation only -->
+<div class="instructions">Please hold your device in a landscape orientation.</div>  
+  
+<!-- Game controller -->
+<div class="controller">
+  
+  <!-- Darker area for contrast -->
+  <div class="surface"></div>
+
+  <!-- Direction pad -->
+  <!-- Pad is SVG -->
+  <!-- Invisible hot spots on top of SVG -->
+  <div class="pad noselect">
+    <div class="direction up"></div>
+    <div class="direction left"></div>  
+    <div class="direction down"></div>    
+    <div class="direction right"></div>      
+  </div>  
+
+  <!-- Counter clockwise button -->
+  <div class="button noselect">
+    <div></div>
+  </div>
+  
+  <!-- Clockwise button -->
+  <div class="button noselect">
+    <div></div>
+  </div>  
+    
+</div>  
+  
+</body>
+</html>

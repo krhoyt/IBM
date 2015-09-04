@@ -1,13 +1,12 @@
 // Constant
-var ACTION_CREATE = 'create_chat';
-var ACTION_HISTORY = 'read_all_chat';
+var ACTION_CREATE = 'create';
+var ACTION_HISTORY = 'read_all';
 var CLIENT_PREFIX = 'chat_'; 
     
 // Application
 var client = null;
 var color = null;
 var history = null;
-var list = null;
 var message = null;
 var placeholder = null;
 var socket = null;
@@ -23,9 +22,9 @@ function createItem( client, css, message ) {
     item.setAttribute( 'data-client', client );
     item.style.color = css;
     item.innerHTML = message;
-            
+
     // Populate DOM
-    list.appendChild( item );        
+    history.appendChild( item );        
 }
 
 function doMessageBlur() {
@@ -90,12 +89,12 @@ function doMessageKey( event ) {
 function doSocketMessage( event ) {
     var body = null;
     
+    // Debug
+    console.log( event.data );    
+    
     // Get data
     body = JSON.parse( event.data );
 
-    // Debug
-    console.log( body );    
-    
     // Action
     switch( body.action ) {
         // History
@@ -120,29 +119,6 @@ function doSocketMessage( event ) {
             
             break;
     }
-    
-    // Overflow
-    if( history.scrollHeight > history.clientHeight ) {        
-        // No longer need border
-        // Outer element acts as border
-        list.className = 'list taller';
-        
-        // Scroll to last
-        TweenMax.to( history, 1,  {
-            scrollTo: {
-                y: history.scrollHeight    
-            }
-        } );
-    } else {
-        if( list.children.length == 0 ) {
-            // No items in list
-            list.className = 'list taller';
-        } else {
-            // At least one item in list
-            // Not overvflow
-            list.className = 'list smaller';
-        }
-    }
 }
     
 function doSocketOpen() {
@@ -151,9 +127,6 @@ function doSocketOpen() {
         
     // History reference
     history = document.querySelector( '.history' );
-    
-    // List reference
-    list = document.querySelector( '.list' );
     
     // Listen for interactions
     message = document.querySelector( '.message' );
