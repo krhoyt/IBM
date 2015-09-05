@@ -11,8 +11,7 @@ SerialPort.list( function( err, ports ) {
 } );
 
 // Socket
-// var socket = new WebSocket( 'ws://sockets.mybluemix.net' );
-var socket = new WebSocket( 'ws://localhost:6004' );
+var socket = new WebSocket( 'ws://sockets.mybluemix.net' );
 var open = false;
 
 // Connected
