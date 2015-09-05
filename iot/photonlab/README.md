@@ -2,17 +2,43 @@
 
 This workshop will introduce you to IoT using the Particle (formerly Spark) Photon. The Particle Photon offers a suite of hardware and software tools to help you prototype, scale, and manage your IoT products. Based on Broadcom’s WICED architecture (used in Nest, Amazon Dash), combined with a powerful ARM Cortex M3, the Photon offer wi-fi for everything. During this workshop you will pair the Photon with a wireless network, and then learn to control the digital and analog features, both in firmware, and from your own web application.
 
+*Designed to fit into four (4) hours.*
+
 #Materials
 
 - [Particle](http://particle.io) [Photon](https://store.particle.io/?product=particle-photon) ($19 USD)
 - [Breadboard](https://www.sparkfun.com/products/9567) ($4.95 USD)
 - [LED](https://www.sparkfun.com/products/11121) ($0.50 USD)
 - [Photocell](https://www.sparkfun.com/products/9088) ($1.50 USD)
-- 10k [resistor](https://www.sparkfun.com/products/11508) ($0.05 USD)
+- [10k](http://www.dannyg.com/examples/res2/resistor.htm) [resistor](https://www.sparkfun.com/products/11508) ($0.05 USD)
 - [Jumper wires](https://www.sparkfun.com/products/8431) ($3.95 USD)
 - [Micro USB cable](https://www.sparkfun.com/products/13244) ($1.95 USD)
 
 *Approximate total cost per student: $32.00 USD*
+
+#Prerequisites
+
+**Software**
+
+- [Node.js](https://nodejs.org/en/) (needed for CLI)
+- [Particle CLI](https://docs.particle.io/guide/tools-and-features/cli/)
+- Modern browser (take your pick)
+
+**Software (helpful but not required)**
+
+- [Particle Dev](https://docs.particle.io/guide/tools-and-features/dev/)
+- [Arduino IDE](https://www.arduino.cc/en/Main/Software)
+
+**Skills**
+
+- HTML
+- CSS
+- JavaScript
+
+**Skills (helpful but not required)**
+
+- Node.js
+- [Arduino](http://arduino.cc)
 
 #Setup
 
