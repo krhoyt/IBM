@@ -10,6 +10,9 @@ int UPDATE_RATE = 4;
 // Delay without blocking
 long last;
 
+// Latest light reading
+int light = 0;
+
 // Setup
 void setup() {
   // Serial port
@@ -22,13 +25,17 @@ void setup() {
     delay( 10 );
   } while ( last < 1000000 && millis() < 20000 );
 
+  // Register light reading as variable
+  // Exposed through GET
+  // CLI: particle get DEVICE light
+  Spark.variable( "light", &light, INT );
+
   // Analog input
   pinMode( PHOTOCELL, INPUT );
 }
 
 // Loop
 void loop() {
-  int light;
   long now;
 
   // Current time in seconds

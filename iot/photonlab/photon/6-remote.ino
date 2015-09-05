@@ -11,6 +11,9 @@ int UPDATE_RATE = 4;
 // Delay without blocking
 long last;
 
+// Latest light reading
+int light = 0;
+
 // Setup
 void setup() {
   // Serial port
@@ -29,13 +32,14 @@ void setup() {
   // Digital output
   pinMode( LED, OUTPUT );
 
+  // Expose light reading
   // Expose LED control
+  Spark.variable( "light", &light, INT );
   Spark.function( "led", led );
 }
 
 // Loop
 void loop() {
-  int light;
   long now;
 
   // Current time in seconds

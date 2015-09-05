@@ -53,7 +53,7 @@ function doSparkEvent( event ) {
     console.log( 'Photocell: ' + event.data );
     
     // Refresh display
-    gauge.refresh( Math.round( ( event.data / PHOTOCELL_MAX ) * 100 ), 100 );
+    gauge.refresh( Math.round( ( ( PHOTOCELL_MAX - event.data ) / PHOTOCELL_MAX ) * 100 ), 100 );
 }    
     
 function doSparkLogin( error, authentication ) {
