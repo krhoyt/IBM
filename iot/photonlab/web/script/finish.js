@@ -1,6 +1,7 @@
 // Constants
 var EVENT_PHOTOCELL = 'photocell';
 var FUNCTION_LED = 'led';
+var PHOTOCELL_MAX = 3300;
 var SWITCH_OFF = 0;
 var SWITCH_ON = -300;
     
@@ -12,7 +13,7 @@ var touch = false;
     
 // Reference
 var led = null;    
-var photocell = null;
+var gauge = null;
 
 function doSparkCalled( error, data ) {
     // Debug
@@ -50,6 +51,9 @@ function doSparkEvent( event ) {
 
     // Display
     console.log( 'Photocell: ' + event.data );
+    
+    // Refresh display
+    gauge.refresh( Math.round( ( event.data / PHOTOCELL_MAX ) * 100 ), 100 );
 }    
     
 function doSparkLogin( error, authentication ) {
@@ -94,7 +98,15 @@ function doWindowLoad() {
     
     // Quick reference versus repeated lookup
     led = document.querySelector( '.led' );
-    photocell = Gauge( '.photocell', true );
+    gauge = new JustGage( {
+        parentNode: document.querySelector( '.photocell' ),
+        value: 0,
+        min: 0,
+        max: 100,
+        symbol: '%',
+        refreshAnimationTime: 1000,
+        hideMinMax: true
+    } );
     
     // Login to Particle
     spark.login( {

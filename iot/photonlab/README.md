@@ -4,37 +4,44 @@ This workshop will introduce you to IoT using the Particle (formerly Spark) Phot
 
 #Materials
 
-- Particle Photon
-- Breadboard
-- LED
-- Photocell
-- 10k resistor
-- Jumper wires
-- Micro USB cable
+- [Particle](http://particle.io) [Photon](https://store.particle.io/?product=particle-photon) ($19 USD)
+- [Breadboard](https://www.sparkfun.com/products/9567) ($4.95 USD)
+- [LED](https://www.sparkfun.com/products/11121) ($0.50 USD)
+- [Photocell](https://www.sparkfun.com/products/9088) ($1.50 USD)
+- 10k [resistor](https://www.sparkfun.com/products/11508) ($0.05 USD)
+- [Jumper wires](https://www.sparkfun.com/products/8431) ($3.95 USD)
+- [Micro USB cable](https://www.sparkfun.com/products/13244) ($1.95 USD)
+
+*Approximate total cost per student: $32.00 USD*
 
 #Setup
 
 - create particle.io account
-- particle login
+- particle login (login to account)
 - listening mode (setup x3 seconds)
-- particle setup
-* particle setup wifi
-- reset button
-- particle list
-- particle serial list
+- particle setup (attach and wireless)
+- particle setup wifi (may not be needed)
+- reset button (connect to wireless)
+- particle list (confirm cloud setup)
+- particle serial list (confirm local acces)
 
 #Outline
 
-- photon/1-led.ino
-- photon/2-call.ino
-- web/1-connect.html
-- web/2-devices.html
-- web/3-call.html
-- photon/3-photocell.ino
-- photon/4-event.ino
-- web/4-event.html
-- photon/5-remote.ino
-- web/5-remote.html
+- photon/0-serial.ino (find your way around)
+- photon/1-led.ino (digital pin control)
+- photon/2-call.ino (expose cloud function)
+- web/1-connect.html (connect to particle cloud)
+- web/2-devices.html (list particle cloud devices)
+- web/3-call.html (call cloud function)
+- photon/3-photocell.ino (analog pin control)
+- photon/4-variable.ino (expose cloud variable)
+- photon/5-event.ino (publish cloud event)
+- web/4-event.html (subscribe to cloud event)
+- photon/6-remote.ino (device all in one)
+- web/5-remote.html (client all in one)
+- web/6-finish.html (polished client)
+- photon/color.ino (time permitting, expose onboard RGB LED)
+- photon/color.html (time permitting, control onboard RGB LED)
 
 #Links
 

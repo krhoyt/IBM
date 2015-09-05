@@ -11,5 +11,5 @@ app.use( express.static( path.join( __dirname, '..', 'web' ) ) );
 
 // Start server
 var server = app.listen( 3000, function () {
-  console.log( 'Ready.' );
+  console.log( 'Ready on 3000.' );
 } );
