@@ -1,0 +1,32 @@
+body {
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+
+canvas {
+    display: none;
+    position: absolute;
+}
+
+.enclosure {
+    border: solid 1px black;
+    position: absolute;
+    visibility: hidden;
+}
+
+.logo {
+    background-color: #F47D31;
+    height: 75px;
+    left: 10px;
+    position: absolute;
+    visibility: hidden;
+    width: 75px;
+}
+
+.square {
+    border: solid 1px black;
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+}

@@ -1,7 +1,7 @@
 applications:
 - disk_quota: 1024M
-  host: mosca
-  name: Mosca
+  host: foundation
+  name: Foundation
   path: .
   domain: mybluemix.net
   instances: 1

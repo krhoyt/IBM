@@ -9,26 +9,34 @@ var configuration = jsonfile.readFileSync( path.join( __dirname, 'configuration.
 // Connection parameters
 // Format: d:org_id:device_type:device_id
 // URI: org_id.messaging.internetofthings.ibmcloud.com
-var clientId = 'd:asu2l5:Photon:286cb6fb';
+var id = 
+	'd:' + 
+	configuration.organizationId + ':' +
+	configuration.devices[1].deviceType + ':' +
+	configuration.devices[1].deviceId;
 var uri = 
-	configuration.protocol + 
-	configuration.organizationId + '.' + 
-	configuration.iotFoundation + ':' + 
-	configuration.port;
+	'tcp://' + 
+	configuration.uri + ':' +
+	'1883';
+
+// Debug
+console.log( id );
+console.log( uri );
 
 // Counter
 var count = 0; 
 
 // Connect
 var client = mqtt.connect( uri, {
-	clientId: clientId,
+	clientId: id,
 	clean: true,
-	username: configuration.username,
-	password: configuration.authenticationToken
+	username: 'use-token-auth',
+	password: configuration.devices[1].authenticationToken
 } ); 
  
 // Connected
 client.on( 'connect', function() {
+	// Debug
 	console.log( 'Connected.' );
 
 	// Subscribe

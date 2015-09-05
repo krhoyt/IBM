@@ -1,121 +1,49 @@
+<!DOCTYPE html>
 <html>
 <head>
     
-<!-- Paho MQTT -->
-<script src="mqttws31.js"></script>    
+<!-- Mobile -->
+<meta name="viewport" content="initial-scale=1.0, user-scalable=0, width=device-width"/>    
+
+<title>Tic Tac Toe</title>
+
+<!-- Styling -->
+<link href="style/tictactoe.css" rel="stylesheet" type="text/css">    
+
+<!-- UUID -->
+<!-- Unique client identification -->
+<script src="script/uuid.js" type="text/javascript"></script>    
     
 <!-- Application -->
-<script type="text/javascript">
-var CLIENT_PASSWORD = '0X7Jh&p!NYWf_Zfk+1';
-var CLIENT_USER_NAME = 'a-asu2l5-n8nrugtarm';
-var MQTT_CLIENT_ID = 'a:asu2l5:nodejs';
-var MQTT_HOST = 'asu2l5.messaging.internetofthings.ibmcloud.com';
-var MQTT_PORT = 1883;
-var TOPIC_PUBLISH = 'iot-2/type/Photon/id/286cb6fb/cmd/testing/fmt/json';
-var TOPIC_SUBSCRIBE = 'iot-2/type/Photon/id/286cb6fb/evt/testing/fmt/json';
-    
-// Application
-var client = null;
-var count = 0;
-var interval = null;
-
-// Connected to broker
-// Subscribe for messages
-function doClientSuccess( context )
-{
-    // Debug
-    console.log( 'Connected.' );
-    
-    // Handle messages
-    client.onMessageArrived = doMessageArrived;
-    
-    // Subscribe
-    client.subscribe( 
-        TOPIC_SUBSCRIBE,
-        {onSuccess: doSubscribeSuccess}
-    );
-}
- 
-// Message arrive from broker
-// Display to user
-function doMessageArrived( message )
-{
-    var data = null;
-    
-    // Parse data
-    // Display
-    data = JSON.parse( message.payloadString );
-    console.log( data.d.source + ': ' + data.d.count );
-}
-    
-// Publish a new message
-function doSend()
-{
-    var data = null;
-    var message = null;
-    
-    // Increment counter
-    count = count + 1;
-    
-    // Data object
-    // Per IoT Foundation documentation
-    data = {
-        d: {
-            source: 'browser',
-            count: count
-        }
-    };
-    
-    // Assemble message
-    // Set destination topic
-    message = new Paho.MQTT.Message( JSON.stringify( data ) );
-    message.destinationName = TOPIC_PUBLISH;
-    
-    // Send
-    client.send( message );
-}
-    
-// Subscribed to topic
-function doSubscribeSuccess( context, granted ) 
-{
-    // Debug
-    console.log( 'Subscribed.' );
-    
-    // Regular publish
-    interval = setInterval( doSend, 1000 );
-}
-    
-// Document loaded
-// Connect to server
-function doWindowLoad()
-{
-    // Debug
-    console.log( 'Load.' );
-    
-    // Client
-    client = new Paho.MQTT.Client(
-        MQTT_HOST, 
-        MQTT_PORT, 
-        MQTT_CLIENT_ID
-    );
-
-    // Connect
-    client.connect( {
-        onSuccess: doClientSuccess,
-        userName: CLIENT_USER_NAME,
-        password: CLIENT_PASSWORD,
-        cleanSession: true
-    } );    
-}
-    
-// Go    
-window.addEventListener( 'load', doWindowLoad );
-</script>
+<script src="script/tictactoe.js" type="text/javascript"></script>
 
 </head>
 <body>
 
-<!-- Empty -->    
+<!-- Enclosure representation -->
+<!-- One square for each RGB LED -->
+<!-- Data attribute indicates mapping to physical box -->
+<div class="enclosure">
+    <div class="square" data-index="7"></div>
+    <div class="square" data-index="8"></div>
+    <div class="square" data-index="9"></div>
+    <div class="square" data-index="6"></div>
+    <div class="square" data-index="5"></div>
+    <div class="square" data-index="4"></div>
+    <div class="square" data-index="1"></div>
+    <div class="square" data-index="2"></div>
+    <div class="square" data-index="3"></div>
+</div>
+
+<!-- Using canvas for color picker -->
+<canvas class="picker"></canvas>
+
+<!-- IBM -->
+<a href="http://bluemix.net" target="_blank">
+    <div class="logo">
+        <img src="ibm.svg" width="75" height="75">
+    </div>
+</a>
     
 </body>
 </html>
