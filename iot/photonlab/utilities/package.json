@@ -1,7 +1,8 @@
 {
   "author": "IBM",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "serialport": "^1.7.4"
   },
   "scripts": {
     "start": "node app.js"

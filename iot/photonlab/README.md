@@ -12,6 +12,17 @@ This workshop will introduce you to IoT using the Particle (formerly Spark) Phot
 - Jumper wires
 - Micro USB cable
 
+#Setup
+
+- create particle.io account
+- particle login
+- listening mode (setup x3 seconds)
+- particle setup
+* particle setup wifi
+- reset button
+- particle list
+- particle serial list
+
 #Outline
 
 - photon/1-led.ino
@@ -24,3 +35,11 @@ This workshop will introduce you to IoT using the Particle (formerly Spark) Phot
 - web/4-event.html
 - photon/5-remote.ino
 - web/5-remote.html
+
+#Links
+
+- [Connecting Over USB](https://docs.particle.io/guide/getting-started/connect/photon/)
+- [Photon Reference](https://docs.particle.io/reference/firmware/photon/)
+- [Device Modes](https://docs.particle.io/guide/getting-started/modes/photon/)
+- [Command Line Reference](https://docs.particle.io/reference/cli/)
+- [Hackathon Guide](https://docs.particle.io/guide/tools-and-features/hackathon/)
