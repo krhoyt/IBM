@@ -599,7 +599,7 @@ function do_window_load()
   // Client side library used
   // No server needed
   qrcode = new QRCode( 'qrcode', {
-    text: 'http://sockets.mybluemix.net/controller.html?user=' + user,
+    text: 'http://sockets.mybluemix.net/tetris/controller.html?user=' + user,
     width: 300,
     height: 300,
     correctLevel: QRCode.CorrectLevel.M
