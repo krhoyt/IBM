@@ -68,6 +68,9 @@ This workshop will introduce you to IoT using the Particle (formerly Spark) Phot
 - web/6-finish.html (polished client)
 - photon/color.ino (time permitting, expose onboard RGB LED)
 - photon/color.html (time permitting, control onboard RGB LED)
+- server/app.js (time permitting, Node.js server)
+- photon/http.ino (time permitting, HTTP POST)
+- server/public/photon.js (time permitting, WebSocket)
 
 #Links
 
@@ -76,3 +79,5 @@ This workshop will introduce you to IoT using the Particle (formerly Spark) Phot
 - [Device Modes](https://docs.particle.io/guide/getting-started/modes/photon/)
 - [Command Line Reference](https://docs.particle.io/reference/cli/)
 - [Hackathon Guide](https://docs.particle.io/guide/tools-and-features/hackathon/)
+- [Photon Pin Markings](https://docs.particle.io/datasheets/photon-datasheet/#pin-markings)
+- [Photon Pin Out Diagrams](https://docs.particle.io/datasheets/photon-datasheet/#pin-out-diagrams)
