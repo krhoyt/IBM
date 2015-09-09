@@ -9,8 +9,12 @@ var path = require( 'path' );
 var ws = require( 'ws' );
 
 // Constant
+var BARCODE_REMOVE = 'barcode_remove';
+var BARCODE_SHOW = 'barcode_show';
+var BUILDINGS_VALUE = 'buildings';
 var CHAT_CREATE = 'create_chat';
 var CHAT_READ_ALL = 'read_all_chat';
+var PETROLPAL_VALUE = 'petropal';
 var PHOTOCELL_VALUE = 'photocell';
 var TETRIS_DOWN = 'tetris_down';
 var TETRIS_JOIN = 'tetris_join';
@@ -131,6 +135,34 @@ socket.on( 'connection', function connection( connection ) {
                 }         
                 
                 break;                
+                
+            // PetrolPal
+            case PETROLPAL_VALUE:
+                // Distribute
+                for( var c = 0; c < socket.clients.length; c++ ) {
+                    socket.clients[c].send( message );
+                }         
+                
+                break;     
+                
+            // Barcode
+            case BARCODE_REMOVE:
+            case BARCODE_SHOW:
+                // Distribute
+                for( var c = 0; c < socket.clients.length; c++ ) {
+                    socket.clients[c].send( message );
+                }         
+                
+                break;                     
+                
+            // Buildings
+            case BUILDINGS_VALUE:
+                // Distribute
+                for( var c = 0; c < socket.clients.length; c++ ) {
+                    socket.clients[c].send( message );
+                }         
+                
+                break;                                     
         }
     } );
     

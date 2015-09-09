@@ -63,7 +63,7 @@ socket.on( 'connection', function connection( connection ) {
                 client = this;
                 
                 // Find and send back to requesting client
-                Chat.find( {}, function( error, data ) {                    
+                Chat.find( {}, null, {sort: {createdAt: 1}}, function( error, data ) {                    
                     client.send( JSON.stringify( {
                         action: body.action,
                         data: data

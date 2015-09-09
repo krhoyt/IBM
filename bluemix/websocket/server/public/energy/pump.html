@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+<meta charset="UTF-8">
+
+<title>Petrol Pump</title>
+
+<!-- Google Fonts -->
+<!-- Righteous, 400 -->
+<!-- Source Sans Pro, 300, 400, 700 -->
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700|Righteous" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+@font-face {
+    font-family: 'dotmatrix';
+    src: url( 'fonts/dotmatrix/dotmatrix-webfont.eot' );
+    src: url( 'fonts/dotmatrix/dotmatrix-webfont.eot?#iefix' )            format( 'embedded-opentype' ),
+         url( 'fonts/dotmatrix/dotmatrix-webfont.woff2' )                 format( 'woff2' ),
+         url( 'fonts/dotmatrix/dotmatrix-webfont.woff' )                  format( 'woff' ),
+         url( 'fonts/dotmatrix/dotmatrix-webfont.ttf' )                   format( 'truetype' ),
+         url( 'fonts/dotmatrix/dotmatrix-webfont.svg#dot_matrixregular' ) format( 'svg' );
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: black;
+    margin: 0;
+    padding: 0;
+}
+
+.locations {
+    bottom: 0;
+    left: -320px;
+    position: absolute;
+    top: 0;
+    width: 360px;
+}
+
+.locations > .list {
+    background-color: rgba( 255, 255, 255, 0.90 );
+    border-right: solid 1px #a8a8a7;
+    border-top: 1px solid #a8a8a7;
+    bottom: 0;
+    top: 265px;
+    left: 0;
+    overflow: scroll;
+    position: absolute;
+    right: 40px;
+}
+
+.locations > .list > .item {
+    border-top: 1px solid #a8a8a7;
+    cursor: default;
+    height: 75px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.locations > .list > .item:first-of-type {
+    border-top: none;
+}
+
+.locations > .list > .item > .station {
+    float: left;
+    margin-left: 15px;
+    margin-top: 11px;
+}
+
+.locations > .list > .item > .station > p:first-of-type {
+    color: black;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.5em;
+    margin-bottom: 0;
+    margin-top: 0;
+    max-width: 185px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.locations > .list > .item > .station > p:last-of-type {
+    color: darkgray;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1em;
+    font-weight: 300;
+    margin-bottom: 0;
+    margin-top: 0;
+    max-width: 185px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.locations > .list > .item > .price {
+    float: right;
+    margin-right: 15px;
+    margin-top: 11px;
+}
+
+.locations > .list > .item > .price > p:first-of-type {
+    color: #3b6e8f;
+    /* color: orange; */
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.5em;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-align: right;
+    width: 92px;
+}
+
+.locations > .list > .item > .price > p:last-of-type {
+    color: darkgray;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1em;
+    font-weight: 300;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-align: right;
+    width: 92px;
+}
+
+.locations > .map {
+    border-right: solid 1px #a8a8a7;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 40px;
+    top: 0;
+}
+
+.locations > .tab {
+    background-color: rgba( 255, 255, 255, 0.40 );
+    border-bottom: solid 1px rgba( 255, 255, 255, 0.60 );
+    border-right: solid 1px rgba( 255, 255, 255, 0.60 );
+    border-top: solid 1px rgba( 255, 255, 255, 0.60 );
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    cursor: default;
+    height: 100px;
+    position: absolute;
+    right: 0;
+    top: 80px;
+    user-select: none;
+    -webkit-user-select: none;
+    width: 40px;
+}
+
+.locations > .tab > p {
+    color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+    line-height: 40px;
+    margin-bottom: 0;
+    margin-top: -20px;
+    padding-bottom: 0;
+    padding-top: 0;
+    -webkit-transform-origin: left bottom;
+    transform-origin: left bottom;
+    -webkit-transform: rotate( 90deg );
+    transform: rotate( 90deg );
+}
+
+.marker {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 74px;
+    width: 63px;
+}
+
+.marker_empty {
+    background-image: url( 'img/marker.empty.svg' );
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 24px;
+    width: 20px;
+}
+
+.pump {
+    background-image: url( 'img/steel.sheet.jpg' );
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.pump > .controls {
+    margin: auto;
+    margin-top: 15px;
+    width: 865px;
+}
+
+.pump > .controls > .pad {
+    background-color: #3a3a3a;
+    border: solid 1px black;
+    border-radius: 6px;
+    box-shadow: inset 0 0 2px #000000;
+    float: right;
+    height: 290px;
+    width: 425px;
+}
+
+.pump > .controls > .pad > div:first-of-type {
+    background-color: #6b6b6d;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.pump > .controls > .pad > div:nth-of-type( 4 ) {
+    background-color: red;
+}
+
+.pump > .controls > .pad > div:nth-of-type( 6 ) {
+    margin-left: 10px;
+}
+
+.pump > .controls > .pad > div:nth-of-type( 5 ) {
+    visibility: hidden;
+}
+
+.pump > .controls > .pad > div:nth-of-type( 9 ) {
+    visibility: hidden;
+}
+
+.pump > .controls > .pad > div:nth-of-type( 10 ) {
+    visibility: hidden;
+}
+
+.pump > .controls > .pad > div:nth-of-type( 11 ) {
+    margin-left: 10px;
+}
+
+.pump > .controls > .pad > div:nth-of-type( 16 ) {
+    margin-left: 10px;
+}
+
+.pump > .controls > .pad > div {
+    background-color: #6b6b6d;
+    cursor: default;
+    float: left;
+    height: 50px;
+    margin-right: 10px;
+    margin-top: 10px;
+    padding-top: 10px;
+    text-transform: capitalize;
+    user-select: none;
+    -webkit-user-select: none;
+    width: 73px;
+}
+
+.pump > .controls > .pad > div.caution {
+    background-image: url( 'img/caution.svg' );
+    background-position: top;
+    background-repeat: repeat-x;
+    background-size: 20px 20px;
+    height: 40px;
+    padding-top: 20px;
+}
+
+.pump > .controls > .pad > div.helpcancel {
+    background-color: red;
+    height: 60px;
+    padding-top: 0;
+}
+
+.pump > .controls > .pad > div.yesno {
+    background-color: yellow;
+    height: 60px;
+    padding-top: 0;
+}
+
+.pump > .controls > .pad > div.zero {
+    height: 60px;
+    padding-top: 0;
+}
+
+.pump > .controls > .pad > div > p {
+    color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-align: center;
+}
+
+.pump > .controls > .pad > div > p.caution {
+    line-height: 40px;
+}
+
+.pump > .controls > .pad > div > p.helpcancel {
+    background-color: red;
+    color: white;
+    font-size: 1.4em;
+    line-height: 60px;
+}
+
+.pump > .controls > .pad > div > p.yesno {
+    background-color: yellow;
+    color: black;
+    font-size: 1.4em;
+    line-height: 60px;
+}
+
+.pump > .controls > .pad > div > p.zero {
+    line-height: 60px;
+}
+
+.pump > .controls > .screen {
+    background-color: #c8af55;
+    border-radius: 6px;
+    color: black;
+    float: left;
+    font-family: 'dotmatrix', monospace;
+    font-size: 2em;
+    height: 262px;
+    overflow: hidden;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    position: relative;
+    text-align: center;
+    width: 425px;
+}
+
+.pump > .controls > .screen > div {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border: solid 1px black;
+    box-shadow: inset 0 0 5px black;
+    border-radius: 6px;
+}
+
+.pump > .controls > .screen > img {
+    position: absolute;
+    left: 130px;
+    visibility: hidden;
+    /* top: 295px; */
+    /* top: -270px; */
+}
+
+.pump > .controls > .screen > p {
+    left: 0;
+    margin-top: 0;
+    position: absolute;
+    right: 0;
+    top: 15px;
+}
+
+.pump > .quality {
+    height: 340px;
+    margin: auto;
+    margin-top: 320px;
+    width: 865px;
+}
+
+.pump > .quality > .gauge {
+    float: left;
+    height: 340px;
+    margin-left: 15px;
+    width: 205px;
+}
+
+.pump > .quality > .gauge > .reading {
+    background-color: #c8af55;
+    border: solid 1px black;
+    border-radius: 6px;
+    box-shadow: inset 0 0 5px #000000;
+    color: black;
+    font-family: 'dotmatrix', monospace;
+    font-size: 2em;
+    padding-bottom: 10px;
+    padding-top: 40px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.pump > .quality > .gauge > .reading.selected {
+    background-image: url( "img/selection.svg" );
+    background-size: 175px 15px;
+    background-position: center 15px;
+    background-repeat: no-repeat;
+}
+
+.pump > .quality .gauge:first-of-type {
+    margin-left: 0;
+}
+
+.pump > .quality > .gauge > .category {
+    color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 2em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.pump > .quality > .gauge > button {
+    background-color: yellow;
+    border: solid 10px black;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px rgba( 255, 255, 255, 0.30 );
+    font-family: 'Source Sans Pro', sans-serif;
+    height: 185px;
+    width: 100%;
+}
+
+.pump > .quality > .gauge > button:focus {
+    outline: none;
+}
+
+.pump > .quality > .gauge:last-of-type > button {
+    background-color: green;
+}
+
+.pump > .quality > .gauge > button > p:first-of-type {
+    font-size: 8em;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.pump > .quality > .gauge:last-of-type > button > p:first-of-type {
+    font-size: 5em;
+    line-height: 2em;
+}
+
+.pump > .quality > .gauge > button > p:last-of-type {
+    font-size: 2em;
+    font-weight: 700;
+    letter-spacing: 1em;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.pump > .quality > .gauge > button > p > span {
+    letter-spacing: 0;
+}
+
+.template {
+    display: none;
+}
+</style>
+
+<!-- Google Maps -->
+<script src="https://maps.googleapis.com/maps/api/js" type="text/javascript"></script>
+
+<!-- Rich Marker -->
+<!-- https://googlemaps.github.io/js-rich-marker/reference.html -->
+<script src="script/rich.marker.js" type="text/javascript"></script>
+
+<!-- GreenSock -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.13.2/TweenMax.min.js" type="text/javascript"></script>
+
+<!-- Emulation -->
+<script src="http://wallet.kaazing.com/lib/client/javascript/WebSocket.js" type="text/javascript"></script>
+
+<!-- JMS -->
+<script src="http://wallet.kaazing.com/lib/client/javascript/jms/JmsClient.js" type="text/javascript"></script>
+
+<!-- Application constants -->
+<script src="script/constants.js" type="text/javascript"></script>
+
+<!-- Brand constants -->
+<script src="script/brands.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+// Kaazing
+var concurrent = null;
+var connection = null;
+var consumer = null;
+var future = null;
+var producer = null;
+var sending = null;
+var session = null;
+var topic = null;
+
+// Application
+var gallons = null;
+var grade = null;
+var latitude = null;
+var longitude = null;
+var map = null;
+var map_detail_marker = null;
+var petrol = null;
+var petrol_selected = null;
+var pump = null;
+var touch = null;
+
+function broadcast( message )
+{
+    // Debug
+    console.log( "Broadcast: " + message.action );
+
+    // Initialize concurrency if needed
+    if( sending == null )
+    {
+        concurrent = [];
+        sending = false;
+    }
+
+    // Do not allow concurrent sending
+    if( !sending )
+    {
+        sending = true;
+
+        producer.send(
+            session.createTextMessage( JSON.stringify( message ) ),
+            doMessageSent
+        );
+    } else {
+        // Queue for retry later
+        concurrent.push( message );
+    }
+}
+
+function showPosition( position )
+{
+    var center_place = null;
+    var latlng = null;
+    var list = null;
+    var locations = null;
+    var map_area = null;
+    var marker = null;
+    var new_place = null;
+    var script = null;
+
+    // Store location
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+
+    // For use in Google Maps
+    latlng = new google.maps.LatLng( latitude, longitude );
+
+    // Current location
+    if( POSITION_OWN == true )
+    {
+        marker = new google.maps.Marker( {
+            position: latlng,
+            map: map
+        } );
+    }
+
+    // Center on current location
+    // Based on screen placement
+    locations = document.querySelector( ".locations" );
+    list = document.querySelector( ".locations > .list" );
+
+    map_area = locations.clientHeight - list.clientHeight;
+    center_place = locations.clientHeight / 2;
+    new_place = center_place - ( map_area / 2 );
+
+    map.setCenter( latlng );
+    map.panBy( 0, new_place );
+
+    // Load station data
+    script = document.createElement( "script" );
+    script.src =
+        PETROL_FEED_URL +
+        latitude + "/" +
+        longitude + "/" +
+        PETROL_FEED_DISTANCE + "/" +
+        PETROL_FEED_TYPE + "/" +
+        PETROL_FEED_SORT + "/" +
+        PETROL_FEED_API_KEY + ".json?callback=" +
+        PETROL_FEED_CALLBACK;
+    document.getElementsByTagName( "head" )[0].appendChild( script );
+}
+
+function stationFind( id )
+{
+    var result = null;
+
+    for( var p = 0; p < petrol.length; p++ )
+    {
+        if( petrol[p].id == id )
+        {
+            result = petrol[p];
+            break;
+        }
+    }
+
+    return result;
+}
+
+function stationGraphic( station )
+{
+    var result = null;
+
+    result = ICON_GENERIC;
+
+    // TODO: Put in alphanumeric order
+    if( station.toLowerCase().indexOf( STATION_7_ELEVEN ) >= 0 )
+    {
+        result = ICON_7_ELEVEN;
+    } else if( station.toLowerCase().indexOf( STATION_CIRCLE_K ) >= 0 ) {
+        result = ICON_CIRCLE_K;
+    } else if( station.toLowerCase().indexOf( STATION_CIRCLE_K ) >= 0 ) {
+        result = ICON_CIRCLE_K;
+    } else if( station.toLowerCase().indexOf( STATION_CONOCO ) >= 0 ) {
+        result = ICON_CONOCO;
+    } else if( station.toLowerCase().indexOf( STATION_LOAF_N_JUG ) >= 0 ) {
+        result = ICON_LOAF_N_JUG;
+    } else if( station.toLowerCase().indexOf( STATION_VALERO ) >= 0 ) {
+        result = ICON_VALERO;
+    } else if( station.toLowerCase().indexOf( STATION_76 ) >= 0 ) {
+        result = ICON_76;
+    } else if( station.toLowerCase().indexOf( STATION_ARCO ) >= 0 ) {
+        result = ICON_ARCO;
+    } else if( station.toLowerCase().indexOf( STATION_BP ) >= 0 ) {
+        result = ICON_BP;
+    } else if( station.toLowerCase().indexOf( STATION_CHEVRON ) >= 0 ) {
+        result = ICON_CHEVRON;
+    } else if( station.toLowerCase().indexOf( STATION_CITGO ) >= 0 ) {
+        result = ICON_CITGO;
+    } else if( station.toLowerCase().indexOf( STATION_COSTCO ) >= 0 ) {
+        result = ICON_COSTCO;
+    } else if( station.toLowerCase().indexOf( STATION_EXXON ) >= 0 ) {
+        result = ICON_EXXON;
+    } else if( station.toLowerCase().indexOf( STATION_MOBIL ) >= 0 ) {
+        result = ICON_MOBIL;
+    } else if( station.toLowerCase().indexOf( STATION_SHELL ) >= 0 ) {
+        result = ICON_SHELL;
+    } else if( station.toLowerCase().indexOf( STATION_TEXACO ) >= 0 ) {
+        result = ICON_TEXACO;
+    }
+
+    return result;
+}
+
+function stationList( json )
+{
+    var item = null;
+    var list = null;
+    var marker = null;
+    var match = null;
+    var price = null;
+    var station = null;
+    var template = null;
+
+    // Store results
+    petrol = json.stations;
+
+    // List
+    list = document.querySelector( ".locations > .list" );
+
+    // Clear previous
+    for( var s = 0; s < list.children.length; s++ )
+    {
+        list.removeChild( list.children[0] );
+    }
+
+    // List line item
+    template = document.querySelector( ".item.template" );
+
+    // Show stations
+    for( var p = 0; p < petrol.length; p++ )
+    {
+        // Get matching logo
+        match = stationGraphic( petrol[p].station );
+
+        // Station location
+        // Big icons for closest
+        if( p > MAP_DISPLAY )
+        {
+            marker = new RichMarker( {
+                position: new google.maps.LatLng( petrol[p].lat, petrol[p].lng ),
+                map: map,
+                draggable: false,
+                flat: true,
+                content: "<div class=\"marker_empty\"></div>"
+            } );
+        } else {
+            marker = new RichMarker( {
+                position: new google.maps.LatLng( petrol[p].lat, petrol[p].lng ),
+                map: map,
+                draggable: false,
+                flat: true,
+                content: "<div class=\"marker\" style=\"background-image: url( '" + match + "' );\"></div>"
+            } );
+        }
+
+        // Line item
+        item = template.cloneNode( true );
+        item.setAttribute( "data-id", petrol[p].id );
+        item.addEventListener( "click", doStationClick );
+        item.classList.remove( "template" );
+
+        // Price and distance
+        price = item.querySelector( ".price" );
+        price.children[0].innerHTML = "$" + petrol[p].reg_price;
+        price.children[1].innerHTML = petrol[p].distance;
+
+        // Location
+        station = item.querySelector( ".station" );
+        station.children[0].innerHTML = petrol[p].station;
+        station.children[1].innerHTML = petrol[p].address;
+
+        list.appendChild( item );
+    }
+}
+
+function doCardSwipeComplete()
+{
+    console.log( "Card has traversed screen." );
+
+    this.style.visibility = "hidden";
+
+    // Kick off a new transaction
+    // nextTransaction();
+}
+
+function doCardSwipeUpdate()
+{
+    var center = null;
+    var message = null;
+    var top = null;
+
+    console.log( "Crossing the screen." );
+
+    // Determine placement
+    // center = Math.round( window.innerHeight / 2 );
+    top = parseInt( this.style.top.substr( this.style.top - 2 ) );
+    console.log( "Top: " + top );
+
+    /*
+    // If at center
+    if( top < center && this.getAttribute( "data-center" ) == "false" )
+    {
+        console.log( "Clear line item at half way point." );
+
+        // Mark as point reached
+        this.setAttribute( "data-center", "true" );
+
+        // Clear register interface
+        clearLineItems();
+    }
+    */
+
+    // If at top but not off screen
+    if( top < 0 && this.getAttribute( "data-edge" ) == "false" )
+    {
+        console.log( "Tell wallet card was charged." );
+
+        // Mark as point reached
+        this.setAttribute( "data-edge", "true" );
+
+        // Construct message
+        message = {
+            action: "authorized"
+        };
+
+        // Send message return trip
+        broadcast( message );
+    }
+}
+
+function doConnected()
+{
+    // Connection
+    connection = future.getValue();
+
+    // Start broker session
+    connection.start( doSessionStart );
+}
+
+function doGradeClick()
+{
+    var grades = null;
+    var screen = null;
+
+    // Prevent default focus
+    event.preventDefault();
+
+    grades = document.querySelectorAll( "button" );
+
+    for( var g = 0; g < grades.length; g++ )
+    {
+        if( grades[g] != this )
+        {
+            grades[g].parentElement.children[1].classList.remove( "selected" );
+        }
+    }
+
+    this.parentElement.children[1].classList.add( "selected" );
+    grade = parseFloat( this.parentElement.children[1].innerHTML );
+
+    // Setup screen to begin fueling
+    screen = document.querySelector( ".pump > .controls > .screen > p" );
+    screen.innerHTML = "Purchase: 0.00<br>Gallons: 0.00<br><br>Thank you!";
+
+    gallons = 0;
+
+    // Remove focus
+    this.blur();
+}
+
+function doMessageArrived( message )
+{
+    var card = null;
+    var data = null;
+    var screen = null;
+
+    data = JSON.parse( message.getText() );
+
+    if( data.action == "handshake" )
+    {
+        console.log( "Handshake." );
+
+        screen = document.querySelector( ".pump > .controls > .screen > p" );
+        screen.innerHTML = "It looks like you will be using your device today.<br><br>Please select a payment method.";
+    } else if( data.action == "payment" ) {
+        console.log( "Payment." );
+
+        screen = document.querySelector( ".pump > .controls > .screen > p" );
+        screen.innerHTML = "Thank you for paying with your " + data.company + " card today.<br><br>Select fuel grade below.";
+
+        // Ready for pumping
+        window.document.addEventListener( "keydown", doPumpStart );
+        window.document.addEventListener( "keyup", doPumpPause );
+    } else if( data.action == "swipe" ) {
+        console.log( "Swipe." );
+
+        card = document.querySelector( ".pump > .controls > .screen > img" );
+        card.style.top = "295px";
+        card.style.visibility = "visible";
+
+        TweenMax.to( card, 3, {
+            top: -270,
+            onComplete: doCardSwipeComplete,
+            onCompleteScope: card,
+            onUpdate: doCardSwipeUpdate,
+            onUpdateScope: card
+        } );
+    }
+}
+
+function doMessageSent()
+{
+    // Debug
+    console.log( "Message sent (" + concurrent.length + " left)." );
+
+    // Not sending any longer
+    sending = false;
+
+    // Check for next messages
+    // Send first-in-first-out
+    if( concurrent.length > 0 )
+    {
+        broadcast( concurrent[0] );
+        concurrent.splice( 0, 1 );
+    }
+}
+
+function doPumpFinish()
+{
+    var grades = null;
+    var screen = null;
+
+    // Back to welcome screen
+    screen = document.querySelector( ".pump > .controls > .screen > p" );
+    screen.innerHTML = "Welcome to pump #" + pump + " at your local " + petrol_selected.station + ".<br><br>Store #" + petrol_selected.id;
+
+    // Remove previous customer selection
+    grades = document.querySelectorAll( "button" );
+
+    for( var g = 0; g < grades.length; g++ )
+    {
+        grades[g].parentElement.children[1].classList.remove( "selected" );
+    }
+}
+
+function doPumpPause( event )
+{
+    var screen = null;
+
+    // Stop normal behavior
+    event.preventDefault();
+
+    // Show latest purchase details
+    screen = document.querySelector( ".pump > .controls > .screen > p" );
+    screen.innerHTML = "Purchase: " + ( gallons * grade ).toFixed( 2 ) + "<br>Gallons: " + gallons.toFixed( 2 ) +  "<br><br>Thank you!";
+}
+
+function doPumpStart( event )
+{
+    var screen = null;
+
+    // Stop normal function
+    event.preventDefault();
+
+    screen = document.querySelector( ".pump > .controls > .screen > p" );
+
+    if( event.keyCode == 32 )
+    {
+        gallons = gallons + 0.10;
+        screen.innerHTML = "Purchase: " + ( gallons * grade ).toFixed( 2 ) + "<br>Gallons: " + gallons.toFixed( 2 ) +  "<br><br>Thank you!";
+
+        broadcast( {
+            action: "pump",
+            gallons: gallons,
+            grade: grade,
+            purchase: gallons * grade
+        } );
+    } else if( event.keyCode == 13 ) {
+        window.document.removeEventListener( "keydown", doPumpStart );
+        window.document.removeEventListener( "keyup", doPumpPause );
+
+        screen.innerHTML = "Transaction complete.<br><br>Have a nice day!";
+
+        setTimeout( doPumpFinish, 3000 );
+    }
+}
+
+function doPumpStop()
+{
+    var list = null;
+
+    list = document.querySelector( ".locations > .list" );
+
+    while( list.children.length > 0 )
+    {
+        list.removeChild( list.children[0] );
+    }
+
+    showPosition( {
+        coords: {
+            latitude: KAAZING_LATITUDE,
+            longitude: KAAZING_LONGITUDE
+        }
+    } );
+}
+
+function doReconnect()
+{
+    // Consumer
+    // Set listener
+    consumer = session.createConsumer( topic );
+    consumer.setMessageListener( doMessageArrived );
+
+    // Producer
+    producer = session.createProducer( topic );
+
+    console.log( "Ready for messaging." );
+}
+
+function doSessionStart()
+{
+    session = connection.createSession( false, Session.AUTO_ACKNOWLEDGE );
+}
+
+function doStationClick()
+{
+    var center_place = null;
+    var details = null;
+    var latlng = null;
+    var map_area = null;
+    var marker = null;
+    var match = null;
+    var new_place = null;
+    var panel = null;
+    var prices = null;
+    var readings = null;
+    var screen = null;
+
+    // Clean up
+    if( map_detail_marker != null )
+    {
+        map_detail_marker.setMap( null );
+        map_detail_marker = null;
+    }
+
+    // Get details
+    petrol_selected = stationFind( parseInt( this.getAttribute( "data-id" ) ) );
+
+    // Center on selected location
+    // Based on screen placement
+    details = document.querySelector( ".locations" );
+    panel = document.querySelector( ".locations > .list" );
+
+    // Location
+    latlng = new google.maps.LatLng( petrol_selected.lat, petrol_selected.lng );
+
+    // Fit in offset viewport
+    map_area = details.clientHeight - panel.clientHeight;
+    center_place = details.clientHeight / 2;
+    new_place = center_place - ( map_area / 2 );
+
+    map.setZoom( 16 );
+    map.setCenter( latlng );
+    map.panBy( 0, new_place );
+
+    // Station logo
+    match = stationGraphic( petrol_selected.station );
+
+    // Station location
+    marker = new RichMarker( {
+        position: latlng,
+        map: map,
+        draggable: false,
+        flat: true,
+        content: "<div class=\"marker\" style=\"background-image: url( '" + match + "' );\"></div>"
+    } );
+
+    // Generate random pump number
+    pump = Math.ceil( Math.random() * PUMP_COUNT );
+
+    // Show landing message
+    screen = document.querySelector( ".pump > .controls > .screen > p" );
+    screen.innerHTML = "Welcome to pump #" + pump + " at your local " + petrol_selected.station + ".<br><br>Store #" + petrol_selected.id;
+
+    // Display prices
+    readings = document.querySelectorAll( ".quality > .gauge > .reading" );
+
+    readings[0].innerHTML = petrol_selected.reg_price;
+    readings[1].innerHTML = petrol_selected.mid_price;
+    readings[2].innerHTML = petrol_selected.pre_price;
+    readings[3].innerHTML = petrol_selected.diesel_price;
+
+    // Gateway
+    if( topic != null )
+    {
+        topic = session.createTopic( KAAZING_TOPIC + "." + petrol_selected.id + "." + pump );
+
+        producer.close();
+        consumer.close( doReconnect );
+    } else {
+        topic = session.createTopic( KAAZING_TOPIC + "." + petrol_selected.id + "." + pump );
+
+        doReconnect();
+    }
+
+    // Close station list panel
+    doTabClick();
+}
+
+function doTabClick()
+{
+    var locations = null;
+
+    locations = document.querySelector( ".locations" );
+
+    if( locations.style.left == "0px" )
+    {
+        TweenMax.to( locations, 0.50, {
+            left: -320
+        } );
+    } else {
+        TweenMax.to( locations, 0.50, {
+            left: 0
+        } );
+    }
+}
+
+function doWindowLoad()
+{
+    var factory = null;
+    var grades = null;
+    var stop = null;
+    var tab = null;
+
+    // Gateway
+    factory = new JmsConnectionFactory( KAAZING_GATEWAY );
+
+    // Connect to server
+    future = factory.createConnection(
+        null,           // User name
+        null,           // Password
+        doConnected     // Callback
+    );
+
+    // Touch support
+    touch = ( 'ontouchstart' in document.documentElement ) ? true : false;
+
+    // Force location at Kaazing HQ
+    stop = document.querySelector( ".pump > .controls > .pad > div:nth-of-type( 4 )" );
+    stop.addEventListener( touch ? "touchstart" : "click", doPumpStop );
+
+    // Tab control
+    tab = document.querySelector( ".locations > .tab" );
+    tab.addEventListener( touch ? "touchstart" : "click", doTabClick );
+
+    // Grade selection
+    grades = document.querySelectorAll( "button" );
+
+    for( var g = 0; g < grades.length; g++ )
+    {
+        grades[g].addEventListener( touch ? "touchstart" : "click", doGradeClick );
+    }
+
+    // Map for list
+    map = new google.maps.Map(
+        document.querySelector( ".locations > .map" ),
+        {
+            center: {
+                lat: KAAZING_LATITUDE,
+                lng: KAAZING_LONGITUDE
+            },
+            mapTypeControl: false,
+            streetViewControl: false,
+            zoom: 12,
+            zoomControl: false
+        }
+    );
+
+    // Get location
+    navigator.geolocation.getCurrentPosition( showPosition );
+}
+
+window.addEventListener( "load", doWindowLoad );
+</script>
+
+</head>
+<body>
+
+<!-- Pump interface -->
+<div class="pump">
+    <div class="controls">
+        <div class="screen">
+            <p>Before showing this demo, please select a gas station from the list on the left (Locations tab).<br><br>Use a static geolocation by clicking on the "PUMP STOP" button.</p>
+            <img src="img/card.svg" height="265" data-edge="false">
+            <div></div>
+        </div>
+        <div class="pad">
+            <div>
+                <p>QZ</p>
+                <p>1</p>
+            </div>
+            <div>
+                <p>ABC</p>
+                <p>2</p>
+            </div>
+            <div>
+                <p>DEF</p>
+                <p>2</p>
+            </div>
+            <div>
+                <p>PUMP</p>
+                <p>STOP</p>
+            </div>
+            <div>
+                <p>Blank</p>
+                <p>Blank</p>
+            </div>
+            <div>
+                <p>GHI</p>
+                <p>4</p>
+            </div>
+            <div>
+                <p>JKL</p>
+                <p>5</p>
+            </div>
+            <div>
+                <p>MNO</p>
+                <p>6</p>
+            </div>
+            <div>
+                <p>Blank</p>
+                <p>Blank</p>
+            </div>
+            <div>
+                <p>Blank</p>
+                <p>Blank</p>
+            </div>
+            <div>
+                <p>PRS</p>
+                <p>7</p>
+            </div>
+            <div>
+                <p>TUV</p>
+                <p>8</p>
+            </div>
+            <div>
+                <p>WXY</p>
+                <p>9</p>
+            </div>
+            <div class="yesno">
+                <p class="yesno">NO</p>
+            </div>
+            <div class="yesno">
+                <p class="yesno">YES</p>
+            </div>
+            <div class="caution">
+                <p class="caution">CLEAR</p>
+            </div>
+            <div class="zero">
+                <p class="zero">0</p>
+            </div>
+            <div class="caution">
+                <p class="caution">ENTER</p>
+            </div>
+            <div class="helpcancel">
+                <p class="helpcancel">HELP</p>
+            </div>
+            <div class="helpcancel">
+                <p class="helpcancel">CANCEL</p>
+            </div>
+        </div>
+    </div>
+    <div class="quality">
+        <div class="gauge">
+            <div class="category">Regular</div>
+            <div class="reading">&nbsp;</div>
+            <button>
+                <p>87</p>
+                <p>PRES<span>S</span></p>
+            </button>
+        </div>
+        <div class="gauge">
+            <div class="category">Plus</div>
+            <div class="reading">&nbsp;</div>
+            <button>
+                <p>89</p>
+                <p>PRES<span>S</span></p>
+            </button>
+        </div>
+        <div class="gauge">
+            <div class="category">Premium</div>
+            <div class="reading">&nbsp;</div>
+            <button>
+                <p>91</p>
+                <p>PRES<span>S</span></p>
+            </button>
+        </div>
+        <div class="gauge">
+            <div class="category">Diesel</div>
+            <div class="reading">&nbsp;</div>
+            <button>
+                <p>DIESEL</p>
+                <p>PRES<span>S</span></p>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Location list -->
+<div class="locations">
+    <div class="map"></div>
+    <div class="list"></div>
+    <div class="tab">
+        <p>Locations</p>
+    </div>
+</div>
+
+<!-- Templates -->
+<div class="item template">
+    <div class="price">
+        <p>$9.99</p>
+        <p>0.25km</p>
+    </div>
+    <div class="station">
+        <p>Hoyt House</p>
+        <p>16220 Martingale Drive</p>
+    </div>
+</div>
+
+</body>
+</html>
