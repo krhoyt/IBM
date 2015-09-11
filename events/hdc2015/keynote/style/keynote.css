@@ -1,0 +1,32 @@
+body {
+    background-color: #dddedd;
+    font-family: 'Roboto', sans-serif;    
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+    
+.controls {
+    height: 300px;
+    overflow: hidden;
+    position: absolute;
+    visibility: hidden;
+    width: 300px;
+}
+    
+.led {
+    background-image: url( ../img/switch.png );
+    background-position: 0;
+    background-repeat: no-repeat;
+    height: 135px;
+    position: absolute;
+    width: 300px;
+}
+    
+.photocell {
+    height: 300px;
+    left: -45px;
+    position: absolute;
+    top: 50px;
+    width: 390px;    
+}
