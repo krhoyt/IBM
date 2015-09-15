@@ -16,7 +16,6 @@ var ARDUINO_PORT = '/dev/cu.usbmodem1411';
 SerialPort.list( function( err, ports ) {
 	ports.forEach( function(port) {
 		console.log( port.comName )
-		console.log( port.manufacturer );
     } );
 } );
 
@@ -34,7 +33,7 @@ var light = null;
 // You may want to adjust to fit your needs
 serial.on( 'data', function( data ) {
 	// Send to console for debugging
-	console.log( data );
+	// console.log( data );
 	
 	// Alternative to sub-second delivery
 	// Store off for slower delivery
@@ -80,7 +79,7 @@ socket.on( 'request', function( request ) {
 	// Send messages to the Arduino	
 	connection.on( 'message', function( message ) {
 		serial.write( message.utf8Data );
-		console.log( message.utf8Data );
+		// console.log( message.utf8Data );
 	} );
 
 	// Close the connection

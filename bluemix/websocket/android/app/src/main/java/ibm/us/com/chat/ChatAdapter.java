@@ -1,6 +1,7 @@
 package ibm.us.com.chat;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,17 +27,32 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
         TextView        label;
         View            row;
 
-        // Layout access
-        inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        // Reuse rows if possible
+        if(convert == null) {
+            // Layout access
+            inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        // Get row layout
-        row = inflater.inflate(R.layout.chat_row, parent, false);
+            // Get row layout
+            row = inflater.inflate(R.layout.chat_row, parent, false);
+        } else {
+            // Use existing
+            row = convert;
+        }
 
         // Get label
         label = (TextView)row.findViewById(R.id.text_content);
 
         // Set the text
-        label.setText(items.get(position).getContent());
+        label.setText(items.get(position).message);
+
+        // Set the color
+        label.setTextColor(
+            Color.rgb(
+                items.get(position).red,
+                items.get(position).green,
+                items.get(position).blue
+            )
+        );
 
         // Return row
         return row;
