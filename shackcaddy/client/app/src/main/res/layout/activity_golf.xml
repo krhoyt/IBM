@@ -1,0 +1,143 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:parallax="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GolfActivity">
+
+    <com.nvanbenschoten.motion.ParallaxImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        parallax:motionTiltSensitivity="2.5"
+        android:id="@+id/image_background"
+        android:layout_gravity="center"
+        android:src="@drawable/golf_course" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/image_title"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/logo"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp" />
+
+    <ImageView
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:id="@+id/image_ball"
+        android:layout_gravity="center_horizontal|bottom"
+        android:src="@drawable/golf_ball"
+        android:scaleType="fitCenter"
+        android:layout_marginBottom="60dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="130dp"
+        android:background="@drawable/weather_circle"
+        android:gravity="center_vertical"
+        android:id="@+id/layout_current"
+        android:visibility="invisible">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/image_icon"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="71"
+            android:id="@+id/text_temperature"
+            android:textColor="#1e4580"
+            android:textSize="56sp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="-4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Partly Cloudy"
+            android:id="@+id/text_phrase"
+            android:textSize="24sp"
+            android:textColor="#1e4580"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="-4dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="86"
+                android:id="@+id/text_maximum"
+                android:textColor="#1e4580"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/"
+                android:id="@+id/text_slash"
+                android:textColor="#1e4580"
+                android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="57"
+                android:id="@+id/text_minimum"
+                android:textSize="17sp"
+                android:textColor="#1e4580" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="60dp"
+        android:id="@+id/layout_transcript"
+        android:layout_marginTop="173dp"
+        android:visibility="invisible">
+
+        <ImageView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:id="@+id/image_gopher"
+            android:src="@drawable/gopher"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Licensed to kill gophers by the government of the United Nations. A man, free to kill gophers at will."
+            android:id="@+id/text_transcript"
+            android:layout_marginLeft="8dp"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:textColor="#1e4580"
+            android:background="@drawable/gopher_transcript"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</FrameLayout>
