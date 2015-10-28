@@ -7,7 +7,9 @@ applications:
   host: shackcaddy
   disk_quota: 1024M
   services:
-  - Shackcaddy-cloudantNoSQLDB
-  - Shackcaddy-imfpush
-  - Shackcaddy-AdvancedMobileAccess
+  - Shack-Cloudant
+  - Shack-Weather
+  - Shack-MCA
+  - Shack-STT
+  - Shack-TTS
   command: node app.js

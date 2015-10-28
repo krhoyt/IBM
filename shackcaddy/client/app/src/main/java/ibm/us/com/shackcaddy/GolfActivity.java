@@ -151,11 +151,19 @@ public class GolfActivity extends AppCompatActivity {
 
                 bundle = new Bundle();
                 bundle.putString("action", "current");
-                bundle.putString("icon", observed.icon);
                 bundle.putInt("temperature", observed.temperature);
-                bundle.putString("phrase", observed.phrase);
+                bundle.putString("icon", observed.icon);
                 bundle.putInt("maximum", observed.maximum);
+                bundle.putString("phrase", observed.phrase);
                 bundle.putInt("minimum", observed.minimum);
+                bundle.putString("direction", observed.windCardinal);
+                bundle.putInt("speed", observed.windSpeed);
+                bundle.putInt("index", observed.uvIndex);
+                bundle.putString("uv", observed.uvDescription);
+                bundle.putString("sunrise", observed.sunrise);
+                bundle.putString("sunset", observed.sunset);
+                bundle.putString("place", observed.place);
+                bundle.putString("dow", observed.dayOfWeek);
 
                 message = new Message();
                 message.setData(bundle);
@@ -308,6 +316,11 @@ public class GolfActivity extends AppCompatActivity {
                 TextView            txtPhrase;
                 TextView            txtMaximum;
                 TextView            txtMinimum;
+                TextView            txtDirection;
+                TextView            txtSpeed;
+                TextView            txtSunrise;
+                TextView            txtSunset;
+                TextView            txtUv;
 
                 bundle = message.getData();
 
@@ -352,7 +365,12 @@ public class GolfActivity extends AppCompatActivity {
                         txtPhrase = (TextView)findViewById(R.id.text_phrase);
                         txtPhrase.setText(bundle.getString("phrase"));
 
-                        concatenation = bundle.getInt("maximum") + getString(R.string.degrees);
+                        if(bundle.getInt("maximum") == 9999) {
+                            concatenation = "--";
+                        } else {
+                            concatenation = bundle.getInt("maximum") + getString(R.string.degrees);
+                        }
+
                         txtMaximum = (TextView)findViewById(R.id.text_maximum);
                         txtMaximum.setText(concatenation);
 
@@ -360,9 +378,42 @@ public class GolfActivity extends AppCompatActivity {
                         txtMinimum = (TextView)findViewById(R.id.text_minimum);
                         txtMinimum.setText(concatenation);
 
+                        txtDirection = (TextView)findViewById(R.id.text_direction);
+                        txtDirection.setText(bundle.getString("direction"));
+
+                        concatenation = bundle.getInt("speed") + " MPH";
+                        txtSpeed = (TextView)findViewById(R.id.text_speed);
+                        txtSpeed.setText(concatenation);
+
+                        joda = DateTime.parse(bundle.getString("sunrise"));
+                        format = DateTimeFormat.forPattern("h:mm");
+                        concatenation = format.print(joda) + " AM";
+                        txtSunrise = (TextView)findViewById(R.id.text_sunrise);
+                        txtSunrise.setText(concatenation);
+
+                        joda = DateTime.parse(bundle.getString("sunset"));
+                        concatenation = format.print(joda) + " PM";
+                        txtSunset = (TextView)findViewById(R.id.text_sunset);
+                        txtSunset.setText(concatenation);
+
+                        concatenation = bundle.getString("uv");
+
+                        if(concatenation.equals("Moderate")) {
+                            concatenation = "Mod";
+                        }
+
+                        concatenation = bundle.getInt("index") + " " + concatenation;
+                        txtUv = (TextView)findViewById(R.id.text_uv);
+                        txtUv.setText(concatenation);
+
                         // Do not show if in the middle of a transcript
                         if(!watson.isRecording()) {
-                            layWeather.setVisibility(View.VISIBLE);
+                            if(layWeather.getVisibility() == View.INVISIBLE) {
+                                AlphaAnimation alpha = new AlphaAnimation(0, 1);
+                                alpha.setDuration(1000);
+                                layWeather.setVisibility(View.VISIBLE);
+                                layWeather.startAnimation(alpha);
+                            }
                         }
 
                         break;
@@ -396,22 +447,22 @@ public class GolfActivity extends AppCompatActivity {
                         txtMinimum = (TextView)findViewById(R.id.text_minimum);
                         txtMinimum.setText(concatenation);
 
-                        TextView txtDirection = (TextView)findViewById(R.id.text_direction);
+                        txtDirection = (TextView)findViewById(R.id.text_direction);
                         txtDirection.setText(bundle.getString("direction"));
 
                         concatenation = bundle.getInt("speed") + " MPH";
-                        TextView txtSpeed = (TextView)findViewById(R.id.text_speed);
+                        txtSpeed = (TextView)findViewById(R.id.text_speed);
                         txtSpeed.setText(concatenation);
 
                         joda = DateTime.parse(bundle.getString("sunrise"));
                         format = DateTimeFormat.forPattern("h:mm");
                         concatenation = format.print(joda) + " AM";
-                        TextView txtSunrise = (TextView)findViewById(R.id.text_sunrise);
+                        txtSunrise = (TextView)findViewById(R.id.text_sunrise);
                         txtSunrise.setText(concatenation);
 
                         joda = DateTime.parse(bundle.getString("sunset"));
                         concatenation = format.print(joda) + " PM";
-                        TextView txtSunset = (TextView)findViewById(R.id.text_sunset);
+                        txtSunset = (TextView)findViewById(R.id.text_sunset);
                         txtSunset.setText(concatenation);
 
                         concatenation = bundle.getString("uv");
@@ -421,7 +472,7 @@ public class GolfActivity extends AppCompatActivity {
                         }
 
                         concatenation = bundle.getInt("index") + " " + concatenation;
-                        TextView txtUv = (TextView)findViewById(R.id.text_uv);
+                        txtUv = (TextView)findViewById(R.id.text_uv);
                         txtUv.setText(concatenation);
 
                         TranslateAnimation gopher = new TranslateAnimation(

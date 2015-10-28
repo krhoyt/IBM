@@ -43,25 +43,51 @@ public class MobileFirst {
         quick.send(new ResponseListener() {
             @Override
             public void onSuccess(Response response) {
-                Forecast    observed;
+                Forecast    results;
+                JSONArray   days;
                 JSONObject  data;
+                JSONObject  weather;
+                JSONObject  forecast;
+                JSONObject  observed;
+                JSONObject  imperial;
+                JSONObject  today;
 
                 try {
                     data = new JSONObject(response.getResponseText());
 
-                    observed = new Forecast();
-                    observed.temperature = data.getInt("temperature");
-                    observed.minimum = data.getInt("minimum");
-                    observed.maximum = data.getInt("maximum");
-                    observed.phrase = data.getString("phrase");
-                    observed.icon =
+                    weather = data.getJSONObject("current");
+                    observed = weather.getJSONObject("observation");
+                    imperial = observed.getJSONObject("imperial");
+
+                    forecast = data.getJSONObject("forecast");
+                    days = forecast.getJSONArray("forecasts");
+                    today = days.getJSONObject(0);
+
+                    results = new Forecast();
+                    results.icon =
                         BMSClient.getInstance().getBluemixAppRoute() +
                         "/public/weathericons/icon" +
-                        data.getInt("icon") +
+                        observed.getInt("icon_code") +
                         ".png";
+                    results.temperature = imperial.getInt("temp");
+                    results.phrase = observed.getString("phrase_12char");
+
+                    if(today.isNull("max_temp")) {
+                        results.maximum = 9999;
+                    } else {
+                        results.maximum = today.getInt("max_temp");
+                    }
+
+                    results.minimum = today.getInt("min_temp");
+                    results.windCardinal = observed.getString("wdir_cardinal");
+                    results.windSpeed = imperial.getInt("wspd");
+                    results.uvIndex = observed.getInt("uv_index");
+                    results.uvDescription = observed.getString("uv_desc");
+                    results.sunrise = observed.getString("sunrise");
+                    results.sunset = observed.getString("sunset");
 
                     for(MobileFirstListener observer:observers) {
-                        observer.onCurrent(observed);
+                        observer.onCurrent(results);
                     }
                 } catch(JSONException jsone) {
                     jsone.printStackTrace();
@@ -105,7 +131,6 @@ public class MobileFirst {
                         daily.place = place;
                         daily.dayOfWeek = current.getString("dow");
                         daily.minimum = current.getInt("min_temp");
-                        daily.narrative = current.getString("narrative");
 
                         if(r > 0) {
                             daily.maximum = current.getInt("max_temp");
@@ -114,8 +139,6 @@ public class MobileFirst {
 
                             day = current.getJSONObject("day");
 
-                            daily.dayAlternate = day.getString("alt_daypart_name");
-                            daily.dayName = day.getString("daypart_name");
                             daily.golfCategory = day.getString("golf_category");
                             daily.golfIndex = day.getInt("golf_index");
                             daily.icon =
@@ -126,10 +149,7 @@ public class MobileFirst {
                             daily.phrase = day.getString("phrase_12char");
                             daily.uvDescription = day.getString("uv_desc");
                             daily.uvIndex = day.getInt("uv_index");
-                            daily.uvRaw = day.getDouble("uv_index_raw");
-                            daily.windDirection = day.getInt("wdir");
                             daily.windCardinal = day.getString("wdir_cardinal");
-                            daily.windPhrase = day.getString("wind_phrase");
                             daily.windSpeed = day.getInt("wspd");
                         }
 

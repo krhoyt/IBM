@@ -168,11 +168,8 @@ app.get( '/papi/weather/quick', passport.authenticate( 'imf-backend-strategy', {
         var latitude = req.query.latitude;
         var longitude = req.query.longitude;
         var result = {
-            icon: 0,
-            temperature: 0,
-            minimum: 0,
-            maximum: 0,
-            phrase: null
+            current: null,
+            forecast: null
         };    
         var url = 
             credentials.url + '/' + 
@@ -183,11 +180,7 @@ app.get( '/papi/weather/quick', passport.authenticate( 'imf-backend-strategy', {
             'units=' + UNITS;             
 
         request( url, function( error, response, body ) {
-            var data = JSON.parse( body );
-
-            result.temperature = data.observation.imperial.temp;
-            result.phrase = data.observation.phrase_12char;
-            result.icon = data.observation.icon_code;            
+            result.current = JSON.parse( body );
 
             url = 
                 credentials.url + '/' + 
@@ -198,11 +191,7 @@ app.get( '/papi/weather/quick', passport.authenticate( 'imf-backend-strategy', {
                 'units=' + UNITS;             
 
             request( url, function( error, response, body ) {
-                var data = JSON.parse( body );
-
-                result.maximum = data.forecasts[0].max_temp;
-                result.minimum = data.forecasts[0].min_temp;
-
+                result.forecast = JSON.parse( body );
                 res.send( 200, JSON.stringify( result ) );
             } );
         } );
