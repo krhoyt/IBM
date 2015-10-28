@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
 }
 
 dependencies {
@@ -34,6 +38,9 @@ dependencies {
 
     // Weak handler
     compile 'com.badoo.mobile:android-weak-handler:1.1'
+
+    // Date and Time
+    compile 'joda-time:joda-time:2.9'
 }
 
 repositories{

@@ -34,7 +34,10 @@ public class MobileFirst {
     }
 
     public void current(float latitude, float longitude) {
-        Request quick = new Request(BMSClient.getInstance().getBluemixAppRoute() + "/papi/weather/quick", Request.GET);
+        Request quick = new Request(
+            BMSClient.getInstance().getBluemixAppRoute() + "/papi/weather/quick",
+            Request.GET
+        );
         quick.setQueryParameter("latitude", String.valueOf(latitude));
         quick.setQueryParameter("longitude", String.valueOf(longitude));
         quick.send(new ResponseListener() {
@@ -51,7 +54,11 @@ public class MobileFirst {
                     observed.minimum = data.getInt("minimum");
                     observed.maximum = data.getInt("maximum");
                     observed.phrase = data.getString("phrase");
-                    observed.icon = "http://shackcaddy.mybluemix.net/public/weathericons/icon" + data.getInt("icon") + ".png";
+                    observed.icon =
+                        BMSClient.getInstance().getBluemixAppRoute() +
+                        "/public/weathericons/icon" +
+                        data.getInt("icon") +
+                        ".png";
 
                     for(MobileFirstListener observer:observers) {
                         observer.onCurrent(observed);
@@ -71,7 +78,10 @@ public class MobileFirst {
     public void forecast(final String place, final String dayOfWeek) {
         this.dayOfWeek = dayOfWeek;
 
-        Request golf = new Request(BMSClient.getInstance().getBluemixAppRoute() + "/papi/golf", Request.GET);
+        Request golf = new Request(
+            BMSClient.getInstance().getBluemixAppRoute() + "/papi/golf",
+            Request.GET
+        );
         golf.setQueryParameter("place", place);
         golf.send(new ResponseListener() {
             @Override
@@ -99,6 +109,8 @@ public class MobileFirst {
 
                         if(r > 0) {
                             daily.maximum = current.getInt("max_temp");
+                            daily.sunrise = current.getString("sunrise");
+                            daily.sunset = current.getString("sunset");
 
                             day = current.getJSONObject("day");
 
@@ -106,7 +118,12 @@ public class MobileFirst {
                             daily.dayName = day.getString("daypart_name");
                             daily.golfCategory = day.getString("golf_category");
                             daily.golfIndex = day.getInt("golf_index");
-                            daily.phrase = day.getString("phrase_22char");
+                            daily.icon =
+                                BMSClient.getInstance().getBluemixAppRoute() +
+                                "/public/weathericons/icon" +
+                                day.getInt("icon_code") +
+                                ".png";
+                            daily.phrase = day.getString("phrase_12char");
                             daily.uvDescription = day.getString("uv_desc");
                             daily.uvIndex = day.getInt("uv_index");
                             daily.uvRaw = day.getDouble("uv_index_raw");
@@ -139,7 +156,10 @@ public class MobileFirst {
     }
 
     public void test() {
-        Request test = new Request(BMSClient.getInstance().getBluemixAppRoute() + "/papi/test", Request.GET);
+        Request test = new Request(
+            BMSClient.getInstance().getBluemixAppRoute() + "/papi/test",
+            Request.GET
+        );
         test.send(new ResponseListener() {
             @Override
             public void onSuccess(Response response) {

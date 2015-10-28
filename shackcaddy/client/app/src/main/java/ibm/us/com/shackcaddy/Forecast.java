@@ -18,6 +18,8 @@ public class Forecast {
     String  narrative;
     String  phrase;
     String  place;
+    String  sunrise;
+    String  sunset;
     String  uvDescription;
     String  windCardinal;
     String  windPhrase;

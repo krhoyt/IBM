@@ -31,7 +31,12 @@ import com.ibm.mobilefirstplatform.clientsdk.android.core.api.ResponseListener;
 import com.ibm.mobilefirstplatform.clientsdk.android.logger.api.Logger;
 import com.nvanbenschoten.motion.ParallaxImageView;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.json.JSONObject;
+
+import java.text.DateFormat;
 
 public class GolfActivity extends AppCompatActivity {
 
@@ -42,7 +47,7 @@ public class GolfActivity extends AppCompatActivity {
     private WeakHandler         handler;
 
     private ImageView           imgBall;
-    private LinearLayout        layCurrent;
+    private LinearLayout        layWeather;
     private LinearLayout        layTranscript;
     private ParallaxImageView   imgBackground;
     private TextView            txtTranscript;
@@ -62,7 +67,7 @@ public class GolfActivity extends AppCompatActivity {
 
         // User interface
         imgBall = (ImageView)findViewById(R.id.image_ball);
-        layCurrent = (LinearLayout)findViewById(R.id.layout_current);
+        layWeather = (LinearLayout)findViewById(R.id.layout_weather);
         layTranscript = (LinearLayout)findViewById(R.id.layout_transcript);
         txtTranscript = (TextView)findViewById(R.id.text_transcript);
 
@@ -102,8 +107,39 @@ public class GolfActivity extends AppCompatActivity {
         mobile.setMobileFirstListener(new MobileFirstListener() {
             @Override
             public void onForecast(Forecast daily) {
+                Bundle  bundle;
+                Message message;
+
                 Log.d("SHACKCADDY", "Forecast.");
-                watson.say("The golf forecast for " + daily.place + " on " + daily.dayName + " is " + daily.golfCategory + "." );
+
+                bundle = new Bundle();
+                bundle.putString("action", "results");
+                bundle.putString("icon", daily.icon);
+                bundle.putInt("maximum", daily.maximum);
+                bundle.putString("phrase", daily.phrase);
+                bundle.putInt("minimum", daily.minimum);
+                bundle.putString("direction", daily.windCardinal);
+                bundle.putInt("speed", daily.windSpeed);
+                bundle.putInt("index", daily.uvIndex);
+                bundle.putString("uv", daily.uvDescription);
+                bundle.putString("sunrise", daily.sunrise);
+                bundle.putString("sunset", daily.sunset);
+                bundle.putString("place", daily.place);
+                bundle.putString("dow", daily.dayOfWeek);
+
+                message = new Message();
+                message.setData(bundle);
+                handler.sendMessage(message);
+
+                watson.say(
+                    "The golf forecast for " +
+                    daily.place +
+                    " on " +
+                    daily.dayOfWeek +
+                    " is " +
+                    daily.golfCategory +
+                    "."
+                );
             }
 
             @Override
@@ -263,9 +299,15 @@ public class GolfActivity extends AppCompatActivity {
             @Override
             public boolean handleMessage(Message message) {
                 Bundle              bundle;
-                String              temperature;
-                String              transcript;
-                TranslateAnimation  slide;
+                DateTime            joda;
+                DateTimeFormatter   format;
+                DownloadTask        download;
+                ImageView           imgIcon;
+                String              concatenation;
+                TextView            txtTemperature;
+                TextView            txtPhrase;
+                TextView            txtMaximum;
+                TextView            txtMinimum;
 
                 bundle = message.getData();
 
@@ -273,7 +315,12 @@ public class GolfActivity extends AppCompatActivity {
                     case "listen":
                         txtTranscript.setText(getString(R.string.gopher_talk));
 
-                        slide = new TranslateAnimation(0, 0, metrics.heightPixels - dipsToPixels(173), 0);
+                        TranslateAnimation slide = new TranslateAnimation(
+                            0,
+                            0,
+                            metrics.heightPixels - dipsToPixels(173),
+                            0
+                        );
                         slide.setDuration(1000);
 
                         layTranscript.setVisibility(View.VISIBLE);
@@ -282,7 +329,7 @@ public class GolfActivity extends AppCompatActivity {
                         break;
 
                     case "message":
-                        transcript = bundle.getString("transcript").trim();
+                        String transcript = bundle.getString("transcript").trim();
 
                         if(bundle.getBoolean("final")) {
                             transcript = transcript + ".";
@@ -294,29 +341,135 @@ public class GolfActivity extends AppCompatActivity {
                         break;
 
                     case "current":
-                        ImageView imgIcon = (ImageView)findViewById(R.id.image_icon);
-                        DownloadTask download = new DownloadTask(imgIcon);
+                        imgIcon = (ImageView)findViewById(R.id.image_icon);
+                        download = new DownloadTask(imgIcon);
                         download.execute(bundle.getString("icon"));
 
-                        temperature = String.valueOf(bundle.getInt("temperature")) + getString(R.string.degrees);
-                        TextView txtTemperature = (TextView)findViewById(R.id.text_temperature);
-                        txtTemperature.setText(temperature);
+                        concatenation = bundle.getInt("temperature") + getString(R.string.degrees);
+                        txtTemperature = (TextView)findViewById(R.id.text_temperature);
+                        txtTemperature.setText(concatenation);
 
-                        TextView txtPhrase = (TextView)findViewById(R.id.text_phrase);
+                        txtPhrase = (TextView)findViewById(R.id.text_phrase);
                         txtPhrase.setText(bundle.getString("phrase"));
 
-                        temperature = String.valueOf(bundle.getInt("maximum")) + getString(R.string.degrees);
-                        TextView txtMaximum = (TextView)findViewById(R.id.text_maximum);
-                        txtMaximum.setText(temperature);
+                        concatenation = bundle.getInt("maximum") + getString(R.string.degrees);
+                        txtMaximum = (TextView)findViewById(R.id.text_maximum);
+                        txtMaximum.setText(concatenation);
 
-                        temperature = String.valueOf(bundle.getInt("minimum")) + getString(R.string.degrees);
-                        TextView txtMinimum = (TextView)findViewById(R.id.text_minimum);
-                        txtMinimum.setText(temperature);
+                        concatenation = bundle.getInt("minimum") + getString(R.string.degrees);
+                        txtMinimum = (TextView)findViewById(R.id.text_minimum);
+                        txtMinimum.setText(concatenation);
 
                         // Do not show if in the middle of a transcript
                         if(!watson.isRecording()) {
-                            layCurrent.setVisibility(View.VISIBLE);
+                            layWeather.setVisibility(View.VISIBLE);
                         }
+
+                        break;
+
+                    case "results":
+                        concatenation = bundle.getString("place");
+                        concatenation = concatenation.replaceAll("\\b \\b(?!.*\\b \\b)", ", ");
+                        concatenation =
+                            concatenation +
+                            " on " +
+                            bundle.getString("dow");
+                        TextView txtTitle = (TextView)findViewById(R.id.text_title);
+                        txtTitle.setText(concatenation);
+
+                        imgIcon = (ImageView)findViewById(R.id.image_icon);
+                        download = new DownloadTask(imgIcon);
+                        download.execute(bundle.getString("icon"));
+
+                        concatenation = bundle.getInt("maximum") + getString(R.string.degrees);
+                        txtTemperature = (TextView)findViewById(R.id.text_temperature);
+                        txtTemperature.setText(concatenation);
+
+                        txtPhrase = (TextView)findViewById(R.id.text_phrase);
+                        txtPhrase.setText(bundle.getString("phrase"));
+
+                        concatenation = bundle.getInt("maximum") + getString(R.string.degrees);
+                        txtMaximum = (TextView)findViewById(R.id.text_maximum);
+                        txtMaximum.setText(concatenation);
+
+                        concatenation = bundle.getInt("minimum") + getString(R.string.degrees);
+                        txtMinimum = (TextView)findViewById(R.id.text_minimum);
+                        txtMinimum.setText(concatenation);
+
+                        TextView txtDirection = (TextView)findViewById(R.id.text_direction);
+                        txtDirection.setText(bundle.getString("direction"));
+
+                        concatenation = bundle.getInt("speed") + " MPH";
+                        TextView txtSpeed = (TextView)findViewById(R.id.text_speed);
+                        txtSpeed.setText(concatenation);
+
+                        joda = DateTime.parse(bundle.getString("sunrise"));
+                        format = DateTimeFormat.forPattern("h:mm");
+                        concatenation = format.print(joda) + " AM";
+                        TextView txtSunrise = (TextView)findViewById(R.id.text_sunrise);
+                        txtSunrise.setText(concatenation);
+
+                        joda = DateTime.parse(bundle.getString("sunset"));
+                        concatenation = format.print(joda) + " PM";
+                        TextView txtSunset = (TextView)findViewById(R.id.text_sunset);
+                        txtSunset.setText(concatenation);
+
+                        concatenation = bundle.getString("uv");
+
+                        if(concatenation.equals("Moderate")) {
+                            concatenation = "Mod";
+                        }
+
+                        concatenation = bundle.getInt("index") + " " + concatenation;
+                        TextView txtUv = (TextView)findViewById(R.id.text_uv);
+                        txtUv.setText(concatenation);
+
+                        TranslateAnimation gopher = new TranslateAnimation(
+                            0,
+                            0,
+                            0,
+                            metrics.heightPixels - dipsToPixels(130)
+                        );
+                        gopher.setDuration(1000);
+                        gopher.setAnimationListener(new Animation.AnimationListener() {
+                            @Override
+                            public void onAnimationEnd(Animation animation) {
+                                layTranscript.setVisibility(View.INVISIBLE);
+                            }
+
+                            @Override
+                            public void onAnimationStart(Animation animation) {
+                                ;
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animation animation) {
+                                ;
+                            }
+                        });
+                        layTranscript.startAnimation(gopher);
+
+                        TranslateAnimation forecast = new TranslateAnimation(
+                            0,
+                            0,
+                            metrics.heightPixels - dipsToPixels(130),
+                            0
+                        );
+                        forecast.setDuration(1000);
+                        forecast.setStartOffset(1000);
+                        layWeather.setVisibility(View.VISIBLE);
+                        layWeather.startAnimation(forecast);
+
+                        TranslateAnimation ball = new TranslateAnimation(
+                            0,
+                            0,
+                            metrics.heightPixels / 2,
+                            0
+                        );
+                        ball.setDuration(1000);
+                        ball.setStartOffset(2000);
+                        imgBall.setVisibility(View.VISIBLE);
+                        imgBall.startAnimation(ball);
 
                         break;
                 }
@@ -335,15 +488,24 @@ public class GolfActivity extends AppCompatActivity {
                 TranslateAnimation  fly;
 
                 // Remove current conditions
-                layCurrent.setVisibility(View.INVISIBLE);
+                layWeather.setVisibility(View.INVISIBLE);
 
                 // Fade into distance
-                alpha = new AlphaAnimation(1.0f, 0.0f);
+                alpha = new AlphaAnimation(1, 0);
                 alpha.setDuration(500);
                 alpha.setStartOffset(500);
 
                 // Shrink into distance
-                scale = new ScaleAnimation(1f, 0f, 1f, 0f, ScaleAnimation.RELATIVE_TO_SELF, 0.5f, ScaleAnimation.RELATIVE_TO_SELF, 0.5f);
+                scale = new ScaleAnimation(
+                    1,
+                    0,
+                    1,
+                    0,
+                    ScaleAnimation.RELATIVE_TO_SELF,
+                    0.5f,
+                    ScaleAnimation.RELATIVE_TO_SELF,
+                    0.5f
+                );
                 scale.setDuration(1000);
 
                 // Move with ball strike
