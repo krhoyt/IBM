@@ -117,12 +117,12 @@ public class MobileFirst {
                 JSONObject  current;
                 JSONObject  data;
                 JSONObject  day;
-                JSONObject  weather;
+                JSONObject  forecast;
 
                 try {
                     data = new JSONObject(response.getResponseText());
-                    weather = data.getJSONObject("weather");
-                    range = weather.getJSONArray("forecasts");
+                    forecast = data.getJSONObject("forecast");
+                    range = forecast.getJSONArray("forecasts");
 
                     for(int r = 0; r < 7; r++) {
                         current = range.getJSONObject(r);
@@ -165,28 +165,6 @@ public class MobileFirst {
                     }
                 } catch(JSONException jsone) {
                     jsone.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Response response, Throwable throwable, JSONObject json) {
-                Log.d("MOBILEFIRST", "Fail: " + response.getResponseText());
-            }
-        });
-    }
-
-    public void test() {
-        Request test = new Request(
-            BMSClient.getInstance().getBluemixAppRoute() + "/papi/test",
-            Request.GET
-        );
-        test.send(new ResponseListener() {
-            @Override
-            public void onSuccess(Response response) {
-                Log.d("MOBILEFIRST", response.getResponseText());
-
-                for(MobileFirstListener observer:observers) {
-                    observer.onTest(response.getResponseText());
                 }
             }
 

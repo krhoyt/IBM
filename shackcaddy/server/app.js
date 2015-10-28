@@ -71,8 +71,8 @@ app.get( '/papi/geocode/find', passport.authenticate( 'imf-backend-strategy', {s
             'text=' + req.query.place + 
             '&f=json';    
     
-        request( url, function( error, response, body ) {
-            res.send( 200, body );
+        request( url, function( error, response, find ) {
+            res.send( 200, find );
         } );
     }
 );
@@ -85,23 +85,28 @@ app.get( '/papi/geocode/reverse', passport.authenticate( 'imf-backend-strategy',
             'location=' + req.query.longitude + ',' + req.query.latitude +
             '&f=json';    
     
-        request( url, function( error, response, body ) {
-            res.send( 200, body );
+        request( url, function( error, response, reverse ) {
+            res.send( 200, reverse );
         } );
     }
 );
 
 app.get( '/papi/golf', passport.authenticate( 'imf-backend-strategy', {session: false} ),
     function( req, res ) {
+        var result = {
+            forecast: null,
+            geocode: null    
+        };
         var url = ESRI_URI + '/' + ESRI_GEOCODE + '?' + 'text=' + req.query.place + '&f=json';
 
         request( url, function( error, response, geocode ) {
-            var data = JSON.parse( geocode );
-            var geometry = data.locations[0].feature.geometry;
-
+            result.geocode = JSON.parse( geocode );
+            
+            var geometry = result.geocode.locations[0].feature.geometry;
             var latitude = geometry.y;
             var longitude = geometry.x;
-            var url = 
+            
+            url = 
                 credentials.url + '/' + 
                 WEATHER_FORECAST + '?' +
                 'geocode=' + latitude + ',' + longitude + '&' +
@@ -109,12 +114,8 @@ app.get( '/papi/golf', passport.authenticate( 'imf-backend-strategy', {session: 
                 'language=' + LANGUAGE + '&' +
                 'units=' + UNITS;             
 
-            request( url, function( error, response, weather ) {
-                var result = {
-                    geocode: JSON.parse( geocode ),
-                    weather: JSON.parse( weather )
-                };
-
+            request( url, function( error, response, forecast ) {
+                result.forecast = JSON.parse( forecast );
                 res.send( 200, JSON.stringify( result ) );
             } );
         } );    
@@ -139,8 +140,8 @@ app.get( '/papi/weather/current', passport.authenticate( 'imf-backend-strategy',
             'language=' + LANGUAGE + '&' +
             'units=' + UNITS;             
 
-        request( url, function( error, response, body ) {
-            res.send( 200, body );
+        request( url, function( error, response, current ) {
+            res.send( 200, current );
         } );
     }
 );
@@ -157,8 +158,8 @@ app.get( '/papi/weather/forecast', passport.authenticate( 'imf-backend-strategy'
             'language=' + LANGUAGE + '&' +
             'units=' + UNITS;             
 
-        request( url, function( error, response, body ) {
-            res.send( 200, body );
+        request( url, function( error, response, forecast ) {
+            res.send( 200, forecast );
         } );
     }
 );
@@ -179,8 +180,8 @@ app.get( '/papi/weather/quick', passport.authenticate( 'imf-backend-strategy', {
             'language=' + LANGUAGE + '&' +
             'units=' + UNITS;             
 
-        request( url, function( error, response, body ) {
-            result.current = JSON.parse( body );
+        request( url, function( error, response, current ) {
+            result.current = JSON.parse( current );
 
             url = 
                 credentials.url + '/' + 
@@ -190,8 +191,8 @@ app.get( '/papi/weather/quick', passport.authenticate( 'imf-backend-strategy', {
                 'language=' + LANGUAGE + '&' +
                 'units=' + UNITS;             
 
-            request( url, function( error, response, body ) {
-                result.forecast = JSON.parse( body );
+            request( url, function( error, response, forecast ) {
+                result.forecast = JSON.parse( forecast );
                 res.send( 200, JSON.stringify( result ) );
             } );
         } );
