@@ -13,10 +13,12 @@ public class DownloadTask extends AsyncTask<String, Void, Bitmap> {
 
     private ImageView   view = null;
 
+    // ImageView target
     public DownloadTask(ImageView view) {
         this.view = view;
     }
 
+    // Download image in own thread
     protected Bitmap doInBackground(String... urls) {
         Bitmap      bitmap = null;
         InputStream input = null;
@@ -35,6 +37,7 @@ public class DownloadTask extends AsyncTask<String, Void, Bitmap> {
         return bitmap;
     }
 
+    // Put downloaded image into ImageView
     protected void onPostExecute(Bitmap result) {
         view.setImageBitmap(result);
     }

@@ -52,6 +52,8 @@ public class Watson implements ISpeechDelegate {
         TextToSpeech.sharedInstance().setVoice("en-US_MichaelVoice");
     }
 
+    // Connect to Watson
+    // Start voice capture
     public void recognize() {
         recording = true;
 
@@ -64,14 +66,17 @@ public class Watson implements ISpeechDelegate {
         }.execute();
     }
 
+    // Have Watson synthesize speech
     public void say(String transcript) {
         TextToSpeech.sharedInstance().synthesize(transcript);
     }
 
+    // Stop voice capture
     public void stop() {
         SpeechToText.sharedInstance().stopRecognition();
     }
 
+    // Convenience
     public URI getHost(String url) {
         try {
             return new URI(url);
@@ -82,10 +87,12 @@ public class Watson implements ISpeechDelegate {
         return null;
     }
 
+    // Listeners
     public void setWatsonListener(WatsonListener observer) {
         observers.add(observer);
     }
 
+    // Recording
     public boolean isRecording() {
         return recording;
     }
@@ -104,8 +111,10 @@ public class Watson implements ISpeechDelegate {
     public void onClose(int code, String reason, boolean b) {
         Log.d("WATSON", "Close, code: " + code + ", reason: " + reason);
 
+        // No longer recording
         recording = false;
 
+        // Tell listeners that Watson is done
         for(WatsonListener observer:observers) {
             observer.onComplete(confidence, transcript);
         }

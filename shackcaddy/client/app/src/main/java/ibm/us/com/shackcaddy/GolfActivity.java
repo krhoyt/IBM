@@ -38,18 +38,21 @@ import org.json.JSONObject;
 
 public class GolfActivity extends AppCompatActivity {
 
+    // Support
     private DisplayMetrics      metrics;
     private LocationManager     gps;
     private MobileFirst         mobile;
     private Watson              watson;
     private WeakHandler         handler;
 
+    // User interface
     private ImageView           imgBall;
     private LinearLayout        layWeather;
     private LinearLayout        layTranscript;
     private ParallaxImageView   imgBackground;
     private TextView            txtTranscript;
 
+    // Audio
     private float               volume;
     private int                 swing;
     private SoundPool           sound;
@@ -110,6 +113,7 @@ public class GolfActivity extends AppCompatActivity {
 
                 Log.d("SHACKCADDY", "Forecast.");
 
+                // Marshal forecast
                 bundle = new Bundle();
                 bundle.putString("action", "golf");
                 bundle.putString("place", forecast.place);
@@ -126,10 +130,12 @@ public class GolfActivity extends AppCompatActivity {
                 bundle.putString("sunrise", forecast.sunrise);
                 bundle.putString("sunset", forecast.sunset);
 
+                // Send to UI thread
                 message = new Message();
                 message.setData(bundle);
                 handler.sendMessage(message);
 
+                // Synthesize result
                 watson.say(
                     "The golf forecast for " +
                     forecast.place +
@@ -148,6 +154,7 @@ public class GolfActivity extends AppCompatActivity {
 
                 Log.d("SHACKCADDY", "Current.");
 
+                // Marshal current conditions
                 bundle = new Bundle();
                 bundle.putString("action", "current");
                 bundle.putString("place", "Current Location");
@@ -164,6 +171,7 @@ public class GolfActivity extends AppCompatActivity {
                 bundle.putString("sunrise", current.sunrise);
                 bundle.putString("sunset", current.sunset);
 
+                // Send to UI thread
                 message = new Message();
                 message.setData(bundle);
                 handler.sendMessage(message);
@@ -291,7 +299,7 @@ public class GolfActivity extends AppCompatActivity {
                 Log.d("SHACKCADDY", "Place: " + place);
                 Log.d("SHACKCADDY", "Day of week: " + dayOfWeek);
 
-                // Load from server
+                // Load forecast from server
                 mobile.forecast(place, dayOfWeek);
             }
         });
@@ -312,6 +320,7 @@ public class GolfActivity extends AppCompatActivity {
                 action = bundle.getString("action");
 
                 if(action.equals("listen")) {
+                    // Watson is connected and ready
                     txtTranscript.setText(getString(R.string.gopher_talk));
 
                     gopher = new TranslateAnimation(
@@ -325,6 +334,7 @@ public class GolfActivity extends AppCompatActivity {
                     layTranscript.setVisibility(View.VISIBLE);
                     layTranscript.startAnimation(gopher);
                 } else if(action.equals("message")) {
+                    // Watson has updated the transcript
                     transcript = bundle.getString("transcript").trim();
 
                     if(bundle.getBoolean("final")) {
@@ -335,6 +345,7 @@ public class GolfActivity extends AppCompatActivity {
 
                     txtTranscript.setText(transcript);
                 } else if(action.equals("current")) {
+                    // Weather forecast dialog
                     populate(bundle);
 
                     // Do not show if in the middle of a transcript
@@ -348,6 +359,7 @@ public class GolfActivity extends AppCompatActivity {
                         }
                     }
                 } else if(action.equals("golf")) {
+                    // Weather forecast dialog
                     populate(bundle);
 
                     gopher = new TranslateAnimation(
@@ -472,6 +484,7 @@ public class GolfActivity extends AppCompatActivity {
         });
     }
 
+    // Accelerometer for parallax effect
     @Override
     protected void onPause() {
         super.onPause();
@@ -484,11 +497,13 @@ public class GolfActivity extends AppCompatActivity {
         imgBackground.registerSensorManager();
     }
 
+    // Convenience
     protected int dipsToPixels(int dips) {
         final float scale = getResources().getDisplayMetrics().density;
         return (int)(dips * scale + 0.5f);
     }
 
+    // Fill fields in weather dialog
     protected void populate(Bundle bundle) {
         DateTime            joda;
         DateTimeFormatter   format;

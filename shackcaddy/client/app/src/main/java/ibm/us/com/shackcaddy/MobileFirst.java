@@ -22,6 +22,7 @@ public class MobileFirst {
     public MobileFirst(Context context) {
         observers = new ArrayList<>();
 
+        // Authenticate mobile client access (MCA)
         try {
             BMSClient.getInstance().initialize(
                 context,
@@ -33,7 +34,9 @@ public class MobileFirst {
         }
     }
 
+    // Current conditions from Weather Insights
     public void current(float latitude, float longitude) {
+        // Protected (authenticated resource)
         Request quick = new Request(
             BMSClient.getInstance().getBluemixAppRoute() + "/papi/weather/quick",
             Request.GET
@@ -55,6 +58,7 @@ public class MobileFirst {
                 try {
                     data = new JSONObject(response.getResponseText());
 
+                    // Get pertinent objects
                     weather = data.getJSONObject("current");
                     observed = weather.getJSONObject("observation");
                     imperial = observed.getJSONObject("imperial");
@@ -63,6 +67,7 @@ public class MobileFirst {
                     days = forecast.getJSONArray("forecasts");
                     today = days.getJSONObject(0);
 
+                    // Populate weather results
                     results = new Forecast();
                     results.icon =
                         BMSClient.getInstance().getBluemixAppRoute() +
@@ -72,6 +77,7 @@ public class MobileFirst {
                     results.temperature = imperial.getInt("temp");
                     results.phrase = observed.getString("phrase_12char");
 
+                    // Maximum may be null after peak of day
                     if(today.isNull("max_temp")) {
                         results.maximum = 9999;
                     } else {
@@ -101,9 +107,12 @@ public class MobileFirst {
         });
     }
 
+    // Full forecasts from Weather Insights
     public void forecast(final String place, final String dayOfWeek) {
+        // Keep around for Watson to speak
         this.dayOfWeek = dayOfWeek;
 
+        // Protected (authenticated) resource
         Request golf = new Request(
             BMSClient.getInstance().getBluemixAppRoute() + "/papi/golf",
             Request.GET
@@ -120,12 +129,16 @@ public class MobileFirst {
                 JSONObject  forecast;
 
                 try {
+                    // Pertinent objects
                     data = new JSONObject(response.getResponseText());
                     forecast = data.getJSONObject("forecast");
                     range = forecast.getJSONArray("forecasts");
 
+                    // Find matching day
                     for(int r = 0; r < 7; r++) {
                         current = range.getJSONObject(r);
+
+                        // Populate forecast
                         daily = new Forecast();
 
                         daily.place = place;
@@ -153,9 +166,11 @@ public class MobileFirst {
                             daily.windSpeed = day.getInt("wspd");
                         }
 
+                        // Found match
                         if(daily.dayOfWeek.equals(dayOfWeek)) {
                             Log.d("MOBILEFIRST", daily.golfCategory + " (" + daily.golfIndex + ")");
 
+                            // Inform listeners
                             for(MobileFirstListener observer:observers) {
                                 observer.onForecast(daily);
                             }

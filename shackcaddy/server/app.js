@@ -1,3 +1,4 @@
+// Libraries
 var express = require( 'express' );
 var imf = require( 'imf-oauth-user-sdk' );
 var ImfBackendStrategy = require( 'passport-imf-token-validation' ).ImfBackendStrategy;
@@ -5,6 +6,7 @@ var jsonfile = require( 'jsonfile' );
 var passport = require( 'passport' );
 var request = require( 'request' );
 
+// Constants
 var ESRI_GEOCODE = 'find';
 var ESRI_REVERSE = 'reverseGeocode';
 var ESRI_URI = 'http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer';
@@ -13,6 +15,8 @@ var UNITS = 'e';
 var WEATHER_CURRENT = 'api/weather/v2/observations/current';
 var WEATHER_FORECAST = 'api/weather/v2/forecast/daily/10day';
 
+// Load Weahter Insight credentials
+// From Bluemix configuration or local file
 if( process.env.VCAP_SERVICES ) {
     var environment = JSON.parse( process.env.VCAP_SERVICES );
     var credentials = environment['weatherinsights'][0].credentials;    
@@ -20,8 +24,10 @@ if( process.env.VCAP_SERVICES ) {
     var credentials = jsonfile.readFileSync( 'configuration.json' );
 }
 
+// Authentication
 passport.use( new ImfBackendStrategy() );
 
+// Web server
 var app = express();
 app.use( passport.initialize() );
 
@@ -38,6 +44,9 @@ app.use( '/protected', passport.authenticate( 'imf-backend-strategy', {session: 
 app.use( '/protected', express.static( __dirname + '/protected' ) );
 
 // Public services
+
+// ESRI geocode finds coordinates from place name
+// Public for Andy
 app.get( '/api/geocode/find', function( req, res ) {
     var url = 
         ESRI_URI + '/' + 
@@ -50,10 +59,12 @@ app.get( '/api/geocode/find', function( req, res ) {
     } );
 } );
 
+// Test
 app.get( '/api/test', function( req, res ) {
     res.send( 200, 'Successfully accessed public backend endpoint.' );
 } );
 
+// Security token
 app.get( '/api/token', function( req, res ) {
     imf.getAuthorizationHeader().then( function( token ) {
         res.send( 200, token );
@@ -63,6 +74,8 @@ app.get( '/api/token', function( req, res ) {
 } );
 
 // Protected services
+
+// ESRI geocode finds coordinates from place name
 app.get( '/papi/geocode/find', passport.authenticate( 'imf-backend-strategy', {session: false} ),
     function( req, res ) {
         var url = 
@@ -77,6 +90,7 @@ app.get( '/papi/geocode/find', passport.authenticate( 'imf-backend-strategy', {s
     }
 );
 
+// ESRI reverse geocode gets place name from coordinates
 app.get( '/papi/geocode/reverse', passport.authenticate( 'imf-backend-strategy', {session: false} ),
     function( req, res ) {
         var url = 
@@ -91,6 +105,7 @@ app.get( '/papi/geocode/reverse', passport.authenticate( 'imf-backend-strategy',
     }
 );
 
+// Combines ESRI geocode and Weather Insights forecast
 app.get( '/papi/golf', passport.authenticate( 'imf-backend-strategy', {session: false} ),
     function( req, res ) {
         var result = {
@@ -99,6 +114,7 @@ app.get( '/papi/golf', passport.authenticate( 'imf-backend-strategy', {session: 
         };
         var url = ESRI_URI + '/' + ESRI_GEOCODE + '?' + 'text=' + req.query.place + '&f=json';
 
+        // Geocode
         request( url, function( error, response, geocode ) {
             result.geocode = JSON.parse( geocode );
             
@@ -114,6 +130,7 @@ app.get( '/papi/golf', passport.authenticate( 'imf-backend-strategy', {session: 
                 'language=' + LANGUAGE + '&' +
                 'units=' + UNITS;             
 
+            // Weather Insights forecast
             request( url, function( error, response, forecast ) {
                 result.forecast = JSON.parse( forecast );
                 res.send( 200, JSON.stringify( result ) );
@@ -122,12 +139,14 @@ app.get( '/papi/golf', passport.authenticate( 'imf-backend-strategy', {session: 
     }
 );
 
+// Test
 app.get( '/papi/test', passport.authenticate( 'imf-backend-strategy', {session: false} ),
     function( req, res ) {
         res.send( 200, 'Successfully accessed protected backend endpoint.' );
     }
 );
 
+// Current conditions from Weather Insights
 app.get( '/papi/weather/current', passport.authenticate( 'imf-backend-strategy', {session: false} ),
     function( req, res ) {
         var latitude = req.query.latitude;
@@ -146,6 +165,7 @@ app.get( '/papi/weather/current', passport.authenticate( 'imf-backend-strategy',
     }
 );
 
+// Forecast conditions from Weather Insights
 app.get( '/papi/weather/forecast', passport.authenticate( 'imf-backend-strategy', {session: false} ),
     function( req, res ) {
         var latitude = req.query.latitude;
@@ -164,6 +184,7 @@ app.get( '/papi/weather/forecast', passport.authenticate( 'imf-backend-strategy'
     }
 );
 
+// Combine current weather and forecast into one request
 app.get( '/papi/weather/quick', passport.authenticate( 'imf-backend-strategy', {session: false} ),
     function( req, res ) {
         var latitude = req.query.latitude;
@@ -180,6 +201,7 @@ app.get( '/papi/weather/quick', passport.authenticate( 'imf-backend-strategy', {
             'language=' + LANGUAGE + '&' +
             'units=' + UNITS;             
 
+        // Current
         request( url, function( error, response, current ) {
             result.current = JSON.parse( current );
 
@@ -191,6 +213,7 @@ app.get( '/papi/weather/quick', passport.authenticate( 'imf-backend-strategy', {
                 'language=' + LANGUAGE + '&' +
                 'units=' + UNITS;             
 
+            // Forecast
             request( url, function( error, response, forecast ) {
                 result.forecast = JSON.parse( forecast );
                 res.send( 200, JSON.stringify( result ) );

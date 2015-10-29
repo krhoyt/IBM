@@ -164,7 +164,9 @@
                         android:id="@+id/text_minimum"
                         android:textSize="17sp"
                         android:textColor="#1e4580" />
+
                 </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -199,6 +201,7 @@
                         android:textSize="17sp"
                         android:textStyle="bold"
                         android:layout_weight="1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -227,6 +230,7 @@
                         android:textSize="17sp"
                         android:textStyle="bold"
                         android:layout_weight="1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -255,6 +259,7 @@
                         android:textSize="17sp"
                         android:textStyle="bold"
                         android:layout_weight="1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -283,6 +288,7 @@
                         android:textSize="17sp"
                         android:textStyle="bold"
                         android:layout_weight="1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -311,6 +317,7 @@
                         android:textSize="17sp"
                         android:textStyle="bold"
                         android:layout_weight="1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -339,9 +346,10 @@
                         android:textSize="17sp"
                         android:textStyle="bold"
                         android:layout_weight="1" />
-                </LinearLayout>
-            </LinearLayout>
 
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
