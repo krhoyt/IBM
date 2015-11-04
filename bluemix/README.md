@@ -1,7 +1,3 @@
-#Bluemix
-
-Content the interacts with IBM Bluemix in some way, shape, or form.  Software only.  Project using hardware that interact with Bluemix can be found in the "iot" folder.
-
 #MBaaS (Mobile Back-end As A Service)
 
 Leverages MBaaS features of IBM Bluemix.  Usually native device projects.
