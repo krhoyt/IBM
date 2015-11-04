@@ -1,0 +1,13 @@
+applications:
+- path: .
+  memory: 512M
+  instances: 1
+  domain: mybluemix.net
+  name: My Weather
+  host: my-weather
+  disk_quota: 1024M
+  services:
+  - My Weather-cloudantNoSQLDB
+  - My Weather-imfpush
+  - My Weather-AdvancedMobileAccess
+  command: node app.js

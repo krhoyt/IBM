@@ -4,7 +4,7 @@ var mqtt = require( 'mqtt' );
 var path = require( 'path' );
 
 // Configuration
-var configuration = jsonfile.readFileSync( path.join( __dirname, 'configuration.json' ) );
+var configuration = jsonfile.readFileSync( path.join( __dirname, '..', 'configuration.json' ) );
 
 // Connection parameters
 // Format: d:org_id:device_type:device_id
@@ -12,8 +12,8 @@ var configuration = jsonfile.readFileSync( path.join( __dirname, 'configuration.
 var id = 
 	'd:' + 
 	configuration.organizationId + ':' +
-	configuration.devices[1].deviceType + ':' +
-	configuration.devices[1].deviceId;
+	'Node' + ':' +
+	'Testing';
 var uri = 
 	'tcp://' + 
 	configuration.uri + ':' +
@@ -70,7 +70,7 @@ client.on( 'connect', function() {
 		// Publish object
 		// JSON string
 		// Topic: iot-2/evt/event_id/fmt/format_string
-		client.publish( 'iot-2/evt/testing/fmt/json', JSON.stringify( data ), function() {
+		client.publish( 'iot-2/evt/count/fmt/json', JSON.stringify( data ), function() {
 			console.log( data );
 		} );							
 	}, 1000 );

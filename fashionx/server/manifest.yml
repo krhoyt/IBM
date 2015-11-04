@@ -1,0 +1,14 @@
+applications:
+- path: .
+  memory: 512M
+  instances: 1
+  domain: mybluemix.net
+  name: FashionX
+  host: fashionx
+  disk_quota: 1024M
+  services:
+  - FashionX-Cloudant
+  - FashionX-Push
+  - FashionX-Mobile
+  - FashionX-Weather
+  command: node app.js
