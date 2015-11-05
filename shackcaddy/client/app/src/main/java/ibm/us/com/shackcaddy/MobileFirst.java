@@ -38,7 +38,7 @@ public class MobileFirst {
     public void current(float latitude, float longitude) {
         // Protected (authenticated resource)
         Request quick = new Request(
-            BMSClient.getInstance().getBluemixAppRoute() + "/papi/weather/quick",
+            BMSClient.getInstance().getBluemixAppRoute() + "/api/weather/quick",
             Request.GET
         );
         quick.setQueryParameter("latitude", String.valueOf(latitude));
@@ -114,7 +114,7 @@ public class MobileFirst {
 
         // Protected (authenticated) resource
         Request golf = new Request(
-            BMSClient.getInstance().getBluemixAppRoute() + "/papi/golf",
+            BMSClient.getInstance().getBluemixAppRoute() + "/api/golf",
             Request.GET
         );
         golf.setQueryParameter("place", place);
