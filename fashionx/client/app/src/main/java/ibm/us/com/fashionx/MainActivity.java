@@ -26,9 +26,9 @@ import com.ibm.caas.CAASAssetRequest;
 import com.ibm.caas.CAASDataCallback;
 import com.ibm.caas.CAASErrorResult;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
-    public static final String FASHION_APP = "fashion app/views/all";
+public class MainActivity extends AppCompatActivity {
 
     private ImageView       imgSuggest;
 
@@ -117,7 +117,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Mobile Content
-        content = new MobileContent(getApplicationContext(), FASHION_APP);
+        content = new MobileContent(
+            getApplicationContext().getString(R.string.macm_server),
+            getApplicationContext().getString(R.string.macm_context),
+            getApplicationContext().getString(R.string.macm_instance),
+            getApplicationContext().getString(R.string.macm_user),
+            getApplicationContext().getString(R.string.macm_password)
+        );
         content.setMobileContentListener(new MobileContentListener() {
             @Override
             public void onSuggest(String path) {
@@ -141,6 +147,16 @@ public class MainActivity extends AppCompatActivity {
                 };
                 CAASAssetRequest request = new CAASAssetRequest(path, callback);
                 content.getService().executeRequest(request);
+            }
+
+            @Override
+            public void onAdvertise(String path, String body) {
+                ;
+            }
+
+            @Override
+            public void onCatalog(ArrayList<CatalogItem> departments) {
+                ;
             }
         });
 

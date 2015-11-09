@@ -94,5 +94,42 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"></FrameLayout>
+        android:layout_height="120dp"
+        android:id="@+id/layout_ad"
+        android:visibility="visible">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/image_ad"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/fall_leaves" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Advertisement"
+            android:id="@+id/text_shadow"
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#de000000"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="1dp"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Advertisement"
+            android:id="@+id/text_ad"
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:paddingRight="32dp"
+            android:paddingLeft="32dp" />
+    </FrameLayout>
 </LinearLayout>
