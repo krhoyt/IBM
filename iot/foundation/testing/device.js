@@ -14,6 +14,7 @@ var id =
 	configuration.organizationId + ':' +
 	'Node' + ':' +
 	'Testing';
+	id = 'd:wkqwsd:Edison:FashionFinder';
 var uri = 
 	'tcp://' + 
 	configuration.uri + ':' +
@@ -31,7 +32,8 @@ var client = mqtt.connect( uri, {
 	clientId: id,
 	clean: true,
 	username: 'use-token-auth',
-	password: configuration.devices[1].authenticationToken
+	// password: configuration.devices[1].authenticationToken
+	password: 'jLRYHEDiEjCzgveed&'
 } ); 
  
 // Connected
@@ -70,7 +72,7 @@ client.on( 'connect', function() {
 		// Publish object
 		// JSON string
 		// Topic: iot-2/evt/event_id/fmt/format_string
-		client.publish( 'iot-2/evt/count/fmt/json', JSON.stringify( data ), function() {
+		client.publish( 'iot-2/evt/weather/fmt/json', JSON.stringify( data ), function() {
 			console.log( data );
 		} );							
 	}, 1000 );
