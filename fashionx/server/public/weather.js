@@ -16,17 +16,24 @@ var xhr;
 function report() {
     var conditions;
     var data;
+    var icon;
     var message;
+    var selected;
     
     conditions = document.querySelectorAll( '.condition' );    
     data = {};
     
     for( var c = 0; c < conditions.length; c++ ) {
-        data[conditions[c].getAttribute( 'data-name' )] = parseInt( conditions[c].getAttribute( 'data-value' ) );
+        selected = conditions[c].querySelector( '.centered' );
+        icon = selected.className.split( ' ' );
+        icon = icon[icon.length - 1].trim();
+        
+        data[conditions[c].getAttribute( 'data-name' )] = {
+            value: parseInt( conditions[c].getAttribute( 'data-value' ) ),
+            icon: icon
+        }
     }
 
-    console.log( data );
-    
     message = new Paho.MQTT.Message( JSON.stringify( {
         d: data     
     } ) );
@@ -43,8 +50,9 @@ function doClientConnect() {
     }
 }
     
-function doClientFail() {
+function doClientFail(evt) {
     console.log( 'MQTT fail.' );
+    console.log( evt );
 }    
     
 function doConditionClick() {
@@ -83,15 +91,15 @@ function doConfigurationLoad() {
     
     client = new Paho.MQTT.Client(
         config.uri,
-        1883,
+        443,
         config.client
     );
     client.connect( {
         userName: config.userName,
         password: config.password,
-        cleanSession: true,
         onSuccess: doClientConnect,
-        onFailure: doClientFail
+        onFailure: doClientFail,
+        useSSL: true
     } );    
 }    
     
