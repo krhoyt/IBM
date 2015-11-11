@@ -26,6 +26,7 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile (name:'mqtt-client-0.4.0', ext:'jar')
     compile 'com.badoo.mobile:android-weak-handler:1.1'
+    compile (name: 'MACM-SDK-android-release', ext: 'aar')
 }
 
 repositories{

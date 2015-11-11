@@ -21,19 +21,26 @@ function report() {
     var selected;
     
     conditions = document.querySelectorAll( '.condition' );    
-    data = {};
+    data = {
+        icons: [],
+        names: [],
+        values: []
+    };
     
     for( var c = 0; c < conditions.length; c++ ) {
         selected = conditions[c].querySelector( '.centered' );
         icon = selected.className.split( ' ' );
         icon = icon[icon.length - 1].trim();
         
-        data[conditions[c].getAttribute( 'data-name' )] = {
-            value: parseInt( conditions[c].getAttribute( 'data-value' ) ),
-            icon: icon
-        }
+        data.icons.push( icon );
+        data.names.push(
+            conditions[c].getAttribute( 'data-name' )            
+        )
+        data.values.push(
+            parseInt( conditions[c].getAttribute( 'data-value' ) )
+        );
     }
-
+    
     message = new Paho.MQTT.Message( JSON.stringify( {
         d: data     
     } ) );

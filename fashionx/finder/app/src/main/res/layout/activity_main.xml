@@ -25,47 +25,11 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/moderate"
-            android:layout_marginBottom="16dp"
+            android:src="@drawable/sunny"
             app:civ_border_width="3dp"
             app:civ_border_color="#FFFFFF"
-            android:id="@+id/image_temperature" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/clear"
-            android:layout_marginBottom="16dp"
-            app:civ_border_width="3dp"
-            app:civ_border_color="#FFFFFF"
-            android:id="@+id/image_pressure" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/midday"
-            android:layout_marginBottom="16dp"
-            app:civ_border_width="3dp"
-            app:civ_border_color="#FFFFFF"
-            android:id="@+id/image_light" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/desert"
-            android:layout_marginBottom="16dp"
-            app:civ_border_width="3dp"
-            app:civ_border_color="#FFFFFF"
-            android:id="@+id/image_humidity" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/north"
-            android:layout_marginBottom="16dp"
-            app:civ_border_width="3dp"
-            app:civ_border_color="#FFFFFF"
-            android:id="@+id/image_direction" />
+            android:id="@+id/image_rain"
+            android:layout_marginBottom="16dp" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="60dp"
@@ -79,11 +43,47 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/sunny"
+            android:src="@drawable/north"
+            android:layout_marginBottom="16dp"
             app:civ_border_width="3dp"
             app:civ_border_color="#FFFFFF"
-            android:id="@+id/image_rain" />
-        
+            android:id="@+id/image_direction" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/desert"
+            android:layout_marginBottom="16dp"
+            app:civ_border_width="3dp"
+            app:civ_border_color="#FFFFFF"
+            android:id="@+id/image_humidity" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/midday"
+            android:layout_marginBottom="16dp"
+            app:civ_border_width="3dp"
+            app:civ_border_color="#FFFFFF"
+            android:id="@+id/image_light" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/clear"
+            android:layout_marginBottom="16dp"
+            app:civ_border_width="3dp"
+            app:civ_border_color="#FFFFFF"
+            android:id="@+id/image_pressure" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/moderate"
+            app:civ_border_width="3dp"
+            app:civ_border_color="#FFFFFF"
+            android:id="@+id/image_temperature" />
+
     </LinearLayout>
 
 </FrameLayout>
