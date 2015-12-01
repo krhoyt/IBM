@@ -33,5 +33,37 @@ public class EngineData extends RealmObject {
     private int oilTemperature;
     private String vin;
     */
-}
 
+    /*
+    vehicle speed
+    engine speed
+    water temperature
+    key position
+    mil status
+    airbag status
+    belt status
+    door switch
+    door lock
+    window status
+    signal status
+    hazard status
+    rc signal
+    brake status
+    brake pedal
+    accelerator pedal
+    battery voltage
+    front left tire
+    rear left tire
+    front right tire
+    rear right tire
+    fuel consumption
+    faulty mileage
+    current mileage
+    remain oil
+    remain mileage
+    read dtc
+    support pids
+    vin
+    */
+
+}
