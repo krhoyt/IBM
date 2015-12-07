@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.esri.android.map.GraphicsLayer;
 import com.esri.android.map.MapView;
+import com.esri.android.map.event.OnStatusChangedListener;
 import com.esri.core.geometry.CoordinateConversion;
 import com.esri.core.geometry.Polyline;
 import com.esri.core.geometry.SpatialReference;
@@ -18,6 +19,8 @@ import io.realm.RealmResults;
 
 public class RouteActivity extends AppCompatActivity {
 
+    private long  routeId;
+    private MapView map;
     private Realm realm;
 
     @Override
@@ -26,14 +29,26 @@ public class RouteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_route);
 
         Bundle extras = getIntent().getExtras();
-        long routeId = extras.getLong("routeId");
+        routeId = extras.getLong("routeId");
 
+        map = (MapView) findViewById(R.id.map);
+        map.setOnStatusChangedListener(new OnStatusChangedListener() {
+            @Override
+            public void onStatusChanged(Object source, STATUS status) {
+                if (OnStatusChangedListener.STATUS.INITIALIZED == status && source == map) {
+                    Log.d("ROUTE", "Map initialized.");
+                    draw();
+                }
+            }
+        });
+    }
+
+    private void draw() {
         realm = Realm.getInstance(getApplicationContext());
         RealmResults<Location> locations = realm.where(Location.class).equalTo("routeId", routeId).findAll();
 
         Log.d("ROUTE", locations.size() + " data points.");
 
-        MapView map = (MapView) findViewById(R.id.map);
         SpatialReference mercator = SpatialReference.create(102100);
 
         GraphicsLayer layer = new GraphicsLayer();
@@ -67,7 +82,7 @@ public class RouteActivity extends AppCompatActivity {
 
         Graphic graphic = new Graphic(track, symbol);
         layer.addGraphic(graphic);
-
+        
         map.setExtent(track);
     }
 

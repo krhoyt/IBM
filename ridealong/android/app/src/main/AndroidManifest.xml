@@ -24,6 +24,8 @@
         </activity>
         <activity android:name=".RouteActivity" >
         </activity>
+        <activity android:name=".RecordActivity" >
+        </activity>
     </application>
 
 </manifest>

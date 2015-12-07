@@ -2,4 +2,5 @@
     <string name="app_name">Ride Along</string>
     <string name="action_caltrain">Import Caltrain</string>
     <string name="action_cascades">Import Cascades Train</string>
+    <string name="action_record">Record a Drive</string>
 </resources>

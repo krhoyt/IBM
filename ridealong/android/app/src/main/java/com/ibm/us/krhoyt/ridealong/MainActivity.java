@@ -15,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        RealmConfiguration config = new RealmConfiguration.Builder(this).build();
-        Realm.deleteRealm(config);
+        // RealmConfiguration config = new RealmConfiguration.Builder(this).build();
+        // Realm.deleteRealm(config);
 
         realm = Realm.getInstance(this);
         RealmResults<Route> routes = realm.where(Route.class).findAll();
@@ -85,15 +84,18 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_caltrain) {
-            ImportTask importer;
-            importer = new ImportTask(MainActivity.this, 742);
+            ImportLogTask importer;
+            importer = new ImportLogTask(MainActivity.this, 742);
             importer.execute("Caltrain", "http://ridealong.mybluemix.net/gps/caltrain.log");
 
             return true;
         } else if (id == R.id.action_cascades) {
-            ImportTask importer;
-            importer = new ImportTask(MainActivity.this, 2382);
+            ImportLogTask importer;
+            importer = new ImportLogTask(MainActivity.this, 2382);
             importer.execute("Cascades Train", "http://ridealong.mybluemix.net/gps/sea-pdx-train.log");
+
+            return true;
+        } else if (id == R.id.action_record) {
 
             return true;
         }

@@ -14,5 +14,10 @@
         android:title="@string/action_cascades"
         android:orderInCategory="200"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_record"
+        android:title="@string/action_record"
+        android:orderInCategory="300"
+        app:showAsAction="never" />
 
 </menu>

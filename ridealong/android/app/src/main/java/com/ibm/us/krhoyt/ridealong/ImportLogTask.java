@@ -13,13 +13,13 @@ import java.util.GregorianCalendar;
 
 import io.realm.Realm;
 
-public class ImportTask extends AsyncTask<String, Integer, Integer> {
+public class ImportLogTask extends AsyncTask<String, Integer, Integer> {
 
     private ProgressDialog  progress;
     private Context         context;
     private int             count;
 
-    public ImportTask(Context context, int count) {
+    public ImportLogTask(Context context, int count) {
         this.context = context;
         this.count = count;
     }
