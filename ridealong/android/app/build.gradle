@@ -31,5 +31,5 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile 'io.realm:realm-android:0.85.0'
     compile 'com.esri.arcgis.android:arcgis-android:10.2.7'
-
+    compile 'com.pubnub:pubnub-android:3.7.5'
 }

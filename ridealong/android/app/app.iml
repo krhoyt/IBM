@@ -100,5 +100,6 @@
     <orderEntry type="library" exported="" name="design-23.1.1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.1.1" level="project" />
     <orderEntry type="library" exported="" name="realm-android-0.85.0" level="project" />
+    <orderEntry type="library" exported="" name="pubnub-android-3.7.5" level="project" />
   </component>
 </module>

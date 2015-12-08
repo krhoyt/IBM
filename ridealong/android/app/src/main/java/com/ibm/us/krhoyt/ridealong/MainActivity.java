@@ -96,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
 
             return true;
         } else if (id == R.id.action_record) {
+            Intent intent = new Intent(MainActivity.this, RecordActivity.class);
+            startActivity(intent);
 
             return true;
         }

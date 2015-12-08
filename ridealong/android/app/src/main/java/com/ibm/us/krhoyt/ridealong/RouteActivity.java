@@ -82,7 +82,7 @@ public class RouteActivity extends AppCompatActivity {
 
         Graphic graphic = new Graphic(track, symbol);
         layer.addGraphic(graphic);
-        
+
         map.setExtent(track);
     }
 
