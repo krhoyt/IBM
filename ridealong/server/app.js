@@ -64,6 +64,7 @@ app.use( '/', express.static( 'public' ) );
 // Routes
 app.use( '/api', require( './routes/location.js' ) );
 app.use( '/api', require( './routes/route.js' ) );
+app.use( '/api', require( './routes/weather.js' ) );
 
 // Listen
 var port = ( process.env.VCAP_APP_PORT || 3000 );

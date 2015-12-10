@@ -111,4 +111,16 @@ public class MainActivity extends AppCompatActivity {
         realm.close();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        realm.close();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        realm = Realm.getInstance(this);
+    }
+
 }
