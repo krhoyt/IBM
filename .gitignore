@@ -4,3 +4,5 @@ configuration.json
 configuration.xml
 node_modules/
 volley/
+config.json
+.DS_Store
