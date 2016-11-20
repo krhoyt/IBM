@@ -1,0 +1,122 @@
+<html>
+<head>
+
+<title>AR IoT</title>
+
+<style>
+body {
+  background: white;
+}
+
+#container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+</style>
+
+</head>
+<body>
+
+<div id="container"></div>
+
+<!-- Three.js -->
+<script src="three.js-master/build/three.js"></script>
+
+<!-- Application -->
+<script>
+var data = [ 
+  [2, 5, 6],
+  [10, 2, 5],
+  [3, 3, 3]
+];
+
+var Cube = ( function( scene ) {
+  var material = new THREE.MeshLambertMaterial( {color: 0xCC0000} );
+  var cube = new THREE.Mesh(
+    new THREE.BoxGeometry( 50, 50, 50 ),
+    material
+  );
+
+  var tumble = function() {
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+  };
+
+  scene.add( cube );
+
+  return {
+    tumble: tumble
+  };
+} );
+
+var Sphere = ( function( scene ) {
+  var material = new THREE.MeshLambertMaterial( {color: 0xCC0000} );
+  var radius = 50;
+  var rings = 16;
+  var segments = 16;
+  var sphere = new THREE.Mesh(
+    new THREE.SphereGeometry( radius, segments, rings ),
+    material
+  );
+
+  scene.add( sphere );
+
+  return {};
+} );
+
+var Excel = ( function() {
+  var ANGLE = 45;
+  var FAR = 1000;
+  var HEIGHT = 400;
+  var NEAR = 0.1;
+  var WIDTH = 400;
+  var ASPECT = WIDTH / HEIGHT;
+
+  // Scene
+  var scene = new THREE.Scene();
+
+  // Camera
+  var camera = new THREE.PerspectiveCamera( ANGLE, ASPECT, NEAR, FAR  );
+  camera.position.z = 150;  
+  scene.add( camera );
+
+  // Light
+  var light = new THREE.PointLight( 0xFFFFFF );
+  light.position.set( 10, 50, 130 );
+  scene.add( light );
+
+  // Sphere
+  // var sphere = new Sphere( scene );
+
+  // Cube
+  var cube = new Cube( scene );
+
+  // Render
+  var renderer = new THREE.WebGLRenderer( {antialias: true, alpha: true} );
+  renderer.setSize( WIDTH, HEIGHT );
+
+  // Container
+  var container = document.querySelector( '#container' );
+  container.append( renderer.domElement );
+
+  // Animate
+  var render = function() { 
+    // requestAnimationFrame( render );
+    // cube.tumble();
+    renderer.render( scene, camera );   
+  };
+
+  // Render
+  render();
+
+  // Reveal
+  return {};
+} )();
+</script>
+
+</body>
+</html>

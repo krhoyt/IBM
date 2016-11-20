@@ -1,0 +1,33 @@
+<html>
+<head>
+
+<title>Perceptual</title>
+
+<!-- Styles -->
+<link href="style/perceptual.css" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- User interface -->
+<!-- Two drop zones for comparison -->
+<div class="comparison">
+  <div class="first_compare drop_zone drop_waiting"></div>
+  <div class="second_compare drop_zone drop_waiting"></div>  
+</div>
+
+<!-- Full images -->
+<!-- From local source -->
+<img class="first_image input">
+<img class="second_image input">
+
+<!-- Working area -->
+<!-- Access to pixel data -->
+<canvas class="working_space" width="8" height="8"></canvas>
+
+<!-- Application -->
+<script src="script/average.js"></script>
+<script src="script/perceptual.js"></script>
+
+</body>
+</html>

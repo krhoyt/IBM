@@ -1,0 +1,171 @@
+<html>
+<head>
+
+<title>Gift Card</title>
+
+</head>
+<body>
+
+<video id="camera"></video>
+<canvas width="32" height="32"></canvas>
+
+<script src="phash.js"></script>
+
+<script>
+var GiftCard = ( function() {
+
+  var catalog = [{
+      label: 'Orange Subway Gift Card',
+      average: '0000000001000010001011110101011101011111011110110111111100000000',
+      difference: '1001000110100100100110111010010110100101100111011001010110000100',
+      perceptual: '1001110000100000011001111000011001111000011110011100101110001110'
+    }
+  ];
+
+  var camera = null;
+  var context = null;
+  var canvas = null;
+  var interval = null;
+
+  // Discrete cosine transform
+  var dct = function( N, f ) {
+    // Initialize coefficients
+    var c = new Float64Array( N );
+    
+    for( var i = 1; i < N; i++ ) {
+      c[i] = 1;
+    }
+    
+    c[0] = 1 / Math.sqrt( 2 );
+    
+    // Output
+    var F = new Float64Array( N * N );
+
+    // Lookup table
+    // Because it's O(n^4)
+    var entries = ( 2 * N ) * ( N - 1 );
+    var COS = new Float64Array( entries );
+
+    for( var i = 0; i < entries; i++ ) {
+      COS[i] = Math.cos( i / ( 2 * N ) * Math.PI );
+    }
+
+    // the core loop inside a loop inside a loop...
+    for( var u = 0; u < N; u++ ) {
+      for( var v = 0; v < N; v++ ) {
+        var sum = 0;
+
+        for( var i = 0; i < N; i++ ) {
+          for( var j = 0; j < N; j++ ) {
+            sum += COS[( 2 * i + 1 ) * u] 
+              * COS[( 2 * j + 1 ) * v] 
+              * f[N * i + j];
+          }
+        }
+
+        sum *= ( ( c[u] * c[v] ) / 4 );
+        F[N * u + v] = sum;
+      }
+    }
+
+    return F;
+  };
+
+  // Hamming distance
+  // Difference between two hashes
+  var distance = function( first_hash, second_hash ) {
+    var result = 0;
+
+    for( var i = 0; i < first_hash.length; i++ ) {
+      if( first_hash.charAt( i ) != second_hash.charAt( i ) ) {
+        result = result + 1;
+      }  
+    }
+
+    return result;
+  };
+
+  var mirror = function() {
+    context.drawImage( camera, 0, 0, canvas.width, canvas.height );
+
+    if( interval == null ) {
+      interval = setInterval( perceptual, 1000 );
+    }
+
+    requestAnimationFrame( mirror );
+  };
+
+  // https://raw.githubusercontent.com/naptha/phash.js/master/phash.js
+  var perceptual = function() {
+    var size = 32;
+    var smallerSize = 8;
+
+    // ctx.drawImage(img, 0, 0, size, size);
+    // context.drawImage(img, 0, -size, size, size * 3);
+    var im = context.getImageData( 0, 0, size, size );
+
+    // Reduce color
+    var vals = new Float64Array( size * size );
+
+    for(var i = 0; i < size; i++){
+      for(var j = 0; j < size; j++){
+        var base = 4 * (size * i + j);
+        vals[size * i + j] = 0.299 * im.data[base] + 
+          0.587 * im.data[base + 1] + 
+          0.114 * im.data[base + 2];
+      }
+    }
+
+    // Compute DCT
+    var dctVals = dct(size, vals);
+
+    // Reduce the DCT
+    // Keep top-left
+    // Lowest frequencies
+    var vals = []
+
+    for(var x = 1; x <= smallerSize; x++){
+      for(var y = 1; y <= smallerSize; y++){
+        vals.push(dctVals[size * x + y])
+      }
+    }
+
+    // Average value
+    // Mean using top-left
+    var median = vals.slice(0).sort(function(a, b){
+      return a - b
+    })[Math.floor(vals.length / 2)];
+
+    // Reduce to hash
+    var result = vals.map(function(e){
+      return e > median ? '1' : '0';
+    }).join('');
+
+    for( var i = 0; i < catalog.length; i++ ) {
+      console.log( catalog[i].label + ': ' + distance( result, catalog[i].perceptual ) );
+    }
+  };
+
+  canvas = document.querySelector( 'canvas' );
+
+  navigator.mediaDevices.getUserMedia( {audio: false, video: true} ).then( function( stream ) {
+    camera = document.querySelector( '#camera' );
+    camera.srcObject = stream;
+    camera.onloadedmetadata = function( evt ) {
+      context = canvas.getContext( '2d' );
+      
+      camera.play();
+
+      mirror();
+    };
+  } ).catch( function( error ) {
+    console.log( error );
+  } );
+
+  return {};
+
+} )();
+</script>
+
+</body>
+</html>

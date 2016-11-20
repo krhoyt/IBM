@@ -1,0 +1,196 @@
+<html>
+<head>
+
+<title>Excel</title>
+
+<style>
+body {
+  background: white;
+}
+
+#chart {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+</style>
+
+</head>
+<body>
+
+<!-- Chart -->
+<div id="chart"></div>
+
+<!-- Three.js -->
+<script src="three.js-master/build/three.js"></script>
+
+<!-- Application -->
+<script>
+var Excel = ( function() {
+  // Constants
+  var ANGLE = 45;
+  var DEPTH = 400;
+  var FAR = 1000;
+  var HEIGHT = 400;
+  var NEAR = 0.1;
+  var WIDTH = 400;
+  var ASPECT = WIDTH / HEIGHT;
+
+  var animate = false;
+  var data = {
+    labels: ['Jan', 'Feb', 'Mar'],
+    datasets: [{
+      color: 0x5F9CD3,
+      data: [2, 5, 6],
+      label: 'Apples',      
+      type: 'bar'
+    }, {
+      color: 0xEB7E3B,      
+      data: [10, 2, 5],
+      label: 'Oranges',
+      type: 'bar'
+    }, {
+      color: 0xA5A5A5,      
+      data: [3, 3, 3],
+      label: 'Bananas',
+      type: 'bar'
+    }]
+  };
+  var maximum = null;
+
+  // Build the scene
+  var build = function() {
+    for( var s = 0; s < data.datasets.length; s++ ) {
+      for( var d = 0; d < data.datasets[s].data.length; d++ ) {
+        var width = ( WIDTH / data.datasets[s].data.length ) / 3;
+        var height = HEIGHT * ( data.datasets[s].data[d] / maximum );
+        var depth = width;
+        var geometry = new THREE.BoxGeometry(
+          width,
+          height,
+          depth
+        );        
+        var material = new THREE.MeshLambertMaterial( {color: data.datasets[s].color} );
+        var item = new THREE.Mesh( geometry, material );
+        item.position.x = 
+          ( WIDTH / 2 ) - 
+          ( 1.5 * width ) - 
+          ( d * ( width * 3 ) );
+        item.position.y = height / 2;
+        item.position.z = 
+          ( 0 - ( WIDTH / 2 ) ) + 
+          ( 1.5 * depth ) + 
+          ( s * ( depth * 3 ) );
+        scene.add( item );
+      }
+    }
+  };
+
+  var angle = 0;
+
+  // Animate
+  var render = function() { 
+    var radians = angle * ( Math.PI / 180 );
+
+    camera.position.x = 800 * Math.cos( radians );
+    camera.position.z = 800 * Math.sin( radians );  
+    camera.lookAt( new THREE.Vector3( 0, 200, 0 ) );  
+
+    if( angle == 360 ) {
+      angle = 0;
+    } else {
+      angle = angle + 1;
+    }
+
+    renderer.render( scene, camera );   
+    
+    if( animate ) {
+      requestAnimationFrame( render );          
+    }
+  };
+
+  var setAnimate = function( state ) {
+    animate = state;
+    render();
+  };
+
+  // Scene
+  var scene = new THREE.Scene();
+
+  // Camera
+  var camera = new THREE.PerspectiveCamera( ANGLE, ASPECT, NEAR, FAR  );
+  camera.position.x = 0;
+  camera.position.y = 500;
+  camera.position.z = -800;  
+  camera.lookAt( new THREE.Vector3( 0, 200, 0 ) );
+  scene.add( camera );
+
+  // Lighting
+  var front = new THREE.PointLight( 0xFFFFFF );
+  front.position.set( 0, 200, -800 );
+  scene.add( front );
+
+  var side = new THREE.PointLight( 0xFFFFFF );
+  side.position.set( -800, 800, 0 );
+  scene.add( side );  
+
+  // Center
+  var geometry = new THREE.CylinderGeometry( 1, 1, 400, 32 );
+  var material = new THREE.MeshBasicMaterial( {color: 0xFF0000} );
+  var cylinder = new THREE.Mesh( geometry, material );
+  cylinder.position.x = 0;
+  cylinder.position.y = 0;
+  cylinder.position.z = 0;
+  scene.add( cylinder );
+
+  // Bottom
+  var geometry = new THREE.BoxGeometry( 400, 1, 400 );
+  var material = new THREE.MeshBasicMaterial( {color: 0xE6E6E6} );
+  var bottom = new THREE.Mesh( geometry, material );
+  bottom.position.x = 0;
+  bottom.position.y = 0;
+  bottom.position.z = 0;
+  scene.add( bottom );
+
+  // Container
+  var container = document.querySelector( '#chart' );
+
+  // Render
+  var renderer = new THREE.WebGLRenderer( {antialias: true, alpha: true} );
+  renderer.setSize( container.clientWidth, container.clientHeight );
+
+  // Canvas
+  container.append( renderer.domElement );
+
+  // Largest value
+  for( var s = 0; s < data.datasets.length; s++ ) {
+    for( var d = 0; d < data.datasets[s].data.length; d++ ) {
+      if( maximum == null ) {
+        maximum = data.datasets[s].data[d];
+      }
+
+      if( data.datasets[s].data[d] > maximum ) {
+        maximum = data.datasets[s].data[d];
+      }
+    }
+  }
+
+  console.log( 'Maximum: ' + maximum );
+
+  // Build
+  build();
+
+  // Render
+  render();
+
+  return {
+    setAnimate: setAnimate
+  };
+} )();
+</script>
+
+</body>
+</html>
