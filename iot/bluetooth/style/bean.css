@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#ble {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  bottom: 16px;
+  height: 20px;
+  opacity: 0.65;
+  position: absolute;
+  right: 16px;
+  width: 20px;
+}
+
+#ble:hover {
+  opacity: 1.0;
+}
+
+#ble.connected {
+  background-image: url( '../img/bluetooth.connected.svg' );  
+}
+
+#ble.ready {
+  background-image: url( '../img/bluetooth.svg' );
+}
+
+#ble.searching {
+  background-image: url( '../img/bluetooth.searching.svg' );
+}
