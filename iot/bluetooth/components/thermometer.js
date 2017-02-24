@@ -30,6 +30,21 @@ class Thermometer {
     } );
   }
 
+  // A phrase describing the current state
+  status() {
+    let phrase = 
+      'The current temperature is ' +
+      this.root.innerHTML.trim();
+
+    if( this.display == Thermometer.FAHRENHEIT ) {
+      phrase = phrase + ' fahrenheit.';
+    } else {
+      phrase = phrase + ' celcius.';
+    }
+
+    return phrase;
+  }
+
   // Update displayed value
   update() {
     // Get most recent reported value from sensor
@@ -53,16 +68,26 @@ class Thermometer {
   }
 
   // Toggle units displayed
+  // Alternatively report status
   doClick( evt ) {
-    // Toggle units
-    if( this.display == Thermometer.FAHRENHEIT ) {
-      this.display = Thermometer.CELCIUS;
+    if( evt.altKey ) {
+      let alternate = new CustomEvent( Thermometer.ALTERNATE, {
+        detail: {
+          status: this.status()
+        }
+      } );
+      this.root.dispatchEvent( alternate );
     } else {
-      this.display = Thermometer.FAHRENHEIT;
-    }
+      // Toggle units
+      if( this.display == Thermometer.FAHRENHEIT ) {
+        this.display = Thermometer.CELCIUS;
+      } else {
+        this.display = Thermometer.FAHRENHEIT;
+      }
 
-    // Update display
-    this.update();
+      // Update display
+      this.update();
+    }
   }
 
   // Element no longer visible
@@ -74,5 +99,6 @@ class Thermometer {
 }
 
 // Constants
+Thermometer.ALTERNATE = 'thermometer_alternate';
 Thermometer.CELCIUS = 'c';
 Thermometer.FAHRENHEIT = 'f';

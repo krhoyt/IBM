@@ -113,6 +113,20 @@ class Bluetooth {
     this.bluetooth.gatt.disconnect();
   }
 
+  // A phrase describing the current state
+  status() {
+    // Assume not connected
+    let phrase = 'is not';
+
+    // Change if connected
+    if( this.connected ) {
+      phrase = ' is ';
+    }
+
+    // Assemble and return phrase
+    return 'A Bluetooth device ' + phrase + ' currently connected.';
+  }
+
   // Scratch characteristic changed
   // Parse content
   // Pass along relevant values
@@ -145,12 +159,22 @@ class Bluetooth {
   }
 
   // Toggle connection
+  // Alternatively report status
   doClick( evt ) {
-    if( this.connected ) {
-      this.disconnect();
+    if( evt.altKey ) {
+      let alternate = new CustomEvent( Bluetooth.ALTERNATE, {
+        detail: {
+          status: this.status()
+        }
+      } );
+      this.root.dispatchEvent( alternate );
     } else {
-      this.connect();
-    }        
+      if( this.connected ) {
+        this.disconnect();
+      } else {
+        this.connect();
+      }        
+    }
   }
 
   // Disconnected from device
@@ -167,6 +191,7 @@ class Bluetooth {
 
 // Constants
 Bluetooth.ACCELEROMETER = 'bluetooth_accelerometer';
+Bluetooth.ALTERNATE = 'bluetooth_alternate';
 Bluetooth.CONNECTED = 'bluetooth_connected';
 Bluetooth.DISCONNECTED = 'bluetooth_disconnected';
 Bluetooth.LED = 'a495ff22-c5b1-4b44-b512-1370f02d74de';

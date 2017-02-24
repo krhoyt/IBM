@@ -6,3 +6,4 @@ node_modules/
 volley/
 config.json
 .DS_Store
+local.env

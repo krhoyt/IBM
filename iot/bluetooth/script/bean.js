@@ -8,6 +8,10 @@ class Bean {
     // Event listeners
     this.bluetooth = new Bluetooth( '#bluetooth' );
     this.bluetooth.root.addEventListener( 
+      Bluetooth.ALTERNATE, 
+      evt => this.doAlternate( evt ) 
+    );
+    this.bluetooth.root.addEventListener( 
       Bluetooth.CONNECTED, 
       evt => this.doConnected( evt ) 
     );
@@ -27,18 +31,36 @@ class Bean {
     // Color picker
     this.picker = new Picker( '#picker' );
     this.picker.root.addEventListener( 
+      Picker.ALTERNATE,
+      evt => this.doAlternate( evt )
+    );    
+    this.picker.root.addEventListener( 
       Picker.COLOR,
       evt => this.doColor( evt )
     );
 
     // Thermometer
     this.thermometer = new Thermometer( '#thermometer' );
+    this.thermometer.root.addEventListener( 
+      Thermometer.ALTERNATE,
+      evt => this.doAlternate( evt )
+    );            
+
+    // Watson Speech
+    this.watson = new Watson();
+    this.watson.say( 'Hello there!' );
   }
 
   // Accelerometer data changed
   // Update 3D scene
   doAccelerometer( evt ) {
     this.scene.rotate( evt.detail.x, evt.detail.y );
+  }
+
+  // Alternate actions for controls
+  // Speak their status using Watson TTS
+  doAlternate( evt ) {
+    this.watson.say( evt.detail.status );
   }
 
   // New color selection
@@ -73,7 +95,7 @@ class Bean {
     this.thermometer.hide();
 
     // Reset scene
-    this.scene.rotate( 0, 0, 0 );
+    this.scene.rotate( 0, 0 );
   }
 
   // Temperature data arrived
