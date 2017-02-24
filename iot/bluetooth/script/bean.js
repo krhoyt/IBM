@@ -48,7 +48,6 @@ class Bean {
 
     // Watson Speech
     this.watson = new Watson();
-    this.watson.say( 'Hello there!' );
   }
 
   // Accelerometer data changed
