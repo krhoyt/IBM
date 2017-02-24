@@ -4,38 +4,29 @@
 <!-- Magic beans! -->
 <title>Bean Explorer</title>
 
+<!-- Roboto -->
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
 <!-- Styles -->
 <link rel="stylesheet" type="text/css" href="style/bean.css">
+<link rel="stylesheet" type="text/css" href="style/bluetooth.css">
+<link rel="stylesheet" type="text/css" href="style/picker.css">
+<link rel="stylesheet" type="text/css" href="style/thermometer.css">
 
 </head>
 <body>
 
 <!-- 3D render surface -->
-<div id="webgl"></div>
+<div id="scene"></div>
 
-<!-- Bluetooth connectivity -->
-<div id="ble" class="ready"></div>
+<!-- Thermometer -->
+<button id="thermometer">72&deg;</button>
 
 <!-- Color picker -->
-<div id="picker">
-  <div id="palette">
-    <div class="swatch"><div class="color"></div></div>
-    <div class="swatch"><div class="color"></div></div>
-    <div class="swatch"><div class="color"></div></div>
-    <div class="swatch"><div class="color"></div></div>    
-    <div class="swatch"><div class="color"></div></div>
-    <div class="swatch"><div class="color"></div></div>
-    <div class="swatch"><div class="color"></div></div>
-    <div class="swatch"><div class="color"></div></div>    
-    <div class="swatch"><div class="color"></div></div>
-    <div class="swatch"><div class="color"></div></div>
-    <div class="swatch"><div class="color"></div></div>
-    <div class="swatch"><div class="color"></div></div>            
-  </div>
-  <div id="current">
-    <div class="color"></div>
-  </div>
-</div>
+<div id="picker"></div>
+
+<!-- Bluetooth connectivity -->
+<button id="bluetooth" class="waiting"></button>
 
 <!-- Three.js -->
 <!-- STL file loader and parser -->
@@ -45,6 +36,12 @@
 <!-- TweenMax -->
 <!-- Animation -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
+
+<!-- Custom components -->
+<script src="../components/scene.js"></script>
+<script src="../components/bluetooth.js"></script>
+<script src="../components/picker.js"></script>
+<script src="../components/thermometer.js"></script>
 
 <!-- Application -->
 <script src="script/bean.js"></script>

@@ -1,0 +1,22 @@
+#thermometer {
+  background: none;
+  border: none;
+  color: white;
+  display: none;
+  font-size: 14px;
+  height: 24px;
+  left: 14px;
+  line-height: 24px;
+  margin: 0;
+  opacity: 0;
+  outline: none;
+  padding: 0;
+  position: absolute;
+  text-align: left;
+  top: 14px;  
+  width: 24px;
+}
+
+#thermometer:hover {
+  opacity: 1.0;
+}
