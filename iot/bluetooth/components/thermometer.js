@@ -26,7 +26,7 @@ class Thermometer {
   show() {
     this.root.style.display = 'block';
     TweenMax.to( this.root, 0.50, {
-      opacity: 0.65
+      opacity: 1
     } );
   }
 
