@@ -1,0 +1,42 @@
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+#name {
+  margin-right: 5px;
+}
+
+#output {
+  color: rgba( 0, 0, 0, 0.85 );
+  font-size: 2em;
+  margin: 0;
+  padding: 0;
+  text-align: center;  
+}
+
+#prefix {
+  margin-right: 5px;
+}
+
+.panel {
+  display: flex;
+  flex-basis: 0;
+  flex-direction: column;  
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.panel:first-of-type {
+  border-bottom: dashed 1px rgba( 0, 0, 0, 0.15 );
+}
+
+.parameters {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
