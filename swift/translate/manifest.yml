@@ -1,0 +1,9 @@
+applications:
+- name: Translate
+  memory: 256M
+  instances: 1
+  random-route: true
+  disk_quota: 1024M
+  command: Translate
+  buildpack: swift_buildpack
+  

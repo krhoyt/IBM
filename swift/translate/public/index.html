@@ -1,0 +1,76 @@
+<html>
+<head>
+
+<link href="favicon.ico" rel="icon">
+
+<title>Translation</title>
+
+<!-- Google Fonts -->
+<!-- Roboto -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+
+<!-- Styles -->
+<link rel="stylesheet" href="style/translate.css">
+
+</head>
+<body>
+
+<!-- Form area -->
+<!-- Top portion of screen -->
+<div class="form">
+
+  <!-- Phrase to translate -->
+  <div class="phrase">
+    <input class="text" placeholder="Phrase to translate">
+  </div>
+
+  <!-- Languages -->
+  <div class="languages">
+
+    <!-- Source langauge -->
+    <p>From:</p>
+    <select class="source">
+      <option value="ar">Arabic</option>
+      <option value="en" selected>English</option>
+      <option value="fr">French</option>
+      <option value="it">Italian</option>
+      <option value="pt">Portuguese</option>
+      <option value="es">Spanish</option>
+    </select>
+
+    <!-- Target language -->
+    <p>To:</p>
+    <select class="target">
+      <option value="ar">Arabic</option>
+      <option value="en">English</option>
+      <option value="fr">French</option>
+      <option value="it">Italian</option>
+      <option value="pt">Portuguese</option>
+      <option value="es" selected>Spanish</option>      
+    </select>
+
+  </div>
+
+  <!-- Submit button -->
+  <div class="submit">
+    <button>Translate</button>  
+  </div>
+
+</div>
+
+<!-- Result view -->
+<!-- Bottom portion of screen -->
+<div class="results">
+  <p class="translate">&nbsp;</p>
+</div>
+
+<!-- Logo -->
+<a href="http://kevinhoyt.com">
+  <img class="logo" src="img/ibm.svg" width="65">
+</a>
+
+<!-- Application -->
+<script src="script/translate.js"></script>
+
+</body>
+</html>
