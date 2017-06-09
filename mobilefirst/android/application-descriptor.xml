@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<nativeAndroidApp id="ibm_us_com_hellomobilefirst" platformVersion="7.1.0.00.20150807-0630" version="1.0" xmlns="http://www.worklight.com/native-android-descriptor">
-    <displayName>Hello MobileFirst</displayName>
-    <description>Hello MobileFirst</description>
-    <packageName>ibm.us.com.hellomobilefirst</packageName>
-    <publicSigningKey />
-    <accessTokenExpiration>3600</accessTokenExpiration>
-    <userIdentityRealms />
-</nativeAndroidApp>

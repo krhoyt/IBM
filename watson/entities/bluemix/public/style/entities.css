@@ -1,0 +1,64 @@
+body {
+  background-color: #ececec;   
+  color: rgba( 0, 0, 0, 0.87 );
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 16px;  
+}
+
+input {
+  background: none;
+  border: none;
+  border-bottom: solid 1px #994fd7;  
+  color: #994fd7;
+  font-size: 2em;
+  font-weight: 300;
+  margin: 100px 100px 30px 100px;
+  padding: 0 0 16px 0;
+  outline: none;
+  opacity: 0.30;
+}
+
+input::placeholder {
+  color: #994fd7;  
+}
+
+.entity {
+  display: flex;
+  flex-direction: row;
+  padding: 20px 100px 20px 100px;
+}
+
+.entity > p {
+  font-size: 1.5em;
+  margin: 0;
+  padding: 0;
+}
+
+.entity > p:nth-of-type( 1 ) {
+  width: 150px;
+}
+
+.entity > p:nth-of-type( 2 ) {
+  color: #994fd7;  
+  flex-basis: 0;
+  flex-grow: 0.60;
+}
+
+.entity > p:nth-of-type( 3 ) {
+  flex-basis: 0;
+  flex-grow: 0.40;
+}
+
+.entity > p:nth-of-type( 4 ) {
+  text-align: right;
+  width: 150px;
+}
+
+.logo {
+  bottom: 16px;
+  left: 16px;
+  position: absolute;
+}

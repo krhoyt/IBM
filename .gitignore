@@ -2,8 +2,8 @@ forecast.io
 configuration.js
 configuration.json
 configuration.xml
+config.json
+local.env
 node_modules/
 volley/
-config.json
 .DS_Store
-local.env

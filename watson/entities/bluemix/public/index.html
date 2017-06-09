@@ -1,0 +1,43 @@
+<html>
+<head>
+
+<title>System Entities</title>
+
+<link href="favicon.ico" rel="icon">
+
+<!-- Google Fonts -->
+<!-- Roboto -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+
+<!-- Styles -->
+<link rel="stylesheet" href="style/entities.css">
+
+</head>
+<body>
+
+<!-- Entry field -->
+<input type="text" placeholder="Enter a phrase with entities (i.e. date, number)">
+
+<!-- Holder for results -->
+<div class="results"></div>
+
+<!-- Logo -->
+<a href="http://kevinhoyt.com">
+  <img class="logo" src="img/ibm.svg" width="65">
+</a>
+
+<!-- Result rows -->
+<template id="row">
+  <div class="entity">
+    <p>date</p>
+    <p>tomorrow</p>
+    <p>2017-06-03</p>
+    <p>100%</p>
+  </div>
+</template>
+
+<!-- Application -->
+<script src="script/entities.js"></script>
+
+</body>
+</html>

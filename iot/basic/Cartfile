@@ -1,0 +1,4 @@
+github "robbiehanson/CocoaAsyncSocket" "master"
+github "radex/SwiftyTimer" "master"
+github "emqtt/CocoaMQTT" "master"
+github "SwiftyJSON/SwiftyJSON"

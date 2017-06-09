@@ -1,8 +1,0 @@
-applications:
-- disk_quota: 1024M
-  host: java-weather
-  name: Java Weather
-  path: weather.war
-  domain: mybluemix.net
-  instances: 1
-  memory: 512M

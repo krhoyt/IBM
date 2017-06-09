@@ -1,0 +1,8 @@
+{
+  "location_api_key": "AIzaSyBLfo4g4C8Wzo2gqZy6rFkYLORIBAXakPw",
+  "map_api_key": "AIzaS2AVdZUkJcTZlcBr3xdidBgCBA55q4jjbXg",
+  "event_name": "deviceLocator",
+  "particle_username": "_YOUR_PARTICLE_USERNAME_",
+  "particle_password": "_YOUR_PARTICLE_PASSWORD_",
+  "particle_device": "240023000f4d343436313031"
+}
