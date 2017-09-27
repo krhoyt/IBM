@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/text_content"
+        android:layout_width="fill_parent"
+        android:layout_height="34dp"
+        android:textSize="14dp"
+        android:paddingLeft="10dp"
+        android:text="Chat Row"
+        android:gravity="center|left"
+        android:paddingRight="10dp">
+    </TextView>
+
+</RelativeLayout>

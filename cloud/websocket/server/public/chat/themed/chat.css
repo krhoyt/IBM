@@ -1,0 +1,140 @@
+::-webkit-input-placeholder {
+    color: rgba( 0, 0, 0, 0.30 );
+}
+    
+::-moz-placeholder {
+   color: rgba( 0, 0, 0, 0.30 );
+}
+
+:-ms-input-placeholder {
+   color: rgba( 0, 0, 0, 0.30 );
+}    
+    
+body {
+    background-color: #eeeeee;
+    font-family: 'Roboto', sans-serif;    
+}
+    
+.chat {
+    margin-right: 76px;
+    margin-top: 8px;
+    position: relative;
+}
+ 
+.chat:last-of-type {
+    padding-bottom: 8px;
+}
+    
+.chat .avatar {
+    background-color: #009688;
+    background-image: url( /avatar/hdc.svg );
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 60px;
+    height: 60px;
+    left: 8px;
+    position: absolute;
+    width: 60px;
+}
+    
+.chat .bubble {
+    background-color: white;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    box-shadow: 0 2px 2px rgba( 0, 0, 0, 0.20 );
+    color: rgba( 0, 0, 0, 0.87 );    
+    left: 76px;
+    padding: 8px;
+    position: absolute;
+    top: 0;
+}
+    
+.chat .bubble:after {
+    border-color: transparent #FFFFFF;        
+    border-style: solid;
+    border-width: 0px 11px 11px 0;
+    content: '';
+    display: block;
+    left: -11px;    
+    position: absolute;
+    top: 0;
+    width: 0;
+    z-index: 1;
+}    
+    
+.chat .bubble p:first-of-type {
+    color: rgba( 0, 0, 0, 0.87 );    
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0;
+}
+    
+.chat .bubble p:last-of-type {
+    color: rgba( 0, 0, 0, 0.30 );    
+    font-size: 14px;
+    margin: 0;
+    margin-top: 4px;
+}    
+    
+.header {
+    background-color: #009688; 
+    /* box-shadow: 0 4px 8px rgba( 0, 0, 0, 0.20 ); */
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    height: 56px;
+    left: 0;
+    line-height: 56px;
+    margin: 0;
+    padding-left: 16px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+    
+.history {
+    bottom: 48px;
+    left: 0;
+    -webkit-overflow-scrolling: touch;        
+    overflow-y: scroll;
+    position: absolute;
+    right: 0;
+    top: 56px;
+}
+    
+.message {
+    background-color: white;
+    background-image: url( /img/chat_bubble_gray.svg );
+    background-position: 16px 14px;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    border-top: solid 2px rgba( 0, 0, 0, 0.20 );
+    bottom: 0;
+    height: 48px;
+    left: 0;
+    position: absolute;
+    right: 0;
+}
+    
+.message input {
+    background: none;
+    border: none;
+    color: rgba( 0, 0, 0, 0.87 );
+    font-size: 16px;
+    height: 48px;
+    left: 56px;
+    line-height: 48px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+    
+.message input:focus {
+    outline: none;
+}
+    
+.template {
+    visibility: hidden;
+}

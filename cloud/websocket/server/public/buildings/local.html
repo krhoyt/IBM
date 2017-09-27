@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    
+<title>Building Overview</title>
+
+<!-- Bootstrap styles -->
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+<!-- Application styles -->
+<link href="../style/buildings/buildings.css" rel="stylesheet" type="text/css">  
+  
+<!-- Moment -->
+<script src="../script/buildings/moment.min.js" type="text/javascript"></script>  
+  
+<!-- Application -->  
+<script src="../script/buildings/local.js" type="text/javascript"></script>
+  
+</head>
+<body style="padding: 50px;">
+  
+<div class="container-fluid">
+  
+<div class="row">
+  
+  <div class="col-sm-8">
+    
+    <!-- Building status -->
+    <div class="panel row">
+      
+      <div class="col-sm-12">
+        
+        <!-- Header -->
+        <div class="row">
+          <p class="col-sm-12 header building">Building Status</p>
+        </div>
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-sm-12 office">
+                <div class="energy-star">
+                  <div class="energy-logo"></div>
+                  <div class="score-label">Energy Star Score</div>
+                  <div class="score-goal">Target score: 80</div>
+                  <div class="score-current">85</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="row">
+              <p class="col-sm-12 comparison">My Usage Comparison</p>
+            </div>
+            <div class="row" style="height: 50px; margin-top: 10px;">
+              <p class="col-sm-3 comparison-label lightening">Energy</p>
+              <p class="col-sm-8 comparison-report up">2.3% week over week</p>
+            </div>
+            <div class="row" style="height: 50px;">
+              <p class="col-sm-3 comparison-label drop">Water</p>
+              <p class="col-sm-8 comparison-report down">3.5% week over week</p>
+            </div>           
+            <div class="row" style="height: 50px;">
+              <p class="col-sm-3 comparison-label fire">Fuel</p>
+              <p class="col-sm-8 comparison-report down">4.8% week over week</p>
+            </div>            
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <!-- HVAC summary -->
+    <div class="panel row">
+      
+      <div class="col-sm-12">
+        
+        <!-- Header -->
+        <div class="row">
+          <p class="col-sm-12 header gauge">HVAC Summary</p>
+        </div>
+        
+        <div class="row">
+
+          <div class="col-sm-4">          
+            <div class="row">
+              <p class="col-sm-12 summary status">Unit Status</p>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 green" style="padding-top: 5px;">
+                <p class="status-icon">&nbsp;</p>
+                <p class="status-message">No Alarms</p>        
+              </div>
+            </div>            
+            <div class="row">
+              <p class="col-sm-12 details">View Details</p>
+            </div>            
+          </div>
+          
+          <div class="col-sm-4">          
+            <div class="row">
+              <p class="col-sm-12 summary wrench">Maintenance</p>
+            </div>
+            <div class="row">
+              <div class="col-sm-12" style="background-color: #ffd33f; padding-top: 5px;">
+                <p class="maintenance-icon">&nbsp;</p>
+                <p class="status-message">Recommended</p>        
+              </div>
+            </div>            
+            <div class="row">
+              <p class="col-sm-12 details">View Details</p>
+            </div>            
+          </div>          
+          
+          <div class="col-sm-4">          
+            <div class="row">
+              <p class="col-sm-12 summary lightening">Power Usage</p>
+            </div>
+            <div class="row green">
+              <div class="col-sm-12" style="padding-top: 5px;">
+                <p class="down-white">&nbsp;</p>
+                <p class="status-message">15% lower</p>        
+              </div>
+            </div>            
+            <div class="row">
+              <p class="col-sm-12 details">View Details</p>
+            </div>            
+          </div>          
+          
+        </div>
+        
+        <div class="row">
+        
+          <div class="col-sm-1 happy"></div>
+          <div class="col-sm-1" style="padding: 0;">
+            <p id="usage-usage" style="font-size: 1.50em; font-weight: 600; margin: 0; padding: 0;  color: #655f5f; text-align: center;">75%</p>
+            <p style="margin: 0; padding: 0; margin-top: -5px; color: #655f5f; text-align: center;">usage</p>
+          </div>
+          <svg class="col-sm-4" height="50">
+            <g id="usage-callout" transform="translate( 32, 0 )">
+              <rect x="0" y="0" width="50" height="20" fill="#6fc048" rx="10" ry="10"></rect>
+              <path d="M25 28 l6 -8 l-12 0 l6 8" fill="#6fc048"></path>
+              <text id="usage-label" x="25" y="15" width="50" text-anchor="middle" fill="white">25%</text>              
+            </g>
+            <rect id="usage-slider" x="0" y="30" width="25%" height="10" rx="5" ry="5" fill="#655f5f"></rect>                        
+            <rect x="0" y="30" width="100%" height="10" stroke-width="2" stroke="#655f5f" rx="5" ry="5" fill="rgba( 0, 0, 0, 0 )"></rect>
+          </svg>
+          <div class="col-sm-1 leaf"></div>
+          <div class="col-sm-1" style="padding: 0;">
+            <p id="live-usage" style="font-size: 1.50em; font-weight: 600; margin: 0; padding: 0;  color: #655f5f; text-align: center;">0.60</p>
+            <p style="margin: 0; padding: 0; margin-top: -5px; color: #655f5f; text-align: center;">index</p>        
+          </div>
+          <svg class="col-sm-4" height="50">
+            <g id="live-callout" transform="translate( 90, 0 )">
+              <rect x="0" y="0" width="50" height="20" fill="#6fc048" rx="10" ry="10"></rect>
+              <path d="M25 28 l6 -8 l-12 0 l6 8" fill="#6fc048"></path>
+              <text id="live-label" x="25" y="15" width="50" text-anchor="middle" fill="white">50%</text>              
+            </g>
+            <rect id="live-slider" x="0" y="30" width="50%" height="10" rx="5" ry="5" fill="#655f5f"></rect>            
+            <rect x="0" y="30" width="100%" height="10" stroke-width="2" stroke="#655f5f" rx="5" ry="5" fill="rgba( 0, 0, 0, 0 )"></rect>
+          </svg>          
+          
+        </div>
+        
+      </div>
+      
+    </div>    
+    
+  </div>
+    
+  <!-- Info panels -->
+  <div class="col-sm-4" style="padding-left: 30px;">
+    <div class="row">
+      <p class="col-sm-12 pod compass">Building Info</p>
+    </div>
+    
+    <div class="row">
+      <p class="col-sm-12 pod cloud">Weather Preview</p>
+    </div>    
+    
+    <div class="row">
+      <p class="col-sm-12 pod condition">Allapot Condition</p>
+    </div>
+    
+    <div class="panel row" style="margin-bottom: 10px;">
+      <div class="col-sm-12">
+        <div class="row">
+          <p class="col-sm-12 pod thumb">Comfort Index</p>                
+        </div>
+        <div class="row">
+          <p class="col-sm-12 as-of" style="margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0;">As of the Last 30 Days</p>
+        </div>
+        <div class="row">
+          <p class="col-sm-12" style="color: #59bee8; margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0;">Viewing average index in the current range.</p>
+        </div>        
+        <div class="row">
+          <div class="col-sm-2 happy" style="margin-top: 10px;"></div>
+          <div class="col-sm-2" style="margin-top: 10px; padding: 0; text-align: center;">
+            <p id="comfort-percent" style="font-size: 1.50em; font-weight: 600; margin: 0; padding: 0; color: #655f5f;">75%</p>
+            <p style="margin: 0; margin-top: -5px; padding: 0; color: #655f5f;">usage</p>
+          </div>
+          <svg class="col-sm-8" height="65">
+            <g id="comfort-callout" transform="translate( 0, 10 )">
+              <rect x="0" y="0" width="50" height="20" fill="#6fc048" rx="10" ry="10"></rect>
+              <path d="M25 28 l6 -8 l-12 0 l6 8" fill="#6fc048"></path>
+              <text id="comfort-label" x="25" y="15" width="50" text-anchor="middle" fill="white">12%</text>              
+            </g>
+            <rect id="comfort-slider" x="0" y="40" width="12%" height="10" rx="5" ry="5" fill="#655f5f"></rect>                        
+            <rect x="0" y="40" width="100%" height="10" stroke-width="2" stroke="#655f5f" rx="5" ry="5" fill="rgba( 0, 0, 0, 0 )"></rect>
+          </svg>          
+        </div>
+        <div class="row" style="margin-top: 10px; padding-bottom: 10px;">
+          <div class="col-sm-12">
+            <div style="background-color: white; height: 200px; background-image: url( '../img/buildings/graph.png' );">
+              <svg id="comfort" width="100%" height="200">
+                <g id="range"></g>
+                <g id="plot" opacity="0">
+                  <circle cx="0" cy="0" r="6" stroke="rgba( 0, 0, 0, 0 )" fill="rgba( 0, 0, 0, 1 )"></circle>
+                  <circle cx="0" cy="0" r="10" stroke="rgba( 0, 0, 0, 1 )" fill="rgba( 0, 0, 0, 0 )"></circle>                  
+                </g>
+                <path id="chart" stroke-width="2" stroke="black" fill="rgba( 0, 0, 0, 0 )"></path>
+              </svg>
+            </div>
+          </div>
+        </div>        
+      </div>    
+    </div>  
+  
+    <div id="controls" class="panel row" style="visibility: hidden;">
+      <div class="col-sm-12">
+        <div class="row">
+          <p class="col-sm-12 pod display">Display Options</p>                
+        </div>    
+        <div class="row" style="padding-bottom: 10px;">
+          <button class="col-sm-3 refresh" style="height: 40px;"></button>          
+          <button class="col-sm-3 turtle" style="height: 40px;"></button>
+          <button class="col-sm-3 funnel" style="height: 40px;"></button>
+          <button class="col-sm-3 kaazing" style="height: 40px;"></button>
+        </div>
+      </div>
+    </div>          
+    
+  </div>
+  
+</div>  
+  
+<!-- jQuery -->
+<script src="../script/buildings/jquery.min.js"></script>
+    
+<!-- Bootstrap -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+  
+</body>
+</html>

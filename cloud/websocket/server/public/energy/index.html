@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1">
+
+<title>Petrol Pal</title>
+
+<!-- Google Fonts -->
+<!-- Righteous, 400 -->
+<!-- Source Sans Pro, 300, 400, 700 -->
+<!-- Source Code Pro, 600 -->
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700|Righteous|Source+Code+Pro:600" rel="stylesheet" type="text/css">
+
+<!-- Application styles -->    
+<link href="../style/energy/petrolpal.css" rel="stylesheet" type="text/css">
+
+<!-- Google Maps -->
+<script src="https://maps.googleapis.com/maps/api/js" type="text/javascript"></script>
+
+<!-- Rich Marker -->
+<!-- https://googlemaps.github.io/js-rich-marker/reference.html -->
+<script src="../script/energy/rich.marker.js" type="text/javascript"></script>
+
+<!-- GreenSock -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.13.2/TweenMax.min.js" type="text/javascript"></script>
+
+<!-- PreloadJS -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/PreloadJS/0.4.1/preloadjs.min.js" type="text/javascript"></script>
+
+<!-- Emulation -->
+<script src="http://wallet.kaazing.com/lib/client/javascript/WebSocket.js" type="text/javascript"></script>
+
+<!-- JMS -->
+<script src="http://wallet.kaazing.com/lib/client/javascript/jms/JmsClient.js" type="text/javascript"></script>
+
+<!-- Application constants -->
+<script src="../script/energy/constants.js" type="text/javascript"></script>
+
+<!-- Brand constants -->
+<script src="../script/energy/brands.js" type="text/javascript"></script>
+
+<script src="../script/energy/petrolpal.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+<div id="viewport">
+
+    <div class="splash screen">
+        <p>petrol pal</p>
+        <p>Determining location ...</p>
+    </div>
+
+    <div class="locations screen">
+        <div class="map"></div>
+        <div class="list"></div>
+    </div>
+
+    <div class="details screen">
+        <div class="map"></div>
+        <div class="panel">
+            <p>Hoyt House</p>
+            <p>16220 Martingale Drive</p>
+            <div class="prices">
+                <div>
+                    <p>$9.99</p>
+                    <p>Regular</p>
+                </div>
+                <div>
+                    <p>$9.99</p>
+                    <p>Midgrade</p>
+                </div>
+                <div>
+                    <p>$9.99</p>
+                    <p>Premium</p>
+                </div>
+                <div>
+                    <p>$9.99</p>
+                    <p>Diesel</p>
+                </div>
+            </div>
+            <div class="pump">
+                <div class="code">
+                    <p>I am using pump #</p>
+                    <input type="tel">
+                </div>
+                <button class="pending">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="payment screen">
+        <div class="status">PAYMENT METHOD</div>
+        <div class="wallet"></div>
+        <div class="page">
+            <div class="holder">
+                <div class="indicator selected" data-card="gold-card" data-petrol="shell" data-bank="citigroup"></div>
+                <div class="indicator" data-card="red-card" data-petrol="bp" data-bank="hsbc"></div>
+                <div class="indicator" data-card="blue-card" data-petrol="walmart" data-bank="empty"></div>
+            </div>
+        </div>
+        <p>Swipe the selected card upwards.</p>
+        <!-- <button class="ready">Fill 'er Up</button> -->
+    </div>
+
+    <div class="fill screen">
+        <p>0.00</p>
+        <p>Purchase</p>
+        <p>0.00</p>
+        <p>Gallons</p>
+        <div>
+            <div></div>
+            <p>Delicious hot dogs are waiting for you inside! Only $1.99 each.</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Credit card -->
+<!-- ISO 8710 ID-1 == 54mm x 86mm (0.6279 ratio) -->
+<div class="card">
+    <div class="member">Member since</div>
+    <div class="since">2010</div>
+    <div class="holder">VIKRAM MEHTA</div>
+    <img class="kaazing" height="52" src="img/kaazing.svg">
+    <img class="petrol" height="52" src="img/shell.svg">
+    <img class="bank" height="52" src="img/citigroup.svg">
+</div>
+
+<!-- Templates -->
+<div class="item template">
+    <div class="price">
+        <p>$9.99</p>
+        <p>0.25km</p>
+    </div>
+    <div class="station">
+        <p>Hoyt House</p>
+        <p>16220 Martingale Drive</p>
+    </div>
+</div>
+
+</body>
+</html>

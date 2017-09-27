@@ -1,0 +1,312 @@
+body {
+  background-color: white;
+  font-family: 'Source Sans Pro', sans-serif;  
+}
+ 
+button:focus {
+  outline: 0;
+}  
+  
+.as-of {
+  color: #655f5f;  
+  font-size: 1.50em;
+}
+  
+.building {
+  background-image: url( '../../img/buildings/building.svg' );
+  background-position: 13px center;
+}
+  
+.cloud {
+  background-image: url( '../../img/buildings/cloud.svg' );
+}  
+
+.comparison {
+  color: #655f5f;  
+  font-size: 1.50em;
+  font-weight: 600;
+  margin-left: 10px;
+}
+  
+.comparison-label {
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  color: #655f5f;  
+  font-size: 1.10em;
+  font-weight: 600;
+  margin-left: 10px;
+  padding-left: 30px;
+}  
+  
+.comparison-report {
+  background-position: left center;
+  background-repeat: no-repeat;
+  color: #655f5f;  
+  font-size: 1.10em;
+  padding-left: 30px;
+}    
+  
+.compass {
+  background-image: url( '../../img/buildings/compass.svg' );
+}
+  
+.condition {
+  background-image: url( '../../img/buildings/condition.svg' );
+}    
+  
+.details {
+  color: #59bee8;
+  background-image: url( '../../img/buildings/info.svg' );
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  background-size: auto 80%;
+  padding-left: 30px;
+  margin-top: 5px;
+}
+  
+.display {
+  background-image: url( '../../img/buildings/computer.svg' );
+}    
+    
+.down {
+  background-image: url( '../../img/buildings/low.svg' );
+}
+  
+.down-white {
+  background-image: url( '../../img/buildings/low-white.svg' );
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: auto 90%;
+  margin: 0;
+  padding: 0;  
+}  
+  
+.drop {
+  background-image: url( '../../img/buildings/drop.svg' );
+  background-size: auto 85%;    
+}  
+  
+.energy-logo {
+  background-color: #0093dd;
+  background-image: url( '../../img/buildings/energy-star.svg' );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+}
+  
+.energy-star {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50px;
+  background-color: white;
+  border-top: solid 2px #0093dd;
+}
+
+.fire {
+  background-image: url( '../../img/buildings/fire.svg' );
+  background-size: auto 100%;    
+}  
+  
+.funnel {
+  background-color: rgba( 0, 0, 0, 0 );
+  background-image: url( '../../img/buildings/refresh-1.svg' );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 80%;
+  border: none;
+}  
+  
+.gauge {
+  background-image: url( '../../img/buildings/gauge.svg' );
+  background-position: 13px center;
+}  
+  
+.green {
+  background-color: #6fc048;
+}
+  
+.happy {
+  background-image: url( '../../img/buildings/happy.svg' );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 80%;
+  height: 50px;
+}
+  
+.header {
+  background-color: #565253;
+  background-repeat: no-repeat;
+  background-size: auto 50%;
+  color: white;
+  font-size: 1.50em;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 50px;
+}
+  
+.kaazing {
+  background-color: rgba( 0, 0, 0, 0 );
+  background-image: url( '../../img/buildings/kaazing.svg' );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 75%;
+  border: none;
+}    
+  
+.leaf {
+  background-image: url( '../../img/buildings/leaf.svg' );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 80%;
+  height: 50px;
+}  
+  
+.lightening {
+  background-image: url( '../../img/buildings/lightening.svg' );
+  background-size: auto 100%;    
+}
+ 
+.maintenance-icon {
+  background-image: url( '../../img/buildings/alert.svg' );
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: auto 90%;
+  margin: 0;
+  padding: 0;  
+}
+  
+.office {
+  background-image: url( '../../img/buildings/hq.jpg' ); 
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 220px;
+  margin-bottom: 10px;    
+  margin-left: 10px;
+  position: relative;
+}
+  
+.panel {
+  background-color: #f3f2ee;
+}
+
+.pod {
+  background-position: 5px center;
+  background-repeat: no-repeat;
+  background-size: auto 50%;
+  height: 30px; 
+  background-color: #1799cb; 
+  color: white; 
+  line-height: 30px;  
+  padding-left: 25px;
+}
+  
+.refresh {
+  background-color: rgba( 0, 0, 0, 0 );
+  background-image: url( '../../img/buildings/refresh.svg' );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 80%;
+  border: none;
+}  
+  
+.score-current {
+  bottom: 0;
+  color: #655f5f;
+  font-size: 3em;
+  line-height: 48px;
+  padding-right: 10px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+}  
+  
+.score-goal {
+  background-image: url( '../../img/buildings/star.svg' );
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  background-size: auto 65%;
+  bottom: 0;
+  color: #655f5f;
+  font-size: 1em;
+  font-weight: 600;
+  left: 50px;
+  letter-spacing: 0.50px;  
+  padding-bottom: 2px;
+  padding-left: 28px;
+  position: absolute;
+  right: 50px;
+}
+  
+.score-label {
+  color: #655f5f;
+  font-size: 1.50em;
+  font-weight: 600;
+  left: 50px;
+  padding-left: 10px;
+  position: absolute;
+  right: 50px;
+  top: 0;
+}  
+  
+.status {
+  background-image: url( ../../img/buildings/status.svg' );
+}
+  
+.status-icon {
+  background-image: url( '../../img/buildings/check.svg' );
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: auto 90%;
+  margin: 0;
+  padding: 0;  
+}
+  
+.status-message {
+  color: white;
+  font-size: 1.25em;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+  
+.summary {
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  background-size: auto 80%;
+  color: #655f5f;
+  font-size: 1.50em;
+  font-weight: 600;
+  padding-left: 40px;
+}    
+  
+.thumb {
+  background-image: url( '../../img/buildings/thumb.svg' );
+}  
+  
+.turtle {
+  background-color: rgba( 0, 0, 0, 0 );
+  background-image: url( '../../img/buildings/refresh-5.svg' );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 80%;
+  border: none;
+}
+  
+.up {
+  background-image: url( '../../img/buildings/high.svg' );
+}
+  
+.wrench {
+  background-image: url( '../../img/buildings/wrench.svg' );
+}  
+
+.selected {
+  background-color: #e5e5e1;
+  border-radius: 5px;
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 353.3 253.3" enable-background="new 0 0 353.3 253.3" xml:space="preserve">
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="176.6667" y1="-7.392373e-09" x2="176.6667" y2="253.3333">
+	<stop  offset="0" style="stop-color:#11BAEF"/>
+	<stop  offset="1" style="stop-color:#004688"/>
+</linearGradient>
+<path fill-rule="evenodd" clip-rule="evenodd" fill="url(#SVGID_1_)" d="M341.3,253.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0
+	h329.3c6.6,0,12,5.4,12,12v229.3C353.3,247.9,347.9,253.3,341.3,253.3z"/>
+<g>
+	<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M126.6,185.4L126,186c-7.5,7.5-16.2,11.5-25.4,11.5
+		c-19.1,0-32.9-13.9-32.9-33.5c0-20.2,13.9-34.1,32.9-34.1c9.2,0,17.9,4,25.4,11.5l0.6,0.6l12.1-14.4v-0.6
+		c-10.4-12.1-22.5-17.9-37.5-17.9c-15,0-28.9,5.2-38.7,14.4c-11,9.8-16.2,23.7-16.2,40.4c0,16.2,5.2,30,16.2,39.8
+		c9.8,9.2,23.7,14.4,38.7,14.4c15,0,27.1-5.8,37.5-17.9v-0.6L126.6,185.4L126.6,185.4z"/>
+	<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" points="152,216 173.4,216 173.4,110.9 152,110.9 152,216 	"/>
+	<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M254.2,193.5c-5.2,3.5-11,5.2-15.6,5.2c-6.9,0-10.4-3.5-10.4-12.1
+		v-55.4h21.9v-20.2h-21.9V78l-20.8,11.6v21.4H189v20.2h18.5v59.5c0,16.2,9.2,27.1,23.7,27.1c9.8,0.6,15.6-2.3,19.1-4.6h0.6v-0.6
+		l5.2-20.2L254.2,193.5L254.2,193.5z"/>
+	<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" points="269.8,216 291.8,216 291.8,110.9 269.8,110.9 269.8,216 	
+		"/>
+	<path fill="#E72C0F" d="M221.7,70.1c23.8,0,45.3,9.5,61.1,24.8h28.2c-19.8-28-52.4-46.4-89.3-46.4c-36.9,0-69.5,18.4-89.3,46.4
+		h28.2C176.4,79.6,198,70.1,221.7,70.1z"/>
+</g>
+</svg>
