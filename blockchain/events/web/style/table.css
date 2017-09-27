@@ -1,0 +1,103 @@
+@keyframes blink {
+  from {
+    background-color: rgba( 13, 71, 161, 0.10 );
+  }
+
+  to {
+    background-color: rgba( 13, 71, 161, 0 );
+  }
+}
+
+.table {
+  background-color: white;
+  border-radius: 2px;
+  bottom: 197px;
+  box-shadow: 0 2px 5px rgba( 0, 0, 0, 0.26 );  
+  left: 24px;
+  position: absolute;
+  right: 24px;
+  top: 55px;
+}
+
+.table > .columns {
+  border-bottom: solid 1px rgba( 0, 0, 0, 0.12 );  
+  display: flex;
+  flex-direction: row;
+}
+
+.table > .columns > p {
+  color: rgba( 0, 0, 0, 0.54 );  
+  font-size: 12px;  
+  font-weight: 500;
+  height: 56px;
+  line-height: 56px;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+  width: 80px;
+}
+
+.table > .columns > p:nth-of-type( 1 ) {
+  margin-left: 24px;
+  text-align: left;
+}
+
+.table > .columns > p:nth-of-type( 2 ) {
+  flex-basis: 0;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.table > .columns > p:last-of-type {
+  margin-right: 24px;
+}
+
+.table > .list {
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  position: absolute;
+  right: 0;
+  top: 57px;
+}
+
+.table > .list > .row {
+  border-bottom: solid 1px rgba( 0, 0, 0, 0.12 );    
+  display: flex;
+  flex-direction: row;
+}
+
+.table > .list > .row:last-of-type {
+  border-bottom: none;
+}
+
+.table > .list > .row.blink {
+  animation-duration: 1s;
+  animation-name: blink;
+}
+
+.table > .list > .row > p {
+  color: rgba( 0, 0, 0, 0.87 );
+  font-size: 13px;
+  height: 48px;
+  line-height: 48px;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+  width: 80px;
+}  
+
+.table > .list > .row > p:nth-of-type( 1 ) {
+  margin-left: 24px;
+  text-align: left;
+}
+
+.table > .list > .row > p:nth-of-type( 2 ) {
+  flex-basis: 0;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.table > .list > .row > p:last-of-type {
+  margin-right: 24px;
+}

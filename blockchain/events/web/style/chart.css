@@ -1,0 +1,19 @@
+.chart {
+  bottom: 56px;
+  display: flex;
+  flex-direction: row;
+  left: 24px;
+  position: absolute;
+  right: 24px;
+}
+
+.chart > .render {
+  flex-grow: 1;
+  height: 125px;
+}
+
+.chart > .render > .label {
+  fill: rgba( 0, 0, 0, 0.54 );  
+  font-family: 'Roboto', sans-serif; 
+  font-size: 13px; 
+}

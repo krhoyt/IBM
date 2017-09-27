@@ -1,0 +1,30 @@
+namespace org.acme.market
+
+asset Stock identified by symbol {
+  o String symbol
+  o String name
+  o Double low
+  o Double high
+  o Double open
+  o Double last
+  o Double change
+}
+
+participant Trader identified by id {
+  o String id
+  --> Stock[] portfolio
+}
+
+transaction Trade {
+  --> Stock stock
+  o Double price
+}
+
+event TradeComplete {
+  o String symbol
+  o Double low
+  o Double high
+  o Double open
+  o Double last
+  o Double change
+}

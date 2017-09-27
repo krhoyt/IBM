@@ -1,0 +1,14 @@
+.header {
+  background-color: #2196F3;
+  height: 112px;
+}
+
+.header > p {
+  color: white;
+  font-size: 20px;
+  font-weight: 400;
+  height: 56px;
+  line-height: 56px;
+  margin: 0 0 0 24px;
+  padding: 0;
+}
