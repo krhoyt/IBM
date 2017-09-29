@@ -10,9 +10,6 @@ with open( 'short.list.csv', 'rb' ) as financials:
   portfolio = list( reader )
 
 for stock in portfolio:
-  if len( stock[8] ) == 0:
-    continue
-
   last = randint( 
     int( float( stock[8] ) * 100 ), 
     int( float( stock[9] ) * 100 ) 

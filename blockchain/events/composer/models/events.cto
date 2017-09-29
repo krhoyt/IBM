@@ -20,6 +20,11 @@ transaction Trade {
   o Double price
 }
 
+transaction Basket {
+  --> Stock[] lot
+  o Double[] prices
+}
+
 event TradeComplete {
   o String symbol
   o Double low
@@ -27,4 +32,8 @@ event TradeComplete {
   o Double open
   o Double last
   o Double change
+}
+
+event BasketComplete {
+  o Stock[] lot
 }

@@ -1,57 +1,52 @@
-# Basic Sample Business Network
+# Stock Trading Business Network
 
-> This is the "Hello World" of Hyperledger Composer samples, which demonstrates the core functionality of Hyperledger Composer by changing the value of an asset.
+> This is a Composer business network defined to support the illustration of event notifications, against the backdrop of a stock trading environment.
 
 This business network defines:
 
 **Participant**
-`SampleParticipant`
+`Trader`
 
 **Asset**
-`SampleAsset`
+`Stock`
 
 **Transaction**
-`SampleTransaction`
+`Trade`
+`Basket`
 
 **Event**
-`SampleEvent`
+`TradeComplete`
+`BasketComplete`
 
-SampleAssets are owned by a SampleParticipant, and the value property on a SampleAsset can be modified by submitting a SampleTransaction. The SampleTransaction emits a SampleEvent that notifies applications of the old and new values for each modified SampleAsset.
+Stock assets can be owned by a Trader, but association with the Trader is not required for this illustration. Stock assets can be updated by their resource, or through the use of the Trade or Basket transactions. Trade is for a single Stock asset change, and Basket is for a group of Stock asset changes.
 
 To test this Business Network Definition in the **Test** tab:
 
-Create a `SampleParticipant` participant:
+Create a `Stock` asset:
 
 ```
 {
-  "$class": "org.acme.sample.SampleParticipant",
-  "participantId": "Toby",
-  "firstName": "Tobias",
-  "lastName": "Hunter"
+  "$class": "org.acme.market.Stock",
+  "symbol": "IBM",
+  "name": "International Business Machines",
+  "low": 100,
+  "high": 200,
+  "open": 110,
+  "last": 111,
+  "change": 1
 }
 ```
 
-Create a `SampleAsset` asset:
+Submit a `Trade` transaction:
 
 ```
 {
-  "$class": "org.acme.sample.SampleAsset",
-  "assetId": "assetId:1",
-  "owner": "resource:org.acme.sample.SampleParticipant#Toby",
-  "value": "original value"
+  "$class": "org.acme.market.Trade",
+  "stock": "resource:org.acme.market.Stock#IBM",
+  "price": 112
 }
 ```
 
-Submit a `SampleTransaction` transaction:
-
-```
-{
-  "$class": "org.acme.sample.SampleTransaction",
-  "asset": "resource:org.acme.sample.SampleAsset#assetId:1",
-  "newValue": "new value"
-}
-```
-
-After submitting this transaction, you should now see the transaction in the Transaction Registry and that a `SampleEvent` has been emitted. As a result, the value of the `assetId:1` should now be `new value` in the Asset Registry.
+After submitting this transaction, you will see the transaction in the "All Transactions" summary, and that a `TradeComplete` event has been emitted. As a result of the transaction, the `IBM` Stock asset `last` value will have changed from `111` to `112` and the `change` value will reflect a value of `1`. Running on Hyperledger Fabric, these event details would have been emitted over WebSocket.
 
 Congratulations!

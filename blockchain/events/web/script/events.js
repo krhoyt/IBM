@@ -35,9 +35,13 @@ class Events {
   // Update table and chart
   doSocketMessage( evt ) {
     let data = JSON.parse( evt.data );
-    this.table.update( data );
-    this.chart.update( data );
-    console.log( data.symbol + ': ' + data.last + ', ' + data.change );    
+
+    for( let s = 0; s < data.lot.length; s++ ) {
+      this.table.update( data.lot[s] );
+      this.chart.update( data.lot[s] );
+    }
+
+    console.log( 'Updating ' + data.lot.length + ' records.' );    
   }
 
   // FYI
