@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Bean
 //
-//  Created by Kevin Hoyt on 10/2/17.
+//  Created by Kevin Hoyt on 10/4/17.
 //  Copyright © 2017 IBM. All rights reserved.
 //
 

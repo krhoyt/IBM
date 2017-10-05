@@ -1,24 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Bean" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="l1B-Nz-VbM">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jfw-Ox-Zsh" userLabel="X-Axis" customClass="ChartView" customModule="Bean" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="162"/>
+                                        <subviews>
+                                            <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0x-Kg-8KL" userLabel="Bottom Border">
+                                                <rect key="frame" x="0.0" y="161" width="375" height="1"/>
+                                                <color key="backgroundColor" red="0.25490196079999999" green="0.47058823529999999" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="bsp-iD-leW"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstItem="i0x-Kg-8KL" firstAttribute="leading" secondItem="Jfw-Ox-Zsh" secondAttribute="leading" id="295-w6-x47"/>
+                                            <constraint firstAttribute="trailing" secondItem="i0x-Kg-8KL" secondAttribute="trailing" id="GOY-nS-P2x"/>
+                                            <constraint firstAttribute="bottom" secondItem="i0x-Kg-8KL" secondAttribute="bottom" id="egy-w6-2pD"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jV9-bd-cwp" userLabel="Y-Axis" customClass="ChartView" customModule="Bean" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="162" width="375" height="161.5"/>
+                                        <subviews>
+                                            <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z2n-ix-xSG" userLabel="Bottom Border">
+                                                <rect key="frame" x="0.0" y="160.5" width="375" height="1"/>
+                                                <color key="backgroundColor" red="0.25490196079999999" green="0.47058823529999999" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="g2n-Ia-bmc"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="z2n-ix-xSG" secondAttribute="bottom" id="2Zb-fQ-8Dk"/>
+                                            <constraint firstAttribute="trailing" secondItem="z2n-ix-xSG" secondAttribute="trailing" id="5yb-9u-U3k"/>
+                                            <constraint firstItem="z2n-ix-xSG" firstAttribute="leading" secondItem="jV9-bd-cwp" secondAttribute="leading" id="FBD-dt-dDI"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GgE-CN-5bv" userLabel="Z-Axis" customClass="ChartView" customModule="Bean" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="323.5" width="375" height="162"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rvo-pf-k29" userLabel="Temperature">
+                                        <rect key="frame" x="0.0" y="485.5" width="375" height="161.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gqh-9f-Taj" userLabel="Farenheit">
+                                                <rect key="frame" x="155" y="49.5" width="66" height="62.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="52"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.25490196079999999" green="0.47058823529999999" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="Gqh-9f-Taj" firstAttribute="centerY" secondItem="rvo-pf-k29" secondAttribute="centerY" id="Jzo-92-gpl"/>
+                                            <constraint firstItem="Gqh-9f-Taj" firstAttribute="centerX" secondItem="rvo-pf-k29" secondAttribute="centerX" id="MkK-cE-uUg"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="l1B-Nz-VbM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="2U8-LI-x1P"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="l1B-Nz-VbM" secondAttribute="bottom" id="3xo-Hf-8oe"/>
+                            <constraint firstAttribute="trailing" secondItem="l1B-Nz-VbM" secondAttribute="trailing" id="K58-Vr-rK0"/>
+                            <constraint firstItem="l1B-Nz-VbM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="x1T-j9-uh8"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="lbl_temperature" destination="Gqh-9f-Taj" id="Ikr-3w-gmV"/>
+                        <outlet property="view_x" destination="Jfw-Ox-Zsh" id="wNc-bI-fJl"/>
+                        <outlet property="view_y" destination="jV9-bd-cwp" id="43d-VI-UDM"/>
+                        <outlet property="view_z" destination="GgE-CN-5bv" id="Kpp-6E-i1d"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="38.23088455772114"/>
         </scene>
     </scenes>
 </document>
