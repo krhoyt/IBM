@@ -13,6 +13,7 @@
 		0A530AC21F85402C003C5890 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A530AC11F85402C003C5890 /* Assets.xcassets */; };
 		0A530AC51F85402C003C5890 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A530AC31F85402C003C5890 /* LaunchScreen.storyboard */; };
 		0A530AD11F86CB97003C5890 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A530AD01F86CB97003C5890 /* ChartView.swift */; };
+		0AC6172E1F8711B2002AC118 /* Cloudant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6172D1F8711B2002AC118 /* Cloudant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		0A530AC41F85402C003C5890 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A530AC61F85402C003C5890 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A530AD01F86CB97003C5890 /* ChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		0AC6172D1F8711B2002AC118 /* Cloudant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cloudant.swift; path = ../../../../../../../../kevin/Git/IBM/iot/bluetooth/cloud/ios/Bean/Cloudant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				0A530AC31F85402C003C5890 /* LaunchScreen.storyboard */,
 				0A530AC61F85402C003C5890 /* Info.plist */,
 				0A530AD01F86CB97003C5890 /* ChartView.swift */,
+				0AC6172D1F8711B2002AC118 /* Cloudant.swift */,
 			);
 			path = Bean;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 				0A530ABD1F85402C003C5890 /* ViewController.swift in Sources */,
 				0A530AD11F86CB97003C5890 /* ChartView.swift in Sources */,
 				0A530ABB1F85402C003C5890 /* AppDelegate.swift in Sources */,
+				0AC6172E1F8711B2002AC118 /* Cloudant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +310,7 @@
 				0A530ACB1F85402C003C5890 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

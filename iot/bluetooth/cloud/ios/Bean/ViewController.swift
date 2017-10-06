@@ -2,6 +2,15 @@ import CoreBluetooth
 import UIKit
 
 class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
+
+  // Cloudant constants
+  let CLOUDANT_ACCOUNT = "krhoyt"
+  let CLOUDANT_DATABASE = "bean"
+  let CLOUDANT_KEY = "someredillyouattleadelyh"
+  let CLOUDANT_PASSWORD = "bd13e57d6908a7378af497026ca31ed507a22edf"
+  
+  // Cloudant access
+  let cloudant = Cloudant()
   
   // Beacon constants
   let BEAN_NAME = "Bean"
@@ -26,6 +35,12 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
   // Here we go
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    // Cloudant access
+    cloudant.account = CLOUDANT_ACCOUNT
+    cloudant.database = CLOUDANT_DATABASE
+    cloudant.key = CLOUDANT_KEY
+    cloudant.password = CLOUDANT_PASSWORD
     
     // Beacon manager
     manager = CBCentralManager(delegate: self, queue: nil)
@@ -131,20 +146,36 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
       // Split by comma
       let content = String(data: characteristic.value!, encoding: String.Encoding.utf8)
       let parts = content!.components(separatedBy: ",")
-      var temperature = Double((parts[3]))!
+      
+      // Cast values
+      let x_axis = Int32((parts[0]))!
+      let y_axis = Int32((parts[1]))!
+      let z_axis = Int32((parts[2]))!
+      var temperature = Int32((parts[3]))!
+      
+      // Save values in Cloudant
+      cloudant.save(
+        x_axis: x_axis,
+        y_axis: y_axis,
+        z_axis: z_axis,
+        temperature: temperature,
+        raw: content!
+      )
       
       // Populate charts
-      view_x.append(reading: Int32((parts[0]))!)
-      view_y.append(reading: Int32((parts[1]))!)
-      view_z.append(reading: Int32((parts[2]))!)
+      view_x.append(reading: x_axis)
+      view_y.append(reading: y_axis)
+      view_z.append(reading: z_axis)
       
       // Fahrenheit or celcius
       if farenheit {
-        temperature = (temperature * 1.80) + 32
+        let conversion = (Double(temperature) * 1.80) + 32.0
+        temperature = Int32(conversion)
       }
       
       // Show temperature
-      lbl_temperature.text = "\(Int(temperature))\u{00B0}"
+      // Use integer whole number
+      lbl_temperature.text = "\(temperature)\u{00B0}"
       
       // Debug
       debugPrint(content!)

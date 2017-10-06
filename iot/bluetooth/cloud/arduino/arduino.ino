@@ -1,6 +1,6 @@
 // Reporting rate
 unsigned long last = 0;
-int rate = 5000;
+int rate = 1000;
 
 // Setup
 void setup() {
@@ -30,6 +30,9 @@ void loop() {
     
     // Check timer
     if( ( now - last ) >= rate ) {
+      // Update clock
+      last = now;
+      
       // Set sensor values
       output();      
     }
