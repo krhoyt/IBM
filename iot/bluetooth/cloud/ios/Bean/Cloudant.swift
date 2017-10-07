@@ -2,10 +2,10 @@ import Foundation
 
 class Cloudant {
 
-  var account = ""
-  var database = ""
-  var key = ""
-  var password = ""
+  var account = "krhoyt"
+  var database = "bean"
+  var key = "someredillyouattleadelyh"
+  var password = "bd13e57d6908a7378af497026ca31ed507a22edf"
   
   func save(x_axis:Int32, y_axis:Int32, z_axis:Int32, temperature:Int32, raw:String) {
     // Authentication

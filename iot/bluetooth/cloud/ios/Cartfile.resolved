@@ -1,0 +1,3 @@
+github "emqtt/CocoaMQTT" "e8081f3fd64a64f176cf07369eacf738bd6a5d35"
+github "radex/SwiftyTimer" "77325e642504ccf1d1dde022da35c384764958e7"
+github "robbiehanson/CocoaAsyncSocket" "b6f98791995ab7c7ef6faee4726102a711431f58"

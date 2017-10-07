@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A04EED21F89353900907233 /* WatsonIoT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A04EED11F89353900907233 /* WatsonIoT.swift */; };
+		0A04EED61F8938F600907233 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A04EED31F8938F600907233 /* CocoaAsyncSocket.framework */; };
+		0A04EED71F8938F600907233 /* CocoaAsyncSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A04EED31F8938F600907233 /* CocoaAsyncSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A04EED81F8938F600907233 /* CocoaMQTT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A04EED41F8938F600907233 /* CocoaMQTT.framework */; };
+		0A04EED91F8938F600907233 /* CocoaMQTT.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A04EED41F8938F600907233 /* CocoaMQTT.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A04EEDA1F8938F600907233 /* SwiftyTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A04EED51F8938F600907233 /* SwiftyTimer.framework */; };
+		0A04EEDB1F8938F600907233 /* SwiftyTimer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A04EED51F8938F600907233 /* SwiftyTimer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A530ABB1F85402C003C5890 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A530ABA1F85402C003C5890 /* AppDelegate.swift */; };
 		0A530ABD1F85402C003C5890 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A530ABC1F85402C003C5890 /* ViewController.swift */; };
 		0A530AC01F85402C003C5890 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A530ABE1F85402C003C5890 /* Main.storyboard */; };
@@ -16,7 +23,27 @@
 		0AC6172E1F8711B2002AC118 /* Cloudant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6172D1F8711B2002AC118 /* Cloudant.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		0A04EEDC1F8938F600907233 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0A04EEDB1F8938F600907233 /* SwiftyTimer.framework in Embed Frameworks */,
+				0A04EED91F8938F600907233 /* CocoaMQTT.framework in Embed Frameworks */,
+				0A04EED71F8938F600907233 /* CocoaAsyncSocket.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0A04EED11F89353900907233 /* WatsonIoT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WatsonIoT.swift; path = ../../../../../../../../kevin/Git/IBM/iot/bluetooth/cloud/ios/Bean/WatsonIoT.swift; sourceTree = "<group>"; };
+		0A04EED31F8938F600907233 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaAsyncSocket.framework; sourceTree = "<group>"; };
+		0A04EED41F8938F600907233 /* CocoaMQTT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaMQTT.framework; sourceTree = "<group>"; };
+		0A04EED51F8938F600907233 /* SwiftyTimer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftyTimer.framework; sourceTree = "<group>"; };
 		0A530AB71F85402C003C5890 /* Bean.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bean.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A530ABA1F85402C003C5890 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A530ABC1F85402C003C5890 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -33,6 +60,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A04EEDA1F8938F600907233 /* SwiftyTimer.framework in Frameworks */,
+				0A04EED81F8938F600907233 /* CocoaMQTT.framework in Frameworks */,
+				0A04EED61F8938F600907233 /* CocoaAsyncSocket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +72,9 @@
 		0A530AAE1F85402C003C5890 = {
 			isa = PBXGroup;
 			children = (
+				0A04EED31F8938F600907233 /* CocoaAsyncSocket.framework */,
+				0A04EED41F8938F600907233 /* CocoaMQTT.framework */,
+				0A04EED51F8938F600907233 /* SwiftyTimer.framework */,
 				0A530AB91F85402C003C5890 /* Bean */,
 				0A530AB81F85402C003C5890 /* Products */,
 			);
@@ -66,6 +99,7 @@
 				0A530AC61F85402C003C5890 /* Info.plist */,
 				0A530AD01F86CB97003C5890 /* ChartView.swift */,
 				0AC6172D1F8711B2002AC118 /* Cloudant.swift */,
+				0A04EED11F89353900907233 /* WatsonIoT.swift */,
 			);
 			path = Bean;
 			sourceTree = "<group>";
@@ -80,6 +114,7 @@
 				0A530AB31F85402C003C5890 /* Sources */,
 				0A530AB41F85402C003C5890 /* Frameworks */,
 				0A530AB51F85402C003C5890 /* Resources */,
+				0A04EEDC1F8938F600907233 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -147,6 +182,7 @@
 				0A530AD11F86CB97003C5890 /* ChartView.swift in Sources */,
 				0A530ABB1F85402C003C5890 /* AppDelegate.swift in Sources */,
 				0AC6172E1F8711B2002AC118 /* Cloudant.swift in Sources */,
+				0A04EED21F89353900907233 /* WatsonIoT.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +306,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ER47H7CD55;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Bean/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.krhoyt.Bean;
@@ -283,6 +323,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ER47H7CD55;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Bean/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.krhoyt.Bean;

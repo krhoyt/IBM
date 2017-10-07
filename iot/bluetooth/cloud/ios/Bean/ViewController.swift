@@ -3,14 +3,11 @@ import UIKit
 
 class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
 
-  // Cloudant constants
-  let CLOUDANT_ACCOUNT = "krhoyt"
-  let CLOUDANT_DATABASE = "bean"
-  let CLOUDANT_KEY = "someredillyouattleadelyh"
-  let CLOUDANT_PASSWORD = "bd13e57d6908a7378af497026ca31ed507a22edf"
-  
   // Cloudant access
   let cloudant = Cloudant()
+    
+  // Watson IoT access
+  let watson = WatsonIoT()
   
   // Beacon constants
   let BEAN_NAME = "Bean"
@@ -35,12 +32,6 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
   // Here we go
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    // Cloudant access
-    cloudant.account = CLOUDANT_ACCOUNT
-    cloudant.database = CLOUDANT_DATABASE
-    cloudant.key = CLOUDANT_KEY
-    cloudant.password = CLOUDANT_PASSWORD
     
     // Beacon manager
     manager = CBCentralManager(delegate: self, queue: nil)
@@ -155,6 +146,15 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
       
       // Save values in Cloudant
       cloudant.save(
+        x_axis: x_axis,
+        y_axis: y_axis,
+        z_axis: z_axis,
+        temperature: temperature,
+        raw: content!
+      )
+      
+      // Send values to Watson IoT
+      watson.publish(
         x_axis: x_axis,
         y_axis: y_axis,
         z_axis: z_axis,
