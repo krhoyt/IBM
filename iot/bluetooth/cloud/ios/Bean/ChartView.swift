@@ -12,7 +12,7 @@ class ChartView: UIView {
   )
   
   // History and chart layer
-  var history = [Int32()]
+  var history = [Int()]
   var chart = CAShapeLayer()
   
   // Last reading
@@ -45,7 +45,7 @@ class ChartView: UIView {
   }
   
   // Increment history
-  func append(reading: Int32) {
+  func append(reading: Int) {
     // Append
     history.append(reading)
     
@@ -64,7 +64,7 @@ class ChartView: UIView {
   
   // Linear transform
   // Take a value in one range and respectively place in a second range
-  func map( x:Int32, in_min:Int32, in_max:Int32, out_min:Int32, out_max:Int32 ) -> Int32 {
+  func map( x:Int, in_min:Int, in_max:Int, out_min:Int, out_max:Int ) -> Int {
     return ( x - in_min ) * ( out_max - out_min ) / ( in_max - in_min ) + out_min;
   }
   
@@ -73,7 +73,7 @@ class ChartView: UIView {
     // Keep chart inside view
     // Padding on top and bottom
     // Number of horizontal stops
-    let height = Int32(self.bounds.height * 0.90)
+    let height = Int(self.bounds.height * 0.90)
     let path = UIBezierPath()
     let remainder = self.bounds.height * 0.05
     let step = self.bounds.width / 9

@@ -1,34 +1,88 @@
-import CocoaMQTT
 import Foundation
 
+class WatsonIoT {
+
+  // Connectivity
+  let clientId = "a:ts200f:" + UUID().uuidString
+  let host = "messaging.internetofthings.ibmcloud.com"
+  let organization = "ts200f"
+  let port = 8883
+  
+  // Access
+  let username = "a-ts200f-ztwvifvf9v"
+  let password = "4zu+2NSgQhI9M@6*f1"
+
+  // Routing
+  let device_id = "Punch"
+  let device_type = "Bean"
+  let event = "reading"
+  
+  func publish(reading:Reading) {
+    
+    // Authentication
+    let user_pass = "\(self.username):\(self.password)".data(using: .utf8)
+    let encoded = user_pass!.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+    let authorization = "Basic \(encoded)"
+    
+    // Build request
+    let url = URL(string:
+      "https://\(organization).\(host):\(port)" +
+      "/api/v0002/application/" +
+      "types/\(device_type)" +
+      "/devices/\(device_id)" +
+      "/events/\(event)"
+    )
+    var request = URLRequest(url: url!)
+    request.httpMethod = "POST"
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.addValue(authorization, forHTTPHeaderField: "Authorization")
+    request.httpBody = reading.json();
+    
+    // Make request
+    // Handle response
+    URLSession.shared.dataTask(with: request) { (data, response, error) in
+      if error != nil {
+        debugPrint(error!)
+      } else {
+        // Zero bytes returned
+      }
+    }.resume()
+  }
+  
+}
+
+/*
 class WatsonIoT:CocoaMQTTDelegate {
   
   // Server
   let clientId = "a:ts200f:" + UUID().uuidString
   let host = "ts200f.messaging.internetofthings.ibmcloud.com"
+  let organization = "ts200f"
   let port = 1883
   
   // Access
   let username = "a-ts200f-ztwvifvf9v"
   let password = "4zu+2NSgQhI9M@6*f1"
   let topic = "iot-2/type/Bean/id/Punch/evt/reading/fmt/json"
-  
+ 
   // var device_token = "y*Q1AXFOMVt5Y8Vg_7"
   
   // Client
   var mqtt:CocoaMQTT?
   
-  init() {
-    // Connect
-    mqtt = CocoaMQTT(
-      clientID: clientId,
-      host: host,
-      port: UInt16(port)
-    )
-    mqtt?.username = username
-    mqtt?.password = password
-    mqtt?.delegate = self;
-    mqtt?.connect()
+  init(rest:Bool = true) {
+    if rest == false {
+      // Connect
+      mqtt = CocoaMQTT(
+        clientID: clientId,
+        host: host,
+        port: UInt16(port)
+      )
+      mqtt?.username = username
+      mqtt?.password = password
+      mqtt?.delegate = self;
+      mqtt?.connect()
+    }
   }
   
   // Publish
@@ -99,3 +153,4 @@ class WatsonIoT:CocoaMQTTDelegate {
   }
   
 }
+*/
