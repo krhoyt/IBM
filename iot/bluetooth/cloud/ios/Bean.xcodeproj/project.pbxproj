@@ -18,6 +18,7 @@
 		0AEEEA621F8ADB67004C0D06 /* Bean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEEEA611F8ADB67004C0D06 /* Bean.swift */; };
 		0AEEEA641F8ADE4D004C0D06 /* BeanDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEEEA631F8ADE4D004C0D06 /* BeanDelegate.swift */; };
 		0AEEEA661F8ADF79004C0D06 /* Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEEEA651F8ADF79004C0D06 /* Reading.swift */; };
+		0AF3B08C1F8BD652001E4EAB /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF3B08B1F8BD652001E4EAB /* TabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +48,7 @@
 		0AEEEA611F8ADB67004C0D06 /* Bean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bean.swift; sourceTree = "<group>"; };
 		0AEEEA631F8ADE4D004C0D06 /* BeanDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeanDelegate.swift; sourceTree = "<group>"; };
 		0AEEEA651F8ADF79004C0D06 /* Reading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reading.swift; sourceTree = "<group>"; };
+		0AF3B08B1F8BD652001E4EAB /* TabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				0AEEEA611F8ADB67004C0D06 /* Bean.swift */,
 				0AEEEA631F8ADE4D004C0D06 /* BeanDelegate.swift */,
 				0AEEEA651F8ADF79004C0D06 /* Reading.swift */,
+				0AF3B08B1F8BD652001E4EAB /* TabView.swift */,
 			);
 			path = Bean;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 				0AEEEA661F8ADF79004C0D06 /* Reading.swift in Sources */,
 				0A530AD11F86CB97003C5890 /* ChartView.swift in Sources */,
 				0A530ABB1F85402C003C5890 /* AppDelegate.swift in Sources */,
+				0AF3B08C1F8BD652001E4EAB /* TabView.swift in Sources */,
 				0AC6172E1F8711B2002AC118 /* Cloudant.swift in Sources */,
 				0A04EED21F89353900907233 /* WatsonIoT.swift in Sources */,
 				0AEEEA621F8ADB67004C0D06 /* Bean.swift in Sources */,

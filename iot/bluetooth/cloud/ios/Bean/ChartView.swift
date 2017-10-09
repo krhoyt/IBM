@@ -138,8 +138,7 @@ class ChartView: UIView {
     )
     
     // Animate to new position
-    UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseOut],
-      animations: {
+    UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseOut], animations: {
         self.lbl_last.frame = new_frame
     }, completion: nil)
   }

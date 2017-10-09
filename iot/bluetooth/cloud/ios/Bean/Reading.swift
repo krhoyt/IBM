@@ -38,7 +38,7 @@ class Reading {
   }
   
   // Convert to fahrenheit
-  func farenheit() -> Double {
+  func fahrenheit() -> Double {
     return (Double(temperature) * 1.80) + 32.0
   }
   
