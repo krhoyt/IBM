@@ -14,7 +14,7 @@ class ViewController: UIViewController, BeanDelegate {
   let cloudant = Cloudant()
     
   // Watson IoT access
-  let watson = WatsonIoT()
+  let watson = WatsonIoT(web: false)
   
   // Last reading
   var last:Reading?
@@ -69,10 +69,10 @@ class ViewController: UIViewController, BeanDelegate {
     if reporting == MODE_CLOUDANT {
       cloudant.save(reading: reading)
     } else if reporting == MODE_WATSON {
-      watson.publish(reading: reading)
+      watson.save(reading: reading)
     } else if reporting == MODE_BOTH {
       cloudant.save(reading: reading)
-      watson.publish(reading: reading)
+      watson.save(reading: reading)
     }
     
     // Populate charts

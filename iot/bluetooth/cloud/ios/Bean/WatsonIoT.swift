@@ -1,6 +1,7 @@
+import CocoaMQTT
 import Foundation
 
-class WatsonIoT {
+class WatsonIoT: CocoaMQTTDelegate {
 
   // Connectivity
   let clientId = "a:ts200f:" + UUID().uuidString
@@ -17,7 +18,46 @@ class WatsonIoT {
   let device_type = "Bean"
   let event = "reading"
   
-  func publish(reading:Reading) {
+  // HTTP or MQTT
+  var web = true
+  
+  // Client
+  var watson:CocoaMQTT?
+  
+  // Default to HTTP
+  init(web:Bool = true) {
+    self.web = web
+    
+    // TODO: Publish 8883 with TLS
+    
+    // Not Web
+    // Connect to broker
+    // Using MQTT
+    if self.web == false {
+      watson = CocoaMQTT(
+        clientID: clientId,
+        host: "\(organization).\(host)",
+        // port: UInt16(port)
+        port: UInt16(1883)
+      )
+      watson?.username = username
+      watson?.password = password
+      watson?.delegate = self;
+      watson?.connect()
+    }
+  }
+  
+  // Match Cloudant interface
+  // Publish in manner initialized
+  func save(reading:Reading) {
+    if web == true {
+      post(reading: reading)
+    } else {
+      publish(reading: reading)
+    }
+  }
+  
+  func post(reading:Reading) {
     
     // Authentication
     let user_pass = "\(self.username):\(self.password)".data(using: .utf8)
@@ -49,66 +89,18 @@ class WatsonIoT {
     }.resume()
   }
   
-}
-
-/*
-class WatsonIoT:CocoaMQTTDelegate {
-  
-  // Server
-  let clientId = "a:ts200f:" + UUID().uuidString
-  let host = "ts200f.messaging.internetofthings.ibmcloud.com"
-  let organization = "ts200f"
-  let port = 1883
-  
-  // Access
-  let username = "a-ts200f-ztwvifvf9v"
-  let password = "4zu+2NSgQhI9M@6*f1"
-  let topic = "iot-2/type/Bean/id/Punch/evt/reading/fmt/json"
- 
-  // var device_token = "y*Q1AXFOMVt5Y8Vg_7"
-  
-  // Client
-  var mqtt:CocoaMQTT?
-  
-  init(rest:Bool = true) {
-    if rest == false {
-      // Connect
-      mqtt = CocoaMQTT(
-        clientID: clientId,
-        host: host,
-        port: UInt16(port)
-      )
-      mqtt?.username = username
-      mqtt?.password = password
-      mqtt?.delegate = self;
-      mqtt?.connect()
-    }
-  }
-  
-  // Publish
-  func publish(x_axis:Int32, y_axis:Int32, z_axis:Int32, temperature:Int32, raw:String) {
-    // Data to send
-    let record = [
-      "x_axis": x_axis,
-      "y_axis": y_axis,
-      "z_axis": z_axis,
-      "temperature": temperature,
-      "raw": raw,
-      "created_at": (Date().timeIntervalSince1970 * 1000.0).rounded()      
-    ] as [String:Any]
+  func publish(reading:Reading) {
     
-    // As JSON
-    let json = try? JSONSerialization.data(withJSONObject: record, options: .prettyPrinted)
-    
-    // With string in message
+    // Build MQTT message
     let message = CocoaMQTTMessage(
-      topic: topic,
-      string: String(data: json!, encoding: String.Encoding.utf8)!
+      topic: "iot-2/type/\(device_type)/id/\(device_id)/evt/\(event)/fmt/json",
+      string: String(data: reading.json(), encoding: String.Encoding.utf8)!
     )
     
-    mqtt?.publish(message)
+    // Send
+    watson?.publish(message)
   }
-  
+ 
   // Informational messages
   func mqtt(_ mqtt: CocoaMQTT, didConnect host: String, port: Int) {
     print("Connected.")
@@ -153,4 +145,3 @@ class WatsonIoT:CocoaMQTTDelegate {
   }
   
 }
-*/
