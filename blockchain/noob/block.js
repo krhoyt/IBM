@@ -8,6 +8,9 @@ class Block {
   }
 
   calculateHash() {
+    // Third-party library
+    // Web Crypto API is promise-based
+    // Difficult application in this instance
     let sha = new jsSHA( 'SHA-256', 'TEXT' );
     sha.update(
       this.previousHash +
