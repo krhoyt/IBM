@@ -1,0 +1,45 @@
+body {
+  align-items: center;
+  background-color: #ececec;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;  
+  justify-content: center;
+}
+
+button {
+  background-color: #1269fb;
+  background-image: url( '../img/watson.svg' );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  border: none;
+  border-radius: 56px;
+  height: 56px;
+  left: 3px;
+  outline: none;
+  position: absolute;
+  top: 3px;
+  width: 56px;
+}
+
+p {
+  color: rgba( 0, 0, 0, 0.86 );
+}
+
+#watson {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+  height: 62px;
+  position: relative;
+  width: 62px;
+}
+
+#watson.listening {
+  background-image: url( '../img/listening.svg' );
+}
+
+#watson.processing {
+  background-image: url( '../img/processing.svg' );
+}

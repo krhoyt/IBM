@@ -1,0 +1,23 @@
+{
+  "iot": {
+    "host": "mqtt://ts123x.messaging.internetofthings.ibmcloud.com",
+    "client": "a:ts123x:Garage",
+    "user": "a-ts123x-rhy0vhijef",
+    "password": "KpogUAF2a(uP+*2R5n",
+    "port": 1883,
+    "command": "iot-2/type/Pi/id/Garage/cmd/monitor/fmt/json",
+    "event": "iot-2/type/Pi/id/Garage/evt/monitor/fmt/json"
+  },
+  "stt": {
+    "stream": "https://stream.watsonplatform.net/authorization/api/v1/token",
+    "url": "https://stream.watsonplatform.net/speech-to-text/api",
+    "password": "FFTiU50lz018",
+    "username": "42dbc128-482d-4940-879a-b692d6x67f04"    
+  },
+  "tts": {
+    "url": "https://stream.watsonplatform.net/text-to-speech/api",
+    "password": "ManMCcSDrUaj",
+    "username": "4bb16379-f172-4b21-bf71-65015270de90",
+    "stream": "https://stream.watsonplatform.net/authorization/api/v1/token"
+  }
+}
