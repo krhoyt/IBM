@@ -9,7 +9,7 @@ body {
 
 button {
   background-color: #1269fb;
-  background-image: url( '../img/watson.svg' );
+  background-image: url( ../img/watson.svg );
   background-position: center;
   background-repeat: no-repeat;
   background-size: 24px;
@@ -25,6 +25,18 @@ button {
 
 p {
   color: rgba( 0, 0, 0, 0.86 );
+}
+
+#logo {
+  background-image: url( ../img/ibm.svg );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;  
+  bottom: 16px;
+  height: 16px;
+  left: 0;
+  position: absolute;
+  right: 0;
 }
 
 #watson {
