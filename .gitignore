@@ -11,3 +11,5 @@ volley/
 Carthage/
 *.framework
 composer-logs/
+*.zip
+package-lock.json

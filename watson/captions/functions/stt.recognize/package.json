@@ -1,0 +1,19 @@
+{
+  "name": "stt-recognize",
+  "version": "1.0.0",
+  "description": "Upload a file to Watson Speech To Text",
+  "main": "handler.js",
+  "keywords": [
+    "serverless",
+    "openwhisk"
+  ],
+  "devDependencies": {
+    "serverless-openwhisk": ">=0.13.0"
+  },
+  "dependencies": {
+    "multipart": "^0.1.5",
+    "parted": "^0.1.1",
+    "request": "^2.88.0",
+    "string-to-stream": "^1.1.1"
+  }
+}

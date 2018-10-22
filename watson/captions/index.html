@@ -1,0 +1,43 @@
+<html>
+<head>
+
+<title>Captions</title>
+
+<!-- Google Fonts -->
+<!-- Montserrat -->
+<!-- Clean, readable, sans -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+<!-- Application styles -->
+<link href="/style/captions.css" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- File interaction -->
+<button class="file" src="/img/watson.svg" width="120" height="120"></button>
+
+<!-- Instructions -->
+<!-- Also progress indicator -->
+<!-- Also dialog copy -->
+<p class="copy">Click the Watson logo<br>to select an audio file.</p>
+
+<!-- Waveform -->
+<div class="waveform">
+  <div class="speaker"></div>
+  <div class="audio"></div>
+  <button class="play"></button>
+</div>
+
+<!-- File selector -->
+<!-- Hidden for custom user interface -->
+<input type="file" accept="audio/*">
+
+<!-- Libraries -->
+<script src="https://unpkg.com/wavesurfer.js"></script>
+
+<!-- Application -->
+<script src="/script/captions.js"></script>
+
+</body>
+</html>

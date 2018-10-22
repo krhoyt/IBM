@@ -1,0 +1,101 @@
+body {
+  align-items: center;
+  background: linear-gradient( 45deg,  #016158 0%, #053976 100% );  
+  display: flex;
+  flex-direction: column;  
+  font-family: 'Montserrat', sans-serif;  
+  justify-content: center;
+  margin: 0 0 112px 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+button.file {
+  background: none;  
+  background-image: url( '/img/watson.svg' );
+  background-size: contain;
+  border: none;
+  outline: none;  
+  height: 120px;
+  width: 120px;
+}
+
+button.play {
+  background: #00b2b2;
+  background-image: url( '/img/play.svg' );
+  background-position: center;  
+  background-repeat: no-repeat;    
+  background-size: 24px;
+  border: none;
+  border-radius: 2px;
+  height: 48px;
+  margin: 16px;
+  outline: none;
+  width: 48px;
+}
+
+button.pause {
+  background: #00b2b2;
+  background-image: url( '/img/pause.svg' );
+  background-position: center;  
+  background-repeat: no-repeat;    
+  background-size: 24px;
+  border: none;
+  border-radius: 2px;
+  height: 48px;
+  margin: 16px;
+  outline: none;
+  width: 48px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.audio {
+  border-right: solid 1px rgba( 0, 0, 0, 0.20 );  
+  flex-grow: 1;
+  padding: 16px 0 0 0;
+}
+
+.copy {
+  color: white;
+  font-size: 24px;
+  height: 60px;
+  margin: 80px 0 0 0;
+  padding: 0;
+  text-align: center;
+}
+
+.speaker {
+  background-image: url( '/img/speaker.svg' );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50%;
+  border-right: solid 1px rgba( 0, 0, 0, 0.20 );
+  height: 80px;
+  opacity: 0.80;
+  width: 80px;
+}
+
+.spinner {
+  background-image: url( '/img/spinner.svg' );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 40px;
+  width: 40px;
+}
+
+.waveform {
+  background: white;
+  bottom: -80px;
+  display: flex;
+  flex-direction: row;
+  height: 80px;
+  left: 16px;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  right: 16px;
+  transition: bottom 0.80s;
+}
