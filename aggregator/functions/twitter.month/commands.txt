@@ -1,0 +1,7 @@
+Check exports
+Returns promise
+Package.json main set
+
+npm install
+zip twitter.zip -r *
+ibmcloud wsk action create gator/twitter.month twitter.zip --kind nodejs:default

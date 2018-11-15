@@ -1,0 +1,7 @@
+Check exports
+Returns promise
+Package.json main set
+
+npm install
+zip media.zip -r *
+ibmcloud wsk action create gator/media.month media.zip --kind nodejs:default

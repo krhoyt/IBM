@@ -1,0 +1,298 @@
+<html>
+<head>
+
+<title>Gator</title>
+
+<style>
+@font-face {
+  font-family: 'Plex Sans Regular';
+  src: url( 'fonts/IBMPlexSans-Regular.woff' ) format( 'woff' );
+}
+
+@font-face {
+  font-family: 'Plex Sans Medium';
+  src: url( 'fonts/IBMPlexSans-Medium.woff' ) format( 'woff' );
+}
+
+body {
+  background-color: #2b2b2b;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+#table {
+  background-color: white;
+  height: 60vh;
+  position: relative;
+  width: 100vw;
+}
+
+#table > .header {
+  background-color: #53b7b5;
+  display: flex;
+  flex-direction: row;
+}
+
+#table > .header > p {
+  color: white;
+  font-family: 'Plex Sans Medium';
+  font-size: 13px;
+  height: 48px;  
+  line-height: 48px;
+  margin: 0;
+  padding: 0 0 0 16px;
+}
+
+#table > .header > p:nth-of-type( 1 ) {
+  width: 100px;
+}
+
+#table > .header > p:nth-of-type( 2 ) {
+  width: 200px;
+}
+
+#table > .header > p:nth-of-type( 3 ) {
+  flex-grow: 1;
+  padding: 0 16px 0 16px;  
+}
+
+#table > .list {
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  position: absolute;
+  right: 0;
+  top: 48px;
+}
+
+#table > .list > .row {
+  display: flex;
+  flex-direction: row;
+}
+
+#table > .list > div:nth-child( even ) {
+  background-color: rgba( 83, 183, 181, 0.10 );
+}
+
+#table > .list > .row > p {
+  color: rgba( 0, 0, 0, 0.80 );
+  font-family: 'Plex Sans Regular';
+  font-size: 14px;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 0 0 16px;
+  margin: 0;
+}
+
+#table > .list > .row > p:nth-of-type( 1 ) {
+  width: 100px;
+}
+
+#table > .list > .row > p:nth-of-type( 2 ) {
+  display: inline-block;  
+  flex-grow: 1;
+  overflow: hidden;    
+  padding: 0 16px 0 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.advocate {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0 0 0 16px;
+  width: 200px;
+}
+
+.advocate > img {
+  border-radius: 36px;
+  margin: 6px 12px 0 0;
+}
+
+.advocate > p {
+  font-family: 'Plex Sans Regular';
+  font-size: 14px;
+  line-height: 48px;
+  margin: 0;
+  padding: 0;
+}
+
+#mentions {
+  overflow: auto;
+}
+
+#mentions > div {
+  display: flex;
+  flex-direction: row;
+}
+
+#mentions > div:nth-child( even ) {
+  background-color: rgba( 83, 183, 181, 0.10 );
+}
+
+#mentions > div > p {
+  color: rgba( 0, 0, 0, 0.80 );
+  font-family: 'Plex Sans Regular';
+  font-size: 14px;
+  height: 48px;
+  line-height: 48px;
+  margin: 0;
+  padding: 0 0 0 16px;
+}
+
+#mentions > div > p:nth-of-type( 1 ) {
+  flex-grow: 1;
+}
+
+#mentions > div > p:nth-of-type( 2 ) {
+  color: rgba( 0, 0, 0, 0.40 );
+  padding: 0 16px 0 16px;
+}
+
+#summary {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 40vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+#summary > div.card {
+  background-color: white;
+  border-radius: 2px;
+  height: 30vh;
+  width: 20vw;
+}
+
+#summary > div.card:nth-child( 2 ) {
+  margin: 0 2vw 0 2vw;
+}
+
+#summary > div.card:nth-child( 3 ) {
+  margin: 0 2vw 0 0;
+}
+
+.template {
+  display: none;
+  position: absolute;
+}
+</style>
+
+</head>
+<body>
+
+<div id="summary">
+  <div class="card"></div>
+  <div class="card"></div>
+  <div id="mentions" class="card"></div>
+  <div id="media" class="card" style="background-image: url( https://pbs.twimg.com/tweet_video_thumb/Dr8oxPsW4AAb7Y-.jpg ); background-position: center; background-repeat: no-repeat; background-size: cover;"></div>      
+</div>
+<div id="table">
+  <div class="header">
+    <p>Date</p>
+    <p>Advocate</p>
+    <p>Text</p>
+  </div>
+  <div class="list"></div>
+</div>
+
+<div class="mentions template">
+  <p>krhoyt</p>
+  <p>10</p>
+</div>
+
+<div class="twitter template">
+  <p>Nov-01</p>
+  <div class="advocate">
+    <img src="https://pbs.twimg.com/profile_images/51152312/khoyt-headshot_400x400.jpg" width="36" height="36">
+    <p>Kevin Hoyt</p>
+  </div>
+  <p>Because I have all teh tweets!</p>
+</div>        
+
+<script>
+class Table {
+  constructor() {
+    this.root = document.querySelector( '#table' );
+    this.list = this.root.querySelector( '.list' );
+    this.template = document.querySelector( '.twitter.template' );
+  }
+
+  set data( tweets ) {
+    for( let t = 0; t < tweets.length; t++ ) {
+      let row = this.template.cloneNode( true );
+      
+      row.classList.remove( 'twitter' );
+      row.classList.remove( 'template' );
+      row.classList.add( 'row' );
+
+      let created = new Date( tweets[t].created_at );
+
+      let text = tweets[t].text.trim();
+      // TODO: Wrap links in anchor tag
+
+      row.children[0].innerHTML = `${Table.MONTHS[created.getMonth()]}-${created.getDate()}`;
+      row.children[1].children[0].src = tweets[t].photo;
+      row.children[1].children[1].innerHTML = tweets[t].name;
+      row.children[2].innerHTML = text;
+
+      this.list.appendChild( row );
+    }
+  }
+}
+
+Table.MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+class Mentions {
+  constructor() {
+    this.root = document.querySelector( '#mentions' );
+    this.template = document.querySelector( '.mentions.template' );
+  }
+
+  set data( mentions ) {
+    for( let m = 0; m < mentions.length; m++ ) {
+      let row = this.template.cloneNode( true );
+      row.classList.remove( 'mentions' );
+      row.classList.remove( 'template' );
+
+      row.children[0].innerHTML = mentions[m].name;
+      row.children[1].innerHTML = mentions[m].count;
+
+      this.root.appendChild( row );
+    }
+  }
+}
+
+class Gator {
+  constructor() {
+    let config = null;
+
+    this.mentions = new Mentions();
+    this.table = new Table();
+
+    fetch( 'config.json' )
+    .then( ( response ) => {return response.json();} )
+    .then( ( data ) => {
+      console.log( data );
+      this.config = data;
+      return fetch( this.config.twitter );
+    } ) 
+    .then( ( response ) => {return response.json();} )
+    .then( ( data ) => {
+      this.mentions.data = data.mentions.slice( 0 );
+      this.table.data = data.tweets.slice( 0 );
+    } );
+  }
+}
+
+const app = new Gator();
+</script>
+
+</body>
+</html>
