@@ -1,0 +1,4 @@
+docker build -t gator .
+docker run -v ~/Desktop/Gator:/usr/src/ingest -t -d gator
+docker run -t -d gator
+docker exec -i -t <image> /bin/bash

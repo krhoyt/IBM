@@ -19,3 +19,6 @@ package-lock.json
 *.pptx
 plex/
 *.crt
+*.pyc
+__pycache__
+action.zip

@@ -1,0 +1,5 @@
+feedparser
+isodate
+mysql-connector
+requests
+XlsxWriter
