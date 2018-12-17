@@ -4,11 +4,14 @@ const mysql = require( 'mysql' );
 const util = require( 'util' );
 
 let params = jsonfile.readFileSync( __dirname + '/config.json' );
-params.month = 11;
+// params.id = 'ce9f0c7a-8e91-4e46-af39-00fd9b9bfb58';
+params.id = '7b332138-3163-454c-a76e-f829f59a2d2';
 
 aggregate();
 
 async function aggregate() {
+  let result = {};
+
   // Query date
   let year = 0;
   let month = 0;
@@ -39,9 +42,15 @@ async function aggregate() {
 
   // Formalize
   // For use in query
-  const start = new Date( year, month, 1 );
-  const end = new Date( year, month, last );
-
+  if( params.month || params.year ) {
+    result.start = new Date( year, month, 1 );
+    result.end = new Date( year, month, last );
+  } else {
+    result.start = new Date( year, month, now.getDate() );
+    result.start.setDate( result.start.getDate() - 30 );
+    result.end = new Date( year, month, now.getDate() );
+  }
+  
   // Connect to MySQL
   // Compose
   const connection = mysql.createConnection( {
@@ -59,27 +68,43 @@ async function aggregate() {
 
   const query = util.promisify( connection.query ).bind( connection );
 
-  console.log( start );
-  console.log( end );  
+  console.log( result.start );
+  console.log( result.end );  
 
-  let results = {
-    month: month + 1,
-    year: year,
-    blog: await blog( query, start, end ),
-    youtube: await youtube( query, start, end ),
-    twitter: await twitter( query, start, end ),
-    github: await github( query, start, end ),
-    so: await so( query, start, end )
-  };
+  let advocate = await query( 'SELECT id FROM Advocate WHERE uuid = ?', params.id );
 
-  console.log( results );
+  if( advocate.length > 0 ) {
+    advocate = advocate[0].id;
+
+    result.id = params.id;
+  
+    result.blog = await blog( query, advocate, result.start, result.end );
+    result.github = await github( query, advocate, result.start, result.end );
+    result.so = await so( query, advocate, result.start, result.end );
+    result.twitter = await twitter( query, advocate, result.start, result.end );
+    result.youtube = await youtube( query, advocate, result.start, result.end );
+  }
+
+  console.log( result );
 
   connection.end();  
 }
 
-async function blog( query, start, end ) {
+async function blog( query, advocate, start, end ) {
   // Query
-  const posts = await query( 'SELECT * FROM Post WHERE published_at >= ? AND published_at <= ?', [start, end] );
+  const posts = await query(
+    'SELECT Post.guid, Post.title, Post.category, Post.keywords ' +
+    'FROM Advocate, Blog, Post ' +
+    'WHERE Advocate.id = Blog.advocate_id ' +
+    'AND Blog.id = Post.blog_id ' +
+    'AND Advocate.id = ? ' +
+    'AND Post.published_at >= ? ' +
+    'AND Post.published_at <= ? ' +
+    'ORDER BY Post.published_at DESC', 
+    [advocate, start, end] 
+  );
+
+  console.log( posts.length );
 
   // Accumulations
   let category = '';  
@@ -95,13 +120,23 @@ async function blog( query, start, end ) {
   return {
     category: refine( category ),    
     keywords: refine( keywords ),
-    posts: posts.length
+    posts: posts
   };
 }
 
-async function github( query, start, end ) {
+async function github( query, advocate, start, end ) {
   // Query
-  const events = await query( 'SELECT * FROM Source WHERE published_at >= ? AND published_at <= ?', [start, end] );  
+  const events = await query(
+    'SELECT Source.source_id, Source.source_type, Source.repository_name ' +
+    'FROM Advocate, GitHub, Source ' +
+    'WHERE Advocate.id = GitHub.advocate_id ' +
+    'AND GitHub.id = Source.github_id ' +
+    'AND Advocate.id = ? ' +
+    'AND Source.published_at >= ? ' +
+    'AND Source.published_at <= ? ' +
+    'ORDER BY Source.published_at DESC',
+    [advocate, start, end] 
+  );  
 
   // Accumulations
   let comment = 0;
@@ -132,16 +167,26 @@ async function github( query, start, end ) {
   // Done
   return {
     comment: comment,
-    events: events.length,
+    events: events,
     pull: pull,
     push: push,
     repository: refine( repos, 10, false )
   };
 }
 
-async function so( query, start, end ) {
+async function so( query, advocate, start, end ) {
   // Query
-  const answers = await query( 'SELECT * FROM Answer WHERE answered_at >= ? AND answered_at <= ?', [start, end] );  
+  const answers = await query( 
+    'SELECT Answer.answer_id, Answer.question_id, Answer.score, Answer.accepted, Answer.link, Answer.title, Answer.tags, Answer.keywords ' +
+    'FROM Advocate, Answer, StackOverflow ' +
+    'WHERE Advocate.id = StackOverflow.advocate_id ' +
+    'AND StackOverflow.id = Answer.so_id ' +
+    'AND Advocate.id = ? ' +
+    'AND Answer.answered_at >= ? ' +
+    'AND Answer.answered_at <= ? ' +
+    'ORDER BY Answer.answered_at DESC',
+    [advocate, start, end]
+  );  
 
   // Accumulations
   let accepted = 0;
@@ -160,16 +205,26 @@ async function so( query, start, end ) {
   // Done
   return {
     accepted: accepted,    
-    answers: answers.length,
+    answers: answers,
     keywords: refine( keywords ),
     score: score,
     tags: refine( tags )
   };
 }
 
-async function twitter( query, start, end ) {
+async function twitter( query, advocate, start, end ) {
   // Query
-  const status = await query( 'SELECT * FROM Status WHERE published_at >= ? AND published_at <= ?', [start, end] );  
+  const status = await query( 
+    'SELECT Status.status_id, Status.link, Status.text, Status.favorite, Status.retweet, Status.hashtags, Status.mentions ' +
+    'FROM Advocate, Status, Twitter ' +
+    'WHERE Advocate.id = Twitter.advocate_id ' +
+    'AND Twitter.id = Status.twitter_id ' +
+    'AND Advocate.id = ? ' +
+    'AND Status.published_at >= ? ' +
+    'AND Status.published_at <= ? ' +
+    'ORDER BY Status.published_at DESC',
+    [advocate, start, end]
+  );  
 
   // Accumulations
   let favorites = 0;
@@ -191,14 +246,24 @@ async function twitter( query, start, end ) {
     favorites: favorites,
     hashtags: refine( hashtags ),
     mentions: refine( mentions, 10, false ),
-    posts: status.length,    
+    status: status,    
     retweets: retweets,
   }
 }
 
-async function youtube( query, start, end ) {
+async function youtube( query, advocate, start, end ) {
   // Query
-  const videos = await query( 'SELECT * FROM Video WHERE published_at >= ? AND published_at <= ?', [start, end] );  
+  const videos = await query(
+    'SELECT Video.video_id, Video.link, Video.title, Video.views, Video.stars, Video.duration ' +
+    'FROM Advocate, YouTube, Video ' +
+    'WHERE Advocate.id = YouTube.advocate_id ' +
+    'AND YouTube.id = Video.youtube_id ' +
+    'AND Advocate.id = ? ' +
+    'AND Video.published_at >= ? ' +
+    'AND Video.published_at <= ? ' +
+    'ORDER BY Video.published_at DESC',
+    [advocate, start, end]
+  );  
 
   // Accumulations
   let duration = 0;
@@ -216,7 +281,7 @@ async function youtube( query, start, end ) {
 
   // Done
   return {
-    posts: videos.length,
+    videos: videos,
     produced: seconds,    
     stars: stars,
     views: views    
@@ -257,6 +322,10 @@ const refine = ( words, maximum = 10, clean = true ) => {
     // i.e. when bloggers do not assign categories
     // Disregard that situation
     if( words[w] == 'null' ) {
+      continue;
+    }
+
+    if( words[w].length == 0 ) {
       continue;
     }
 
