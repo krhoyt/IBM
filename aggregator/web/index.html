@@ -10,14 +10,115 @@
 <link href="style/gator.css" rel="stylesheet">
 <link href="style/login.css" rel="stylesheet">
 
+<style>
+body {
+  background: linear-gradient( to bottom, #4781de 0%, #5650bc 100% );        
+  margin: 0;
+  padding: 0;
+}
+
+#home {
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  visibility: hidden;
+  transition: opacity 1s;
+}
+
+#home > div.page {
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  height: 8%;  
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+#home > div.page > div {
+  border: 1px solid white;
+  border-radius: 10px;
+  height: 10px;
+  margin: 0 5px 0 5px;
+  width: 10px;
+}
+
+#home > div.page > div.filled {
+  background: white;
+}
+
+#home > div.photo {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 3px solid white;
+  border-radius: 4em;
+  height: 20vw;
+  width: 20vw;
+}
+
+#home > div.section {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 2px rgba( 0, 0, 0, 0.30 );    
+  height: 50%;  
+  margin: 10% 0 0 0;
+  padding: 0;
+  width: 84%;  
+}
+
+#home > div.shadow {
+  background: linear-gradient( to bottom, rgba( 255, 255, 255, 0 ) 0%,rgba( 255, 255, 255, 0.30 ) 100% ); 
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  height: 10px;
+}
+
+#home > p {
+  color: white;
+  font-family: 'Plex-Medium';
+  font-size: 1.5em;
+  margin: 4% 0 0 0;
+  padding: 0;
+}
+</style>
+
 </head>
 <body>
+
+<div id="home">
+  <div class="photo"></div>
+  <p>Kevin Hoyt</p>
+  <div class="section"></div>
+  <div class="shadow" style="width: 76%;"></div>
+  <div class="shadow" style="width: 68%;"></div>
+  <div class="shadow" style="width: 60%;"></div>  
+  <div class="shadow" style="width: 52%; margin-bottom: 8%;"></div>    
+  <div class="page">
+    <div class="filled"></div>
+    <div></div>    
+    <div></div>    
+    <div></div>        
+    <div></div>            
+  </div>
+</div>
 
 <!-- Login -->
 <div id="login">
   <div></div>
   <div></div>
-  <img src="img/ibm.circle.svg" width="28%" height="28%">
+  <div class="logo"></div>
   <button class="forgot">Forgot password?</button>  
   <form>
     <h4>Login</h4>    
@@ -32,6 +133,7 @@
 <!-- Application -->
 <script src="script/observer.js"></script>
 <script src="script/login.js"></script>
+<script src="script/home.js"></script>
 <script src="script/gator.js"></script>
 
 </body>

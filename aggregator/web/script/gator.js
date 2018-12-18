@@ -1,10 +1,11 @@
 class Gator {
   constructor() {
-    this.advocate = null;
     this.summary = null;
 
     this.login = new Login();
     this.login.addEventListener( Login.SUBMIT, ( evt ) => this.doLoginSubmit( evt ) );
+
+    this.home = new Home();
   }
 
   doLoginSubmit( evt ) {
@@ -14,13 +15,13 @@ class Gator {
       console.log( data );
 
       if( data.id ) {
-        this.advocate = data;
         this.login.hide();
+        this.home.advocate = data;
       } else {
         alert( 'Advocate not found.' );
       }
 
-      return fetch( `${Gator.SUMMARY}?id=${this.advocate.id}` );
+      return fetch( `${Gator.SUMMARY}?id=${data.id}` );
     } )
     .then( ( response ) => {return response.json();} )
     .then( ( data ) => {
@@ -28,6 +29,7 @@ class Gator {
       
       if( data.id ) {
         this.summary = data;
+        this.home.show();
       } else {
         alert( 'Invalid advocate ID.' );
       }

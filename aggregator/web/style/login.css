@@ -26,28 +26,33 @@
 }
 
 #login > button.forgot {
-  background-color: white;
-  color: rgba( 0, 0, 0, 0.80 );  
+  color: white;
   top: 90%;    
 }
 
 #login > button.login {
-  background-color: #4a6dd0;
+  background-color: #4781de;
   box-shadow: 0px 0px 10px 2px rgba( 66, 107, 215, 0.25 );    
   color: white;  
   top: 80%;  
 }
 
-#login > img {
-  left: 36%;
+#login > div.logo {
+  background-image: url( ../img/ibm.circle.svg );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 25vw;
+  height: 25vw;
+  left: 37vw;
   margin: 0;  
   padding: 0;
   position: absolute;
-  top: 8%;
+  top: 16%;
+  width: 25vw;
 }
 
 #login > div:first-of-type {
-  background: linear-gradient( to bottom, #4781de 0%, #5650bc 100% );    
   flex-grow: 1;
 }
 
