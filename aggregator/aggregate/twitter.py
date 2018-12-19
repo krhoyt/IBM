@@ -54,6 +54,10 @@ def mentions( values ):
         # Get user statistics
         details = profile( people['id_str'], people['screen_name'] )
       
+        # User does not allow access to profile
+        if details is None:
+          continue
+
         cursor.execute( 
           'UPDATE Mention SET updated_at = %s, followers = %s, friends = %s, listed = %s, favorites = %s, count = %s, location = %s, description = %s WHERE id = %s', (
             datetime.now().strftime( '%Y-%m-%d %H:%M:%S' ),
