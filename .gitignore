@@ -22,3 +22,4 @@ plex/
 *.pyc
 __pycache__
 action.zip
+*.xlsx

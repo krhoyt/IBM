@@ -1,0 +1,9 @@
+{
+  "name": "monthly.summary",
+  "main": "index.js",
+  "dependencies": {
+    "excel4node": "^1.7.0",
+    "jsonfile": "^5.0.0",
+    "mysql": "^2.16.0"
+  }
+}
