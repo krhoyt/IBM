@@ -4,8 +4,8 @@ const mysql = require( 'mysql' );
 const util = require( 'util' );
 
 let params = jsonfile.readFileSync( __dirname + '/config.json' );
-// params.id = 'ce9f0c7a-8e91-4e46-af39-00fd9b9bfb58';
-params.id = '7b332138-3163-454c-a76e-f829f59a2d2';
+params.id = 'ce9f0c7a-8e91-4e46-af39-00fd9b9bfb58';
+// params.id = '7b332138-3163-454c-a76e-f829f59a2d2';
 
 aggregate();
 
@@ -93,7 +93,7 @@ async function aggregate() {
 async function blog( query, advocate, start, end ) {
   // Query
   const posts = await query(
-    'SELECT Post.guid, Post.title, Post.category, Post.keywords ' +
+    'SELECT Post.guid, Post.published_at, Post.title, Post.category, Post.keywords ' +
     'FROM Advocate, Blog, Post ' +
     'WHERE Advocate.id = Blog.advocate_id ' +
     'AND Blog.id = Post.blog_id ' +
@@ -127,7 +127,7 @@ async function blog( query, advocate, start, end ) {
 async function github( query, advocate, start, end ) {
   // Query
   const events = await query(
-    'SELECT Source.source_id, Source.source_type, Source.repository_name ' +
+    'SELECT Source.source_id, Source.published_at, Source.source_type, Source.repository_name ' +
     'FROM Advocate, GitHub, Source ' +
     'WHERE Advocate.id = GitHub.advocate_id ' +
     'AND GitHub.id = Source.github_id ' +
@@ -177,7 +177,7 @@ async function github( query, advocate, start, end ) {
 async function so( query, advocate, start, end ) {
   // Query
   const answers = await query( 
-    'SELECT Answer.answer_id, Answer.question_id, Answer.score, Answer.accepted, Answer.link, Answer.title, Answer.tags, Answer.keywords ' +
+    'SELECT Answer.answer_id, Answer.answered_at, Answer.question_id, Answer.score, Answer.accepted, Answer.link, Answer.title, Answer.tags, Answer.keywords ' +
     'FROM Advocate, Answer, StackOverflow ' +
     'WHERE Advocate.id = StackOverflow.advocate_id ' +
     'AND StackOverflow.id = Answer.so_id ' +
@@ -215,7 +215,7 @@ async function so( query, advocate, start, end ) {
 async function twitter( query, advocate, start, end ) {
   // Query
   const status = await query( 
-    'SELECT Status.status_id, Status.link, Status.text, Status.favorite, Status.retweet, Status.hashtags, Status.mentions ' +
+    'SELECT Status.status_id, Status.published_at, Status.link, Status.text, Status.favorite, Status.retweet, Status.hashtags, Status.mentions ' +
     'FROM Advocate, Status, Twitter ' +
     'WHERE Advocate.id = Twitter.advocate_id ' +
     'AND Twitter.id = Status.twitter_id ' +
@@ -254,7 +254,7 @@ async function twitter( query, advocate, start, end ) {
 async function youtube( query, advocate, start, end ) {
   // Query
   const videos = await query(
-    'SELECT Video.video_id, Video.link, Video.title, Video.views, Video.stars, Video.duration ' +
+    'SELECT Video.video_id, Video.published_at, Video.link, Video.title, Video.views, Video.stars, Video.duration ' +
     'FROM Advocate, YouTube, Video ' +
     'WHERE Advocate.id = YouTube.advocate_id ' +
     'AND YouTube.id = Video.youtube_id ' +

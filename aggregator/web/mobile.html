@@ -1,0 +1,277 @@
+<html>
+<head>
+
+<!-- Mobile -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Gator</title>
+
+<!-- Styles -->
+<link href="style/gator.css" rel="stylesheet">
+<link href="style/login.css" rel="stylesheet">
+
+<style>
+body {
+  background: linear-gradient( to bottom, #4781de 0%, #5650bc 100% );        
+  margin: 0;
+  padding: 0;
+}
+
+#home {
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 0;
+  opacity: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  visibility: visible;
+  transition: opacity 1s;
+}
+
+#home > button.menu {
+  background: none;
+  background-image: url( ../img/hamburger.svg );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  border: none;
+  height: 54px;
+  left: 8px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 8px;
+  width: 54px;
+}
+
+#home > div.page {
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  height: 8%;  
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+#home > div.page > button {
+  background: none;
+  background: white;
+  border-radius: 10px;
+  height: 10px;
+  margin: 0 4px 0 4px;
+  opacity: 0.35;
+  padding: 0;
+  width: 10px;
+}
+
+#home > div.page > button.filled {
+  opacity: 1;
+}
+
+#home > div.photo {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 3px solid white;
+  border-radius: 4em;
+  height: 20vw;
+  width: 20vw;
+}
+
+#home > div.section {
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 2px rgba( 0, 0, 0, 0.30 );    
+  display: flex;
+  flex-direction: column;
+  height: 55%;  
+  margin: 5% 0 0 0;
+  padding: 0;
+  width: 84%;  
+}
+
+#home > div.section > div.bottom {
+  display: flex;
+  flex-direction: row;
+  margin: 25px 0 0 0;
+  width: 80%;
+}
+
+#home > div.section > div.bottom > div {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+#home > div.section > div.bottom > div > p {
+  color: rgba( 0, 0, 0, 0.80 );
+  font-family: 'Plex-Medium';
+  font-size: 0.90em;  
+  margin: 0 0 3px 0;
+  padding: 0;
+}
+
+#home > div.section > div.bottom > div:last-of-type > p {
+  text-align: right;
+}
+
+#home > div.section > div.bottom > div:last-of-type > h3 {
+  text-align: right;
+}
+
+#home > div.section > div.bottom > div > h3 {
+  color: #4a6dd0;
+  font-family: 'Plex-Medium';
+  font-size: 0.70em;
+  margin: 0 0 3px 0;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+#home > div.section > div.top {
+  display: flex;
+  flex-direction: row;
+  margin: 15px 0 0 0;
+  width: 80%;
+}
+
+#home > div.section > div.top > div {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  text-align: center;
+}
+
+#home > div.section > div.top > div > p {
+  font-family: 'Plex-Medium';
+  margin: 0;
+  padding: 0;
+}
+
+#home > div.section > div.top > div > p:first-of-type {
+  color: rgba( 0, 0, 0, 0.80 );
+  font-size: 1.5em;
+}
+
+#home > div.section > div.top > div > p:last-of-type {
+  color: #4a6dd0;
+  font-size: 0.70em;
+  text-transform: uppercase;
+}
+
+#home > div.section > h2 {
+  color: rgba( 0, 0, 0, 0.80 );
+  font-family: 'Plex-Medium';
+  font-size: 1.25em;
+  margin: 15px 0 0 0;
+  padding: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#home > div.shadow {
+  background: linear-gradient( to bottom, rgba( 255, 255, 255, 0 ) 0%,rgba( 255, 255, 255, 0.30 ) 100% ); 
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  height: 10px;
+}
+
+#home > p {
+  color: white;
+  font-family: 'Plex-Medium';
+  font-size: 1.5em;
+  margin: 4% 0 0 0;
+  padding: 0;
+}
+</style>
+
+</head>
+<body>
+
+<div id="home">
+  <button class="menu"></button>
+  <div class="photo"></div>
+  <p>Kevin Hoyt</p>
+  <div class="section">
+    <h2>Twitter</h2>
+    <div class="top">
+      <div>
+        <p>999<p>
+        <p>posts</p>
+      </div>
+      <div>
+        <p>999<p>
+        <p>favorites</p>
+      </div>
+      <div>
+        <p>999<p>
+        <p>retweets</p>
+      </div>            
+    </div>
+    <div class="bottom">
+      <div>
+        <h3>Hashtags</h3>
+        <p>ibmdeveloper (99)</p>
+        <p>ibmdeveloper (99)</p>
+        <p>ibmdeveloper (99)</p>
+        <p>ibmdeveloper (99)</p>
+        <p>ibmdeveloper (99)</p>
+        <p>ibmdeveloper (99)</p>
+        <p>ibmdeveloper (99)</p>
+        <p>ibmdeveloper (99)</p>
+        <p>ibmdeveloper (99)</p>
+        <p>ibmdeveloper (99)</p>                                                                        
+      </div>
+      <div>
+        <h3>Mentions</h3>
+        <p>bob_jones (99)</p>
+      </div>
+    </div>
+  </div>
+  <div class="shadow" style="width: 76%;"></div>
+  <div class="shadow" style="width: 68%;"></div>
+  <div class="shadow" style="width: 60%;"></div>  
+  <div class="shadow" style="width: 52%; margin-bottom: 8%;"></div>    
+  <div class="page">
+    <button class="filled"></button>
+    <button></button>    
+    <button></button>    
+    <button></button>    
+    <button></button>                
+  </div>
+</div>
+
+<!-- Login -->
+<div id="login">
+  <div></div>
+  <div></div>
+  <div class="logo"></div>
+  <button class="forgot">Forgot password?</button>  
+  <form>
+    <h4>Login</h4>    
+    <p>Email</p>
+    <input type="text" value="krhoyt@us.ibm.com">
+    <p>Password</p>
+    <input type="password">    
+  </form>
+  <button class="login">Login</button>
+</div>
+
+<!-- Application -->
+<script src="script/observer.js"></script>
+<script src="script/login.js"></script>
+<script src="script/home.js"></script>
+<script src="script/gator.js"></script>
+
+</body>
+</html>

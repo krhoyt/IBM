@@ -1,0 +1,28 @@
+body {
+  background: #e9e9e9;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.answers {
+  background-color: #ff9800;
+}
+
+.blog {
+  background-color: #e91e63;
+}
+
+.github {
+  background-color: #8bc34a;
+}
+
+.twitter {
+  background-color: #00bcd4;
+}
+
+.video {
+  background-color: #00c6ae;
+}

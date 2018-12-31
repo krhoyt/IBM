@@ -2,3 +2,8 @@
   font-family: 'Plex-Medium';
   src: url( '../fonts/IBMPlexSans-Medium.otf' );
 }
+
+@font-face {
+  font-family: 'Plex-Text';
+  src: url( '../fonts/IBMPlexSans-Text.otf' );
+}
