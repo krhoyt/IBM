@@ -1,0 +1,42 @@
+#keywords div.item {
+  display: flex;
+  flex-direction: row;
+}
+
+#keywords > p {
+  color: white;
+  font-family: 'Plex-Medium';
+  font-size: 14px;
+  margin: 16px 0 16px 16px;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+#keywords div.item {
+  margin: 0 16px 8px 16px;
+  padding: 0;
+}
+
+#keywords div.item p {
+  color: white;
+  font-family: 'Plex-Text';
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+#keywords div.item > p:first-of-type {
+  flex-grow: 1;
+}
+
+#keywords div.item > p:nth-of-type( 2 ) {
+  font-family: 'Plex-Medium';
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+#keywords div.item > p:nth-of-type( 3 ) {
+  font-size: 8px;
+  padding-top: 7px;
+  text-transform: uppercase;
+}

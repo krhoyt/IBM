@@ -7,6 +7,28 @@ body {
   padding: 0;
 }
 
+#statistics {
+  bottom: 16px;
+  display: flex;
+  flex-direction: row;   
+  left: 272px;   
+  position: absolute; 
+  right: 16px; 
+  top: 428px;  
+}
+
+#statistics > div {
+  box-shadow: 0 1px 4px 0 rgba( 0, 0, 0, 0.30 );    
+  display: flex;
+  flex-basis: 0;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+#statistics > div:nth-of-type( 2 ) {
+  margin: 0 16px 0 16px;
+}
+
 .answers {
   background-color: #ff9800;
 }

@@ -83,6 +83,7 @@ async function aggregate() {
     result.so = await so( query, advocate, result.start, result.end );
     result.twitter = await twitter( query, advocate, result.start, result.end );
     result.youtube = await youtube( query, advocate, result.start, result.end );
+    result.media = await media( query, advocate, result.start, result.end );
   }
 
   console.log( result );
@@ -171,6 +172,40 @@ async function github( query, advocate, start, end ) {
     pull: pull,
     push: push,
     repository: refine( repos, 10, false )
+  };
+}
+
+async function media( query, advocate, start, end ) {
+  // Query
+  const images = await query( 
+    'SELECT Media.published_at, Media.media_id, Media.url, Media.keywords, Twitter.screen_name ' +
+    'FROM Advocate, Media, Status, Twitter ' +
+    'WHERE Media.status_id = Status.status_id ' +
+    'AND Status.twitter_id = Twitter.id ' +
+    'AND Twitter.advocate_id = Advocate.id ' +
+    'AND Advocate.id = ? ' +
+    'AND Media.published_at >= ? ' +
+    'AND Media.published_at <= ? ' +
+    'ORDER BY Media.published_at',
+    [advocate, start, end] 
+  );
+
+  // Accumulations
+  let keywords = '';
+  
+  // Calculate totals
+  for( let i = 0; i < images.length; i++ ) {
+    delete images[i].id;
+    delete images[i].created_at;
+    delete images[i].updated_at;
+
+    keywords = keywords + ',' + images[i].keywords;
+  }
+
+  // Done
+  return {
+    images: images,
+    keywords: refine( keywords )
   };
 }
 

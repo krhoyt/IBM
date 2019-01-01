@@ -79,6 +79,10 @@ class Organization extends Observer {
         this.root.appendChild( button );        
       }
       
+      this.emit( Organization.TEAM_CLICK, {
+        id: data[0].team_id
+      } );
+
       console.log( data );
     } );
   }
