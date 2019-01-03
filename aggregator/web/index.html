@@ -1,175 +1,440 @@
 <html>
+
 <head>
 
 <title>Gator Desktop</title>
 
-<link href="style/gator.css" rel="stylesheet">
-<link href="style/desktop.css" rel="stylesheet">
-<link href="style/header.css" rel="stylesheet">
-<link href="style/tabs.css" rel="stylesheet">
-<link href="style/chart.css" rel="stylesheet">
-<link href="style/keywords.css" rel="stylesheet">
-<link href="style/navigation.css" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Plex-Medium';
+  src: url( '../fonts/IBMPlexSans-Medium.otf' );
+}
+
+@font-face {
+  font-family: 'Plex-Text';
+  src: url( '../fonts/IBMPlexSans-Text.otf' );
+}
+
+body {
+  background-color: #e9e9e9;
+}
+
+header {
+  background-color: #f44336;  
+  box-shadow: 0 1px 4px 0 rgba( 0, 0, 0, 0.30 );  
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+nav {
+  background-color: white;
+  bottom: 0;
+  box-shadow: 0 1px 4px 0 rgba( 0, 0, 0, 0.30 );    
+  left: 0;
+  position: absolute;
+  top: 104px;
+  width: 256px;
+}
+
+#app-bar {
+  display: flex;
+  flex-direction: row;
+  height: 56px;
+  margin: 0;
+  padding: 0 16px 0 16px;
+}
+
+#app-bar > p {
+  color: white;
+  flex-grow: 1;
+  font-family: 'Plex-Medium';
+  font-size: 20px;
+  line-height: 56px;
+  margin: 0;
+  padding: 0;
+}
+
+#organization {
+  bottom: 72px;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  overflow: scroll;
+  right: 0;
+  top: 0;
+}
+
+#organization > button {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  float: left;
+  height: 48px;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  width: 256px;
+}
+
+#organization > button > div {
+  color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 22px;  
+  font-family: 'Plex-Text';  
+  font-size: 12px;
+  height: 24px;
+  line-height: 24px;
+  margin: 12px 16px 0 16px;
+  text-transform: uppercase;
+  width: 24px;
+}
+
+#organization > button > p {
+  font-family: 'Plex-Medium';
+  font-size: 14px;  
+  line-height: 48px;
+  margin: 0;
+  padding: 0;
+  transition: color 0.80s;
+}
+
+#organization > button.advocate > div {
+  background-color: #80d1d0;
+  background-size: cover;
+  border-radius: 24px;
+}
+
+#organization > button.selected {
+  color: #f44336;
+}
+
+#organization > div {
+  background-color: #f44336;  
+  height: 48px;
+  position: absolute;
+  right: 0;
+  top: 36px;
+  transition: top 0.80s;
+  width: 5px;
+}
+
+#organization > p {
+  background-color: #eeeeee;
+  color: rgba( 0, 0, 0, 0.80 );
+  display: block;
+  height: 36px;
+  font-family: 'Plex-Medium';
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 36px; 
+  margin: 0;
+  padding: 0 0 0 16px;
+}
+
+#tabs {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0 16px 0 16px;
+}
+
+#tabs > button {
+  background: none;
+  background-position: center 12px;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  border: none;
+  color: white;  
+  font-family: 'Plex-Medium';
+  font-size: 14px;
+  margin: 0;  
+  outline: none;
+  text-transform: uppercase;
+}
+
+#tabs > button.icon {
+  display: flex;
+  flex-direction: column;  
+  height: 72px;
+  justify-content: flex-end;  
+  padding: 0 16px 12px 16px;  
+}
+
+#tabs > button.sans-icon {
+  height: 48px;
+  line-height: 48px;
+  padding: 0 16px 0 16px;
+}
+
+#tabs > div {
+  background-color: white;
+  bottom: 0;
+  height: 2px;
+  left: 16px;
+  position: absolute;
+  transition: left 0.8s, width 0.8s;
+}
+
+#version {
+  background-color: white;
+  border-top: solid 1px rgba( 0, 0, 0, 0.20 );
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  height: 72px;
+  justify-content: center;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 256px;
+}
+
+#version > p > a {
+  color: #f44336;
+  font-family: 'Plex-Medium';
+  font-weight: 600;
+  text-decoration: none;
+}
+
+#version > p {
+  color: rgba( 0, 0, 0, 0.80 );
+  font-family: 'Plex-Text';
+  font-size: 14px;
+  margin: 0;
+  padding: 0 0 0 16px;
+}
+
+#version > p:first-of-type {
+  padding-bottom: 4px;
+}
+
+#version > p > span {
+  font-family: 'Plex-Medium';
+  font-weight: 600;
+}
+</style>
 
 </head>
 <body>
-  
-<!-- Team navigation -->
+
 <nav>
-  <div class="selected blog"></div>
+  <div id="organization"></div>
+  <div id="version">
+    <p><a href="mailto:krhoyt@us.ibm.com">krhoyt@us.ibm.com</a></p>
+    <p><span>Version:</span> 2019.01.02</p>
+  </div>
 </nav>
 
 <header>
-  <h1>Gator Dashboard</h1>
+  <div id="app-bar"></div>  
+  <div id="tabs"></div>
 </header>
 
-<div id="tabs">
-  <button class="blog">
-    <div class="blog-dark"></div>
-    <div>
-      <p>Blog</p>
-      <p>-</p>
-    </div>
-  </button>
-  <button class="twitter">
-    <div class="twitter-dark"></div>
-    <div>
-      <p>Twitter</p>
-      <p>-</p>
-    </div>
-  </button>      
-  <button class="video">
-    <div class="video-dark"></div>
-    <div>
-      <p>YouTube</p>
-      <p>-</p>
-    </div>
-  </button>            
-  <button class="github">
-    <div class="github-dark"></div>
-    <div>
-      <p>GitHub</p>
-      <p>-</p>
-    </div>
-  </button>                          
-  <button class="answers">
-    <div class="answers-dark"></div>
-    <div>
-      <p>Answers</p>
-      <p>-</p>
-    </div>
-  </button>                
-</div>
-
-<div id="chart"></div>
-
-<div id="statistics">
-  <div id="media" class="blog"></div>
-  <div id="category" class="twitter"></div>
-  <div id="keywords" class="video">
-    <p>Keywords</p>
-    <div class="item">
-      <p>stuff</p>
-      <p>12</p>
-      <p>count</p>
-    </div>
-    <div class="item">
-      <p>stuff</p>
-      <p>12</p>
-      <p>count</p>
-    </div>   
-    <div class="item">
-      <p>stuff</p>
-      <p>12</p>
-      <p>count</p>
-    </div>
-    <div class="item">
-      <p>stuff</p>
-      <p>12</p>
-      <p>count</p>
-    </div>   
-    <div class="item">
-      <p>stuff</p>
-      <p>12</p>
-      <p>count</p>
-    </div>
-    <div class="item">
-      <p>stuff</p>
-      <p>12</p>
-      <p>count</p>
-    </div>   
-    <div class="item">
-      <p>stuff</p>
-      <p>12</p>
-      <p>count</p>
-    </div>       
-    <div class="item">
-      <p>stuff</p>
-      <p>12</p>
-      <p>count</p>
-    </div>           
-  </div>
-</div>
-
 <script src="script/observer.js"></script>
-<script src="script/organization.js"></script>
-<script src="script/tabs.js"></script>
 
 <script>
-class Gator {
-  constructor() {
-    this.organization = new Organization();
-    this.organization.addEventListener( Organization.ADVOCATE_CLICK, ( evt ) => this.doAdvocateClick( evt ) );    
-    this.organization.addEventListener( Organization.TEAM_CLICK, ( evt ) => this.doTeamClick( evt ) );    
-
-    this.tabs = new Tabs();
-  }
-
-  doAdvocateClick( evt ) {
-    console.log( `Advocate: ${evt.id}` );
-
-    this.tabs.clear();
-
-    fetch( `${Gator.GET_ADVOCATE_SUMMARY}?id=${evt.id}` )
-    .then( ( response ) => response.json() )
-    .then( ( data ) => {
-      this.tabs.count = {
-        blog: data.blog.posts.length,
-        github: data.github.events.length,
-        so: data.so.answers.length,
-        twitter: data.twitter.status.length,
-        youtube: data.youtube.videos.length
-      };
-
-      console.log( data );  
-    } );
-  }
-
-  doTeamClick( evt ) {
-    console.log( `Team: ${evt.id}` );
-
-    this.tabs.clear();
-
-    fetch( `${Gator.GET_TEAM_SUMMARY}?id=${evt.id}` )
-    .then( ( response ) => response.json() )
-    .then( ( data ) => {
-      this.tabs.count = {
-        blog: data.blog.posts.length,
-        github: data.github.events.length,
-        so: data.so.answers.length,
-        twitter: data.twitter.posts.length,
-        youtube: data.youtube.posts.length
-      };
-
-      console.log( data );  
-    } );    
+class ApplicationBar {
+  constructor( title = 'Gator Dashboard' ) {
+    this.root = document.querySelector( '#app-bar' );
+    
+    this.title = document.createElement( 'p' );
+    this.title.innerHTML = title;
+    this.root.appendChild( this.title );
   }
 }
 
-Gator.GET_ADVOCATE_SUMMARY = 'https://openwhisk.ng.bluemix.net/api/v1/web/krhoyt%40us.ibm.com_dev/gator/get.advocate.summary';
-Gator.GET_TEAM_SUMMARY = 'https://openwhisk.ng.bluemix.net/api/v1/web/krhoyt%40us.ibm.com_dev/gator/get.team.summary';
+class Organization extends Observer {
+  constructor() {
+    super();
+    
+    this.root = document.querySelector( '#organization' );
 
-const app = new Gator();
+    fetch( Organization.GET_ORGANIZATION )
+    .then( ( response ) => response.json() )
+    .then( ( data ) => {
+      let name = document.createElement( 'p' );
+      name.innerHTML = data[0].organization;
+      this.root.appendChild( name );
+
+      this.selected = document.createElement( 'div' );
+      this.root.appendChild( this.selected );
+
+      let team = null;
+
+      for( let d = 0; d < data.length; d++ ) {
+        if( data[d].team_id != team ) {
+          team = data[d].team_id;
+
+          let button = document.createElement( 'button' );
+          button.classList.add( 'team' );
+          button.setAttribute( 'data-team', data[d].team_id );
+          button.addEventListener( 'click', ( evt ) => this.doItemClick( evt ) );                                       
+
+          let icon = document.createElement( 'div' );
+          icon.style.backgroundImage = `url( img/${data[d].team_name.toLowerCase()}.svg )`;
+          button.appendChild( icon );
+
+          let label = document.createElement( 'p' );
+          label.innerHTML = data[d].team_name;
+          button.appendChild( label );          
+
+          this.root.appendChild( button );
+        }
+
+        let button = document.createElement( 'button' );
+        button.classList.add( 'advocate' );
+        button.setAttribute( 'data-advocate', data[d].advocate_id );        
+        button.setAttribute( 'data-email', data[d].email );                
+        button.setAttribute( 'data-first', data[d].first );        
+        button.setAttribute( 'data-last', data[d].last );                
+        button.setAttribute( 'data-latitude', data[d].latitude );                
+        button.setAttribute( 'data-longitude', data[d].longitude );                        
+        button.setAttribute( 'data-nickname', data[d].nickname );                                
+        button.setAttribute( 'data-photo', data[d].photo );             
+        button.addEventListener( 'click', ( evt ) => this.doItemClick( evt ) );                   
+
+        let icon = document.createElement( 'div' );
+
+        if( data[d].photo == null ) {
+          icon.innerHTML = `${data[d].first.charAt( 0 )}${data[d].last.charAt( 0 )}`;
+        } else {
+          icon.style.backgroundImage = `url( ${data[d].photo} )`;
+        }
+
+        button.appendChild( icon );
+
+        let label = document.createElement( 'p' );
+
+        if( data[d].nickname == null ) {
+          label.innerHTML = `${data[d].first} ${data[d].last}`;          
+        } else {
+          label.innerHTML = `${data[d].nickname} ${data[d].last}`;          
+        }
+
+        button.appendChild( label );
+
+        this.root.appendChild( button );              
+      }
+
+      this.emit( Organization.CLICK, {
+        team_id: data[0].team_id
+      } );      
+    } );
+  }
+
+  doItemClick( evt ) {
+    let item = evt.target;
+
+    if( evt.target.tagName != 'BUTTON' ) {
+      item = evt.target.parentElement;
+    }
+
+    this.selected.style.top = `${item.offsetTop}px`;
+
+    for( let c = 0; c < this.root.children.length; c++ ) {
+      if( this.root.children[c].classList.contains( 'selected' ) ) {
+        this.root.children[c].classList.remove( 'selected' );
+        break;
+      }
+    }
+
+    item.classList.add( 'selected' );
+
+    if( item.classList.contains( 'team' ) ) {
+      this.emit( Organization.CLICK, {
+        team_id: item.getAttribute( 'data-team' )
+      } );
+    } else {
+      this.emit( Organization.CLICK, {
+        advocate_id: item.getAttribute( 'data-advocate' )
+      } );
+    }
+  }  
+}
+
+Organization.CLICK = 'organization_click';
+Organization.GET_ORGANIZATION = 'https://openwhisk.ng.bluemix.net/api/v1/web/krhoyt%40us.ibm.com_dev/gator/get.organization';
+
+class Tabs extends Observer {
+  constructor( tabs = ['Blog', 'Twitter', 'GitHub', 'YouTube', 'Answers'], icons = false ) {
+    super();
+
+    this.root = document.querySelector( '#tabs' );
+
+    for( let t = 0; t < tabs.length; t++ ) {
+      let button = document.createElement( 'button' );
+
+      button.innerHTML = tabs[t];
+      button.setAttribute( 'data-mode', tabs[t].toLowerCase() );
+      button.addEventListener( 'click', ( evt ) => this.doButtonClick( evt ) );
+
+      if( icons ) {
+        button.classList.add( 'icon' );
+        button.style.backgroundImage = `url( img/${tabs[t].toLowerCase()}.svg )`;
+      } else {
+        button.classList.add( 'sans-icon' );
+      }
+      
+      this.root.appendChild( button );
+    }
+
+    let styles = getComputedStyle( this.root.children[0] );
+
+    this.selector = document.createElement( 'div' );
+    this.selector.style.width = styles.width;
+    this.root.appendChild( this.selector );
+  }
+
+  doButtonClick( evt ) {
+    let left = 16;
+
+    for( let c = 0; c < this.root.children.length - 1; c++ ) {
+      let styles = getComputedStyle( this.root.children[c] );
+
+      if( this.root.children[c] == evt.target ) {
+        this.selector.style.left = `${left}px`;
+        this.selector.style.width = styles.width;
+
+        this.emit( Tabs.CLICK, {
+          mode: evt.target.getAttribute( 'data-mode' )
+        } );
+
+        break;
+      } else {
+        left = left + parseInt( styles.width );
+      }
+    }
+  }
+}
+
+Tabs.CLICK = 'tabs_click';
+
+class Gator {
+  constructor() {
+    this.bar = new ApplicationBar();
+    this.tabs = new Tabs();
+    this.organization = new Organization();
+    this.organization.addEventListener( Organization.CLICK, ( evt ) => this.doOrganizationClick( evt ) );
+  }
+
+  doOrganizationClick( evt ) {
+    if( evt.team_id ) {
+      console.log( `Team: ${evt.team_id}` );
+    } else {
+      console.log( `Advocate: ${evt.advocate_id}` );      
+    }
+  }
+}
+
+let app = new Gator();
 </script>
 
 </body>

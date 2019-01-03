@@ -30,6 +30,7 @@ async function report() {
   // Query
   let organization = await query( 
     'SELECT ' +
+    'Organization.name AS organization, ' +
     'Team.uuid AS team_uuid, ' +
     'Team.name, ' +
     'Advocate.uuid AS advocate_uuid, ' +
