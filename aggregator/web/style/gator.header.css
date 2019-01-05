@@ -1,0 +1,9 @@
+gator-header > p {
+  color: white;
+  flex-grow: 1;
+  font-family: 'Plex-Medium';
+  font-size: 20px;
+  line-height: 56px;
+  margin: 0;
+  padding: 0;
+}

@@ -73,7 +73,7 @@ async function report( params ) {
   
     result.blog = await blog( query, advocate, result.start, result.end );
     result.github = await github( query, advocate, result.start, result.end );
-    result.so = await so( query, advocate, result.start, result.end );
+    result.answers = await so( query, advocate, result.start, result.end );
     result.twitter = await twitter( query, advocate, result.start, result.end );
     result.youtube = await youtube( query, advocate, result.start, result.end );
     result.media = await media( query, advocate, result.start, result.end );
@@ -165,13 +165,35 @@ async function github( query, advocate, start, end ) {
     }
   }
     
+  const watchers = await query( 
+    'SELECT ' +
+    'Repository.id, ' +
+    'Repository.pushed_at, ' +
+    'Repository.name, ' + 
+    'Repository.full_name, ' +
+    'Repository.watchers ' +
+    'FROM Repository ' +
+    'WHERE Repository.repository_id IN ( ' +
+    'SELECT DISTINCT Source.repository_id ' +
+    'FROM Advocate, GitHub, Source, Team ' +
+    'WHERE Source.github_id = GitHub.id ' +
+    'AND GitHub.advocate_id = Advocate.id ' +
+    'AND Advocate.id = ? ' +
+    'AND Source.published_at >= ? ' +
+    'AND Source.published_at <= ? ' +
+    ') ' +
+    'ORDER BY Repository.watchers DESC',
+    [advocate, start, end] 
+  );    
+
   // Done
   return {
     comment: comment,
     events: events,
     pull: pull,
     push: push,
-    repository: refine( repos, 10, false )
+    repository: refine( repos, 10, false ),
+    watchers: watchers
   };
 }
 
@@ -237,13 +259,39 @@ async function so( query, advocate, start, end ) {
     tags = tags + answers[a].tags;
   }
     
+  let sorted_score = answers.sort( ( a, b ) => {
+    if( a.score > b.score ) {
+      return -1;
+    }
+
+    if( a.score < b.score ) {
+      return 1;
+    }
+
+    return 0;
+  } );
+
+  let sorted_accepted = answers.sort( ( a, b ) => {
+    if( a.accepted > b.accepted ) {
+      return -1;
+    }
+
+    if( a.accepted < b.accepted ) {
+      return 1;
+    }
+
+    return 0;
+  } );  
+
   // Done
   return {
-    accepted: accepted,    
+    total_accepted: accepted,    
     answers: answers,
     keywords: refine( keywords ),
-    score: score,
-    tags: refine( tags )
+    total_score: score,
+    tags: refine( tags ),
+    sorted_accepted: sorted_accepted,
+    sorted_score: sorted_score
   };
 }
 
@@ -314,12 +362,38 @@ async function youtube( query, advocate, start, end ) {
     views = views + videos[v].views;
   }
 
+  let sorted_views = videos.sort( ( a, b ) => {
+    if( a.views > b.views ) {
+      return -1;
+    }
+
+    if( a.views < b.views ) {
+      return 1;
+    }
+
+    return 0;
+  } );
+
+  let sorted_stars = videos.sort( ( a, b ) => {
+    if( a.stars > b.stars ) {
+      return -1;
+    }
+
+    if( a.stars < b.stars ) {
+      return 1;
+    }
+
+    return 0;
+  } );  
+
   // Done
   return {
     videos: videos,
     produced: seconds,    
-    stars: stars,
-    views: views    
+    total_stars: stars,
+    total_views: views,
+    sorted_views: sorted_views,
+    sorted_stars: sorted_stars
   };
 }
 

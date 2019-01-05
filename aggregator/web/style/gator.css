@@ -1,0 +1,131 @@
+@font-face {
+  font-family: 'Plex-Medium';
+  src: url( '../fonts/IBMPlexSans-Medium.otf' );
+}
+
+@font-face {
+  font-family: 'Plex-Text';
+  src: url( '../fonts/IBMPlexSans-Text.otf' );
+}
+
+body {
+  background-color: #e9e9e9;
+}
+
+gator-chart {
+  background-color: white;
+  box-shadow: 0 1px 4px 0 rgba( 0, 0, 0, 0.30 );    
+  flex-basis: 0;
+  flex-grow: 1;
+  margin: 0 0 8px 0;
+  padding: 0;
+  position: relative;
+}
+
+gator-header {
+  display: flex;
+  flex-direction: row;
+  height: 56px;
+  margin: 0;
+  padding: 0 16px 0 16px;
+}
+
+gator-organization {
+  bottom: 72px;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  overflow: scroll;
+  right: 0;
+  top: 0;
+}
+
+gator-tabs {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0 16px 0 16px;
+}
+
+gator-version {
+  background-color: white;
+  border-top: solid 1px rgba( 0, 0, 0, 0.06 );
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  height: 72px;
+  justify-content: center;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 256px;
+}
+
+header {
+  background-color: #f44336;  
+  box-shadow: 0 1px 4px 0 rgba( 0, 0, 0, 0.30 );  
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+nav {
+  background-color: white;
+  bottom: 0;
+  box-shadow: 0 1px 4px 0 rgba( 0, 0, 0, 0.30 );    
+  left: 0;
+  position: absolute;
+  top: 104px;
+  width: 256px;
+}
+
+#statistics {
+  bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  left: 272px;
+  position: absolute;
+  right: 16px;
+  top: 120px;
+}
+
+#statistics > div {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 0;
+  flex-grow: 1;
+  margin: 8px 0 0 0;
+  padding: 0;
+}
+
+#statistics > div > gator-list {
+  flex-basis: 0;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+#statistics > div > gator-list:nth-of-type( 1 ) {
+  background-color: #8bc34a;
+  box-shadow: 0 1px 4px 0 rgba( 0, 0, 0, 0.30 );      
+  margin: 0 8px 0 0;
+}
+
+#statistics > div > gator-list:nth-of-type( 2 ) {
+  background-color: #ff9800;
+  box-shadow: 0 1px 4px 0 rgba( 0, 0, 0, 0.30 );      
+  margin: 0 0 0 8px;
+}
+
+/*
+#statistics > div > gator-panel {
+  background-color: #00bcd4;
+  box-shadow: 0 1px 4px 0 rgba( 0, 0, 0, 0.30 );      
+  flex-basis: 0;
+  flex-grow: 1;
+}
+*/

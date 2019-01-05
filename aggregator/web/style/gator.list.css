@@ -1,0 +1,47 @@
+gator-list > div.item {
+  display: flex;
+  flex-direction: row;
+}
+
+gator-list > p {
+  color: white;
+  font-family: 'Plex-Medium';
+  font-size: 14px;
+  margin: 16px 0 16px 16px;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+gator-list > div.item {
+  margin: 0 16px 8px 16px;
+  padding: 0;
+}
+
+gator-list > div.item p {
+  color: white;
+  font-family: 'Plex-Text';
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+gator-list > div.item > p:first-of-type {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;  
+  white-space: nowrap;  
+}
+
+gator-list > div.item > p:nth-of-type( 2 ) {
+  font-family: 'Plex-Medium';
+  font-weight: 600;
+  margin-right: 8px;
+  min-width: 50px;
+  text-align: right;
+}
+
+gator-list > div.item > p:nth-of-type( 3 ) {
+  font-size: 8px;
+  padding-top: 7px;
+  text-transform: uppercase;
+}
