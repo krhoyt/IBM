@@ -329,7 +329,7 @@ async function twitter( query, advocate, start, end ) {
     favorites: favorites,
     hashtags: refine( hashtags ),
     mentions: refine( mentions, 10, false ),
-    status: status,    
+    posts: status,    
     retweets: retweets,
   }
 }
@@ -388,7 +388,7 @@ async function youtube( query, advocate, start, end ) {
 
   // Done
   return {
-    videos: videos,
+    posts: videos,
     produced: seconds,    
     total_stars: stars,
     total_views: views,

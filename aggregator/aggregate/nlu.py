@@ -32,11 +32,12 @@ def nlu( url ):
   # References stopwords
   # Reject duplicates
   if 'keywords' in data:
-    result = {
-      'keywords': reduce( data['keywords'] ),
-      'concepts': reduce( data['concepts'] ),
-      'entities': reduce( data['entities'] )
-    }
+    result['keywords'] = reduce( data['keywords'] )
+    result['entities'] = reduce( data['entities'] )    
+
+  # Concepts not supported in all languages
+  if 'concepts' in data:
+    result['concepts'] = reduce( data['concepts'] )
 
   return result
 

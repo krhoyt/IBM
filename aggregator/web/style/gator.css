@@ -14,6 +14,7 @@ body {
 
 gator-chart {
   background-color: white;
+  border-radius: 2px;
   box-shadow: 0 1px 4px 0 rgba( 0, 0, 0, 0.30 );    
   flex-basis: 0;
   flex-grow: 1;
@@ -50,7 +51,7 @@ gator-tabs {
 
 gator-version {
   background-color: white;
-  border-top: solid 1px rgba( 0, 0, 0, 0.06 );
+  border-top: solid 1px rgba( 0, 0, 0, 0.12 );
   bottom: 0;
   display: flex;
   flex-direction: column;
@@ -98,7 +99,7 @@ nav {
   display: flex;
   flex-direction: row;
   flex-basis: 0;
-  flex-grow: 1;
+  flex-grow: 0.80;
   margin: 8px 0 0 0;
   padding: 0;
 }
@@ -120,12 +121,3 @@ nav {
   box-shadow: 0 1px 4px 0 rgba( 0, 0, 0, 0.30 );      
   margin: 0 0 0 8px;
 }
-
-/*
-#statistics > div > gator-panel {
-  background-color: #00bcd4;
-  box-shadow: 0 1px 4px 0 rgba( 0, 0, 0, 0.30 );      
-  flex-basis: 0;
-  flex-grow: 1;
-}
-*/

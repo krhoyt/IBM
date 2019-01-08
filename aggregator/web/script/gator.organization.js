@@ -27,8 +27,11 @@ class Organization extends Observer {
         button.setAttribute( 'data-name', data[d].team_name );
         button.addEventListener( 'click', ( evt ) => this.doItemClick( evt ) );                                       
 
+        let path = data[d].team_name.toLowerCase();
+        path = path.replace( ' ', '-' );
+
         let icon = document.createElement( 'div' );
-        icon.style.backgroundImage = `url( img/${data[d].team_name.toLowerCase()}.svg )`;
+        icon.style.backgroundImage = `url( img/${path}.svg )`;
         button.appendChild( icon );
 
         let label = document.createElement( 'p' );

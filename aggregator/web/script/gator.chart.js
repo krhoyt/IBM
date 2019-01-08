@@ -1,10 +1,23 @@
 class Chart {
-  constructor() {
+  constructor( title = 'Last 30 Days' ) {
+    this.name = null;
+
     this.root = document.querySelector( 'gator-chart' );
+
+    this.header = document.createElement( 'div' );
+
+    this.label = document.createElement( 'p' );
+    this.label.innerHTML = title;
+    this.header.appendChild( this.label );
+
+    this.sub = document.createElement( 'p' );
+    this.header.appendChild( this.sub );
+
+    this.root.appendChild( this.header );
 
     this.holder = document.createElement( 'div' );
     this.holder.style.width = `${this.root.clientWidth - 32}px`;
-    this.holder.style.height = `${this.root.clientHeight - 32}px`;
+    this.holder.style.height = `${this.root.clientHeight - this.header.clientHeight - 32}px`;
     this.root.appendChild( this.holder );
 
     this.chart = Highcharts.chart( this.holder, {
@@ -50,6 +63,7 @@ class Chart {
         },
         maxPadding: 0,
         minPadding: 0,
+        name: this.name,        
         title: {
           text: null
         }
@@ -61,6 +75,14 @@ class Chart {
     } );
   }
  
+  get title() {
+    return this.label.innerHTML.trim();
+  }
+
+  set title( value ) {
+    this.label.innerHTML = value;
+  }
+
   refine( data, start, end, field ) {
     start.setHours( 0 );
     start.setMinutes( 0 );
@@ -110,6 +132,22 @@ class Chart {
   render( data, start, end, field ) {
     data = this.refine( data, start, end, field );
     this.chart.series[0].setData( data );
+    this.chart.series[0].name = this.name;
+  }
+
+  getSubtitle() {
+    let result = {
+      count: parseInt( this.sub.getAttribute( 'data-count ' ) ),
+      unit: this.sub.getAttribute( 'data-unit' )
+    };
+
+    return result;
+  }
+
+  setSubtitle( count, unit ) {
+    this.sub.setAttribute( 'data-count', count );
+    this.sub.setAttribute( 'data-unit', unit );
+    this.sub.innerHTML = `${count} ${unit}`;
   }
 }
 

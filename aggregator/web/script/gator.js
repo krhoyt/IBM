@@ -24,8 +24,10 @@ class Gator {
   render() {
     switch( this.mode ) {
       case 'blog':
+        this.chart.name = 'Posts';
+        this.chart.setSubtitle( this.data[this.mode].posts.length, 'posts' );
         this.chart.render( 
-          this.data.blog.posts, 
+          this.data[this.mode].posts, 
           new Date( this.data.start ), 
           new Date( this.data.end ), 
           'published_at' 
@@ -40,6 +42,8 @@ class Gator {
         break;
 
       case 'twitter':
+        this.chart.name = 'Updates';
+        this.chart.setSubtitle( this.data[this.mode].posts.length, 'updates' );        
         this.chart.render( 
           this.data[this.mode].posts, 
           new Date( this.data.start ), 
@@ -56,7 +60,16 @@ class Gator {
         break;
 
       case 'github':
-        this.categories.title = 'Watchers';
+        this.chart.name = 'Events';
+        this.chart.setSubtitle( this.data[this.mode].events.length, 'events' );        
+        this.chart.render( 
+          this.data[this.mode].events, 
+          new Date( this.data.start ), 
+          new Date( this.data.end ), 
+          'published_at' 
+        );
+
+        this.categories.title = 'Most Watched';
         this.categories.setList( this.data[this.mode].watchers, 'name', 'watchers', 'watchers' );
 
         this.keywords.title = 'Repository';
@@ -65,6 +78,15 @@ class Gator {
         break;
         
       case 'youtube':
+        this.chart.name = 'Videos';
+        this.chart.setSubtitle( this.data[this.mode].posts.length, 'videos' );        
+        this.chart.render( 
+          this.data[this.mode].posts, 
+          new Date( this.data.start ), 
+          new Date( this.data.end ), 
+          'published_at' 
+        );
+
         this.categories.title = 'Views';
         this.categories.setList( this.data[this.mode].sorted_views, 'title', 'views', 'views' );
 
@@ -74,6 +96,15 @@ class Gator {
         break;        
 
       case 'answers': 
+        this.chart.name = 'Answers';
+        this.chart.setSubtitle( this.data[this.mode].answers.length, 'answers' );        
+        this.chart.render( 
+          this.data[this.mode].answers, 
+          new Date( this.data.start ), 
+          new Date( this.data.end ), 
+          'answered_at' 
+        );
+
         this.categories.title = 'Score';
         this.categories.setList( this.data[this.mode].sorted_score, 'title', 'score', 'score' );
 

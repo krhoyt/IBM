@@ -30,6 +30,9 @@ for blog in blogs:
   # Load and parse raw feed data
   # Avoids managing certificates
   response = requests.get( blog['feed'] )
+
+  # TODO: Include updated feedparser in Docker build
+  # https://github.com/kurtmckee/feedparser/issues/131
   rss = feedparser.parse( response.text )  
 
   for entry in rss.entries:

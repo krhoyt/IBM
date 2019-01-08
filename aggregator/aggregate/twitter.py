@@ -59,8 +59,9 @@ def mentions( values ):
           continue
 
         cursor.execute( 
-          'UPDATE Mention SET updated_at = %s, followers = %s, friends = %s, listed = %s, favorites = %s, count = %s, location = %s, description = %s WHERE id = %s', (
+          'UPDATE Mention SET updated_at = %s, joined_at = %s, followers = %s, friends = %s, listed = %s, favorites = %s, count = %s, location = %s, description = %s WHERE id = %s', (
             datetime.now().strftime( '%Y-%m-%d %H:%M:%S' ),
+            details['joined_at'],
             details['followers'],
             details['friends'],
             details['listed'],        
