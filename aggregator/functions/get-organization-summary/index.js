@@ -47,6 +47,10 @@ async function report( params ) {
     end = new Date( year, month, now.getDate() );
   }
 
+  // TODO: Check if report file already exists
+  // TODO: Check if within the last 24 hours
+  // TODO: Send existing if available
+
   // Connect to MySQL
   // Compose
   const connection = mysql.createConnection( {

@@ -4,6 +4,9 @@ class Gator {
     this.mode = 'blog';
 
     this.header = new Header();
+    this.header.addEventListener( Header.DOWNLOAD, ( evt ) => {
+      window.open( Gator.ORGANIZATION_SUMMARY );
+    } );
 
     this.tabs = new Tabs();
     this.tabs.addEventListener( Tabs.CHANGE, ( evt ) => this.doTabsChange( evt ) );
@@ -156,6 +159,7 @@ class Gator {
 }
 
 Gator.ADVOCATE_SUMMARY = 'https://openwhisk.ng.bluemix.net/api/v1/web/krhoyt%40us.ibm.com_dev/gator/get.advocate.summary';
+Gator.ORGANIZATION_SUMMARY = 'https://openwhisk.ng.bluemix.net/api/v1/web/krhoyt%40us.ibm.com_dev/gator/get.organization.summary';
 Gator.TEAM_SUMMARY = 'https://openwhisk.ng.bluemix.net/api/v1/web/krhoyt%40us.ibm.com_dev/gator/get.team.summary';
 
 let app = new Gator();

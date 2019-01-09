@@ -7,3 +7,17 @@ gator-header > p {
   margin: 0;
   padding: 0;
 }
+
+gator-header > button {
+  background: none;
+  background-image: url( ../img/download.svg );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  border: none;
+  height: 48px;
+  outline: none;
+  padding: 0;
+  margin: 4px 0 0 0;
+  width: 48px;
+}
