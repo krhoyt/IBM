@@ -1,4 +1,4 @@
-const archiver = require( 'archiver' );
+const archiver = require( 'archiver-promise' );
 const Excel = require( 'exceljs' );
 const fs = require( 'fs' );  
 const jsonfile = require( 'jsonfile' );
@@ -185,9 +185,11 @@ async function report() {
   connection.end();  
 
   let output = fs.createWriteStream( __dirname + '/report.zip' );  
+  output.on( 'close', function() {
+    console.log( 'Closed' );
+  } );  
 
   let archive = archiver( 'zip', {
-    gzip: true,
     zlib: {level: 9}
   } );  
   archive.pipe( output );
@@ -258,7 +260,9 @@ async function report() {
     );
   }
 
-  archive.finalize();    
+  await archive.finalize();    
+
+  console.log( 'Done' );
 }
 
 function fill( sheet, technology, data, split, delimiters, fields ) {
