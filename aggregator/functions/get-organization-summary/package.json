@@ -4,6 +4,7 @@
   "dependencies": {
     "archiver-promise": "^1.0.0",
     "exceljs": "^1.6.3",
+    "ibm-cos-sdk": "^1.4.1",
     "jsonfile": "^5.0.0",
     "mysql": "^2.16.0"
   }

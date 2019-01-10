@@ -1,5 +1,6 @@
 async function report( params ) {
   const archiver = require( 'archiver-promise' );
+  const AWS = require( 'ibm-cos-sdk' );  
   const Excel = require( 'exceljs' );
   const fs = require( 'fs' );  
   const mysql = require( 'mysql' );
@@ -47,9 +48,40 @@ async function report( params ) {
     end = new Date( year, month, now.getDate() );
   }
 
-  // TODO: Check if report file already exists
-  // TODO: Check if within the last 24 hours
-  // TODO: Send existing if available
+  let cos = new AWS.S3( {
+    endpoint: params.COS_ENDPOINT,
+    apiKeyId: params.COS_API_KEY,
+    ibmAuthEndpoint: params.COS_AUTH_ENDPOINT,
+    serviceInstanceId: params.COS_SERVICE_INSTANCE
+  } );
+
+  let item = await cos.getObject( {
+    Bucket: params.COS_BUCKET, 
+    Key: `${params.id}.zip`
+  } )
+  .promise()
+  .then( (data ) => {
+      return data;
+  } )
+  .catch( ( e ) => {
+    console.log( `ERROR: ${e.code} - ${e.message}` );
+  } );
+
+  if( item != null ) {
+    last = new Date( item.LastModified );
+    let today = new Date();
+  
+    if( ( today.getTime() - last.getTime() ) <= ( 24 * 3600 * 1000 ) ) {
+      return {
+        headers: { 
+          'Content-Disposition': 'attachment; filename="report.zip"',
+          'Content-Type': 'application/zip' 
+        },
+        statusCode: 200,
+        body: Buffer.from( item.Body ).toString( 'base64' )
+      };    
+    }
+  }
 
   // Connect to MySQL
   // Compose
@@ -178,7 +210,7 @@ async function report( params ) {
 
   connection.end();  
 
-  let output = fs.createWriteStream( __dirname + '/report.zip' );  
+  let output = fs.createWriteStream( __dirname + '/' + params.id + '.zip' );  
 
   let archive = archiver( 'zip', {
     gzip: true,
@@ -252,7 +284,18 @@ async function report( params ) {
 
   await archive.finalize();    
 
-  let report_file = fs.readFileSync( __dirname + '/report.zip' );
+  let report_file = fs.readFileSync( __dirname + '/' + params.id + '.zip' );
+
+  await cos.putObject( {
+    Body: report_file,
+    Bucket: params.COS_BUCKET,
+    Key: params.id + '.zip'   
+  } )
+  .promise()
+  .then( ( data ) => {
+    console.log( 'Upload complete' );
+    return data;
+  } );
 
   // Build response
   return {

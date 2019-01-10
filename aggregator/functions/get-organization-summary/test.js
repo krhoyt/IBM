@@ -1,4 +1,6 @@
 const archiver = require( 'archiver-promise' );
+const async = require( 'async' );
+const AWS = require( 'ibm-cos-sdk' );
 const Excel = require( 'exceljs' );
 const fs = require( 'fs' );  
 const jsonfile = require( 'jsonfile' );
@@ -56,6 +58,35 @@ async function report() {
   console.log( start );
   console.log( end );
 
+  let cos = new AWS.S3( {
+    endpoint: params.COS_ENDPOINT,
+    apiKeyId: params.COS_API_KEY,
+    ibmAuthEndpoint: params.COS_AUTH_ENDPOINT,
+    serviceInstanceId: params.COS_SERVICE_INSTANCE
+  } );
+
+  let item = await cos.getObject( {
+    Bucket: params.COS_BUCKET, 
+    Key: `${params.id}.zip`
+  } )
+  .promise()
+  .then( (data ) => {
+      return data;
+  } )
+  .catch( ( e ) => {
+    console.log( `ERROR: ${e.code} - ${e.message}` );
+  } );
+
+  if( item != null ) {
+    last = new Date( item.LastModified );
+    let today = new Date();
+  
+    if( ( today.getTime() - last.getTime() ) <= ( 24 * 3600 * 1000 ) ) {
+      console.log( 'Using current archive.' );
+      return Buffer.from( item.Body ).toString( 'base64' );
+    }
+  }
+
   // Connect to MySQL
   // Compose
   const connection = mysql.createConnection( {
@@ -74,7 +105,7 @@ async function report() {
   const query = util.promisify( connection.query ).bind( connection );
 
   let organization = await query( 'SELECT * FROM Organization WHERE uuid = ?', params.id );
-  console.log( 'Org: ' + organization[0].id + ' (' + params.id + ')' );
+  console.log( organization[0].id + ' (' + params.id + ')' );
 
   let techs = await query( 'SELECT * FROM Technology' );
 
@@ -184,12 +215,10 @@ async function report() {
 
   connection.end();  
 
-  let output = fs.createWriteStream( __dirname + '/report.zip' );  
-  output.on( 'close', function() {
-    console.log( 'Closed' );
-  } );  
-
+  let output = fs.createWriteStream( __dirname + '/' + params.id + '.zip' );  
+  
   let archive = archiver( 'zip', {
+    gzip: true,
     zlib: {level: 9}
   } );  
   archive.pipe( output );
@@ -262,7 +291,50 @@ async function report() {
 
   await archive.finalize();    
 
+  // await upload( cos, params.COS_BUCKET, params.id );
+  let obj = fs.readFileSync( params.id + '.zip' );
+
+  await cos.putObject( {
+    Body: obj,
+    Bucket: params.COS_BUCKET,
+    Key: params.id + '.zip'   
+  } )
+  .promise()
+  .then( ( data ) => {
+    console.log( 'Upload complete' );
+    return data;
+  } );
+
   console.log( 'Done' );
+}
+
+function cancel( cos, bucket, item, upload_id ) {
+  return cos.abortMultipartUpload( {
+    Bucket: bucket,
+    Key: item,
+    UploadId: upload_id
+  } )
+  .promise()
+  .then(() => {
+    console.log( 'Upload aborted.' );
+  } )
+  .catch( ( e ) => {
+    console.error( `ERROR: ${e.code} - ${e.message}\n` );
+  } );
+}
+
+async function check( cos, bucket, id ) {
+  return cos.getObject( {
+    Bucket: bucket, 
+    Key: `${id}.zip`
+  } )
+  .promise()
+  .then( ( data ) => {
+    return data;
+  } )
+  .catch( ( e ) => {
+    console.log( `ERROR: ${e.code} - ${e.message}` );
+  } );
 }
 
 function fill( sheet, technology, data, split, delimiters, fields ) {
@@ -306,3 +378,67 @@ function fill( sheet, technology, data, split, delimiters, fields ) {
     }        
   }   
 }
+
+async function upload( cos, bucket, id ) {
+  let upload_id = null;
+
+  if( !fs.existsSync( `${id}.zip` ) ) {
+    console.log( new Error( 'File does not exist.' ) );
+    return;
+  }
+
+  return cos.createMultipartUpload( {
+    Bucket: bucket,
+    Key: id + '.zip'
+  } )
+  .promise()
+  .then( ( data ) => {
+    upload_id = data.UploadId;
+
+    fs.readFile( id + '.zip', ( e, file_data ) => {
+      let part_size = 1024 * 1024 * 5;
+      let part_count = Math.ceil( file_data.length / part_size );
+
+      async.timesSeries( part_count, ( part_num, next ) => {
+        let start = part_num * part_size;
+        let end = Math.min( start + part_size, file_data.length );
+
+        part_num = part_num + 1;
+
+        cos.uploadPart( {
+          Body: file_data.slice( start, end ),
+          Bucket: bucket,
+          Key: id + '.zip',
+          PartNumber: part_num,
+          UploadId: upload_id
+        } )
+        .promise()
+        .then( ( data ) => {
+          next( e, {ETag: data.ETag, PartNumber: part_num} );
+        } )
+        .catch( ( e ) => {
+          cancel( cos, bucket, id + '.zip', upload_id );
+          console.log( `ERROR: ${e.code} - ${e.message}\n` );
+        } );
+      }, ( e, data_packs ) => {
+        cos.completeMultipartUpload( {
+          Bucket: bucket,
+          Key: id + '.zip',
+          MultipartUpload: {
+            Parts: data_packs
+          },
+          UploadId: upload_id
+        } )
+        .promise()
+        .then( console.log( 'Upload complete.' ) )
+        .catch( ( e ) => {
+          cancel( cos, bucket, id + '.zip', upload_id );
+          console.error( `ERROR: ${e.code} - ${e.message}\n` );
+        } );
+      } );
+    } );
+  } )
+  .catch( ( e ) => {
+    console.error( `ERROR: ${e.code} - ${e.message}\n` );
+  } );
+}  
