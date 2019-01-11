@@ -2,4 +2,4 @@ feedparser
 isodate
 mysql-connector
 requests
-XlsxWriter
+ibm-cos-sdk

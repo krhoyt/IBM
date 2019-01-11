@@ -1,9 +1,34 @@
-from datetime import datetime
-
 import config
+import ibm_boto3
 import mysql.connector
 import os
 import requests
+
+from datetime import datetime
+from ibm_botocore.client import Config
+from ibm_botocore.exceptions import ClientError
+
+# Check if media exists in object storage
+# If not then download to local
+# Then put in object storage
+def store( id, url ):
+  index = url.rfind( '.' )
+  key = id + url[index:]
+
+  try:
+    cos.ObjectSummary(
+      bucket_name = config.ObjectStorage['media'], 
+      key = key
+    ).load()
+  except ClientError as e:
+    if e.response['Error']['Code'] == '404':
+      response = requests.get( url )
+      cos.Object( 
+        config.ObjectStorage['media'], 
+        key 
+      ).put( Body = response.content )
+    else:
+      raise e
 
 # Check and store mentions
 def mentions( values ):
@@ -92,6 +117,8 @@ def photos( status_id, published, values ):
       if len( found ) == 0:
         keywords = visual( link['media_url'] )
 
+        # Store reference in database
+        # Includes original URL
         cursor.execute(
           'INSERT INTO Media VALUES ( NULL, %s, %s, %s, %s, %s, %s, %s )', (
             datetime.now().strftime( '%Y-%m-%d %H:%M:%S' ),
@@ -103,6 +130,11 @@ def photos( status_id, published, values ):
             keywords
           )
         )
+
+        # Download and put image file into object store
+        # If it does not already exist
+        # Reference by media ID
+        store( link['id_str'], link['media_url'] )
 
 def profile( id, name ):
   # Get single Twitter status
@@ -265,6 +297,16 @@ response = requests.post(
 # Assign token to configuration
 response = response.json()
 config.Twitter['token'] = response['access_token']
+
+# Cloud Object Storage
+# Used for media
+cos = ibm_boto3.resource( 's3',
+  ibm_api_key_id = config.ObjectStorage['key'],
+  ibm_service_instance_id = config.ObjectStorage['instance'],
+  ibm_auth_endpoint = config.ObjectStorage['auth'],
+  config = Config( signature_version = 'oauth' ),
+  endpoint_url = config.ObjectStorage['endpoint']
+)
 
 # Connect to Compose MySQL
 connection = mysql.connector.connect(
