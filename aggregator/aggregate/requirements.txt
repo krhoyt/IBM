@@ -3,3 +3,4 @@ isodate
 mysql-connector
 requests
 ibm-cos-sdk
+lxml

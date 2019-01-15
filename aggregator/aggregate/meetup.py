@@ -5,6 +5,7 @@ import mysql.connector
 import os
 import requests
 import time
+import uuid
 
 # Connect to Compose MySQL
 connection = mysql.connector.connect(
@@ -19,7 +20,119 @@ connection = mysql.connector.connect(
   autocommit = True
 )
 
+cursor = connection.cursor( dictionary = True )  
+
+# Meetup Pro organizations
+sources = ['ibm-cloud', 'ibmdeveloper', 'ibm-big-data']
+
+# Maintain parity with official lists
+for source in sources:
+  # Build query for Meetup Pro groups
+  # Meetup Pro requires permissions
+  # This is a hack based on the Web API
+  query = '(endpoint:pro/{}/es_groups_summary,meta:(method:get),params:(only:\'cursor,total_count,chapters.lat,chapters.lon,chapters.status,chapters.name,chapters.urlname,chapters.id,chapters.country,chapters.state,chapters.city\',size:200),ref:mapMarkers,type:mapMarkers)'.format( source )
+
+  # Get the groups for the organization
+  response = requests.get(
+    url = 'https://www.meetup.com/mp_api/pro/network',
+    params = {
+      'queries': query,
+    }
+  )
+  data = response.json()
+  groups = data['responses'][0]['value']['chapters']
+
+  # Check each of the groups
+  for group in groups:
+    # Is group in database
+    cursor.execute( 
+      'SELECT meetup_id, updated_at FROM Meetup WHERE meetup_id = %s', (
+        group['id'],
+      ) 
+    )
+    found = cursor.fetchall()  
+
+    if len( found ) == 0:
+      # Group does not exist in database
+      # Adding group to database
+      print( 'Adding: {}'.format( group['name'] ) )
+
+      # Get group record from official Meetup API
+      response = requests.get(
+        url = 'https://api.meetup.com/{0}'.format( group['urlname'] ),
+        params = {
+          'sign': True,
+          'key': config.Meetup['key']
+        }
+      )
+      item = response.json()        
+
+      # Parse founded date from milliseconds
+      # TODO: Isolate bug that causes key to not be found
+      # TODO: Context switch from previous iteration
+      founded_at = datetime.fromtimestamp( item['created'] / 1000 )
+
+      # Insert into database
+      cursor.execute(
+        'INSERT INTO Meetup VALUES ( NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )', (
+          str( uuid.uuid4() ),
+          1,
+          datetime.now().strftime( '%Y-%m-%d %H:%M:%S' ),
+          datetime.now().strftime( '%Y-%m-%d %H:%M:%S' ),
+          founded_at.strftime( '%Y-%m-%d %H:%M:%S' ),
+          item['id'],
+          item['name'],
+          item['urlname'],
+          item['link'],
+          item['members'],
+          item['description'],
+          item['city'],
+          item['lat'],
+          item['lon']
+        )
+      )    
+    else:
+      # Group does exist in database
+      print( 'Found: {}'.format( group['name'] ) )
+
+      # Update the group
+      # Once per week is fine
+      if ( datetime.now() - found[0]['updated_at'] ).days >= 7:
+        print( 'Updating: {}'.format( group['name'] ) )
+
+        # Get group record from official Meetup API
+        response = requests.get(
+          url = 'https://api.meetup.com/{0}'.format( group['urlname'] ),
+          params = {
+            'sign': True,
+            'key': config.Meetup['key']
+          }
+        )
+        item = response.json()        
+
+        # Parse founded date from milliseconds
+        founded_at = datetime.fromtimestamp( item['created'] / 1000 )
+
+        cursor.execute(
+          'UPDATE Meetup SET updated_at = %s, founded_at = %s, meetup_id = %s, name = %s, url_name = %s, link = %s, members = %s, description = %s, city = %s, latitude = %s, longitude = %s WHERE meetup_id = %s', (
+            datetime.now().strftime( '%Y-%m-%d %H:%M:%S' ),
+            founded_at.strftime( '%Y-%m-%d %H:%M:%S' ),
+            item['id'],
+            item['name'],
+            item['urlname'],
+            item['link'],
+            item['members'],
+            item['description'],
+            item['city'],
+            item['lat'],
+            item['lon'],
+            item['id']
+          )
+        )      
+
 # Get the account list
+# Refresh to be inclusive of previous work
+# TODO: Possible optimize by inserting record
 cursor = connection.cursor( dictionary = True )  
 cursor.execute( 'SELECT * FROM Meetup' )
 groups = cursor.fetchall()
@@ -36,9 +149,6 @@ for meetup in groups:
     }
   )
   items = response.json()
-
-  # Marker for updating statistics
-  owner = False
 
   for event in items:
     # Debug
@@ -61,39 +171,6 @@ for meetup in groups:
       'link': event['link'],
       'description': event['description']
     }    
-
-    # Get owner details on first record
-    if owner == False:
-      # Check if meetup needs updating
-      # To reflect statistics
-      if ( datetime.now() - meetup['updated_at'] ).days >= 7:
-        response = requests.get(
-          url = 'https://api.meetup.com/{0}'.format( meetup['url_name'] ),
-          params = {
-            'sign': True,
-            'key': config.Meetup['key']
-          }
-        )
-        item = response.json()        
-
-        cursor.execute(
-          'UPDATE Meetup SET updated_at = %s, name = %s, url_name = %s, link = %s, members = %s, description = %s, city = %s, latitude = %s, longitude = %s WHERE id = %s', (
-            datetime.now().strftime( '%Y-%m-%d %H:%M:%S' ),
-            item['name'],
-            item['urlname'],
-            item['link'],            
-            item['members'],
-            item['description'],
-            item['city'],
-            item['lat'],
-            item['lon'],
-            meetup['id']
-          )
-        )
-
-        # Mark as updated
-        # Avoid updating for each answer item
-        owner = True
 
     # Check if event already captured
     cursor.execute( 

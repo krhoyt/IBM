@@ -33,6 +33,9 @@ def nlu( url ):
   # Reject duplicates
   if 'keywords' in data:
     result['keywords'] = reduce( data['keywords'] )
+
+  # Entities not supported in all languages
+  if 'entities' in data:
     result['entities'] = reduce( data['entities'] )    
 
   # Concepts not supported in all languages
