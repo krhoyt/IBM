@@ -44,6 +44,24 @@ class Gator {
 
         break;
 
+      case 'medium':
+        this.chart.name = 'Articles';
+        this.chart.setSubtitle( this.data[this.mode].articles.length, 'articles' );
+        this.chart.render( 
+          this.data[this.mode].articles, 
+          new Date( this.data.start ), 
+          new Date( this.data.end ), 
+          'published_at' 
+        );
+
+        this.categories.title = 'Categories';
+        this.categories.setList( this.data[this.mode].category );     
+
+        this.keywords.title = 'Keywords';
+        this.keywords.setList( this.data[this.mode].keywords ); 
+
+        break;        
+
       case 'twitter':
         this.chart.name = 'Updates';
         this.chart.setSubtitle( this.data[this.mode].posts.length, 'updates' );        
