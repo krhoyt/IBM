@@ -1,3 +1,0 @@
-get-organization
-get-advocate-summary
-get-team-summary

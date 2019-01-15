@@ -1,8 +1,0 @@
-{
-  "name": "get.advocate.profile",
-  "main": "index.js",
-  "dependencies": {
-    "jsonfile": "^5.0.0",
-    "mysql": "^2.16.0"
-  }
-}
