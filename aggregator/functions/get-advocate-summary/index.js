@@ -72,6 +72,7 @@ async function report( params ) {
     result.id = params.id;
   
     result.blog = await blog( query, advocate, result.start, result.end );
+    result.medium = await medium( query, advocate, result.start, result.end );
     result.github = await github( query, advocate, result.start, result.end );
     result.answers = await so( query, advocate, result.start, result.end );
     result.twitter = await twitter( query, advocate, result.start, result.end );
@@ -228,6 +229,43 @@ async function media( query, advocate, start, end ) {
   return {
     images: images,
     keywords: refine( keywords )
+  };
+}
+
+async function medium( query, advocate, start, end ) {
+  // Query
+  const articles = await query(
+    'SELECT Article.guid, Article.published_at, Article.title, Article.claps, Article.category, Article.keywords ' +
+    'FROM Advocate, Article, Medium ' +
+    'WHERE Advocate.id = Medium.advocate_id ' +
+    'AND Medium.id = Article.medium_id ' +
+    'AND Advocate.id = ? ' +
+    'AND Article.published_at >= ? ' +
+    'AND Article.published_at <= ? ' +
+    'ORDER BY Article.published_at DESC', 
+    [advocate, start, end] 
+  );
+
+  console.log( articles.length );
+
+  // Accumulations
+  let claps = 0;
+  let category = '';  
+  let keywords = '';
+  
+  // Calculate totals
+  for( let a = 0; a < articles.length; a++ ) {
+    category = category + ',' + articles[a].category;    
+    keywords = keywords + ',' + articles[a].keywords;
+    claps = claps + articles[a].claps;
+  }
+
+  // Done
+  return {
+    category: refine( category ),    
+    keywords: refine( keywords ),
+    articles: articles,
+    claps: claps
   };
 }
 

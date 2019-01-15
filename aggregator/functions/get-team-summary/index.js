@@ -124,6 +124,48 @@ async function blog( query, team, start, end ) {
   };
 }
 
+async function medium( query, team, start, end ) {
+  // Query
+  const articles = await query( 
+    'SELECT Article.* ' +
+    'FROM Advocate, Article, Medium, Team ' +
+    'WHERE Article.medium_id = Medium.id ' +
+    'AND Medium.advocate_id = Advocate.id ' +
+    'AND Advocate.team_id = Team.id ' +
+    'AND Team.id = ? ' +
+    'AND Article.published_at >= ? ' +
+    'AND Article.published_at <= ? ' +
+    'ORDER BY Article.published_at',
+    [team, start, end] 
+  );
+
+  // Accumulations
+  let claps = 0;
+  let category = '';  
+  let keywords = '';
+  
+  // Calculate totals
+  for( let a = 0; a < articles.length; a++ ) {
+    delete articles[a].id;
+    delete articles[a].medium_id;
+    delete articles[a].created_at;
+    delete articles[a].updated_at;
+
+    category = category + ',' + articles[a].category;    
+    keywords = keywords + ',' + articles[a].keywords;
+
+    claps = claps + articles[a].claps;
+  }
+
+  // Done
+  return {
+    category: refine( category ),    
+    keywords: refine( keywords ),
+    articles: articles,
+    claps: claps
+  };
+}
+
 async function github( query, team, start, end ) {
   // Query
   const events = await query( 
