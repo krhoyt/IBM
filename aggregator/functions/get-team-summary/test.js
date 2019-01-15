@@ -78,6 +78,7 @@ async function report() {
   result.name = team[0].name
 
   result.blog = await blog( query, team[0].id, result.start, result.end );
+  result.medium = await medium( query, team[0].id, result.start, result.end );
   result.twitter = await twitter( query, team[0].id, result.start, result.end );
   result.youtube = await youtube( query, team[0].id, result.start, result.end );  
   result.github = await github( query, team[0].id, result.start, result.end );  
@@ -238,6 +239,47 @@ async function media( query, team, start, end ) {
   return {
     images: images,
     keywords: refine( keywords )
+  };
+}
+
+async function medium( query, team, start, end ) {
+  // Query
+  const articles = await query( 
+    'SELECT Article.* ' +
+    'FROM Advocate, Article, Medium, Team ' +
+    'WHERE Article.medium_id = Medium.id ' +
+    'AND Medium.advocate_id = Advocate.id ' +
+    'AND Advocate.team_id = Team.id ' +
+    'AND Team.id = ? ' +
+    'AND Article.published_at >= ? ' +
+    'AND Article.published_at <= ? ' +
+    'ORDER BY Article.published_at',
+    [team, start, end] 
+  );
+
+  // Accumulations
+  let category = '';  
+  let claps = 0;
+  let keywords = '';
+  
+  // Calculate totals
+  for( let a = 0; a < articles.length; a++ ) {
+    delete articles[a].id;
+    delete articles[a].medium_id;
+    delete articles[a].created_at;
+    delete articles[a].updated_at;
+
+    category = category + ',' + articles[a].category;    
+    keywords = keywords + ',' + articles[a].keywords;
+
+    claps = claps + articles[a].claps;
+  }
+
+  // Done
+  return {
+    category: refine( category ),    
+    keywords: refine( keywords ),
+    articles: articles
   };
 }
 

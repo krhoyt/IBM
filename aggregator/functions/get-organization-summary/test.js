@@ -129,6 +129,27 @@ async function report() {
     [organization[0].id, start, end]
   );
 
+  let articles = await query( 
+    'SELECT ' +
+    'Advocate.email, ' +
+    'Article.published_at, ' +
+    'Article.title, ' +
+    'Article.link, ' +
+    'Article.claps, ' +
+    'Article.category, ' +
+    'Article.keywords ' +
+    'FROM Advocate, Article, Medium, Organization, Team ' +
+    'WHERE Article.medium_id = Medium.id ' +
+    'AND Medium.advocate_id = Advocate.id ' +
+    'AND Advocate.team_id = Team.id ' +
+    'AND Team.organization_id = Organization.id ' +
+    'AND Organization.id = ? ' +
+    'AND Article.published_at >= ? ' +
+    'AND Article.published_at <= ? ' +
+    'ORDER BY Article.published_at',
+    [organization[0].id, start, end]
+  );
+
   let events = await query(
     'SELECT ' +
     'Event.starts_at, ' +
@@ -240,6 +261,16 @@ async function report() {
       [' ', ',', ','],
       ['email', 'published_at', 'title', 'link', 'category', 'keywords']
     );
+
+    sheet = workbook.getWorksheet( 'Medium' );
+    fill( 
+      sheet,
+      techs[t], 
+      articles, 
+      ['title', 'category', 'keywords'],
+      [' ', ',', ','],
+      ['email', 'published_at', 'title', 'link', 'claps', 'category', 'keywords']
+    );    
 
     sheet = workbook.getWorksheet( 'Twitter' );
     fill( 
