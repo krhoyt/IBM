@@ -1,0 +1,231 @@
+<html>
+<head>
+
+<title>Live Video</title>
+
+<style>
+body {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  border: solid 1px lightgrey;
+}
+
+img {
+  position: absolute;
+  visibility: hidden;    
+}
+
+video {
+  position: absolute;
+  visibility: hidden;
+}
+</style>
+
+</head>
+<body>
+
+<!-- Video stream -->
+<video width="640" height="480"></video>
+
+<!-- Drawing surface -->
+<canvas width="640" height="480"></canvas>
+
+<!-- Dropped image -->
+<img>
+
+<!-- Optical character recognition library -->
+<script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'></script>
+
+<!-- Watson speech library -->
+<script src="../lib/watson-speech.min.js"></script>
+
+<script>
+class Reader {
+  constructor() {
+    // Track state
+    // Allow for analysis on single frame
+    this.state = Reader.STATE_PAINTING;
+
+    // Allow user to specify when to pause
+    // Space bar will toggle between pause and play
+    document.body.addEventListener( 'keypress', ( evt ) => this.doKeyPress( evt ) );
+
+    // Prepare to read file contents    
+    this.io = new FileReader();
+    this.io.addEventListener( 'load', ( evt ) => this.doFileLoad( evt ) );
+
+    // Element references
+    // Canvas as drop target
+    this.video = document.querySelector( 'video' );    
+    this.canvas = document.querySelector( 'canvas' );
+    this.canvas.addEventListener( 'dragover', ( evt ) => this.doDragOver( evt ) );
+    this.canvas.addEventListener( 'drop', ( evt ) => this.doDragDrop( evt ) );    
+    this.context = this.canvas.getContext( '2d' );
+    this.sample = document.querySelector( 'img' );
+    this.sample.addEventListener( 'load', ( evt ) => this.doImageLoad( evt ) );
+
+    // Attach web camera to video element
+    navigator.mediaDevices.getUserMedia( {audio: false, video: true} )
+    .then( ( stream ) => {
+      this.video.srcObject = stream;
+      this.video.play();
+
+      // Display video in canvas
+      this.detect();
+    } )
+    .catch( ( error ) => {
+      console.log( error );
+    } );           
+
+    // Store Watson authorization token
+    this.token = null;
+
+    // Get Watson authorization token
+    fetch( Reader.WATSON_TOKEN )
+    .then( ( result ) => { return result.json(); } )
+    .then( ( data ) => {
+      this.token = data.body;
+    } );    
+  }
+
+  capture() {
+    // Toggle state
+    if( this.state === Reader.STATE_PAINTING ) {
+      // Work with single still frame
+      // Put frame content into image element
+      // For analysis
+      this.state = Reader.STATE_READING;
+      this.sample.src = this.canvas.toDataURL();
+    } else if( this.state === Reader.STATE_READING ) {
+      // Restart copying of video when done
+      this.state = Reader.STATE_PAINTING;
+      this.detect();
+    }
+  }  
+
+  detect() {
+    // Copy video to canvas
+    this.context.drawImage( this.video, 0, 0, this.canvas.width, this.canvas.height );
+
+    // With every frame refresh
+    // When applicable state
+    if( this.state === Reader.STATE_PAINTING ) {
+      requestAnimationFrame( () => { return this.detect(); } );
+    }
+  }
+
+  draw( words = [] ) {
+    // Output for speech
+    let phrase = '';
+
+    // Calculate proportions
+    // Sizing and placement
+    let aspect = this.canvas.clientWidth / this.sample.clientWidth;
+    let height = Math.round( this.sample.clientHeight * aspect );
+    let offset = Math.round( ( this.canvas.clientHeight - height ) / 2 );
+
+    // Draw image to canvas
+    this.context.clearRect( 0, 0, this.canvas.clientWidth, this.canvas.clientHeight );
+    this.context.drawImage( this.sample, 0, offset, this.canvas.clientWidth, height );
+
+    for( let w = 0; w < words.length; w++ ) {
+      // Dismiss words with low confidence
+      if( words[w].confidence < Reader.CONFIDENCE ) {
+        continue;
+      }
+
+      // Bounding box
+      this.context.strokeStyle = '#2767f6';          
+      this.context.strokeRect( 
+        words[w].bbox.x0 * aspect,
+        ( words[w].bbox.y0 * aspect ) + offset,
+        ( words[w].bbox.x1 - words[w].bbox.x0 ) * aspect,
+        ( ( words[w].bbox.y1 - words[w].bbox.y0 ) * aspect )
+      );
+
+      // Baseline
+      this.context.strokeStyle = 'red';
+      this.context.beginPath();
+      this.context.moveTo( 
+        words[w].baseline.x0 * aspect,
+        ( words[w].baseline.y0 * aspect ) + offset
+      );
+      this.context.lineTo( 
+        words[w].baseline.x1 * aspect,
+        ( words[w].baseline.y1 * aspect ) + offset  
+      );
+      this.context.stroke();
+
+      // Assemble output speech
+      phrase = phrase + ' ' + words[w].text;
+
+      console.log( words[w].text );
+    }
+
+    // Have Watson speak the results
+    WatsonSpeech.TextToSpeech.synthesize( {
+      text: phrase,
+      token: this.token
+    } );
+  }
+
+  doDragDrop( evt ) {
+    // Item dropped
+    // Prevent browser default (opening)
+    // Reflect state to pause updates
+    // Read content of the file    
+    evt.preventDefault();
+    this.state = Reader.STATE_READING;    
+    this.io.readAsDataURL( evt.dataTransfer.files[0] );
+  }
+
+  doDragOver( evt ) {
+    // Item dragged
+    // Prevent browser default (opening)    
+    evt.preventDefault();
+  }
+
+  doFileLoad( evt ) {
+    // File contents have been read
+    // Place contents into image element    
+    this.sample.src = this.io.result;
+  }
+
+  doImageLoad( evt ) {
+    // Perform optical character recognition
+    Tesseract.recognize( this.sample, {lang: 'eng'} )
+    .then( ( result ) => {      
+      console.log( result );    
+
+      // Draw results
+      this.draw( result.words );
+    } );
+  }
+
+  doKeyPress( evt ) {
+    // Look for space bar
+    // Capture current video frame
+    if( evt.keyCode === 32 ) {
+      this.capture();
+    }
+  }  
+}
+
+// Constants
+Reader.CONFIDENCE = 70;
+Reader.STATE_PAINTING = 1;
+Reader.STATE_READING = 2;
+Reader.WATSON_TOKEN = 'https://openwhisk.ng.bluemix.net/api/v1/web/krhoyt%40us.ibm.com_dev/watson/tts.token.json';
+
+let app = new Reader();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<html>
+<head>
+
+<title>Drag and Drop</title>
+
+<style>
+body {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  border: solid 1px lightgrey;
+}
+
+img {
+  position: absolute;
+  visibility: hidden;    
+}
+</style>
+
+</head>
+<body>
+
+<!-- Drawing surface -->
+<canvas width="640" height="480"></canvas>
+
+<!-- Dropped image -->
+<img>
+
+<script>
+class Reader {
+  constructor() {
+    // Element references
+    // Canvas as drop target
+    this.canvas = document.querySelector( 'canvas' );
+    this.context = this.canvas.getContext( '2d' );    
+    this.canvas.addEventListener( 'dragover', ( evt ) => this.doDragOver( evt ) );
+    this.canvas.addEventListener( 'drop', ( evt ) => this.doDragDrop( evt ) );    
+    
+    this.sample = document.querySelector( 'img' );
+    this.sample.addEventListener( 'load', ( evt ) => this.doImageLoad( evt ) );
+
+    // Prepare to read file contents
+    this.io = new FileReader();
+    this.io.addEventListener( 'load', ( evt ) => this.doFileLoad( evt ) );    
+  }
+
+  draw() {
+    // Calculate proportions
+    // Sizing and placement
+    let aspect = this.canvas.clientWidth / this.sample.clientWidth;
+    let height = Math.round( this.sample.clientHeight * aspect );
+    let offset = Math.round( ( this.canvas.clientHeight - height ) / 2 );
+
+    // Draw image to canvas
+    this.context.clearRect( 0, 0, this.canvas.clientWidth, this.canvas.clientHeight );
+    this.context.drawImage( this.sample, 0, offset, this.canvas.clientWidth, height );
+  }
+
+  doDragDrop( evt ) {
+    // Item dropped
+    // Prevent browser default (opening)
+    // Read content of the file
+    evt.preventDefault();
+    this.io.readAsDataURL( evt.dataTransfer.files[0] );
+  }
+
+  doDragOver( evt ) {
+    // Item dragged
+    // Prevent browser default (opening)
+    evt.preventDefault();
+  }
+
+  doFileLoad( evt ) {
+    // File contents have been read
+    // Place contents into image element
+    this.sample.src = this.io.result;
+  }
+
+  doImageLoad( evt ) {
+    // Image element has loaded
+    // Draw onto canvas
+    this.draw();
+  }
+}
+
+let app = new Reader();
+</script>
+
+</body>
+</html>

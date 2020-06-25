@@ -1,0 +1,206 @@
+<html>
+<head>
+
+<title>Color Detection</title>
+
+<style>
+body {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+video {
+  position: absolute;
+  visibility: hidden;
+}
+</style>
+
+</head>
+<body>
+
+<!-- Document elements -->
+<video width="640" height="480"></video>
+<canvas width="640" height="480"></canvas>
+
+<script>
+class Follower {
+  constructor() {
+    // Color to track
+    this.color = null;
+
+    // Pixels from canvas
+    this.pixels = null;
+
+    // Bounding boxes
+    this.swatches = null;
+
+    // Sampling or finding
+    this.state = Follower.STATE_SAMPLE;
+
+    // Space bar to sample
+    document.body.addEventListener( 'keypress', ( evt ) => this.doKeyPress( evt ) );
+
+    // Element references
+    this.canvas = document.querySelector( 'canvas' );
+    this.context = this.canvas.getContext( '2d' );
+    this.video = document.querySelector( 'video' );
+
+    // Center pixel of the canvas
+    this.center = ( ( ( this.canvas.clientHeight / 2 ) * this.canvas.clientWidth ) + ( this.canvas.clientWidth / 2 ) ) * 4;
+
+    // Attach web camera to video element
+    navigator.mediaDevices.getUserMedia( {audio: false, video: true} )
+    .then( ( stream ) => {
+      this.video.srcObject = stream;
+      this.video.play();
+
+      // Look for color
+      this.detect();
+    } )
+    .catch( ( error ) => {
+      console.log( error );
+    } );        
+  }
+
+  detect() {
+    // Put video onto canvas
+    this.context.drawImage( 
+      this.video, 
+      0, 
+      0, 
+      this.canvas.clientWidth, 
+      this.canvas.clientHeight 
+    );
+
+    // Get the pixels from the canvas
+    this.pixels = this.context.getImageData( 
+      0, 
+      0, 
+      this.canvas.clientWidth, 
+      this.canvas.clientHeight 
+    );
+
+    // Default placement
+    // Center of canvas
+    this.swatches = [{
+      x: this.canvas.clientWidth / 2,
+      y: this.canvas.clientHeight / 2
+    }];
+
+    if( this.state === Follower.STATE_SAMPLE ) {
+      this.sample();
+    } else if( this.state === Follower.STATE_FIND ) {
+      this.find();
+    }
+
+    // Draw swatches
+    for( let s = 0; s < this.swatches.length; s++ ) {
+      this.context.strokeStyle = 'red';          
+      this.context.strokeRect( 
+        this.swatches[s].x - ( Follower.VIEW_SIZE / 2 ), 
+        this.swatches[s].y - ( Follower.VIEW_SIZE / 2 ), 
+        Follower.VIEW_SIZE, 
+        Follower.VIEW_SIZE 
+      ); 
+    }     
+
+    // Keep going
+    requestAnimationFrame( () => { return this.detect(); } ); 
+  }
+
+  find() {
+    // Closest color distance
+    let closest = 360;
+
+    this.swatches = [];
+
+    for( let y = 0; y < this.canvas.clientHeight; y++ ) {
+      for( let x = 0; x < this.canvas.clientWidth; x++ ) {
+        // Calculate pixel location
+        let index = ( ( y * this.canvas.clientWidth ) + x ) * 4;
+
+        // Get color channels
+        let sample = {  
+          red: this.pixels.data[index],
+          green: this.pixels.data[index + 1],
+          blue: this.pixels.data[index + 2]
+        };          
+
+        // Calculate distance
+        // Euclidean does not reflect perception
+        let distance = Math.sqrt(
+          Math.pow( ( this.color.red - sample.red ), 2 ) + 
+          Math.pow( ( this.color.green - sample.green ), 2 ) + 
+          Math.pow( ( this.color.blue - sample.blue ), 2 )                        
+        );          
+
+        // Look for closest color distance
+        // Closest to zero
+        if( distance < closest ) {
+          closest = distance;
+
+          // Allow to be not found or more than one
+          if( this.swatches.length === 0 ) {
+            this.swatches.push( {x: x, y: y} );
+          } else {
+            this.swatches[0].x = x;
+            this.swatches[0].y = y;
+          }
+        }
+      }
+    }    
+  }
+
+  sample() {
+    // Bounding box
+    // Centered on canvas
+    this.swatches = [{
+      x: this.canvas.clientWidth / 2,
+      y: this.canvas.clientHeight / 2
+    }];
+
+    // Get color at center
+    this.color = {
+      red: this.pixels.data[this.center],
+      green: this.pixels.data[this.center + 1],
+      blue: this.pixels.data[this.center + 2]
+    };
+
+    // Show color on canvas
+    this.context.fillStyle = `rgb( ${this.color.red}, ${this.color.green}, ${this.color.blue} )`;
+    this.context.fillRect(
+      this.canvas.clientWidth - Follower.VIEW_SIZE - Follower.INSET,
+      this.canvas.clientHeight - Follower.VIEW_SIZE - Follower.INSET,
+      Follower.VIEW_SIZE,
+      Follower.VIEW_SIZE
+    );    
+  }
+
+  doKeyPress( evt ) {
+    // Look for space bar
+    if( evt.keyCode === 32 ) {
+      // Toggle state
+      if( this.state === Follower.STATE_SAMPLE ) {
+        this.state = Follower.STATE_FIND;
+      } else {
+        this.state = Follower.STATE_SAMPLE;
+      }
+    }    
+  }
+}
+
+// Constants
+Follower.INSET = 16;
+Follower.STATE_FIND = 2;
+Follower.STATE_SAMPLE = 1;
+Follower.VIEW_SIZE = 20;
+
+let app = new Follower();
+</script>
+
+</body>
+</html>

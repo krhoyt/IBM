@@ -1,0 +1,77 @@
+<html>
+<head>
+
+<title>Face Alignment</title>
+
+<style>
+body {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+video {
+  position: absolute;
+  visibility: hidden;
+}  
+</style>
+
+</head>
+<body>
+
+<!-- Document elements -->
+<video width="640" height="480" preload autoplay loop muted></video>
+<canvas width="640" height="480"></canvas>
+
+<!-- Feature detection library -->
+<script src="../lib/clmtracker.js"></script>
+
+<script>
+class Features {
+  constructor() {
+    // Element references    
+    this.video = document.querySelector( 'video' );
+    this.canvas = document.querySelector( 'canvas' );
+    this.context = this.canvas.getContext( '2d' );
+
+    // Instantiate tracker
+    this.tracker = new clm.tracker();
+
+    navigator.mediaDevices.getUserMedia( {audio: false, video: true} )
+    .then( ( stream ) => {
+      this.video.srcObject = stream;
+      this.video.play();
+
+      // Start tracking
+      this.tracker.init();
+      this.tracker.start( this.video );
+
+      // Draw tracking results
+      this.detect();
+    } )
+    .catch( ( error ) => {
+      console.log( error );
+    } );        
+  }
+
+  detect() {
+    this.context.drawImage( this.video, 0, 0, this.canvas.width, this.canvas.height );
+
+    // Check if any faces were found
+    if( this.tracker.getCurrentPosition() ) {
+      // Draw the detected alignment
+      this.tracker.draw( this.canvas );
+    }
+
+    requestAnimationFrame( () => { return this.detect(); } );     
+  }
+}
+
+let app = new Features();
+</script>
+
+</body>
+</html>

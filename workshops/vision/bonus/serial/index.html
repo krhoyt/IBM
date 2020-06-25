@@ -1,0 +1,274 @@
+<html>
+<head>
+
+<title>Serial Number</title>
+
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+
+<style>
+body {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Source Code Pro', monospace;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  left: 0;
+  position: absolute;
+  top: 0;
+  visibility: hidden;
+}
+
+p { 
+  font-size: 24px;
+  margin: 24px 0 0 0;
+  padding: 0;
+  text-align: center; 
+}
+
+#display {
+  border: solid 1px lightgrey;
+}
+
+#offscreen {
+  left: 0;
+  position: absolute;
+  top: 0;
+  visibility: hidden;
+}
+</style>
+
+</head>
+<body>
+
+<!-- Workspace -->
+<canvas id="display" width="640" height="480"></canvas>
+
+<!-- Output -->
+<p>&nbsp;</p>
+
+<!-- Original image -->
+<img>
+
+<!-- Isolated image -->
+<canvas id="offscreen"></canvas>
+
+<!-- OCR -->
+<script src="https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js"></script>
+
+<script>
+class Isolate {
+  constructor() {
+    this.current = Isolate.THRESHOLD_START;
+    this.pixels = null;
+    this.position = null;
+
+    this.canvas = document.querySelector( '#display' );
+    this.canvas.addEventListener( 'click', ( evt ) => this.doCanvasClick( evt ) );
+    this.canvas.addEventListener( 'dragover', ( evt ) => this.doCanvasDrag( evt ) );
+    this.canvas.addEventListener( 'drop', ( evt ) => this.doCanvasDrop( evt ) );
+    this.canvas.addEventListener( 'mousemove', ( evt ) => this.doCanvasMove( evt ) );
+    this.canvas.addEventListener( 'mouseleave', ( evt ) => this.doCanvasLeave( evt) );
+    this.context = this.canvas.getContext( '2d' );
+
+    this.output = document.querySelector( 'p' );
+
+    this.original = document.querySelector( 'img' );
+    this.original.addEventListener( 'load', ( evt ) => this.doOriginalLoad( evt ) );
+
+    this.offscreen = document.querySelector( '#offscreen' );
+    this.offscreen.setAttribute( 'width', Isolate.TARGET_WIDTH - 2 );
+    this.offscreen.setAttribute( 'height', Isolate.TARGET_HEIGHT - 2 );
+
+    this.reader = new FileReader();
+    this.reader.addEventListener( 'load', ( evt ) => this.doReaderLoad( evt ) );
+  }
+
+  cover() {
+    let aspect = this.original.clientHeight / this.original.clientWidth;    
+    let height = this.canvas.clientHeight;
+    let width = Math.round( height / aspect );
+    let left = Math.round( ( this.canvas.clientWidth - width ) / 2 );
+    let top = 0;
+
+    if( this.original.clientHeight > this.original.clientWidth ) {
+      aspect = this.original.clientWidth / this.original.clientHeight;
+      width = this.canvas.clientHeight;
+      height = Math.round( width / aspect );
+      top = Math.round( ( this.canvas.clientHeight - height ) / 2 );
+      left = 0;
+    }
+
+    return {x: left, y: top, width: width, height: height};
+  }
+
+  read( x, y ) {
+    let context = this.offscreen.getContext( '2d' );
+
+    context.clearRect( 0, 0, this.offscreen.clientWidth, this.offscreen.clientHeight );
+    context.drawImage(
+      this.canvas,
+      Math.round( x - ( Isolate.TARGET_WIDTH / 2 ) ) + 1,
+      Math.round( y - ( Isolate.TARGET_HEIGHT / 2 ) ) + 1,
+      Isolate.TARGET_WIDTH - 2,
+      Isolate.TARGET_HEIGHT - 2,
+      0,
+      0,
+      Isolate.TARGET_WIDTH - 2,
+      Isolate.TARGET_HEIGHT - 2
+    );
+
+    this.pixels = context.getImageData( 
+      0, 
+      0, 
+      this.offscreen.clientWidth, 
+      this.offscreen.clientHeight 
+    );
+    this.threshold( this.current );
+    context.putImageData( this.pixels, 0, 0 );
+
+    return Tesseract.recognize( this.offscreen )
+    .then( ( result ) => { 
+      result.words.sort( ( a, b ) => {
+        if( a.confidence > b.confidence ) {
+          return -1;
+        }
+
+        if( a.confidence < b.confidence ) {
+          return 1;
+        }        
+
+        return 0;
+      } );
+
+      return result;
+    } );       
+  }
+
+  threshold( amount ) {
+    let d = this.pixels.data;
+  
+    for( let i = 0; i < d.length; i += 4 ) {
+      let r = d[i];
+      let g = d[i + 1];
+      let b = d[i + 2];
+      let v = ( 0.2126 * r + 0.7152 * g + 0.0722 * b >= amount ) ? 255 : 0;
+      d[i] = d[i + 1] = d[i + 2] = v
+    }
+  }
+
+  async doCanvasClick( evt ) {
+    if( this.position === null ) {
+      return;
+    }
+
+    this.output.innerHTML = 'Processing ...';
+
+    for( let c = this.current; c < 210; c += 10 ) {
+      this.current = c;
+      let result = await this.read( evt.offsetX, evt.offsetY );
+
+      console.log( 'Threshold: ' + this.current );
+
+      if( result.words.length > 0 ) {
+        console.log( result.words );
+        if( result.words[0].confidence > 60 ) {  
+          console.log( result.words[0].confidence );        
+          if( result.words[0].text.trim().length > 6 ) {
+            this.output.innerHTML = result.words[0].text.trim();          
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  doCanvasDrag( evt ) {
+    evt.preventDefault();
+  }
+
+  doCanvasDrop( evt ) {
+    evt.preventDefault();
+    this.reader.readAsDataURL( evt.dataTransfer.files[0] );    
+  }
+
+  doCanvasLeave( evt ) {
+    if( this.position === null ) {
+      return;
+    }
+
+    this.context.clearRect( 0, 0, this.canvas.clientWidth, this.canvas.clientHeight );
+    this.context.drawImage( this.original, this.position.x, this.position.y, this.position.width, this.position.height );    
+  }
+
+  doCanvasMove( evt ) {
+    if( this.position === null ) {
+      return;
+    }
+
+    this.context.clearRect( 0, 0, this.canvas.clientWidth, this.canvas.clientHeight );
+    this.context.drawImage( this.original, this.position.x, this.position.y, this.position.width, this.position.height );
+
+    this.context.strokeStyle = 'red';
+    this.context.beginPath();
+
+    this.context.moveTo( evt.offsetX, 0 );
+    this.context.lineTo( 
+      evt.offsetX, 
+      Math.round( evt.offsetY - ( Isolate.TARGET_HEIGHT / 2 ) )
+    );
+    
+    this.context.moveTo( evt.offsetX, this.canvas.clientHeight );
+    this.context.lineTo( 
+      evt.offsetX, 
+      Math.round( evt.offsetY + ( Isolate.TARGET_HEIGHT / 2 ) )
+    );    
+
+    this.context.moveTo( 0, evt.offsetY );
+    this.context.lineTo( 
+      Math.round( evt.offsetX - ( Isolate.TARGET_WIDTH / 2 ) ),
+      evt.offsetY 
+    );        
+    
+    this.context.moveTo( this.canvas.clientWidth, evt.offsetY );
+    this.context.lineTo( 
+      Math.round( evt.offsetX + ( Isolate.TARGET_WIDTH / 2 ) ),
+      evt.offsetY 
+    );        
+
+    this.context.rect( 
+      Math.round( evt.offsetX - ( Isolate.TARGET_WIDTH / 2 ) ),
+      Math.round( evt.offsetY - ( Isolate.TARGET_HEIGHT / 2 ) ),
+      Isolate.TARGET_WIDTH,
+      Isolate.TARGET_HEIGHT
+    );
+    
+    this.context.stroke();
+  }
+
+  doOriginalLoad( evt ) {
+    this.position = this.cover();
+
+    this.context.clearRect( 0, 0, this.canvas.clientWidth, this.canvas.clientHeight );
+    this.context.drawImage( this.original, this.position.x, this.position.y, this.position.width, this.position.height );
+  }
+
+  doReaderLoad( evt ) {
+    this.original.src = this.reader.result;
+    this.current = Isolate.THRESHOLD_START;
+  }  
+}
+
+Isolate.TARGET_HEIGHT = 50;
+Isolate.TARGET_WIDTH = 200;
+Isolate.THRESHOLD_START = 120;
+
+let app = new Isolate();
+</script>
+
+</body>
+</html>

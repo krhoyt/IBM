@@ -1,0 +1,3 @@
+npm install
+zip -r handler.zip *
+ibmcloud wsk action update watson/visual.recognition --kind nodejs:default handler.zip

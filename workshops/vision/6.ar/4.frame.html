@@ -1,0 +1,36 @@
+<html>
+<head>
+
+<title>A-Frame</title>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+</style>
+
+<!-- A-Frame -->
+<script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+
+</head>
+<body>
+
+<a-scene embedded vr-mode-ui="enabled: false">
+
+  <!-- Import 3D model -->
+  <a-assets>
+    <a-asset-item id="logo" src="../assets/ibm.obj"></a-asset-item>
+    <a-asset-item id="material" src="../assets/ibm.mtl"></a-asset-item>
+  </a-assets>
+
+  <a-entity>
+    <a-entity obj-model="obj: #logo; mtl: #material" scale="0.035 0.035 0.035" position="0 2 -4"></a-entity>  
+    <!-- <a-animation attribute="rotation" dur="5000" fill="forwards" to="0 360 0" repeat="indefinite" easing="linear"></a-animation> -->
+  </a-entity>
+
+</a-scene>
+
+</body>
+</html>

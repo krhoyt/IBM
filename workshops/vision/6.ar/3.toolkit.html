@@ -1,0 +1,139 @@
+<html>
+<head>
+
+<title>AR Toolkit</title>
+
+<style>
+body {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+div {
+  position: relative;
+}
+</style>
+
+</head>
+<body>
+
+<!-- Canvas over video strem -->
+<!-- For drawing located marker -->
+<div>
+  <video width="640" height="480"></video>
+  <canvas width="640" height="480"></canvas>
+</div>
+
+<!-- Augmented reality library -->
+<script src="../lib/artoolkit.min.js"></script>
+<script src="../lib/three.min.js"></script>
+<script src="../lib/artoolkit.three.js"></script>
+
+<script>
+class Augmented {
+  constructor() {
+    this.marker = null;
+
+    // Canvas for drawing located marker
+    // Video stream
+    this.canvas = document.querySelector( 'canvas' );
+    this.context = this.canvas.getContext( '2d' );
+    this.video = document.querySelector( 'video' );
+    this.video.addEventListener( 'loadedmetadata', ( evt ) => this.doVideoLoad( evt ) );        
+
+    // Scene
+    this.renderer = new THREE.WebGLRenderer( {antialias: true} );
+    this.renderer.setSize( this.video.clientWidth, this.video.clientHeight );
+
+    // Augmented reality properties
+    // Controller and camera
+    // Start detecting when camera is ready
+    this.ar = null;
+    this.camera = new ARCameraParam();
+    this.camera.onload = () => {
+      // Start video stream
+      navigator.mediaDevices.getUserMedia( {audio: false, video: true} )
+      .then( ( stream ) => {
+        this.video.srcObject = stream;
+        this.video.play();
+      } )
+      .catch( ( error ) => {
+        console.log( error );
+      } );    
+    };
+    this.camera.src = Augmented.CAMERA;    
+  }
+
+  detect() {
+    this.ar.process();
+
+    // Clear previous drawing
+    this.context.clearRect( 0, 0, this.canvas.clientWidth, this.canvas.clientHeight );
+
+    // Draw currently detected marker
+    if( this.marker ) {
+      this.context.beginPath();
+      this.context.strokeStyle = 'red';
+      this.context.lineWidth = 3;
+      this.context.moveTo( this.marker.vertex[0][0], this.marker.vertex[0][1] );
+      this.context.lineTo( this.marker.vertex[1][0], this.marker.vertex[1][1] );    
+      this.context.lineTo( this.marker.vertex[2][0], this.marker.vertex[2][1] );        
+      this.context.lineTo( this.marker.vertex[3][0], this.marker.vertex[3][1] );        
+      this.context.lineTo( this.marker.vertex[0][0], this.marker.vertex[0][1] );        
+      this.context.stroke();
+
+      this.marker = null;
+    }
+
+    // Keep detecting
+    requestAnimationFrame( () => { return this.detect(); } );         
+  }
+
+  // Found a marker
+  doMarker( evt ) {
+    this.marker = evt.data.marker;
+
+    // Debug
+    // console.log( evt );
+  }
+
+  doVideoLoad( evt ) {
+    this.ar = new ARController( this.video, this.camera );
+    this.ar.setPatternDetectionMode( artoolkit.AR_MATRIX_CODE_DETECTION );        
+    this.ar.addEventListener( 'getMarker', ( evt ) => this.doMarker( evt ) );
+    this.ar.loadMarker( '../assets/hdc.marker.patt', ( evt ) => {
+      console.log( 'Marker: ' + evt );
+
+      let sphere = new THREE.Mesh(
+        new THREE.SphereGeometry( 0.5, 8, 8 ),
+        new THREE.MeshNormalMaterial()
+      );
+      sphere.material.shading = THREE.FlatShading;
+      sphere.position.z = 0.5;
+
+      let root = this.ar.createThreeMarker( evt );
+      root.add( sphere );
+      this.detect();      
+    } );
+  }
+}
+
+// Constants
+// Camera configuration
+Augmented.CAMERA = '../lib/camera_para.dat';
+
+let app = new Augmented();
+</script>
+
+</body>
+</html>

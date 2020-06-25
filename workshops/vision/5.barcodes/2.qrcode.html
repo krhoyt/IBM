@@ -1,0 +1,102 @@
+<html>
+<head>
+
+<title>QR Code</title>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+<style>
+body {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  background-color: rgba( 0, 0, 0, 0.25 );
+  bottom: 0;
+  color: white;
+  display: none;
+  font-family: 'Roboto', sans-serif;  
+  font-size: 24px;
+  height: 70px;
+  left: 0;
+  line-height: 70px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  text-shadow: 1px 1px black;  
+}
+
+#holder {
+  height: 480px;
+  position: relative;
+  width: 640px;
+}
+</style>
+
+</head>
+<body>
+
+<div id="holder">
+
+  <!-- Web camera stream -->
+  <video width="640" height="480"></video>
+
+  <!-- Output -->
+  <p></p>
+
+</div>
+
+<!-- Audible scan indicator -->
+<audio>
+  <source src="/assets/grocery.mp3" type="audio/mp3">
+</audio>
+
+<!-- Zebra Crossing library -->
+<script src="../lib/zxing.min.js"></script>
+
+<script>
+class Barcode {
+  constructor() {
+    // Audio reference
+    this.audio = document.querySelector( 'audio' );
+    
+    // Video reference
+    this.video = document.querySelector( 'video' );
+
+    // Output 
+    this.output = document.querySelector( 'p' );
+
+    // Instantiate qrcode reader
+    this.reader = new ZXing.BrowserQRCodeReader();
+
+    // Detect barcode in video stream
+    this.reader.decodeFromInputVideoDevice( undefined, this.video )
+    .then( ( result ) => {
+      // Display the result
+      this.output.innerHTML = result.text;
+      this.output.style.display = 'block';
+
+      // Audible indicator
+      this.audio.play();
+
+      // Debug
+      console.log( result );      
+    } )
+    .catch( ( err ) => {
+      console.error( err );
+    } );
+  }
+}
+
+let app = new Barcode();
+</script>
+
+</body>
+</html>

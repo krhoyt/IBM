@@ -1,0 +1,213 @@
+<html>
+<head>
+
+<title>TensorFlow</title>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+<style>
+body {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  border: solid 1px lightgrey;
+}
+
+p {
+  color: black;
+  font-family: 'Roboto', sans-serif;  
+  font-size: 24px;
+  height: 70px;
+  line-height: 70px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+#indicator {
+  background-color: red;
+  border: solid 1px lightgrey;  
+  border-radius: 12px;
+  bottom: 16px;
+  height: 12px;
+  position: absolute;
+  right: 16px;
+  width: 12px;
+}
+
+#indicator.ready {
+  background-color: green;
+}
+</style>
+
+</head>
+<body>
+
+<!-- Display contents -->
+<canvas id="display" width="640" height="480"></canvas>
+
+<!-- Output -->
+<p>&nbsp;</p>
+
+<!-- Ready indicator -->
+<!-- Model loaded -->
+<div id="indicator"></div>
+
+<!-- TensorFlow -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.5"></script>
+
+<!-- Watson speech library -->
+<script src="../lib/watson-speech.min.js"></script>
+
+<!-- Drag and drop canvas -->
+<script src="../script/drag.drop.canvas.js"></script>
+
+<script>
+class Machine {
+  constructor() {
+    // Enhanced canvas with drag and drop support
+    // Abstracts away some of the low-level work
+    this.canvas = new DragDropCanvas( document.querySelector( 'canvas' ) );
+    this.canvas.addEventListener( DragDropCanvas.EVENT_RESIZED, ( evt ) => this.doFileResized( evt ) );
+    
+    // Display text of results
+    this.output = document.querySelector( 'p' );
+
+    // Model loaded indicator
+    this.indicator = document.querySelector( '#indicator' );
+
+    // TensorFlow
+    // MobileNet classifier
+    this.mobilenet = null;
+    
+    tf.loadModel( Machine.MOBILE_NET )
+    .then( ( result ) => {
+      this.mobilenet = result;
+
+      // Warm-up for faster prediction on actual content
+      this.mobilenet.predict( tf.zeros( [1, Machine.DIMENSIONS, Machine.DIMENSIONS, 3] ) ).dispose();
+
+      // Display as ready
+      this.indicator.classList.add( 'ready' );
+    } );
+
+    // ImageNet
+    // What the model can classify
+    this.imagenet = null;
+
+    // Loaded as JSON
+    fetch( Machine.IMAGE_NET )
+    .then( ( result ) => { return result.json(); } )
+    .then( ( json ) => {
+      this.imagenet = json;
+    } );
+
+    // Store Watson authorization token
+    this.token = null;
+
+    // Get Watson authorization token
+    fetch( Machine.WATSON_TOKEN )
+    .then( ( result ) => { return result.json(); } )
+    .then( ( data ) => {
+      this.token = data.body;
+    } );            
+  }
+
+  async doFileResized( resized ) {
+    // Clear existing label
+    this.output.innerHTML = '&nbsp;';
+
+    // Pass canvas through model
+    let logits = tf.tidy(() => {
+      let image = tf.fromPixels( resized ).toFloat();
+      let offset = tf.scalar( Machine.DIMENSIONS / 2 );
+      let normalized = image.sub( offset ).div( offset );
+      let batched = normalized.reshape( [1, Machine.DIMENSIONS, Machine.DIMENSIONS, 3] );
+
+      return this.mobilenet.predict( batched );
+    } );
+
+    // Get classe
+    let classes = await this.predict( logits, 10 );
+
+    // Build output
+    let primary = classes[0].className;
+    let modifier = 'a';
+
+    // Some entries contain multiple labels
+    if( primary.indexOf( ',' ) ) {
+      primary = primary.split( ',' )[0].trim();
+    }
+
+    // Grammar
+    if( primary.charAt( 0 ) === 'a' || primary.charAt( 0 ) === 'o' ) {
+      modifier = 'an';
+    }
+
+    let phrase = `This looks like ${modifier} ${primary}.`;
+
+    // Display output
+    this.output.innerHTML = phrase;
+    
+    // Have Watson speak the results
+    WatsonSpeech.TextToSpeech.synthesize( {
+      text: phrase,
+      token: this.token
+    } ); 
+
+    // Debug
+    console.log( classes );
+  }
+
+  // Match class number to known classes
+  // Extract and sort possible matches
+  // Return as an array for further use
+  async predict( logits, top ) {
+    let values = await logits.data();
+    let valuesAndIndices = [];
+
+    for( let i = 0; i < values.length; i++ ) {
+      valuesAndIndices.push( {value: values[i], index: i} );
+    }
+
+    valuesAndIndices.sort( ( a, b ) => {
+      return b.value - a.value;
+    } );
+  
+    let topkValues = new Float32Array( top );
+    let topkIndices = new Int32Array( top );
+  
+    for( let i = 0; i < top; i++ ) {
+      topkValues[i] = valuesAndIndices[i].value;
+      topkIndices[i] = valuesAndIndices[i].index;
+    }
+
+    let topClassesAndProbs = [];
+  
+    for( let i = 0; i < topkIndices.length; i++) {
+      topClassesAndProbs.push( {
+        className: this.imagenet[topkIndices[i]],
+        probability: topkValues[i]
+      } );
+    }
+  
+    return topClassesAndProbs;
+  }
+}
+
+Machine.DIMENSIONS = 224;
+Machine.IMAGE_NET = '../assets/imagenet.json';
+Machine.MOBILE_NET = 'https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json';
+Machine.WATSON_TOKEN = 'https://openwhisk.ng.bluemix.net/api/v1/web/krhoyt%40us.ibm.com_dev/watson/tts.token.json';
+
+let app = new Machine();
+</script>
+
+</body>
+</html>
