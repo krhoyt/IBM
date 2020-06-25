@@ -11,7 +11,7 @@
     "express": "^4.12.4",
     "jsonfile": "^2.2.1",
     "mongoose": "^4.1.4",
-    "ws": "^0.8.0"
+    "ws": "^7.3.0"
   },
   "repository": {},
   "engines": {
