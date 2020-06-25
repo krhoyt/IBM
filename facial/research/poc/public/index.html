@@ -1,0 +1,139 @@
+<html>
+<head>
+
+<title>Facial</title>
+
+<!-- Google Fonts -->
+<!-- Roboto for Material Design -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+
+<!-- Styles -->
+<link href="style/facial.css" rel="stylesheet">
+<link href="style/people.css" rel="stylesheet">
+<link href="style/faces.css" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- Applications -->
+<div class="desktop">
+
+  <!-- Registered people -->
+	<div class="people">
+
+    <!-- Count -->
+		<header>
+			<p>People (</p>
+			<p>0</p>
+			<p>)</p>
+		</header>
+
+    <!-- List -->
+		<div class="list"></div>
+
+	</div>
+
+  <!-- Preview area -->
+  <!-- Heavy lifting happens here -->
+	<div class="preview"></div>
+
+  <!-- Unregisterd people -->
+  <!-- Detected faces -->
+	<div class="faces">
+
+    <!-- Count -->
+		<header>
+			<p>Faces (</p>
+			<p>0</p>
+			<p>)</p>		
+		</header>
+
+    <!-- List -->
+    <!-- Dynamically generated -->
+		<div class="list">
+
+      <!-- Debug -->
+      <!-- 
+      <div class="person">
+        <div class="avatar"></div>
+        <p class="content">Female, 35-44</p>
+      </div>      
+      -->
+
+    </div>
+
+	</div>
+
+  <!-- Action button -->
+  <!-- Allow for vertical expansion -->
+	<div class="action">
+		<button class="add"></button>
+	</div>
+</div>
+
+<!-- Templates -->
+
+<!-- Registered face (people) -->
+<!-- Person list item -->
+<div class="people person template">
+	<div class="avatar"></div>
+	<div class="content">
+		<p>Paige Hoyt</p>
+		<p>4</p>		
+	</div>			
+</div>
+
+<!-- Detected face (faces) -->
+<!-- Person list item -->
+<div class="faces person template">
+  <div class="avatar"></div>
+  <p class="content">Female, 35-44</p>
+</div>
+
+<!-- Detail card -->
+<!-- For unregistered face -->
+<div class="faces card template">
+  <div class="person">
+    <div class="stripe"></div>
+    <div class="avatar"></div>
+  </div>
+  <div class="field">
+    <p class="label">First name</p>       
+    <div class="divider"></div>
+    <input class="content" placeholder="First name">
+  </div>  
+  <div class="field">
+    <p class="label">Last name (optional)</p>       
+    <div class="divider"></div>
+    <input class="content" placeholder="Last name (optional)">
+  </div>    
+  <div class="sheet">
+    <button class="flat">Cancel</button>              
+    <button class="flat">Save</button>
+  </div>  
+</div>
+
+<!-- Text input field -->
+<!-- Roughly Material Design behavior -->
+<div class="field template">
+  <p class="label">First name</p>       
+  <div class="divider">&nbsp;</div>
+  <p class="hint">First name</p>
+</div>
+
+<!-- Full size image -->
+<!-- Used to get full dimensions -->
+<img class="original">
+
+<!-- Application -->
+<script src="script/utility.js"></script>
+<script src="script/perceptual.js"></script>
+<script src="script/people.js"></script>
+<script src="script/preview.js"></script>
+<script src="script/field.js"></script>
+<script src="script/card.js"></script>
+<script src="script/faces.js"></script>
+<script src="script/facial.js"></script>
+
+</body>
+</html>

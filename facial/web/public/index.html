@@ -1,0 +1,92 @@
+<html>
+<head>
+
+<title>Facial</title>
+
+<!-- Google Fonts -->
+<!-- Roboto -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+
+<!-- Application styles -->
+<link href="style/facial.css" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- Home screen -->
+<div class="screen">
+  
+  <!-- Existing -->
+  <div class="browse">
+    <!-- Existing classes as buttons -->
+    <!-- <button class="person"></button> -->
+    <button class="add" data-name="Add a face"></button>
+  </div>
+  
+  <!-- Help user identify options -->
+  <p class="hint">&nbsp;</p>
+
+  <!-- Build button -->
+  <button class="build disabled" data-name="Add a face first"></button>
+</div>
+
+<!-- Add screen -->
+<div class="screen" style="display: none;">
+
+  <!-- Class name (name of person) -->
+  <input class="class" placeholder="Who is this?">
+
+  <!-- Controls -->
+  <div class="controls">
+    <button class="cancel"></button>
+    <button class="forward disabled"></button>      
+  </div>
+</div>
+
+<!-- Edit screen -->
+<div class="screen" style="display: none;">
+
+  <!-- Image from class or placeholder -->
+  <div class="person empty"></div>
+
+  <!-- Name provided for class -->
+  <p class="person">&nbsp;</p>
+
+  <!-- Video and face collection -->
+  <div class="browse">
+    <video width="320" height="240"></video>
+    <div class="list"></div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <button class="cancel"></button>
+    <button class="capture disabled"></button>
+    <button class="done disabled"></button>
+  </div>
+
+  <!-- Canvas used for image manipulation -->
+  <!-- Not visible to end user -->
+  <canvas width="320" height="240"></canvas>
+  <canvas></canvas>      
+</div>
+
+<!-- Status of building classifier -->
+<!--- Visible across all screens -->
+<div class="status"></div>
+
+<!-- Face detection library -->
+<script src="lib/jsfeat.js"></script>
+<script src="lib/cascades/frontalface.js"></script>
+
+<!-- Application logic -->
+<script src="script/observer.js"></script>
+<script src="script/capture.js"></script>
+<script src="script/samples.js"></script>
+<script src="script/home.screen.js"></script>
+<script src="script/add.screen.js"></script>
+<script src="script/edit.screen.js"></script>
+<script src="script/facial.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+body {
+  align-items: center;
+  background: #f5f7fa;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+img {
+  box-shadow: 0 2px 5px rgba( 0, 0, 0, 0.26 );    
+}

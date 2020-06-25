@@ -1,0 +1,14 @@
+{
+  "watson": {
+    "username": "apikey",
+    "password": "A9l2HvaRWAojvbDLWQRnxU6FtosaAzhP789OWwcTAmO5",
+    "url": "https://gateway.watsonplatform.net/visual-recognition/api/v3/classifiers",
+    "classify": "https://gateway.watsonplatform.net/visual-recognition/api/v3/classify",
+    "tts": {
+      "stream": "https://stream.watsonplatform.net/authorization/api/v1/token",
+      "url": "https://stream.watsonplatform.net/text-to-speech/api",
+      "username": "bad63c7f-9a6c-49f2-b38f-b1eabd886dcc",
+      "password": "A9ZFHboNV0om"
+    }    
+  }
+}
