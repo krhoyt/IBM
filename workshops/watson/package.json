@@ -1,0 +1,23 @@
+{
+  "name": "Watson",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cfenv": "1.0.x",
+    "cors": "^2.7.1",
+    "express": "^4.14.0",
+    "jsonfile": "^2.3.1",
+    "mqtt": "^1.12.0",
+    "multer": "^1.1.0",
+    "randomstring": "^1.1.5",
+    "request": "^2.73.0"
+  },
+  "repository": {},
+  "engines": {
+    "node": "4.x"
+  }
+}
