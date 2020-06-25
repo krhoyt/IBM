@@ -1,0 +1,15 @@
+#buckets > .header > button {
+  background-image: url( ../img/add.svg );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  width: 56px;
+}
+
+#buckets > .header > p {
+  margin-left: 56px;
+}
+
+#buckets > .list > .item > div {
+  max-width: calc( 100% - 72px - 16px );      
+}

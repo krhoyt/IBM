@@ -1,0 +1,49 @@
+<html>
+<head>
+
+<title>Show &amp; Tell</title>
+
+<!-- Google Fonts -->
+<!-- IBM Plex Sans -->
+<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,600" rel="stylesheet">
+
+<!-- Application styles -->
+<link href="style/show-and-tell.css" rel="stylesheet">
+
+<!-- Web components -->
+<script src="script/ibm-logo.js"></script>
+<script src="script/ibm-prompt.js"></script>
+<script src="script/ibm-nutrition.js"></script>
+<script src="script/ibm-film.js"></script>
+<script src="script/ibm-show.js"></script>
+<script src="script/ibm-tell.js"></script>
+
+</head>
+<body>
+
+<div id="main">
+
+  <!-- Two main panels -->
+  <!-- One for input (drag/drop) -->
+  <!-- One for output (Watson) -->
+  <ibm-show></ibm-show>
+  <div class="and"></div>
+  <ibm-tell></ibm-tell>
+
+</div>
+
+<!-- One extra for Easter -->
+<ibm-film></ibm-film>
+
+<!-- Branding -->
+<ibm-logo href="https://www.ibm.com/cloud/functions"></ibm-logo>
+
+<!-- Libraries -->
+<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.23.0.js"></script>
+<script src="lib/watson-speech-0.35.11.js"></script>
+
+<!-- Application logic -->
+<script src="script/show-and-tell.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+source ../local.env
+
+ibmcloud fn action create showtell/tell index.js \
+  --kind nodejs:10 \
+  --param CLOUDANT_ACCOUNT "$CLOUDANT_ACCOUNT" \
+  --param CLOUDANT_DATABASE "$CLOUDANT_DATABASE" \
+  --param CLOUDANT_USERNAME "$CLOUDANT_USERNAME" \
+  --param CLOUDANT_PASSWORD "$CLOUDANT_PASSWORD" \
+  --param COS_API_KEY "$COS_API_KEY" \
+  --param COS_SERVICE_INSTANCE "$COS_SERVICE_INSTANCE" \
+  --param PUBNUB_CHANNEL "$PUBNUB_CHANNEL" \
+  --param PUBNUB_PUBLISH "$PUBNUB_PUBLISH" \
+  --param PUBNUB_SUBSCRIBE "$PUBNUB_SUBSCRIBE" \
+  --param WATSON_USERNAME "$WATSON_USERNAME" \
+  --param WATSON_PASSWORD "$WATSON_PASSWORD"

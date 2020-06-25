@@ -1,0 +1,24 @@
+#objects {
+  left: 25%;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#objects > .header > button {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  width: 56px;
+}
+
+#objects > .header > button:first-of-type {
+  background-image: url( ../img/back.svg );
+}
+
+#objects > .header > button:last-of-type {
+  background-image: url( ../img/add.svg );
+}
+
+#objects > .list > .item > div {
+  max-width: calc( 100% - 72px - 72px );      
+}

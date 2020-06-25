@@ -1,0 +1,14 @@
+{
+  "name": "get-object-list",
+  "version": "1.0.0",
+  "description": "Get a listing of objects from a given bucket",
+  "main": "index.js",
+  "dependencies": {
+    "jsonfile": "^5.0.0",
+    "parted": "^0.1.1",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.5",
+    "string-to-stream": "^1.1.1",
+    "xml2js": "^0.4.19"
+  }
+}

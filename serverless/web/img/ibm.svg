@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+
+	<!-- Color at load -->
+	<!-- First color in animation -->
+	<style>
+	path {
+		fill: #4970ad;
+	}
+	</style>
+
+	<!-- I -->
+	<!-- Top down -->
+	<path class="row-1" d="M131.87,175.873H56.369c-0.383,0-0.693,0.31-0.693,0.693v9.496c0,0.428,0.347,0.775,0.775,0.775h75.729
+		c0.818,0,1.481-0.663,1.481-1.481v-7.691C133.661,176.675,132.859,175.873,131.87,175.873z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0s" repeatCount="indefinite"/>		
+	</path>
+
+	<path class="row-2" d="M131.594,197.194H57.631c-1.08,0-1.955,0.875-1.955,1.955v7.23c0,0.982,0.796,1.779,1.779,1.779h74.064
+		c1.183,0,2.142-0.959,2.142-2.142v-6.754C133.662,198.12,132.736,197.194,131.594,197.194z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.12s" repeatCount="indefinite"/>				
+	</path>
+
+	<path class="row-3" d="M111.863,219.879c0-0.753-0.611-1.364-1.364-1.364h-31.28c-0.625,0-1.132,0.507-1.132,1.132v8.585
+		c0,0.698,0.566,1.264,1.264,1.264h31.642c0.481,0,0.871-0.39,0.871-0.871L111.863,219.879L111.863,219.879z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.24s" repeatCount="indefinite"/>						
+	</path>
+
+	<path class="row-4" d="M110.376,239.854H79.591c-0.831,0-1.505,0.674-1.505,1.505v8.076c0,0.763,0.619,1.382,1.383,1.382h30.947
+		c0.799,0,1.447-0.648,1.447-1.447v-8.029C111.863,240.52,111.197,239.854,110.376,239.854z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.36s" repeatCount="indefinite"/>								
+	</path>
+
+	<path class="row-5" d="M111.863,262.505c0-0.731-0.593-1.324-1.324-1.324H79.387c-0.718,0-1.3,0.582-1.3,1.3v8.159
+		c0,0.831,0.673,1.504,1.504,1.504h30.662c0.889,0,1.611-0.721,1.611-1.611L111.863,262.505L111.863,262.505z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.48s" repeatCount="indefinite"/>								
+	</path>
+
+	<path class="row-6" d="M110.845,282.503h-31.66v0c-0.607,0-1.099,0.492-1.099,1.099v8.638c0,0.677,0.549,1.227,1.227,1.227h31.592
+		c0.529,0,0.958-0.429,0.958-0.958v-8.989C111.863,282.959,111.407,282.503,110.845,282.503z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.60s" repeatCount="indefinite"/>								
+	</path>
+
+	<path class="row-7" d="M133.461,303.824H57.093c-0.445,0-0.805,0.361-0.805,0.805v9.101c0,0.594,0.481,1.075,1.075,1.075h76.173
+		c0.407,0,0.737-0.33,0.737-0.737v-9.432C134.273,304.188,133.91,303.824,133.461,303.824z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.72s" repeatCount="indefinite"/>								
+	</path>
+
+	<path class="row-8" d="M133.161,325.164H57.174c-0.49,0-0.887,0.397-0.887,0.887v9.03c0.001,0.578,0.47,1.047,1.048,1.047h75.853
+		c0.599,0,1.085-0.486,1.085-1.085v-8.767C134.273,325.662,133.775,325.164,133.161,325.164z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.84s" repeatCount="indefinite"/>							
+	</path>
+
+	<!-- B -->
+	<!-- Top down -->
+	<path class="row-1" d="M254.444,185.616c-3.471-2.857-13.072-9.744-24.987-9.744h-83.553c-0.66,0-1.195,0.535-1.195,1.195v8.383
+		c0,0.765,0.62,1.385,1.385,1.385H254C254.648,186.836,254.944,186.028,254.444,185.616z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-2" d="M265.345,197.914c-0.318-0.455-0.856-0.704-1.411-0.704H146.08c-0.756,0-1.37,0.614-1.37,1.37v8.314
+		c0,0.698,0.566,1.264,1.264,1.264h121.679c0.57,0,0.996-0.521,0.881-1.079C268.098,204.961,266.993,200.267,265.345,197.914z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.12s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-3" d="M199.809,218.516h-31.58c-0.612,0-1.107,0.496-1.107,1.107v8.426c-0.002,0.8,0.646,1.448,1.446,1.448h31.4
+		c0.51,0,0.924-0.414,0.924-0.924v-8.974C200.892,219.001,200.407,218.516,199.809,218.516z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.24s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-3" d="M268.937,218.515h-34.218c-0.538,0-0.974,0.436-0.974,0.974v9.067c0,0.519,0.421,0.94,0.94,0.94h32.143
+		c0.417,0,0.788-0.263,0.92-0.66c0.52-1.566,1.759-5.673,1.901-9.599C269.662,218.842,269.334,218.515,268.937,218.515z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.24s" repeatCount="indefinite"/>							
+	</path>
+
+	<path class="row-4" d="M261.777,239.855h-93.561c-0.605,0-1.095,0.49-1.095,1.095v8.886h-0.001c0,0.543,0.44,0.983,0.983,0.983h84.594
+		c0.453,0,0.888-0.154,1.238-0.443c1.59-1.316,6.241-5.367,8.462-9.479C262.651,240.426,262.312,239.855,261.777,239.855z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.36s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-5" d="M262.437,271.183c-2.141-4.011-6.641-8-8.362-9.441c-0.436-0.365-0.981-0.562-1.55-0.562h-84.318
+		c-0.601,0-1.088,0.487-1.088,1.088v8.669h0.001c0,0.667,0.541,1.208,1.208,1.208h93.539
+		C262.36,272.146,262.669,271.619,262.437,271.183z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.48s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-6" d="M199.883,282.502h-31.428c-0.737,0-1.334,0.597-1.334,1.334v8.418h-0.001c0,0.67,0.543,1.212,1.212,1.212h31.36
+		c0.662,0,1.199-0.537,1.199-1.199v-8.758C200.891,282.953,200.44,282.502,199.883,282.502z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.60s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-6" d="M267.793,283.303c-0.157-0.48-0.603-0.8-1.109-0.8h-31.582c-0.75,0-1.358,0.608-1.358,1.358v8.059
+		c0,0.855,0.693,1.548,1.548,1.548h33.35c0.575,0,1.02-0.486,0.991-1.06C269.441,288.704,268.321,284.912,267.793,283.303z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.60s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-7" d="M267.964,303.824H145.682c-0.537,0-0.972,0.435-0.972,0.972v9.049c0,0.53,0.43,0.96,0.96,0.96h118.478
+		c0.421,0.001,0.817-0.191,1.069-0.527c1.807-2.41,2.987-7.701,3.38-9.684C268.676,304.194,268.371,303.824,267.964,303.824z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.72s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-8" d="M254.291,325.164H145.826c-0.616,0-1.116,0.5-1.116,1.116v8.813c0,0.562,0.456,1.018,1.018,1.018h83.73
+		c12.186,0,21.95-7.191,25.214-9.917C255.09,325.844,254.837,325.164,254.291,325.164z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.86s" repeatCount="indefinite"/>									
+	</path>
+
+	<!-- M -->
+	<!-- Top down -->
+	<path class="row-1" d="M344.445,185.643l-3.344-9.187c-0.128-0.351-0.461-0.585-0.835-0.585h-61.401c-0.675,0-1.222,0.547-1.222,1.222v8.497
+		c0,0.688,0.558,1.246,1.246,1.246h64.721C344.227,186.836,344.656,186.223,344.445,185.643z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-1" d="M454.823,175.873h-61.122c-0.374,0-0.707,0.234-0.835,0.585l-3.344,9.187c-0.211,0.58,0.218,1.193,0.835,1.193h64.466
+		c0.491,0,0.889-0.398,0.889-0.889v-9.187C455.712,176.27,455.314,175.873,454.823,175.873z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-2" d="M351.853,206.986l-3.096-9.171c-0.122-0.361-0.461-0.604-0.842-0.604H279.03c-0.766,0-1.387,0.621-1.387,1.387v8.362
+		c0,0.661,0.536,1.198,1.198,1.198h72.17C351.619,208.159,352.047,207.562,351.853,206.986z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.12s" repeatCount="indefinite"/>								
+	</path>
+
+	<path class="row-2" d="M454.823,197.21h-69.088c-0.381,0-0.72,0.244-0.842,0.605l-3.096,9.171c-0.194,0.576,0.234,1.173,0.842,1.173h72.184
+		c0.491,0,0.889-0.398,0.889-0.889v-9.171C455.712,197.608,455.314,197.21,454.823,197.21z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.12s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-3" d="M359.503,228.304l-3.344-9.204c-0.128-0.351-0.461-0.585-0.835-0.585h-53.945c-0.729,0-1.319,0.591-1.319,1.319v8.003
+		c0,0.916,0.743,1.659,1.659,1.659h56.949C359.285,229.496,359.714,228.883,359.503,228.304z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.24s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-3" d="M433.019,218.515H378.36c-0.373,0-0.707,0.234-0.835,0.585l-3.354,9.204c-0.211,0.58,0.218,1.193,0.835,1.193h58.013
+		c0.491,0,0.889-0.398,0.889-0.889v-9.204C433.908,218.913,433.51,218.515,433.019,218.515z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.24s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-4" d="M433.02,239.854h-61.881c-0.375,0-0.709,0.234-0.836,0.586l-2.321,6.4c-0.283,0.78-1.387,0.781-1.67,0.001l-2.329-6.402
+		c-0.128-0.351-0.461-0.585-0.835-0.585h-61.73c-0.75,0-1.359,0.608-1.359,1.359v8.077c0,0.844,0.684,1.528,1.528,1.528h31.35
+		c0.491,0,0.889-0.398,0.889-0.889c0-1,1.396-1.238,1.727-0.294l0.207,0.589c0.125,0.356,0.461,0.594,0.838,0.594h60.629
+		c0.37,0,0.701-0.229,0.831-0.575l0.365-0.967c0.349-0.925,1.72-0.675,1.72,0.314v0.339c0,0.491,0.398,0.889,0.889,0.889h31.988
+		c0.491,0,0.889-0.398,0.889-0.889v-9.187C433.909,240.253,433.511,239.854,433.02,239.854z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.36s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-5" d="M332.936,261.181h-31.39c-0.821,0-1.487,0.666-1.487,1.487v7.785c0,0.934,0.757,1.691,1.691,1.691h31.186
+		c0.491,0,0.889-0.398,0.889-0.889v-9.186C333.825,261.579,333.427,261.181,332.936,261.181z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.48s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-5" d="M393.058,261.182h-51.819c-0.62,0-1.049,0.619-0.832,1.199l3.43,9.187c0.13,0.347,0.462,0.578,0.833,0.578h45.14
+		c0.375,0,0.711-0.237,0.837-0.592l3.249-9.187C394.101,261.789,393.672,261.182,393.058,261.182z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.48s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-5" d="M433.019,261.181h-31.988c-0.491,0-0.889,0.398-0.889,0.889v9.187c0,0.492,0.398,0.889,0.889,0.889h31.988
+		c0.491,0,0.889-0.398,0.889-0.889v-9.187C433.908,261.579,433.51,261.181,433.019,261.181z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.48s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-6" d="M332.936,282.502h-31.342c-0.848,0-1.536,0.688-1.536,1.536v7.952c0,0.815,0.661,1.476,1.476,1.476h31.401
+		c0.491,0,0.889-0.398,0.889-0.889v-9.187h0.001C333.825,282.9,333.427,282.502,332.936,282.502z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.60s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-6" d="M433.019,282.503h-31.988c-0.491,0-0.889,0.398-0.889,0.889v9.187c0,0.491,0.398,0.889,0.889,0.889h31.988
+		c0.491,0,0.889-0.398,0.889-0.889v-9.187C433.908,282.901,433.51,282.503,433.019,282.503z">
+			<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.60s" repeatCount="indefinite"/>							
+	</path>
+
+	<path class="row-6" d="M385.403,282.503H348.9c-0.616,0-1.045,0.611-0.836,1.19l3.315,9.187c0.127,0.352,0.461,0.587,0.836,0.587h29.844
+		c0.374,0.001,0.708-0.233,0.835-0.584l3.344-9.187C386.449,283.116,386.02,282.503,385.403,282.503z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.60s" repeatCount="indefinite"/>							
+	</path>
+
+	<path class="row-7" d="M333.825,304.51c0-0.379-0.307-0.686-0.686-0.686h-53.742c-0.63,0-1.141,0.511-1.141,1.141v8.545
+		c0,0.716,0.58,1.296,1.296,1.296h53.587c0.379,0,0.686-0.307,0.686-0.686L333.825,304.51L333.825,304.51z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.72s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-7" d="M377.77,303.825h-21.182c-0.619,0-1.048,0.617-0.833,1.198l3.412,9.204c0.129,0.348,0.462,0.58,0.833,0.58h14.578
+		c0.378-0.001,0.715-0.241,0.839-0.598l3.193-9.204C378.81,304.428,378.382,303.825,377.77,303.825z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.72s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-7" d="M455.435,303.824H401.03c-0.491,0-0.889,0.398-0.889,0.889v9.204c0,0.491,0.398,0.889,0.889,0.889h54.404
+		c0.491,0,0.889-0.398,0.889-0.889v-9.204C456.324,304.222,455.926,303.824,455.435,303.824z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.72s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-8" d="M333.192,325.163h-53.787v0.001c-0.635,0-1.149,0.515-1.149,1.149v8.692c0,0.62,0.503,1.122,1.122,1.122h53.951
+		c0.274,0,0.495-0.222,0.495-0.495v-9.837C333.824,325.446,333.541,325.163,333.192,325.163z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.86s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-8" d="M371.195,325.164h-7.646c-0.252,0-0.428,0.25-0.343,0.487l3.737,10.449l0.669,0.011l3.844-10.574
+		C371.523,325.356,371.388,325.164,371.195,325.164z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.86s" repeatCount="indefinite"/>									
+	</path>
+
+	<path class="row-8" d="M455.435,325.164H401.03c-0.491,0-0.889,0.398-0.889,0.889v9.187c0,0.491,0.398,0.889,0.889,0.889h54.404
+		c0.491,0,0.889-0.398,0.889-0.889v-9.187C456.324,325.562,455.926,325.164,455.435,325.164z">
+		<animate attributeName="fill" calcMode="linear" values="#4970ad;#e5edf8;#4970ad;" keyTimes="0;0.50;1" dur="1" begin="0.86s" repeatCount="indefinite"/>									
+	</path>
+
+	<!-- Short line
+	<path d="M492.499,0H273.501c-4.143,0-7.5,3.357-7.5,7.5s3.357,7.5,7.5,7.5h218.997c2.439,0,4.5,2.061,4.5,4.5v218.997
+		c0,4.143,3.357,7.5,7.5,7.5c4.143,0,7.5-3.357,7.5-7.5V19.501C512,8.749,503.251,0,492.499,0z"/>
+ 	-->		
+
+	<!-- Long line
+	<path d="M504.5,266c-4.143,0-7.5,3.357-7.5,7.5v218.997c0,2.439-2.061,4.5-4.5,4.5H19.501c-2.439,0-4.5-2.061-4.5-4.5V19.501
+		c0-2.439,2.061-4.5,4.5-4.5h218.997c4.143,0,7.5-3.357,7.5-7.5s-3.357-7.5-7.5-7.5H19.501C8.749,0,0,8.749,0,19.501v472.998
+		C0,503.251,8.749,512,19.501,512h472.998c10.753,0,19.501-8.749,19.501-19.501V273.501C512,269.358,508.642,266,504.5,266z"/>
+ 	-->		
+
+</svg>

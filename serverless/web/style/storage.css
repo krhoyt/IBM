@@ -1,0 +1,283 @@
+html, body {
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+
+#bleed {
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+#bleed > div:first-of-type {
+  background-color: #152935;  
+  height: 56px;
+}
+
+#bleed > div:last-of-type {
+  background-color: #f4f7fb;
+  height: 56px;
+}
+
+#browse {
+  position: absolute;
+  visibility: hidden;
+}
+
+#loading {
+  background-image: url( ../img/ibm.svg );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100px;  
+  bottom: 0;
+  left: 0;
+  position: absolute;  
+  right: 0;
+  top: 0;
+}
+
+.field {
+  background: none;
+  background-image: url( ../img/bucket.svg );
+  background-position: 16px center;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  border: none;
+  border-bottom: solid 1px rgba( 0, 0, 0, 0.12 );
+  border-radius: 0;
+  font-family: 'IBM Plex Sans', sans-serif;  
+  font-size: 16px;
+  font-weight: 400;    
+  height: 56px;
+  margin: 0;
+  outline: none;
+  padding: 0 0 0 56px;
+}
+
+.filter {
+  background: none;
+  background-image: url( ../img/search.svg );
+  background-position: 16px center;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  border: none;
+  border-radius: 0;
+  font-family: 'IBM Plex Sans', sans-serif;  
+  font-size: 16px;
+  font-weight: 400;    
+  height: 56px;
+  margin: 0;
+  outline: none;
+  padding: 0 0 0 56px;
+}
+
+.filter:focus {
+  background-image: url( ../img/search.focus.svg );  
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  height: 56px;
+}
+
+.header > button  {
+  background: none;
+  border: none;
+  color: white;
+  font-family: 'IBM Plex Sans', sans-serif;  
+  font-size: 20px;
+  font-weight: 400;  
+  height: 56px;
+  line-height: 56px;
+  margin: 0;
+  outline: none;
+  padding: 0;
+}
+
+.header > p {
+  color: white;
+  flex-grow: 1;
+  font-family: 'IBM Plex Sans', sans-serif;  
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 56px;
+  margin: 0;
+  padding: 0;
+  text-align: center;   
+}
+
+.list {
+  flex-basis: 0;
+  flex-grow: 1;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;  
+  width: 100vw;
+}
+
+.list > .item {
+  background-color: white;
+  border-bottom: solid 1px rgba( 0, 0, 0, 0.12 );
+  display: flex;
+  flex-direction: row;
+  height: 72px;
+}
+
+.list > .item.template {
+  display: none;
+}
+
+.list > .item:last-of-type {
+  border: none;
+}
+
+.list > .item > button {
+  background: none;
+  background-image: url( ../img/more.svg );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  border: none;
+  height: 72px;
+  width: 72px;
+}
+
+.list > .item > div {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.list > .item > img {
+  margin: 16px 16px 0 16px;
+  min-width: 40px;
+}
+
+.list > .item > div > p {
+  color: rgba( 0, 0, 0, 0.80 );
+  font-family: 'IBM Plex Sans', sans-serif;  
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  overflow: hidden;      
+  padding: 0;
+  text-overflow: ellipsis;    
+  white-space: nowrap;  
+}
+
+.list > .item > div > p:last-of-type {
+  color: #8e8e92;
+  font-size: 14px;  
+}
+
+.menu {
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+  visibility: hidden;
+}
+
+.menu > div:first-of-type {
+  background-color: rgba( 0, 0, 0, 0.30 );
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: opacity 0.60s;
+}
+
+.menu > div:last-of-type {
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  position: absolute;
+  right: 0;
+  transition: bottom 0.60s;
+}
+
+.menu > div > button {
+  background: none;
+  background-color: #f8f8f8;  
+  background-position: 22px center;
+  background-repeat: no-repeat;
+  background-size: 28px;    
+  border: none;
+  border-bottom: solid 1px rgba( 0, 0, 0, 0.12 );    
+  border-radius: 0;
+  color: #3D70B2;
+  height: 60px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 60px;
+  margin: 0 16px 0 16px;
+  padding: 0 0 0 72px;   
+  text-align: left;
+}
+
+.menu > div > button:last-of-type {
+  border: none;
+  border-radius: 16px;
+  margin: 16px;
+  padding: 0;
+  text-align: center;
+}
+
+.menu > div > div {
+  align-items: center;
+  background-color: #f8f8f8;
+  border-bottom: solid 1px rgba( 0, 0, 0, 0.12 );
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 60px;
+  margin: 0 16px 0 16px;
+  padding: 0; 
+}
+
+.menu > div > div > p {
+  color: #8e8e92;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;  
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.menu > div > div > p:first-of-type {
+  max-width: calc( 100% - 16px - 16px );
+  overflow: hidden;    
+  padding: 0;
+  text-overflow: ellipsis;    
+  white-space: nowrap;  
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: opacity 0.60s, left 0.60s;
+  width: 100vw;
+}
+
+::placeholder {
+  color: #8e8e92;
+  font-family: 'IBM Plex Sans', sans-serif;  
+  font-size: 16px;
+  font-weight: 400;  
+}

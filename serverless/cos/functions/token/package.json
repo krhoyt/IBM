@@ -1,0 +1,16 @@
+{
+  "name": "token",
+  "version": "1.0.0",
+  "description": "Get a Watson TTS authentication token.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  }
+}
