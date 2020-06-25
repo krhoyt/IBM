@@ -10,7 +10,7 @@
     "cfenv": "1.0.x",
     "express": "4.12.x",
     "jsonfile": "^2.2.3",
-    "mongoose": "^4.2.7",
+    "mongoose": "^5.9.20",
     "nmea": "0.0.9",
     "path": "^0.12.7",
     "pubnub": "^3.7.16",
