@@ -1,0 +1,15 @@
+applications:
+- path: .
+  memory: 512M
+  instances: 1
+  domain: mybluemix.net
+  name: Shackcaddy
+  host: shackcaddy
+  disk_quota: 1024M
+  services:
+  - Shack-Cloudant
+  - Shack-Weather
+  - Shack-MCA
+  - Shack-STT
+  - Shack-TTS
+  command: node app.js

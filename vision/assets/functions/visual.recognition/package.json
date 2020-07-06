@@ -1,0 +1,18 @@
+{
+  "name": "visual-recognition",
+  "version": "1.0.0",
+  "description": "Upload a file to Watson Visual Recognition",
+  "main": "handler.js",
+  "keywords": [
+    "serverless",
+    "openwhisk"
+  ],
+  "devDependencies": {
+    "serverless-openwhisk": ">=0.13.0"
+  },
+  "dependencies": {
+    "parted": "^0.1.1",
+    "request": "^2.88.0",
+    "string-to-stream": "^1.1.1"
+  }
+}

@@ -1,0 +1,50 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "ibm.us.com.shackcaddy"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:23.1.0'
+
+    // MobileFirst
+    compile group: 'com.ibm.mobilefirstplatform.clientsdk.android', name:'core', version: '1.0.0', ext: 'aar', transitive: true
+
+    // Watson
+    compile (name:'speech-android-wrapper-release',ext:'aar')
+
+    // Parallax
+    compile 'com.nvanbenschoten.motion:library:1.1.1'
+
+    // Weak handler
+    compile 'com.badoo.mobile:android-weak-handler:1.1'
+
+    // Date and Time
+    compile 'joda-time:joda-time:2.9'
+}
+
+repositories{
+    flatDir{
+        dirs 'libs'
+    }
+}

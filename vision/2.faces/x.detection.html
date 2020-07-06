@@ -1,0 +1,127 @@
+<html>
+<head>
+
+<title>Face Detection</title>
+
+<style>
+body {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+video {
+  position: absolute;
+  visibility: hidden;
+}
+
+#frame {
+  height: 480px;
+  position: relative;
+  width: 640px;
+}
+</style>
+
+</head>
+<body>
+
+<!-- Video and canvas elements -->
+<div id="frame">
+  <video width="640" height="480" preload autoplay loop muted></video>
+  <canvas id="work" width="640" height="480"></canvas>  
+  <canvas id="shift" width="640" height="480"></canvas>
+  <canvas id="overlay" width="640" height="480"></canvas>
+</div>
+
+<!-- Tracking library -->
+<script src="../lib/headtrackr.js"></script>
+
+<script>
+class Faces {
+  constructor() {
+    // Space bar to sample
+    document.body.addEventListener( 'keypress', ( evt ) => this.doReset( evt ) );
+
+    // Element references
+    this.video = document.querySelector( 'video' );
+    this.overlay = document.querySelector( '#overlay' );
+    this.overlay.addEventListener( 'click', ( evt ) => this.doDebug( evt ) );
+    this.context = this.overlay.getContext( '2d' );
+    this.work = document.querySelector( '#work' );
+    this.shift = document.querySelector( '#shift' );
+    this.shift.style.display = 'none';
+
+    // Setup tracking
+    this.tracker = new headtrackr.Tracker( {
+      calcAngles: true, 
+      ui: false, 
+      headPosition: false,
+      debug: this.shift
+    } );
+    this.tracker.init( this.video, this.work );
+
+    // Start tracking
+    this.tracker.start();    
+
+    // Draw detected faces    
+    document.addEventListener( 'facetrackingEvent', ( evt ) => this.doTracking( evt ) );
+  }
+
+  doDebug( evt ) {
+    // Toggle display of CAM Shift
+    if( this.shift.style.display === 'none' ) {
+      this.shift.style.display = 'block';
+    } else {
+      this.shift.style.display = 'none';
+    }
+  }
+
+  doReset( evt ) {
+    // Look for space bar
+    // Reset mean
+    if( evt.keyCode === 32 ) {    
+      this.tracker.stop();
+      this.tracker.start();    
+    }
+  }
+
+  doTracking( evt ) {
+    // Clear current drawing
+    this.context.clearRect( 0, 0, this.overlay.clientWidth, this.overlay.clientHeight );
+      
+    // Using CAM Shift
+    if( evt.detection === Faces.CAM_SHIFT ) {
+      // Draw found face
+      // Includes angle
+      this.context.translate( evt.x, evt.y );
+      this.context.rotate( evt.angle - ( Math.PI / 2 ) );
+      this.context.strokeStyle = 'red';
+      this.context.strokeRect( 
+        ( 0 - ( evt.width / 2 ) ) >> 0, 
+        ( 0 - ( evt.height / 2 ) ) >> 0, 
+        evt.width, 
+        evt.height
+      );
+      this.context.rotate( ( Math.PI / 2 ) - evt.angle );
+      this.context.translate( 0 - evt.x, 0 - evt.y );
+    }      
+  }
+}
+
+// Constant
+Faces.CAM_SHIFT = 'CS';
+
+let app = new Faces();
+</script>
+
+</body>
+</html>

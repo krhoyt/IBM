@@ -1,0 +1,113 @@
+<html>
+<head>
+
+<title>YOLO Classifier</title>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+<style>
+body {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  border: solid 1px lightgrey;
+}
+
+p {
+  color: black;
+  font-family: 'Roboto', sans-serif;  
+  font-size: 24px;
+  height: 70px;
+  line-height: 70px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+#indicator {
+  background-color: red;
+  border: solid 1px lightgrey;  
+  border-radius: 12px;
+  bottom: 16px;
+  height: 12px;
+  position: absolute;
+  right: 16px;
+  width: 12px;
+}
+
+#indicator.ready {
+  background-color: green;
+}
+</style>
+
+</head>
+<body>
+
+<!-- Display contents -->
+<canvas width="640" height="480"></canvas>
+
+<!-- Ready indicator -->
+<!-- Model loaded -->
+<div id="indicator"></div>
+
+<!-- Machine Learning -->
+<script src="https://unpkg.com/ml5@0.1.1/dist/ml5.min.js"></script>
+
+<!-- Drag and drop canvas -->
+<script src="../script/drag.drop.canvas.js"></script>
+
+<script>
+class Machine {
+  constructor() {
+    // Enhanced canvas element
+    this.canvas = new DragDropCanvas( 
+      document.querySelector( 'canvas' ), 
+      DragDropCanvas.MODE_CONTAIN, 
+      Machine.DIMENSIONS
+    );
+    this.canvas.addEventListener( DragDropCanvas.EVENT_RESIZED, ( evt ) => this.doResized( evt ) );
+
+    // Model loaded indicator
+    this.indicator = document.querySelector( '#indicator' );
+
+    // Machine learning
+    this.classifier = ml5.YOLO( () => {
+      this.indicator.classList.add( 'ready' );
+    } );
+  }
+
+  doResized( image ) {
+    // Image resized to fit
+    // Classify to see what it is
+    this.classifier.detect( image, ( err, results ) => {
+      for( let c = 0; c < results.length; c++ ) {
+        let x = results[c].x * this.canvas.display.canvas.clientWidth;
+        let y = results[c].y * this.canvas.display.canvas.clientHeight;
+        let width = results[c].w * this.canvas.display.canvas.clientWidth;        
+        let height = results[c].h * this.canvas.display.canvas.clientHeight;        
+
+        this.canvas.display.context.beginPath();
+        this.canvas.display.context.strokeStyle = 'red';
+        this.canvas.display.context.lineWidth = 3;
+        this.canvas.display.context.strokeRect( x, y, width, height );
+      }
+
+      // Debug
+      console.log( results );
+    } ); 
+  }
+}
+
+Machine.DIMENSIONS = {width: 320, height: 240};
+
+let app = new Machine();
+</script>
+
+</body>
+</html>

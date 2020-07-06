@@ -1,108 +1,63 @@
-# Implementing Common Transactions on IBM Blockchain
+# IBM
 
-## Overview
-This project shows how to perform traditional data store transactions on IBM Blockchain. This surfaces as a web-based, to-do list application, allowing browse, read, edit, add, and delete (BREAD) operations.
+I started at IBM in July 2015 as a Developer Advocate focused on Mobile Foundation - a set of native SDKs for iOS/Android focused mostly on security and integration with cloud resources. When a product team wanted to release a mobile feature, it was required that they use Mobile Foundation. This sent a lot of varied work my way in the form of reviewing code and UI/UX patterns. This work in turn often supplied me with a steady stream varied content ideas to share with the community.
 
-IBM Blockchain is powered by the Linux Foundation Hyperledger Fabric 0.6 currently. That service is being deprecated, and will be replaced by the Hyperledger Fabric 1.0 architecture in the near future. At that point, this example will be updated to reflect migration patterns for businesses currently using the 0.6 architecture (privately or hosted on IBM Bluemix).
+## Developer Advocacy
 
-The to-do list application presented here is designed to help developers understand how common transactions needed by business processes can be adapted to use Blockchain. *Blockchain != Bitcoin.* It might be said that Bitcoin is the first Blockchain application. As a distributed ledger, the distinct characteristics such as decentralization, consensus, and encryption have broad-reaching implications to many business verticals including finance, transportation, health care, and others.
+In 2016, the existing developer relations organization was being rebooted. New people (read: not IBM employees) were brought in to help guide this effort. One of these people was previously the CEO of Kaazing - where I had worked as Principal Evangelist prior to IBM. I reached out to him, we made the organizational transfer happen, and before I knew it, I was being tasked to write the mission statement for this bold new direction.
 
-![Flow](images/gitlab_container.png)
+Machine Learning was starting to be available to developers at the time, and many were looking to learn about integration ML features into their applications. IBM was known for [Watson v. Jeopardy]([https://www.youtube.com/watch?v=P18EdAKuC1U](https://www.youtube.com/watch?v=P18EdAKuC1U)), but how did you put that kind of smarts into your own projects? Having a Web Standards background from my time at Adobe, I set out to help Web Developers understand and leverage Machine Learning features.
 
-## Included Components
+After that work came, blockchain. After that, serverless with Apache OpenWhisk. Always - for me - with a focus on integrating with standards, and making Web Developers into heroes for whatever it was that they were trying to achieve (with or without IBM product). 
 
-- IBM Blockchain
-- OpenWhisk
+## Leadership
 
-## Prerequisites
+Throughout this time IBM had a city-based approach to structuring its advocacy teams. A specific city would be chosen based on a variety of criteria, and a team of local Developer Advocates would be hired in that city. In 2018, I was asked to build an advocacy team in London. I packed up the family, and we spent a summer in the UK. By 2019, that team was a recognized leader across the broader IBM Developer Advocacy organization.
 
-Create an instance of IBM Blockchain on IBM Bluemix.
+Also in 2019, I moved from managing a team of Developer Advocates, to managing a small team of developers reporting to the [IBM Developer]([https://developer.ibm.com/](https://developer.ibm.com/)) website organization. At first we were focused on performing data analysis on the "paper trails" (blog, Stack Overflow, YouTube, Twitter, etc.) of Developer Advocates employed by our competition. We eventually pivoted to provided an open source community management tooling based on the [Orbit Model]([https://github.com/orbit-love/orbit-model](https://github.com/orbit-love/orbit-model)), which aligns roughly with the Developer Relations practices I have developed over the years.
 
-If you have not provisioned services on IBM Bluemix before, please follow the Setting Up IBM Blockchain tutorial.
+> Most of the code in this repository will not run any longer - the core products have pivoted, or are simply no longer offered. I keep it around for inspiration, and to occasionally reference patterns of problems I have solved in the past.
 
-You will also need a public GitHub repository.
+## FashionX
 
-## Steps
+When IBM acquired The Weather Company in 2016, there was an internal push to add weather features to every product possible. FashionX explores making fashion/clothing recommendations based on the current and forecast weather. In this proof-of-concept, inline advertisements added a path to monetization.
 
-1. Deploy the compiled chaincode to a public GitHub repository
-2. Update the web application to map to your IBM Blockchain
-3. Run the web application on a local web server
-4. Using the to-do list application
+## Shack Caddy
 
-# 1. Deploy the compiled chaincode to a public GitHub repository
+I do not golf, but I have a lot of friends that do. Weather means everything to a golfer. This native mobile application allowed you to select your favorite golf courses, and get the weather conditions for your specified tee-time. The images used in the application reflected the weather conditions. There was even a fun easter egg interaction that allowed you to practice your [digital] swing.
 
-A compiled chaincode application is included. By placing this file in a public GitHub repository, you make it available for IBM Blockchain consumption. Once the chaincode is deployed in a public GitHub repository, log into IBM Blockchain, and navigate to the deployment screen.
+## Watson Workshop
 
-> Chaincode is also commonly referred to as a "smart contract" in Blockchain terminology. Chaincode is authored using the Go language. This represents the business logic of what transactions can take place on the Blockchain.
+What are the different things you might do with Watson and Machine Learning in general? How would you leverage these functionalities from the browser? These were the questions this half-day workshop set out to answer. Coverage includes:
 
-![Landing page for the IBM Blockchain console.](https://raw.githubusercontent.com/IBM/todo-list-fabric/master/assets/blockchain-apis.png)
+- Speech to Text
+- Text to Speech
+- Conversational interactions
+- Visual Recognition
+- Language Translation
+- Natural Language Processing
+- Tone Analysis
 
-When you login to the IBM Blockchain console, you will be presented with a series of menu options down the left side of the screen. To deploy chaincode from your GitHub repository to Hyperledger Fabric, select the "APIs" menu option. A selection of "Validating Peer 0" is already made for you. To the right of that selection is a URL. Place this URL where you can refer to it later.
+## Vision Workshop
 
-A heading on this screen is labeled "IBM Blockchain HTTP APIs" and includes a list of sections that can be clicked on and expanded. Click on the "Chaincode" section to open it. 
+How is it that computers actually see? What are the techniques that can be leveraged, and to what ends? This full-day workshop pushes the browser APIs to the very edge of their abilities. You will be surprised just how much you can achieve in an "evergreen" world. Coverage includes:
 
-![Deploying chaincode using the IBM Blockchain console.](https://raw.githubusercontent.com/IBM/todo-list-fabric/master/assets/deploy-chaincode.png)
+- Face Detection
+- Facial Feature Analysis
+- Optical Character Recognition
+- Object Detection
+- Barcodes (QR and 2D)
+- Augmented Reality
+- Machine Learning
 
-Click on the "POST /chaincode" section to present the options for working directly with chaincode. In the "DeploySpec" section, click on the JSON block on the right side of the screen to populate the text area. Change the "chaincodeID" to point to the chain code in your public GitHub repository. Change the "secureContext" values to read "user_type1_0". Scroll down and click the button labeled "Try it out!" to deploy your chaincode. 
+## Toodles: A Blockchain To-Do List
 
-![URL for validating peer, and chaincode ID for application integration.](https://raw.githubusercontent.com/IBM/todo-list-fabric/master/assets/post-deploy-values.png) 
+The to-do list is the new "hello world" for many application frameworks and their related technologies. Is blockchain the right solution for a to-do list? Maybe. Maybe not. Either way, this feature-complete example was among the most viewed repositories on IBM Developer for nearly a year. Some came for the UI (which I designed and implemented). Some came for the CRUD (Go). It was also the backdrop against which I gave several workshops and presentations at conferences around the world.
 
-Once the operation has completed, click on the "Network" section in the menu on the left of the screen. Place the value from the first row in the "Chaincode ID" section where you can refer to it later.
+![Blockchain To-Do List](/toodles/todo-list.png)
 
-> ![Alternative tooling, such as Paw, for interacting with chaincode.](https://raw.githubusercontent.com/IBM/todo-list-fabric/master/assets/paw-http-tooling.png) 
-> As this operation is an HTTP operation that sends a POST with a small JSON value, you may chose to use other tooling, such as Paw, for managing, testing, and interacting with your chaincode.
+## Serverless Cloud Storage
 
-You have now deployed your first chaincode application onto IBM Blockchain. The next step is to place the values pertinent to your blockchain instance into the web application. This will enable the web application to communicate directly with your specific blockchain instance.
+Where do you put put files uploaded to a serverless infrastructure? Not on the server - it will be gone when the function stops executing. How does one even upload a file to a serverless function in the first place? Or change headers to designate a file download? This feature complete web application was designed to explore file management on top of a serverless infrastructure using cloud storage options. 
 
-# 2. Update the web application to map to your IBM Blockchain
-
-The web application places a data model abstraction over the service layer. The result is that there is only one place where the web application source code needs to be updated. In "/web/script/blockchain.js" change the "Blockchain.CHAINCODE" value to the chaincode ID value from the previous step, and the "Blockchain.URL" value to the validating peer value from the previous step. No further changes are required to use the web application.
-
-There is a "test.html" page which is provided for those looking for more raw access to the underlying chaincode invocation. That HTML page includes "/web/script/test.js" which contains the business logic. If you want to use this HTML page, you will need to update the source code in two places. 
-
-- The first is changing the "Test.URL" value in "/web/script/test.js" to the validating peer value from the previous step. 
-- The second change is in "/web/test.html". Under the button labeled "Deploy Chaincode" (roughly line 21), the value of the HTML input field with the ID of "chaincode" needs to be updated to reflect the chaincode ID from the deployment step.
-
-# 3. Run the web application on a local web server
-
-In order for the web-based to-do list application to work, it must be run from a web server. This server does not need to be publicly available in order for the application to function. On Mac, a common approach is to use the built-in PHP installation to run an in-place web server.
-
-At the command line, navigate to the "/web" directory. Launch the PHP web server in-place.
-
-```bash
-php -S localhost:8081
-```
-
-> IBM Blockchain supports cross-origin resource sharing (CORS). The result is that the browser can communicate directly to IBM Blockchain without the need for a proxy server.
-
-# 4. Using the to-do list application
-
-With the web application loaded into the browser, you will first be presented with a login screen. The login dialog contains an IBM logo. Alt+Click on that logo to preload data into the blockchain. The only indication that this operation has been completed is a transaction ID in the developer console.
-
-> While not extremely verbose, transaction IDs from IBM Blockchain are presented in the developer console of the browser for every change made at the blockchain itself. It may be useful to have the developer console open when you are using the to-do list application.
-
-![To-do login screen](https://raw.githubusercontent.com/IBM/todo-list-fabric/master/assets/todo-authentication.png)
-
-There are three accounts created in the default data. In the form of username:password, those accounts are ...
-
-- krhoyt:abc123
-- abtin:abc123
-- peter:abc123
-
-You can login with any of these accounts to browse, read, edit, add, and delete to-do items.
-
-![To-do listing](https://github.com/IBM/todo-list-fabric/blob/master/assets/todo-list.png)
-
-- To create a to-do list item, click on the red button labeled "+". Hovering over this button will present the additional button to create a "location".
-- To edit a to-do list item, click on the item you are interested in editing and modify the fields to match your desired values. There is no "save" button as all changes are immediately committed to the blockchain.
-- To delete a to-do list item, move your mouse over any item, and click on the trash can icon.
-- To forward the to-do list item to another person, move your mouse over any item and click on the arrow icon that appears. A list of other users in the system will be presented. Select a name. 
-- To logout of the application, click the icon that is a box with an arrow inside of it. This is located in the upper-righthand corner of the screen.
-- Using the above account information, log into the application again using a different account to see to-do items forwarded on to other users in the system.
-
-# Troubleshooting
-
-The developer console in the browser is your key to troubleshooting any problems that may arise. The first place to look for errors is in checking the values of the chaincode ID and validating peer in the "/web/script/blockchain.js" file.
-
-# License
-[Apache 2.0](LICENSE.txt)
+[![Real-Time UAV Telemetry](https://img.youtube.com/vi/d_YpimHwHeM/0.jpg)](https://www.youtube.com/watch?v=d_YpimHwHeM)

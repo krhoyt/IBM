@@ -1,0 +1,137 @@
+<html>
+<head>
+
+<title>Corner Detection</title>
+
+<style>
+body {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+video {
+  position: absolute;
+  visibility: hidden;
+}
+</style>
+
+</head>
+<body>
+
+<!-- Document elements -->
+<video width="640" height="480"></video>
+<canvas width="640" height="480"></canvas>
+
+<!-- Image processing library -->
+<script src="../lib/jsfeat.js"></script>
+
+<script>
+class Geometry {
+  constructor() {
+    // Element references
+    this.canvas = document.querySelector( 'canvas' );
+    this.context = this.canvas.getContext( '2d' );
+    this.video = document.querySelector( 'video' );
+
+    // Data structure for image processing
+    this.image = new jsfeat.matrix_t( 
+      this.canvas.clientWidth, 
+      this.canvas.clientHeight, 
+      jsfeat.U8_t | jsfeat.C1_t 
+    );
+
+    // Data structure for corners
+    this.corners = [];
+                
+    // Descriptor constraints
+    jsfeat.yape06.laplacian_threshold = Geometry.LAPLACIAN;
+    jsfeat.yape06.min_eigen_value_threshold = Geometry.EIGEN;
+
+    let index = this.canvas.clientWidth * this.canvas.clientHeight;
+                
+    while( --index >= 0 ) {
+      this.corners[index] = new jsfeat.keypoint_t( 0, 0, 0, 0 );
+    }
+
+    // Camera stream
+    navigator.mediaDevices.getUserMedia( {audio: false, video: true} )
+    .then( ( stream ) => {
+      this.video.srcObject = stream;
+      this.video.play();
+      this.detect();
+    } )
+    .catch( ( error ) => {
+      console.log( error );
+    } );        
+  }
+
+  detect() {
+    // Copy video frame to canvas
+    this.context.drawImage( 
+      this.video, 
+      0, 
+      0, 
+      this.canvas.clientWidth, 
+      this.canvas.clientHeight 
+    );
+    
+    // Get the pixels from the canvas
+    let pixels = this.context.getImageData( 
+      0, 
+      0, 
+      this.canvas.clientWidth, 
+      this.canvas.clientHeight 
+    );
+
+    // Grayscale 
+    jsfeat.imgproc.grayscale( 
+      pixels.data, 
+      this.canvas.clientWidth, 
+      this.canvas.clientHeight, 
+      this.image 
+    );
+
+    // Blur
+    jsfeat.imgproc.box_blur_gray( this.image, this.image, 2, 0 );
+
+    // Corners
+    let count = jsfeat.yape06.detect( this.image, this.corners );
+
+    // Put back into pixels
+    let data = new Uint32Array( pixels.data.buffer );
+
+    let green = ( 0xff << 24 ) | ( 0x00 << 16 ) | ( 0xff << 8 ) | 0x00;
+                
+    // Paint the corners
+    for( let index = 0; index < count; ++index ) {
+      let x = this.corners[index].x;
+      let y = this.corners[index].y;
+      let offset = ( x + y * this.canvas.clientWidth );
+                    
+      data[offset] = green;
+      data[offset - 1] = green;
+      data[offset + 1] = green;
+      data[offset - this.canvas.clientWidth] = green;
+      data[offset + this.canvas.clientWidth] = green;
+    }
+    
+    // Put it back
+    this.context.putImageData( pixels, 0, 0 );
+
+    // Keep going
+    requestAnimationFrame( () => { return this.detect(); } );     
+  }
+}
+
+Geometry.EIGEN = 25;
+Geometry.LAPLACIAN = 30;
+
+let app = new Geometry();
+</script>
+
+</body>
+</html>

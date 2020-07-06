@@ -1,0 +1,7 @@
+{
+    "iot_username": "a-orgId-appId",
+    "iot_password": "appPassword",
+    "iot_topic": "iot-2/type/deviveType/id/deviceId/evt/gesture/fmt/json",
+    "iot_host": "mqtt://orgId.messaging.internetofthings.ibmcloud.com",
+    "iot_client": "a:orgId:Slap"
+}

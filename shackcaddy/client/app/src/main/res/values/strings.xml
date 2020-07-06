@@ -1,0 +1,13 @@
+<resources>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">Shackcaddy</string>
+    <string name="degrees">°</string>
+    <string name="gopher_talk">Talk to the gopher...</string>
+    <string name="watson_model">en-US_BroadbandModel</string>
+    <string name="weather_sunset">Sunset</string>
+    <string name="weather_sunrise">Sunrise</string>
+    <string name="weather_uv">UV Index</string>
+    <string name="weather_speed">Wind Speed</string>
+    <string name="weather_feels">Feels Like</string>
+    <string name="weather_direction">Wind Direction</string>
+</resources>

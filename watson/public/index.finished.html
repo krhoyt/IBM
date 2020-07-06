@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<title>IBM Watson</title>
+
+<!-- Open Sans -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" type="text/css">    
+
+<!-- Styles -->
+<link href="style/workshop.css" rel="stylesheet" type="text/css">
+
+<!-- TweenMax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js" type="text/javascript"></script>    
+        
+<!-- Watson -->
+<script src="script/watson-speech-0.32.3.js" type="text/javascript"></script>
+    
+<!-- Moment -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js" type="text/javascript"></script>    
+    
+<!-- OCR -->
+<script src="https://cdn.rawgit.com/naptha/tesseract.js/0.2.0/dist/tesseract.js" type="text/javascript"></script>  
+  
+</head>
+<body>
+
+<!-- Background -->
+<div class="scene"></div>
+    
+<!-- Interface -->
+<div class="watson">
+
+    <!-- Prompt -->
+    <p class="prompt help">What can I help you with?</p>
+    
+    <!-- Transcribe -->
+    <button class="capture microphone"></button>    
+    
+</div>
+
+<!-- Path for services -->
+<script src="script/constants.js" type="text/javascript"></script>
+
+<!-- Modules -->
+<script src="script/stt/stt.4.js" type="text/javascript"></script>
+<script src="script/tts/tts.1.js" type="text/javascript"></script>    
+<script src="script/conversation.js" type="text/javascript"></script>        
+<script src="script/visual.js" type="text/javascript"></script>                
+<script src="script/translate.js" type="text/javascript"></script>                
+<script src="script/alchemy.js" type="text/javascript"></script>                        
+<script src="script/tone.js" type="text/javascript"></script>                        
+<script src="script/personality.js" type="text/javascript"></script>                            
+    
+<!-- Application -->    
+<script src="script/workshop.js" type="text/javascript"></script>    
+        
+</body>
+</html>

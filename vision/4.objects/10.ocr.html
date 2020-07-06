@@ -1,0 +1,315 @@
+<html>
+<head>
+
+<title>Just the Paper</title>
+
+<style>
+body {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  position: absolute;
+  visibility: hidden;
+}
+
+video {
+  position: absolute;
+  visibility: hidden;
+}
+
+#sized {
+  position: absolute;
+  visibility: hidden;  
+}
+</style>
+
+</head>
+<body>
+
+<!-- Document elements -->
+<video width="640" height="480"></video>
+<canvas id="drawing" width="640" height="480"></canvas>
+
+<!-- Image sample from canvas -->
+<canvas id="sized"></canvas>
+<img>
+
+<!-- Image processing library -->
+<script src="../lib/jsfeat.js"></script>
+<script src="../lib/jsfeat.kernel.js"></script>
+<script src="../lib/cv.js"></script>
+
+<!-- Optical character recognition library -->
+<script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'></script>
+
+<!-- Watson speech library -->
+<script src="../lib/watson-speech.min.js"></script>
+
+<!-- Utilities for rectangles -->
+<script src="../script/rectangles.js"></script>
+
+<script>
+class Geometry {
+  constructor() {
+    // Track state
+    // Allow for analysis on single frame
+    this.state = Geometry.STATE_PAINTING;
+
+    // Reference to canvas data
+    this.pixels = null;
+
+    // Found shapes
+    this.contours = null;
+
+    // Last known rectangle
+    // Ideally representing the paper
+    this.last = null;
+
+    // Allow user to specify when to pause
+    // Space bar will toggle between pause and play
+    document.body.addEventListener( 'keypress', ( evt ) => this.doKeyPress( evt ) );
+
+    // Element references
+    this.canvas = document.querySelector( '#drawing' );
+    this.context = this.canvas.getContext( '2d' );
+    this.video = document.querySelector( 'video' );
+    this.sample = document.querySelector( 'img' );
+    this.sample.addEventListener( 'load', ( evt ) => this.doImageLoad( evt ) );    
+    this.sized = document.querySelector( '#sized' );
+    this.sizing = this.sized.getContext( '2d' );
+
+    // Data structure for image processing
+    this.image = new jsfeat.matrix_t( 
+      this.canvas.clientWidth, 
+      this.canvas.clientHeight, 
+      jsfeat.U8_t | jsfeat.C1_t 
+    );
+
+    // Camera stream
+    navigator.mediaDevices.getUserMedia( {audio: false, video: true} )
+    .then( ( stream ) => {
+      this.video.srcObject = stream;
+      this.video.play();
+      this.detect();
+    } )
+    .catch( ( error ) => {
+      console.log( error );
+    } );        
+
+    // Store Watson authorization token
+    this.token = null;
+
+    // Get Watson authorization token
+    fetch( Geometry.WATSON_TOKEN )
+    .then( ( result ) => { return result.json(); } )
+    .then( ( data ) => {
+      this.token = data.body;
+    } );     
+  }
+
+  capture() {
+    // Toggle state
+    if( this.state === Geometry.STATE_PAINTING ) {
+      // Work with single still frame
+      // Put frame content into image element
+      // For analysis
+      this.state = Geometry.STATE_READING;
+
+      this.sized.width = this.last[1].x - this.last[0].x;
+      this.sized.height = this.last[2].y - this.last[0].y;
+      this.sizing.drawImage( this.canvas, this.last[0].x, this.last[0].y, this.sized.clientWidth, this.sized.clientHeight, 0, 0, this.sized.clientWidth, this.sized.clientHeight );
+
+      this.sample.src = this.sized.toDataURL();
+    } else if( this.state === Geometry.STATE_READING ) {
+      // Restart copying of video when done
+      this.state = Geometry.STATE_PAINTING;
+
+      // Clear last known rectangle
+      this.last = null;
+
+      // Start sampling again
+      this.detect();
+    }
+  }
+
+  detect() {
+    // Copy video frame to canvas
+    this.context.drawImage( 
+      this.video, 
+      0, 
+      0, 
+      this.canvas.clientWidth, 
+      this.canvas.clientHeight 
+    );
+    
+    // Get the pixels from the canvas
+    this.pixels = this.context.getImageData( 
+      0, 
+      0, 
+      this.canvas.clientWidth, 
+      this.canvas.clientHeight 
+    );
+
+    // Grayscale 
+    jsfeat.imgproc.grayscale( 
+      this.pixels.data, 
+      this.canvas.clientWidth, 
+      this.canvas.clientHeight, 
+      this.image 
+    );
+
+    // Gaussian blur
+    let kernel = ( 3 + 1 ) << 1;
+    jsfeat.imgproc.gaussian_blur( this.image, this.image, kernel, 0 );
+
+    // Canny edge detection
+    jsfeat.imgproc.canny( this.image, this.image, 20, 40 );
+
+    // Emphasize edges
+    jsfeat.imgproc.dilate( this.image, this.image );
+
+    // Interoperability
+    // JSFeat uses columns and rows
+    // CV uses width and height
+    if( !this.image.width ) {
+      this.image.width = this.image.cols;
+      this.image.height = this.image.rows;
+    }
+
+    // Contours
+    this.contours = CV.findContours( this.image, [] );
+
+    for( let c = 0; c < this.contours.length; c++ ) {
+      // Epsilon (variation) based on length of contour array      
+      this.contours[c] = CV.approxPolyDP( this.contours[c], this.contours[c].length * 0.03 );      
+    }
+
+    // Polygons to remove
+    let remove = [];
+
+    // Find rectangles
+    for( let c = 0; c < this.contours.length; c++ ) {
+      // Rectangles have four corners
+      if( this.contours[c].length != 4 ) {
+        remove.push( c );
+        continue;
+      }
+
+      // Order points
+      // Top-left, top-right, bottom-right, bottom-left
+      this.contours[c] = Rectangles.order( this.contours[c] ).splice( 0 );
+
+      /*
+      // Squares have (roughly) equal length sides
+      if( !Rectangles.measure( this.contours[c] ) ) {
+        remove.push( c );
+        continue;
+      }
+      */
+
+      // Rectangles have (roughly) ninety (90) degree angles
+      if( !Rectangles.angles( this.contours[c] ) ) {
+        remove.push( c );
+        continue;
+      }
+
+      // Look for minimal rotation
+      // Checking one side will do
+      let rotation = Math.atan2( this.contours[c][1].y - this.contours[c][0].y, this.contours[c][1].x -  this.contours[c][0].x ) * ( 180 / Math.PI );
+      if( rotation > ( 0 + Rectangles.ROTATION_VARIATION ) || 
+          rotation < ( 0 - Rectangles.ROTATION_VARIATION ) ) {
+        remove.push( c );
+        continue;
+      }
+
+      // Check area is significant enough to be the paper
+      let width = this.contours[c][1].x - this.contours[c][0].x;
+      let height = this.contours[c][2].y - this.contours[c][0].y;
+      let area = ( width * height ) / ( this.canvas.clientWidth * this.canvas.clientHeight );
+
+      if( area > Rectangles.AREA_MAXIMUM || area < Rectangles.AREA_MINIMUM ) {
+        remove.push( c );
+      }
+    }
+
+    // Remove non-squares
+    for( let r = 0; r < remove.length; r++ ) {
+      this.contours.splice( remove[r] - r, 1 );
+    }
+
+    if( this.contours.length === 1 ) {
+      this.last = this.contours[0];
+    }
+
+    if( this.last ) {
+      this.draw();
+    }
+
+    if( this.state === Geometry.STATE_PAINTING ) {
+      requestAnimationFrame( () => { return this.detect(); } ); 
+    }
+  }
+
+  draw() {
+    this.context.beginPath();
+    this.context.lineWidth = 5;
+    this.context.strokeStyle = 'green';      
+
+    // For each point in the contour
+    for( let p = 0; p < this.last.length; p++ ) {
+      if( p == 0 ) {
+        this.context.moveTo( this.last[p].x, this.last[p].y );
+      } else {
+        this.context.lineTo( this.last[p].x, this.last[p].y );          
+      }
+    }
+
+    this.context.closePath();
+    this.context.stroke();    
+  }
+
+  doImageLoad( evt ) {
+    // Perform optical character recognition
+    Tesseract.recognize( this.sample, {lang: 'eng'} )
+    .then( ( result ) => {  
+      let phrase = '';
+
+      for( let w = 0; w < result.words.length; w++ ) {
+        if( result.words[w].confidence > Geometry.CONFIDENCE ) {
+          phrase = phrase + ' ' + result.words[w].text;
+        }
+      }
+
+      // Have Watson speak the results
+      WatsonSpeech.TextToSpeech.synthesize( {
+        text: phrase.trim(),
+        token: this.token
+      } );
+    } );
+  }  
+
+  doKeyPress( evt ) {
+    // Look for space bar
+    // Capture current video frame
+    if( evt.keyCode === 32 ) {
+      this.capture();
+    }
+  }    
+}
+
+Geometry.CONFIDENCE = 70;
+Geometry.STATE_PAINTING = 1;
+Geometry.STATE_READING = 2;
+Geometry.WATSON_TOKEN = 'https://openwhisk.ng.bluemix.net/api/v1/web/krhoyt%40us.ibm.com_dev/watson/tts.token.json';
+
+let app = new Geometry();
+</script>
+
+</body>
+</html>

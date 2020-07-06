@@ -1,0 +1,100 @@
+<html>
+<head>
+
+<title>FashionX</title>
+
+<!-- Google Fonts -->
+<!-- Roboto Medium -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet" type="text/css">    
+    
+<!-- Weather styles -->
+<link href="weather.css" rel="stylesheet" type="text/css">        
+  
+<!-- Greensock -->
+<!-- TweenMax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js" type="text/javascript"></script>    
+    
+<!-- Paho MQTT -->
+<script src="mqttws31.js" type="text/javascript"></script>
+    
+<!-- Application -->
+<script src="weather.js" type="text/javascript"></script>    
+    
+</head>
+<body>
+    
+<div class="holder">
+    
+<!-- Rain -->
+<div class="condition" data-open="no" data-name="rain" data-value="0">
+    <p>Rain</p>
+    <div class="circle sunny" data-value="0"></div>
+    <div class="circle rainy" data-value="1"></div>        
+    <div class="circle centered sunny"></div>    
+</div>
+    
+<!-- Wind Speed -->
+<div class="condition" style="left: 300px;" data-open="no" data-name="speed" data-value="0">
+    <p>Wind Speed</p>
+    <div class="circle calm" data-value="0"></div>
+    <div class="circle tornado" data-value="60"></div>        
+    <div class="circle windy" data-value="20"></div>            
+    <div class="circle centered calm"></div>    
+</div>    
+    
+<!-- Wind Direction -->
+<div class="condition" style="left: 600px;" data-open="no" data-name="direction" data-value="0">
+    <p>Wind Direction</p>
+    <div class="circle west" data-value="270"></div>
+    <div class="circle east" data-value="90"></div>        
+    <div class="circle north" data-value="0"></div>       
+    <div class="circle south" data-value="180"></div>            
+    <div class="circle nw" data-value="315"></div>                
+    <div class="circle ne" data-value="45"></div>                    
+    <div class="circle se" data-value="135"></div>                        
+    <div class="circle sw" data-value="225"></div>                            
+    <div class="circle centered north"></div>    
+</div>        
+    
+<!-- Humidity -->
+<div class="condition" style="left: 300px; top: 300px;" data-open="no" data-name="humidity" data-value="0">
+    <p>Humidity</p>
+    <div class="circle desert" data-value="0"></div>
+    <div class="circle forest" data-value="60"></div>        
+    <div class="circle plains" data-value="20"></div>            
+    <div class="circle jungle" data-value="100"></div>                
+    <div class="circle centered desert"></div>    
+</div>            
+    
+<!-- Light -->
+<div class="condition" style="top: 600px;" data-open="no" data-name="light" data-value="100">
+    <p>Light</p>
+    <div class="circle sunrise" data-value="50"></div>
+    <div class="circle night" data-value="0"></div>        
+    <div class="circle midday" data-value="100"></div>            
+    <div class="circle centered midday"></div>    
+</div>                
+
+<!-- Atmospheric pressure -->
+<div class="condition" style="left: 300px; top: 600px;" data-open="no" data-name="pressure" data-value="0">
+    <p>Atmospheric Pressure</p>
+    <div class="circle clear" data-value="0"></div>
+    <div class="circle cloudy" data-value="70"></div>        
+    <div class="circle partly" data-value="35"></div>            
+    <div class="circle thunderstorm" data-value="100"></div>                
+    <div class="circle centered clear"></div>    
+</div>                   
+    
+<!-- Temperature -->
+<div class="condition" style="left: 600px; top: 600px;" data-open="no" data-name="temperature" data-value="50">
+    <p>Temperature</p>
+    <div class="circle snow" data-value="0"></div>
+    <div class="circle beach" data-value="100"></div>                
+    <div class="circle moderate" data-value="50"></div>        
+    <div class="circle centered moderate"></div>    
+</div>                       
+    
+</div>    
+    
+</body>    
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "list",
+  "version": "1.0.0",
+  "description": "Complete object listing of specified bucket.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7",
+    "xml2js": "^0.4.19"
+  }
+}

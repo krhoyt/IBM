@@ -1,0 +1,75 @@
+<html>
+<head>
+
+<title>Computer Vision Workshop</title>
+
+</head>
+<body>
+
+<ul>
+  <li><a href="1.getting.started/1.elements.html">Getting Started</a> - Pieces and parts used by computer vision in the browser <span style="color: red;">(*)</span></li>
+  <li><a href="1.getting.started/2.stream.html">Web Camera Stream</a> - Using the web camera stream in a video element <span style="color: red;">(*)</span></li>
+  <li><a href="1.getting.started/3.canvas.html">Using Canvas</a> - Putting video stream onto canvas for pixel access <span style="color: red;">(*)</span></li>
+  <li><a href="1.getting.started/4.grayscale.html">Grayscale</a> - Turning the web camera feed into grayscale using canvas <span style="color: red;">(*)</span></li>
+</ul>
+
+<ul>
+  <li><a href="2.faces/1.detection.html">Facial Detection</a> - Find faces in a stream using Viola-Jones algorithm <span style="color: red;">(*)</span></li>
+  <li><a href="2.faces/2.alignment.html">Facial Alignment</a> - Determine facial features through constrained local model</li>
+  <li><a href="2.faces/x.detection.html">Head Tracking</a> - Face detection library that includes rotation of features</li>
+</ul>
+
+<ul>
+  <li><a href="3.ocr/1.dragdrop.html">Drag and Drop</a> - Crash course on drag and drop operations in the browser</li>
+  <li><a href="3.ocr/x.ocrad.html">Extract Text</a> - Perform OCR on dropped content to get only the textual content</li>  
+  <li><a href="3.ocr/2.recognize.html">Recognize Text</a> - Perform OCR on dropped content to get content and placement <span style="color: red;">(*)</span></li>
+  <li><a href="3.ocr/3.speech.html">Speak the Results</a> - Adding Watson to speak the results of the OCR operation</li>
+  <li><a href="3.ocr/4.video.html">Video Input</a> - Recognize text from a single frame of a paused video stream</li>
+</ul>
+
+<ul>
+  <li><a href="4.objects/1.color.html">Color Detection</a> - Sample and track a specific color in a video stream</li>
+  <li><a href="4.objects/2.averaging.html">Averaging Results</a> - Smooth color tracking by using averages</li>
+  <li><a href="4.objects/3.blob.html">Multiple Blobs</a> - Group tracked colors by proximity to one another</li>
+  <li><a href="4.objects/4.tracking.html">Tracking Library</a> - Comparison of the manual approach to a tracking library <span style="color: red;">(*)</span></li>
+  <li><a href="4.objects/5.blur.html">Gaussian Blur</a> - Apply a gaussian blur to remove image processing artifacts</li>
+  <li><a href="4.objects/6.canny.html">Canny and Dilate</a> - Move to a binary image and dilate found edges</li>
+  <li><a href="4.objects/7.contours.html">Contours</a> - Turn edge pixels into geometric points in space</li>
+  <li><a href="4.objects/8.polygons.html">Polygons</a> - Further review contours to approximate polygons</li>
+  <li>(TODO) <a href="4.objects/9.rectangles.html">Rectangles</a> - Isolate rectangles from polygons to narrow down options</li>
+  <li><a href="4.objects/10.ocr.html">Just the Paper</a> - Revisit OCR but only extract paper based on geometry</li>
+  <li>(TODO) <a href="4.objects/11.corners.html">Corner Detection</a> - Show corner points in a live video stream</li>
+  <li>(TODO) <a href="4.objects/12.features.html">Feature Detection</a> - Feature detection by way of corners in a video stream</li>  
+</ul>
+
+<ul>
+  <li><a href="5.barcodes/1.barcode.html">Single Barcode</a> - Scan the web camera video stram until a 2D barcode is found <span style="color: red;">(*)</span></li>
+  <li><a href="5.barcodes/2.qrcode.html">QR Code</a> - Scan the web camera video stream until a QR code is found <span style="color: red;">(*)</span></li>
+  <li><a href="5.barcodes/3.continuous.html">Continuous Scanning</a> - Leverage canvas tricks to keep scanning for a barcode</li>
+  <li><a href="5.barcodes/4.pause.html">Pause</a> - Integrate a pause between successful barcode scanning operations</li>
+  <li><a href="5.barcodes/5.toggle.html">Toggle Barcode</a> - Add support to toggle from 2D barcode to QR code</li>
+  <li><a href="5.barcodes/m.scanner.html">Mobile Scanner</a> - Mobile implementation of a barcode and QR code scanner</li>
+  <li><a href="5.barcodes/x.quagga.html">Quagga</a> - Rotation invariant 2D barcode scanning library example</li>
+  <li><a href="5.barcodes/x.jsqr.html">jsQR</a> - Standalone QR code scanning library example well suited for Node.js</li>
+</ul>
+
+<ul>
+  <li><a href="6.ar/1.three.html">3D Content</a> - Build a basic 3D scene using Three.js in excruciating detail</li>
+  <li><a href="6.ar/2.marker.html">Track Markers</a> - Track a pattern marker with ARToolkit to reveal render area</li>  
+  <li>(TODO) Augmented Reality - Put Three.js and ARToolkit together to put a scene on a marker</li>  
+  <li><a href="6.ar/4.frame.html">Componentization</a> - Leverage A-Frame to declaratively render a 3D scene</li>  
+  <li><a href="6.ar/5.augmented.html">Revisited</a> - Combine AR.js with A-Frame for rapid augmented reality development <span style="color: red;">(*)</span></li>
+  <li><a href="6.ar/m.augmented.html">Mobile</a> - AR.js and A-Frame combination with scene adjusted for mobile viewport</li>  
+</ul>
+
+<ul>
+  <li><a href="7.ml/1.visual.recognition.html">Visual Recognition</a> - Drag and drop an image file to see what Watson thinks <span style="color: red;">(*)</span></li>
+  <li><a href="7.ml/2.async.await.html">Async/Await</a> - Move the Watson call to async/await for cleaner usage down the road</li>  
+  <li><a href="7.ml/3.custom.classifier.html">Custom Classifier</a> - Search against a Watson custom classifier first, then the default</li>    
+  <li><a href="7.ml/4.tensorflow.html">TensorFlow</a> - Image classification using TensorFlow against the MobileNet model</li>
+  <li><a href="7.ml/5.ml5.html">ML5 Abstraction</a> - Using TensorFlow against the MobileNet model via library abstraction <span style="color: red;">(*)</span></li>  
+  <li><a href="7.ml/6.yolo.html">YOLO</a> - Feature detection using the You Only Look Once model via abstraction <span style="color: red;">(*)</span></li>
+</ul>
+
+</body>
+</html>
