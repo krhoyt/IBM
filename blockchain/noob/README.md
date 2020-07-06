@@ -1,1 +1,0 @@
-A JavaScript port of the [Java code](https://github.com/CryptoKass/NoobChain-Tutorial-Part-1) used in an excellent introductory blockchain [article](https://medium.com/programmers-blockchain/create-simple-blockchain-java-tutorial-from-scratch-6eeed3cb03fa).

@@ -1,1 +1,0 @@
-ibmcloud fn rule create storage.tell storage showtell/tell

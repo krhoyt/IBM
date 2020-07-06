@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="primary">#2196F3</color>
-    <color name="catalog">#0D47A1</color>
-    <color name="weather">#2962FF</color>
-    <color name="scanner">#2196F3</color>
-    <color name="font_light">#FFFFFF</color>
-    <color name="font_dark">#DE000000</color>
-</resources>
