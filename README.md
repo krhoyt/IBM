@@ -22,6 +22,8 @@ Also in 2019, I moved from managing a team of Developer Advocates, to managing a
 
 When IBM acquired The Weather Company in 2016, there was an internal push to add weather features to every product possible. FashionX explores making fashion/clothing recommendations based on the current and forecast weather. In this proof-of-concept, inline advertisements added a path to monetization.
 
+[![FashionX: Weather-Enabled Fashion](/fashionx/fashionx.png)](https://docs.google.com/presentation/d/1ehs4pLYB2swb_p7iPEy2MWFX_etfGXO2hKHnAGGYh9w/edit?usp=sharing)
+
 ## Shack Caddy
 
 I do not golf, but I have a lot of friends that do. Weather means everything to a golfer. This native mobile application allowed you to select your favorite golf courses, and get the weather conditions for your specified tee-time. The images used in the application reflected the weather conditions. There was even a fun easter egg interaction that allowed you to practice your [digital] swing.
