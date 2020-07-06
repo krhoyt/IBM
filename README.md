@@ -54,7 +54,7 @@ How is it that computers actually see? What are the techniques that can be lever
 
 The to-do list is the new "hello world" for many application frameworks and their related technologies. Is blockchain the right solution for a to-do list? Maybe. Maybe not. Either way, this feature-complete example was among the most viewed repositories on IBM Developer for nearly a year. Some came for the UI (which I designed and implemented). Some came for the CRUD (Go). It was also the backdrop against which I gave several workshops and presentations at conferences around the world.
 
-![Blockchain To-Do List](/toodles/todo-list.png)
+[![Blockchain To-Do List](toodles/todo-list-480.png)](https://www.youtube.com/watch?v=SeBaUXn-Wnw)
 
 ## Serverless Cloud Storage
 
