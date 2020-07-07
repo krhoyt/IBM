@@ -4,7 +4,7 @@ I started at IBM in July 2015 as a Developer Advocate focused on Mobile Foundati
 
 ## Developer Advocacy
 
-In 2016, the existing developer relations organization was being rebooted. New people (read: not IBM employees) were brought in to help guide this effort. One of these people was previously the CEO of Kaazing - where I had worked as Principal Evangelist prior to IBM. I reached out to him, we made the organizational transfer happen, and before I knew it, I was being tasked to write the mission statement for this bold new direction.
+In 2016, the existing developer relations organization was being rebooted. New people (read: not IBM employees) were brought in to help guide this effort. One of these people was previously the CEO of Kaazing - where I had worked as Principal Evangelist prior to IBM. I reached out to him, we made the organizational transfer happen, and before I knew it, I was being tasked to write the [mission statement](https://gist.github.com/krhoyt/7b7da204e7234ca1073fff09e5075d7a) for this bold new direction.
 
 Machine Learning was starting to be available to developers at the time, and many were looking to learn about integration ML features into their applications. IBM was known for [Watson v. Jeopardy]([https://www.youtube.com/watch?v=P18EdAKuC1U](https://www.youtube.com/watch?v=P18EdAKuC1U)), but how did you put that kind of smarts into your own projects? Having a Web Standards background from my time at Adobe, I set out to help Web Developers understand and leverage Machine Learning features.
 
