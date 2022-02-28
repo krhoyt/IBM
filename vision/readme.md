@@ -11,13 +11,13 @@ Learn computer vision with real-time facial detection, optical character recogni
  - Putting video stream onto canvas for pixel access
  - Turning the web camera feed into grayscale using canvas
 
-### Face Detection and Alignment
+### [Face Detection and Alignment](2.faces)
 
 - Find faces in a stream using Viola-Jones algorithm
 - Determine facial features through constrained local model
 - Face detection library that includes rotation of features
 
-### Optical Character Recognition
+### [Optical Character Recognition](3.ocr)
 
 - Crash course on drag and drop operations in the browser
 - Perform OCR on dropped content to get only the textual content
@@ -25,7 +25,7 @@ Learn computer vision with real-time facial detection, optical character recogni
 - Adding Watson to speak the results of the OCR operation
 - Recognize text from a single frame of a paused video stream
 
-### Object Detection
+### [Object Detection](4.objects)
 
 - Sample and track a specific color in a video stream
 - Smooth color tracking by using averages
@@ -38,7 +38,7 @@ Learn computer vision with real-time facial detection, optical character recogni
 - Isolate rectangles from polygons to narrow down options
 - Revisit OCR but only extract paper based on geometry
 
-### Barcodes
+### [Barcodes](5.barcodes)
 
 - Scan the web camera video stram until a 2D barcode is found
 - Scan the web camera video stream until a QR code is found
@@ -49,7 +49,7 @@ Learn computer vision with real-time facial detection, optical character recogni
 - Rotation invariant 2D barcode scanning library example
 - Standalone QR code scanning library example well suited for Node.js
 
-### Augmented Reality
+### [Augmented Reality](6.ar)
 
 - Build a basic 3D scene using Three.js in excruciating detail
 - Track a pattern marker with ARToolkit to reveal render area
@@ -58,7 +58,7 @@ Learn computer vision with real-time facial detection, optical character recogni
 - Combine AR.js with A-Frame for rapid augmented reality development
 - AR.js and A-Frame combination with scene adjusted for mobile viewport
 
-### Machine Learning
+### [Machine Learning](7.ml)
 
 - Drag and drop an image file to see what Watson thinks
 - Move the Watson call to async/await for cleaner usage down the road
