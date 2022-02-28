@@ -4,7 +4,7 @@ The browser, on both the desktop and mobile, are capable of much more than we of
   
 Learn computer vision with real-time facial detection, optical character recognition, color distance calculations, object tracking, and even reading barcodes and augmented reality markers. From there we will turn our focus to machine learning where you will learn about developing models for neural networks.
 
-### Getting Started
+### [Getting Started](1.getting.started)
 
  - Pieces and parts used by computer vision in the browser
  - Using the web camera stream in a video element
